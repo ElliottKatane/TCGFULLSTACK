@@ -1,0 +1,28 @@
+.hp-bar {
+  width: 10%;
+  height: 20px;
+  background-color: #ccc; /* Couleur de fond de la barre */
+  border: 1px solid #000; /* Bordure de la barre */
+  position: relative; /* Ajoutez cette ligne pour gérer la superposition des éléments internes */
+}
+
+.hp-fill.hp-green {
+  height: 100%;
+  background-color: #00cc00; /* Couleur de remplissage de la barre (vert) */
+  transition: width 0.2s ease-in-out; /* Animation de transition */
+  position: absolute; /* Assurez-vous que la partie verte est positionnée correctement */
+  top: 0;
+  left: 0;
+}
+
+.hp-fill.hp-red {
+  height: 100%;
+  background-color: #ff0000; /* Couleur de remplissage de la barre (rouge) */
+  position: absolute; /* Assurez-vous que la partie rouge est positionnée correctement */
+  top: 0;
+  left: 0;
+}
+.hp-number {
+  margin: 20px;
+  padding: 10px;
+}

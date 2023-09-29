@@ -1,0 +1,20 @@
+/* Combat.css */
+.combat-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.combat-section {
+  flex: 1;
+  margin: 20px;
+  /* Ajoutez d'autres styles CSS selon vos besoins */
+}
+.fighter {
+  order: 1; /* Place the fighter on the left */
+}
+
+.wolf {
+  order: 2; /* Place the wolf on the right */
+}
+/* Ajoutez des classes CSS spécifiques pour les styles de la barre de points de vie, etc. */

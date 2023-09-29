@@ -1,0 +1,15 @@
+je crée TCG
+
+mkdir client
+npx create-react-app . (package.json inclus avec l'app)
+
+cd..
+
+mkdir backend && cd backend
+npm init
+
+
+dans frontend : 
+
+npm install react-router-dom
+npm install bootstrap

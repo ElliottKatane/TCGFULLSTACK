@@ -13,3 +13,7 @@ dans frontend :
 
 npm install react-router-dom
 npm install bootstrap
+
+backend :
+
+npm install cors dotenv express mongodb

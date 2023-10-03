@@ -20,7 +20,7 @@ const Loup = ({ hp }) => {
     }
   }, [hp]);
   const style = {
-    width: "230px",
+    width: "250px",
     height: "196px",
     backgroundImage: `url(${loupSprite})`,
     backgroundPosition: `${spritePosition} 0`,

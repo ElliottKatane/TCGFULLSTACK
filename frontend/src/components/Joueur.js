@@ -8,7 +8,6 @@ const Joueur = ({ hp }) => {
       <h1>FIGHTER</h1>
       <img src={image} alt="copie" />
       <HPBar value={hp} />
-      {/* <button onClick={attackTenHP}>Attaquer</button> */}
     </div>
   );
 };

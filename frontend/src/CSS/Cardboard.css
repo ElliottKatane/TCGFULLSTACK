@@ -1,0 +1,4 @@
+.cardboard-container {
+  display: flex;
+  overflow: auto;
+}

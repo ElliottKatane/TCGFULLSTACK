@@ -1,0 +1,20 @@
+.cardcomp {
+  width: calc(
+    33.33% - 20px
+  ); /* Largeur de chaque carte (ajustez selon vos besoins) */
+  margin-bottom: 20px; /* Espace entre les cartes (ajustez selon vos besoins) */
+  padding: 10px; /* Espace intérieur de chaque carte (ajustez selon vos besoins) */
+  background-color: white; /* Couleur de fond de chaque carte */
+  border: 1px solid #ccc; /* Bordure autour de chaque carte (ajustez selon vos besoins) */
+  text-align: center; /* Centrer le contenu texte à l'intérieur de chaque carte */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Ombre légère autour de chaque carte */
+  flex: 0 0 auto; /* Empêche la carte de se développer au-delà de sa taille intrinsèque */
+  margin: 10px;
+}
+p {
+  align-self: flex-start;
+  color: white;
+  text-align: center;
+  padding: 1vh;
+  background-color: red;
+}

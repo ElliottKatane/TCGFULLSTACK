@@ -1,12 +1,12 @@
 /* Combat.css */
 .combat-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .combat-section {
   flex: 1;
+  width: 50%;
   margin: 20px;
   /* Ajoutez d'autres styles CSS selon vos besoins */
 }
@@ -18,3 +18,12 @@
   order: 2; /* Place the wolf on the right */
 }
 /* Ajoutez des classes CSS spécifiques pour les styles de la barre de points de vie, etc. */
+.cardboard {
+  order: 3;
+  max-height: 45vh;
+  margin: 0 auto; /* Permet de centrer horizontalement */
+  width: 80%; /* Largeur maximale de Cardboard  */
+  margin-top: 250px; /* Espace au-dessus de Cardboard */
+  padding: 20px; /* Espace autour de Cardboard */
+  background-color: rgb(111, 101, 101); /* Couleur de fond de Cardboard */
+}

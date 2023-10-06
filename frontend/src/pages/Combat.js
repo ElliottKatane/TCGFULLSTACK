@@ -5,6 +5,7 @@ import Loup from "../components/Loup";
 import CardBoard from "../components/CardBoard";
 import { useState, useEffect } from "react";
 import "../CSS/Card.css";
+import DamagePopup from "../components/DamagePopup";
 
 const Combat = () => {
   const [joueurHP, setJoueurHP] = useState(100); // Initial HP for Joueur
@@ -14,18 +15,47 @@ const Combat = () => {
   const [currentMana, setCurrentMana] = useState(manaPool);
   const [cardsUsed, setCardsUsed] = useState(0);
   const [currentlyPlaying, setCurrentlyPlaying] = useState("player"); // Initialize with "player"
+
+  //Animations de degats
+  const [isDamagePopupVisible, setIsDamagePopupVisible] = useState(false);
+  const [damageValue, setDamageValue] = useState(0);
+
   // Function to decrease Joueur's HP
   const decreaseJoueurHP = () => {
     setJoueurHP((prevHP) => prevHP - 10); // Decrease Joueur's HP by 10
   };
 
   /////////////////////////////////////////////////////////////////////////
+  // Function to show the damage popup
+  const showDamage = (damage) => {
+    setDamageValue(damage);
+    if (!isDamagePopupVisible) {
+      // Check if the popup is not already visible
+      setIsDamagePopupVisible(true);
+
+      // Use requestAnimationFrame for smoother animations
+      const start = performance.now();
+      function animate(time) {
+        const progress = (time - start) / 1000; // Calculate time progress in seconds
+        if (progress < 1.3) {
+          // Adjust the duration as needed
+          requestAnimationFrame(animate);
+        } else {
+          setIsDamagePopupVisible(false);
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+  };
+
+  ////////////////////////////////////////////////////////////////////////
 
   const attaquerLoup = (ATKvalue) => {
     if (currentlyPlaying === "player" && manaPool > 0 && cardsUsed < 3) {
       // Code to handle the attack and reduce the manaPool
       setLoupHP((prevHP) => prevHP - ATKvalue);
       setCurrentMana(currentMana - 1);
+      showDamage(ATKvalue); // Corrected function name to showDamage
       // pour l'instant ça sert à rien CardsUsed, ça servira p-e plus tard quand on voudra les discard.
       setCardsUsed(cardsUsed + 1);
     } else if (currentMana === 0) {
@@ -36,7 +66,6 @@ const Combat = () => {
       alert("It's the enemy's turn, you can't play right now");
     }
   };
-
   const handleFinTour = () => {
     if (currentlyPlaying === "player") {
       // If it's the player's turn, switch to the enemy's turn
@@ -88,6 +117,11 @@ const Combat = () => {
           End {currentlyPlaying === "player" ? "Player" : "Enemy"} Turn
           {/* petite ternaire qui permet de changer le texte du bouton selon qui joue */}
         </button>
+      </div>
+      <div className="damage-popup-container">
+        {isDamagePopupVisible && (
+          <div className="damage-popup">{damageValue}</div>
+        )}
       </div>
     </div>
   );

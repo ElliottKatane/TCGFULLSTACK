@@ -27,3 +27,6 @@
   padding: 20px; /* Espace autour de Cardboard */
   background-color: rgb(111, 101, 101); /* Couleur de fond de Cardboard */
 }
+.fintourbtn {
+  order: 4;
+}

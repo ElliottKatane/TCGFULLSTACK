@@ -3,11 +3,9 @@ import imageATK from "../assets/carteatk.png";
 // Type : attaque, défense, pouvoir
 // valeur : +3atk, +3 def, +3pv jusqu'à la fin du combat
 // image : image de la carte
-
-//5 dégats : coup de poing
-//10 dégats : coup d'épée
-
+// onAttaque : fonction qui permet d'attaquer
 const CardATK = ({ ATKvalue, onAttaque, name }) => {
+  // gère le click sur la carte : l'attribut "onAttaque" reçoit ATKvalue. ATKvalue est envoyé à la fonction attaquerLoup dans CardBoard.js
   const handleClick = () => {
     console.log("handleClick, ATKvalue dans CardATK.js: " + ATKvalue);
     onAttaque(ATKvalue);

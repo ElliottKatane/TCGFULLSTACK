@@ -3,7 +3,7 @@ import CardATK from "./CardATK";
 import CardDEF from "./CardDEF";
 import "../CSS/Cardboard.css";
 
-const CardBoard = ({ attaquerLoup }) => {
+const CardBoard = ({ attaquerLoup, currentMana, manaPool }) => {
   // Function to decrease Enemy's HP
   const handleAttack = (ATKvalue) => {
     const valeurAttaque = parseInt(ATKvalue);
@@ -23,9 +23,12 @@ const CardBoard = ({ attaquerLoup }) => {
     <div className="cardboard-container">
       <CardATK ATKvalue={5} name="Coup de poing" onAttaque={handleAttack} />
       <CardATK ATKvalue={10} name="Coup d'épée" onAttaque={handleAttack} />
-      <CardATK />
+      <CardATK ATKvalue={3} name="Grosse claque" onAttaque={handleAttack} />
       <CardDEF />
       <CardDEF />
+      <div className="manadisplay">
+        Mana: {currentMana}/{manaPool}
+      </div>
     </div>
   );
 };

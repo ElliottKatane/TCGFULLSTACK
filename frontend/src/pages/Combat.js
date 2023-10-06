@@ -3,31 +3,68 @@ import Joueur from "../components/Joueur";
 import "../CSS/Combat.css";
 import Loup from "../components/Loup";
 import CardBoard from "../components/CardBoard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../CSS/Card.css";
 
 const Combat = () => {
   const [joueurHP, setJoueurHP] = useState(100); // Initial HP for Joueur
-  const [loupHP, setLoupHP] = useState(100); // Initial HP for Loup
+  const [loupHP, setLoupHP] = useState(100); // Initial HP for <Loup/>
 
+  const [manaPool, setManaPool] = useState(3);
+  const [currentMana, setCurrentMana] = useState(manaPool);
+  const [cardsUsed, setCardsUsed] = useState(0);
+  const [currentlyPlaying, setCurrentlyPlaying] = useState("player"); // Initialize with "player"
   // Function to decrease Joueur's HP
   const decreaseJoueurHP = () => {
     setJoueurHP((prevHP) => prevHP - 10); // Decrease Joueur's HP by 10
   };
 
-  // Function to decrease Loup's HP
-  const decreaseLoupHP = () => {
-    setLoupHP((prevHP) => prevHP - 10); // Decrease Loup's HP by 10
-  };
+  /////////////////////////////////////////////////////////////////////////
 
   const attaquerLoup = (ATKvalue) => {
-    setLoupHP((prevHP) => {
-      const newHP = prevHP - ATKvalue;
-      console.log("attaquerLoup, ATKvalue dans Combat.js: " + ATKvalue);
-      console.log("attaquerLoup, LoupHP dans Combat.js: " + newHP);
-      return newHP;
-    });
+    if (currentlyPlaying === "player" && manaPool > 0 && cardsUsed < 3) {
+      // Code to handle the attack and reduce the manaPool
+      setLoupHP((prevHP) => prevHP - ATKvalue);
+      setCurrentMana(currentMana - 1);
+      // pour l'instant ça sert à rien CardsUsed, ça servira p-e plus tard quand on voudra les discard.
+      setCardsUsed(cardsUsed + 1);
+    } else if (currentMana === 0) {
+      // Alert the user when they have 0 mana
+      alert("You have 0 mana, end turn");
+    } else if (currentlyPlaying === "enemy") {
+      // Alert the player that it's the enemy's turn
+      alert("It's the enemy's turn, you can't play right now");
+    }
   };
+
+  const handleFinTour = () => {
+    if (currentlyPlaying === "player") {
+      // If it's the player's turn, switch to the enemy's turn
+      setCurrentlyPlaying("enemy");
+      console.log("Tour du loup");
+
+      // Example: Decrease joueur HP (simulate enemy attack) I could actually put it in the useEffect below, which I did
+      // decreaseJoueurHP();
+    } else {
+      // If it's the enemy's turn, switch to the player's turn
+      setCurrentlyPlaying("player");
+
+      // Add code to simulate the player's turn or any other actions
+    }
+  };
+
+  // permet d'observer un changement dans le state currentlyPlaying. Lorsqu'il y a changement, alors le code s'exécute
+  useEffect(() => {
+    // Code to execute when currentlyPlaying changes, i.e., when the turn changes.
+    if (currentlyPlaying === "enemy") {
+      setCurrentMana(manaPool); // Regenerate the manaPool to 3
+      setCardsUsed(0); // Reset the number of cards used
+
+      // Add code to simulate the enemy's turn or pass to the next player's turn
+      // semble identique si j'écris decreaseJoueurHP() dans handleFinTour ou ici
+      decreaseJoueurHP();
+    }
+  }, [currentlyPlaying]);
 
   return (
     <div className="combat-container">
@@ -37,10 +74,20 @@ const Combat = () => {
       </div>
       <div className="combat-section wolf">
         <Loup hp={loupHP} />
-        <button onClick={decreaseLoupHP}>Decrease Loup HP</button>
       </div>
       <div className="cardboard">
-        <CardBoard attaquerLoup={attaquerLoup} />
+        <CardBoard
+          attaquerLoup={attaquerLoup}
+          currentMana={currentMana}
+          manaPool={manaPool}
+          // je passe les props currentMana et manaPool à CardBoard.js
+        />
+      </div>
+      <div className="fintourbtn">
+        <button onClick={handleFinTour}>
+          End {currentlyPlaying === "player" ? "Player" : "Enemy"} Turn
+          {/* petite ternaire qui permet de changer le texte du bouton selon qui joue */}
+        </button>
       </div>
     </div>
   );

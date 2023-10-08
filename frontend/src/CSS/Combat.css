@@ -1,34 +1,59 @@
 /* Combat.css */
 .combat-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
 
-.combat-section {
-  flex: 1;
-  width: 50%;
-  margin: 20px;
-  /* Ajoutez d'autres styles CSS selon vos besoins */
+.container-fighter-wolf {
+  display: flex;
+  justify-content: center; /* Center the fighter and wolf horizontally */
+  align-items: center; /* Center the fighter and wolf vertically */
 }
+/* Default styles with a margin for all screen sizes */
 .fighter {
-  order: 1; /* Place the fighter on the left */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50%; /* Add a 20px margin to the right of the fighter */
 }
 
 .wolf {
-  order: 2; /* Place the wolf on the right */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 50%; /* Add a 20px margin to the left of the wolf */
 }
-/* Ajoutez des classes CSS spécifiques pour les styles de la barre de points de vie, etc. */
+
+/* Add margins for screens with a width of 768px or larger */
+@media screen and (max-width: 768px) {
+  .fighter {
+    margin-right: 50px; /* Adjust the margin for larger screens */
+  }
+
+  .wolf {
+    margin-left: 50px; /* Adjust the margin for larger screens */
+  }
+}
+
+.cardboard-container {
+  width: 100%; /* Make the Cardboard container take full width */
+  display: flex;
+  justify-content: center; /* Center the Cardboard horizontally */
+}
+
 .cardboard {
-  order: 3;
   max-height: 45vh;
-  margin: 0 auto; /* Permet de centrer horizontalement */
-  width: 80%; /* Largeur maximale de Cardboard  */
-  margin-top: 250px; /* Espace au-dessus de Cardboard */
-  padding: 20px; /* Espace autour de Cardboard */
-  background-color: rgb(111, 101, 101); /* Couleur de fond de Cardboard */
+  width: 80%;
+  padding: 20px;
+  background-color: rgb(111, 101, 101);
+  margin-top: 20px; /* Add some space between Cardboard and fighter/wolf */
 }
+
 .fintourbtn {
-  order: 4;
+  flex: 1;
 }
 
 .damage-popup-container {

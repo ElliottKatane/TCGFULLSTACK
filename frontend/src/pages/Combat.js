@@ -10,7 +10,6 @@ import DamagePopup from "../components/DamagePopup";
 const Combat = () => {
   const [joueurHP, setJoueurHP] = useState(100); // Initial HP for Joueur
   const [loupHP, setLoupHP] = useState(100); // Initial HP for <Loup/>
-
   const [manaPool, setManaPool] = useState(3);
   const [currentMana, setCurrentMana] = useState(manaPool);
   const [cardsUsed, setCardsUsed] = useState(0);
@@ -97,21 +96,27 @@ const Combat = () => {
 
   return (
     <div className="combat-container">
-      <div className="combat-section fighter">
-        <Joueur hp={joueurHP} />
-        <button onClick={decreaseJoueurHP}>Decrease Joueur HP</button>
+      <div className="container-fighter-wolf">
+        <div className="fighter">
+          <Joueur hp={joueurHP} />
+          {/* <button onClick={decreaseJoueurHP}>Decrease Joueur HP</button> */}
+        </div>
+
+        <div className="wolf">
+          <Loup hp={loupHP} />
+        </div>
       </div>
-      <div className="combat-section wolf">
-        <Loup hp={loupHP} />
+      <div className="cardboard-container">
+        <div className="cardboard">
+          <CardBoard
+            attaquerLoup={attaquerLoup}
+            currentMana={currentMana}
+            manaPool={manaPool}
+            // je passe les props currentMana et manaPool à CardBoard.js
+          />
+        </div>
       </div>
-      <div className="cardboard">
-        <CardBoard
-          attaquerLoup={attaquerLoup}
-          currentMana={currentMana}
-          manaPool={manaPool}
-          // je passe les props currentMana et manaPool à CardBoard.js
-        />
-      </div>
+
       <div className="fintourbtn">
         <button onClick={handleFinTour}>
           End {currentlyPlaying === "player" ? "Player" : "Enemy"} Turn

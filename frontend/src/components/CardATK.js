@@ -1,5 +1,5 @@
 import React from "react";
-import imageATK from "../assets/carteatk.png";
+import imageATK from "../assets/rsz_strike_r.png";
 // Type : attaque, défense, pouvoir
 // valeur : +3atk, +3 def, +3pv jusqu'à la fin du combat
 // image : image de la carte
@@ -21,9 +21,9 @@ const CardATK = ({ ATKvalue, onAttaque, name }) => {
 
   return (
     <div className="cardcomp" style={style} onClick={handleClick}>
-      <p>Attaque</p>
-      <p>Valeur: {ATKvalue}</p>
-      <p>{name}</p>
+      {/* <p className="card">Attaque</p>
+      <p className="card">Valeur: {ATKvalue}</p>
+      <p className="card">{name}</p> */}
     </div>
   );
 };

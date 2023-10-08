@@ -1,6 +1,6 @@
 .cardboard-container {
-  display: flex;
   overflow: auto;
+  width: 85%;
 }
 .manadisplay {
   border: 1px solid black;

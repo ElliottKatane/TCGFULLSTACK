@@ -6,10 +6,7 @@ import imageDEF from "../assets/rsz_defend_r.png";
 
 const CardDEF = ({ type, value }) => {
   const style = {
-    width: "170px",
-    height: "230px",
     backgroundImage: `url(${imageDEF})`,
-    backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
   };
 

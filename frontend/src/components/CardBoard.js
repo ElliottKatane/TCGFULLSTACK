@@ -21,7 +21,7 @@ const CardBoard = ({ attaquerLoup, currentMana, manaPool }) => {
 
   return (
     <div className="cardboard-container">
-      <CardATK ATKvalue={6} name="Strike" onAttaque={handleAttack} />
+      <CardATK ATKvalue={100} name="Strike" onAttaque={handleAttack} />
       <CardATK ATKvalue={6} name="Strike" onAttaque={handleAttack} />
       <CardATK ATKvalue={6} name="Strike" onAttaque={handleAttack} />
       <CardDEF />

@@ -7,9 +7,8 @@ const Loup = ({ hp }) => {
 
   useEffect(() => {
     // Calculate the sprite position based on HP whenever hp changes
-    if (hp <= 0) {
-      alert("Loup is dead");
-    } else if (hp <= 25) {
+
+    if (hp <= 25) {
       setSpritePosition("98%");
     } else if (hp <= 50) {
       setSpritePosition("65%");

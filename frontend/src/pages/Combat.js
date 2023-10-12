@@ -5,7 +5,7 @@ import Loup from "../components/Loup";
 import CardBoard from "../components/CardBoard";
 import { useState, useEffect } from "react";
 import "../CSS/Card.css";
-import DamagePopup from "../components/DamagePopup";
+import LootScreen from "../components/LootScreen";
 
 const Combat = () => {
   const [joueurHP, setJoueurHP] = useState(100); // Initial HP for Joueur
@@ -14,6 +14,7 @@ const Combat = () => {
   const [currentMana, setCurrentMana] = useState(manaPool);
   const [cardsUsed, setCardsUsed] = useState(0);
   const [currentlyPlaying, setCurrentlyPlaying] = useState("player"); // Initialize with "player"
+  const [showLootScreen, setShowLootScreen] = useState(false);
 
   //Animations de degats
   const [isDamagePopupVisible, setIsDamagePopupVisible] = useState(false);
@@ -94,6 +95,15 @@ const Combat = () => {
     }
   }, [currentlyPlaying]);
 
+  // Check if either player (fighter) or wolf's HP is zero or less
+
+  useEffect(() => {
+    if (joueurHP <= 0 || loupHP <= 0) {
+      // Set the state variable to show the LootScreen
+      setShowLootScreen(true);
+    }
+  }, [joueurHP, loupHP]);
+
   return (
     <div className="combat-container">
       <div className="container-fighter-wolf">
@@ -106,15 +116,14 @@ const Combat = () => {
           <Loup hp={loupHP} />
         </div>
       </div>
+
       <div className="cardboard-container">
-        <div className="cardboard">
-          <CardBoard
-            attaquerLoup={attaquerLoup}
-            currentMana={currentMana}
-            manaPool={manaPool}
-            // je passe les props currentMana et manaPool à CardBoard.js
-          />
-        </div>
+        <CardBoard
+          attaquerLoup={attaquerLoup}
+          currentMana={currentMana}
+          manaPool={manaPool}
+          // je passe les props currentMana et manaPool à CardBoard.js
+        />
       </div>
 
       <div className="fintourbtn">
@@ -128,6 +137,7 @@ const Combat = () => {
           <div className="damage-popup">{damageValue}</div>
         )}
       </div>
+      {showLootScreen && <LootScreen />}
     </div>
   );
 };

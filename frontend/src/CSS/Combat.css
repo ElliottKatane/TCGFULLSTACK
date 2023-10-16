@@ -1,15 +1,28 @@
 /* Combat.css */
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 .combat-container {
-  display: flex;
+  height: 100vh;
+  background-image: url("../assets/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex; /* Add display: flex */
   flex-direction: column;
+  justify-content: center; /* Vertically center the content */
   align-items: center;
 }
 
 .container-fighter-wolf {
   display: flex;
-  justify-content: center; /* Center the fighter and wolf horizontally */
-  align-items: center; /* Center the fighter and wolf vertically */
+  flex: 1; /* Make sure the fighter and wolf expand to fill the space */
+  justify-content: center;
+  align-items: center;
 }
+
+/* Rest of your CSS */
+
 /* Default styles with a margin for all screen sizes */
 .fighter {
   flex: 1;

@@ -1,0 +1,36 @@
+BACKEND
+
+npm install 
+express 
+mongoose 
+passport 
+passport-local 
+passport-jwt 
+jsonwebtoken
+
+
+Créer un modèle "User" (User.js) et préparer Passport.js pour l'authentification.
+
+
+Implémenter les routes Express suivantes : inscription, login, génération du JWT (JSON Web Token)
+
+Protéger la route "Play" avec un middleware qui vérifie la validité du JWT
+
+
+FRONTEND
+
+Créer une interface utilisateur (Ex: Connexion.js)
+
+Utiliser une librairie de gestion d'états comme Redux ou React Context pour gérer l'état d'authentification de l'utilisateur
+
+Créer des composants pour l'enregistrement, le login et le logout
+
+Conserver le JWT de façon sécuritaire, en utlisant localStorage ou les cookies httpOnly
+
+Ajouter une logique pour faire des requêtes lorsqu'on est authentifié, comme le fait d'accéder au menu de jeu.
+
+
+Sécurités additionnelles à considérer : 
+Sécuriser la clé secrète JWT dans un .env
+Implémenter password hashing and salting
+Implémenter CORS policies pour restreindre quel domaine peut accéder à notre API

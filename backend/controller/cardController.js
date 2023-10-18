@@ -12,4 +12,14 @@ const createCard = async (req, res) => {
   }
 };
 
-module.exports = { createCard };
+// Retrieve all cards
+const getAllCards = async (req, res) => {
+  try {
+    const cards = await Card.find(); // This will retrieve all documents from the 'Card' collection
+    res.status(200).json(cards);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createCard, getAllCards };

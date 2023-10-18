@@ -9,10 +9,13 @@ const app = express();
 
 // middleware
 app.use(express.json());
-
 require("dotenv").config({ path: "./config.env" });
-
 app.use(cors());
+
+// ejs
+app.set("view engine", "ejs"); // Set EJS as the view engine
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public")); // Serve static files from the 'public' folder
 
 //routes
 app.use("/api/user", userRoutes);

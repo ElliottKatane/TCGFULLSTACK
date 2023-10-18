@@ -16,4 +16,4 @@ const cardSchema = new Schema({
   upgradedImageURL: { type: String },
 });
 
-module.exports = mongoose.model("Card", cardSchema);
+module.exports = mongoose.model("Card", cardSchema, "cards");

@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Combat from "./pages/Combat";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import CardCreationPage from "./pages/CardCreation";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -30,6 +31,7 @@ const App = () => {
           path="/signup"
           element={!user ? <Signup /> : <Navigate to="/" />}
         />
+        <Route path="/createcard" element={<CardCreationPage />} />
       </Routes>
     </div>
   );

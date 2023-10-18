@@ -5,7 +5,6 @@ import Loup from "../components/Loup";
 import CardBoard from "../components/CardBoard";
 import { useState, useEffect } from "react";
 import "../CSS/Card.css";
-import DamagePopup from "../components/DamagePopup";
 
 const Combat = () => {
   const [joueurHP, setJoueurHP] = useState(100); // Initial HP for Joueur

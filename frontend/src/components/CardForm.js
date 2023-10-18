@@ -4,8 +4,8 @@ const CardForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    rarity: "",
-    type: "",
+    rarity: "Commune",
+    type: "Attack",
     value: 0,
     cost: 0,
     imageURL: "",
@@ -20,7 +20,7 @@ const CardForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(formData);
     fetch("/api/card-form/createcard", {
       method: "POST",
       headers: {
@@ -73,17 +73,13 @@ const CardForm = () => {
             name="type"
             value={formData.type}
             onChange={handleChange}
-            style={{ width: "250px", height: "30px" }} // Adjust the height as needed
+            style={{ width: "250px", height: "30px" }}
           >
-            <option value="Attack" style={{ textAlign: "center" }}>
+            <option value="Attack" defaultValue>
               Attack
             </option>
-            <option value="Skill" style={{ textAlign: "center" }}>
-              Skill
-            </option>
-            <option value="Power" style={{ textAlign: "center" }}>
-              Power
-            </option>
+            <option value="Skill">Skill</option>
+            <option value="Power">Power</option>
           </select>
         </div>
 
@@ -94,18 +90,13 @@ const CardForm = () => {
             name="rarity"
             value={formData.rarity}
             onChange={handleChange}
-            style={{ width: "250px", height: "30px" }} // Adjust the height as needed
+            style={{ width: "250px", height: "30px" }}
           >
-            <option value="Commune" style={{ textAlign: "center" }}>
+            <option value="Commune" defaultValue>
               Commune
             </option>
-            <option value="Départ" style={{ textAlign: "center" }}>
-              Départ
-            </option>
-
-            <option value="Rare" style={{ textAlign: "center" }}>
-              Rare
-            </option>
+            <option value="Départ">Départ</option>
+            <option value="Rare">Rare</option>
           </select>
         </div>
 

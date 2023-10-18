@@ -7,6 +7,7 @@ const cardSchema = new Schema({
   rarity: { type: String, required: true },
   type: { type: String, required: true }, // can be : attack, skill, power. Defense cards are "skill"
   value: { type: Number, required: true },
+  cost: { type: Number, required: true },
   imageURL: { type: String },
   // Upgrade
   upgradedValue: { type: Number },

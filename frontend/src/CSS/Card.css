@@ -13,4 +13,66 @@ p#card {
   text-align: center;
   padding: 0.5vh;
   background-color: blue;
+} /* card.css */
+
+/* Style for the card container */
+.card-container {
+  position: relative; /* Make the container relative for absolute positioning */
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 280px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the card title */
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Style for the card description */
+.card-description {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* Style for card details (rarity and type) */
+.card-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  margin: 4px 0;
+}
+
+/* Style for cost */
+.card-cost {
+  position: absolute;
+  top: 8px; /* Adjust this value to control vertical positioning */
+  right: 8px; /* Position it in the top right corner */
+  background-color: #0074cc;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+/* Style for 'attack' type */
+.card-attack {
+  background-color: red;
+}
+
+/* Style for 'skill' type */
+.card-skill {
+  background-color: blue;
+}
+
+/* Style for 'power' type */
+.card-power {
+  background-color: green;
 }

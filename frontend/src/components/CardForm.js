@@ -46,6 +46,7 @@ const CardForm = () => {
       });
   };
 
+  // GetAllCards
   const [cards, setCards] = useState([]); // Initialize cards as an empty array
 
   useEffect(() => {
@@ -63,6 +64,7 @@ const CardForm = () => {
         console.error("Error fetching cards", error);
       });
   }, []); // The empty dependency array ensures this effect runs once on component mount
+
   return (
     <div>
       <form onSubmit={handleSubmit}>

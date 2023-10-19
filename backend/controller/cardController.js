@@ -21,5 +21,24 @@ const getAllCards = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const getRandomCards = async (req, res) => {
+  try {
+    const cardCount = await Card.countDocuments();
+    const sampleSize = Math.min(7, cardCount); // Determine the sample size (up to 5)
 
-module.exports = { createCard, getAllCards };
+    const randomCards = await Card.aggregate([
+      { $sample: { size: sampleSize } }, // Retrieve random cards based on the sample size
+    ]);
+
+    // Log each card as it's retrieved
+    randomCards.forEach((card, index) => {
+      console.log(`Card ${index + 1}:`, card);
+    });
+
+    res.status(200).json(randomCards);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createCard, getAllCards, getRandomCards };

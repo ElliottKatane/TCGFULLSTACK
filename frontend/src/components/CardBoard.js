@@ -7,8 +7,6 @@ import Card from "./Card";
 const CardBoard = ({ attaquerLoup, currentMana, manaPool }) => {
   // Function to decrease Enemy's HP
   const handleAttack = (ATKvalue) => {
-    const valeurAttaque = parseInt(ATKvalue);
-
     attaquerLoup(ATKvalue); // Decrease Loup's HP by ATKvalue
   };
 
@@ -17,7 +15,8 @@ const CardBoard = ({ attaquerLoup, currentMana, manaPool }) => {
       {/* <CardATK ATKvalue={6} name="Strike" onAttaque={handleAttack} />
       <CardATK ATKvalue={8} name="Strike" onAttaque={handleAttack} />
       <CardATK ATKvalue={10} name="Strike" onAttaque={handleAttack} /> */}
-      <Card /> {/* Card component from backend. Retrieves 5 random cards */}
+      <Card />
+      {/* Card component from backend. Retrieves x random cards (determined in cardController) */}
       <div className="manadisplay">
         Mana: {currentMana}/{manaPool}
       </div>

@@ -16,4 +16,5 @@ const cardSchema = new Schema({
   upgradedImageURL: { type: String },
 });
 
+// 3rd argument is the collection name
 module.exports = mongoose.model("Card", cardSchema, "cards");

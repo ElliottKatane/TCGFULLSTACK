@@ -48,16 +48,22 @@ const CardForm = () => {
 
   // GetAllCards
   const [cards, setCards] = useState([]); // Initialize cards as an empty array
+  const [skillCount, setSkillCount] = useState(0);
+  const [attackCount, setAttackCount] = useState(0);
+  const [powerCount, setPowerCount] = useState(0);
 
   useEffect(() => {
     // Fetch existing cards and update the 'cards' state
-    fetch("/api/card-form/getcards") // Adjust the API endpoint
+    fetch("/api/card-form/getcards")
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
           console.error("Error fetching cards", data.error);
         } else {
-          setCards(data); // Update the 'cards' state with the fetched data
+          setCards(data.cards); // Update the 'cards' state with the fetched data
+          setSkillCount(data.skillCount);
+          setAttackCount(data.attackCount);
+          setPowerCount(data.powerCount);
         }
       })
       .catch((error) => {
@@ -184,15 +190,32 @@ const CardForm = () => {
 
       {/* Existing cards */}
       <div>
+        <div>
+          {/* Display the counts */}
+          <div>Skill Cards: {skillCount}</div>
+          <div>Attack Cards: {attackCount}</div>
+          <div>Power Cards: {powerCount}</div>
+        </div>
         <h2>Existing Cards:</h2>
         <ul>
           {cards.map((card) => (
-            <li key={card._id}>{card.name}</li>
+            <li
+              key={card._id}
+              style={{
+                color:
+                  card.type.toLowerCase() === "attack"
+                    ? "red"
+                    : card.type.toLowerCase() === "skill"
+                    ? "blue"
+                    : "green",
+              }}
+            >
+              {card.name} / Coût: {card.cost} / {card.description}
+            </li>
           ))}
         </ul>
       </div>
     </div>
   );
 };
-
 export default CardForm;

@@ -1,15 +1,18 @@
 const express = require("express");
 const router = express.Router();
 
-// Import your controller functions for cards
+// Controller functions for cards
 const {
   createCard,
-  getAllCards,
   getRandomCards,
+  getAllCardsWithCounts,
 } = require("../controller/cardController");
+
 // Create a new card
 router.post("/createcard", createCard);
-router.get("/getcards", getAllCards);
+// Retrieve all cards (used in /createcard under the form)
+router.get("/getcards", getAllCardsWithCounts);
+// Retrieve 5 random cards, displayed in Combat.js / Cardboard.js
 router.get("/getRandomCards", getRandomCards);
 
 module.exports = router;

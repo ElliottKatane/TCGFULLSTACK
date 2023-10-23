@@ -1,15 +1,12 @@
 import React from "react";
-
-// We use Route in order to define the different routes of our application
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
-
-// We import all the components we need in our app
 import Navbar from "./components/Navbar";
 import Combat from "./pages/Combat";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import CardCreationPage from "./pages/CardCreation";
+import Map from "./pages/Map";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -19,17 +16,18 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route
-          exact
           path="/"
-          element={user ? <Combat /> : <Navigate to="/login" />}
+          element={user ? <Navigate to="/map" /> : <Navigate to="/login" />}
         />
+        <Route path="/map" element={<Map />} />
+        <Route path="/combat/:mapLevel" element={<Combat />} />
         <Route
           path="/login"
-          element={!user ? <Login /> : <Navigate to="/" />}
+          element={!user ? <Login /> : <Navigate to="/map" />}
         />
         <Route
           path="/signup"
-          element={!user ? <Signup /> : <Navigate to="/" />}
+          element={!user ? <Signup /> : <Navigate to="/map" />}
         />
         <Route path="/createcard" element={<CardCreationPage />} />
       </Routes>

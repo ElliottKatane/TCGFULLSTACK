@@ -1,7 +1,6 @@
 /* Combat.css */
 .combat-container {
   height: 100vh;
-  background-image: url("../assets/background.png");
   background-size: cover;
   background-repeat: no-repeat;
   display: flex; /* Add display: flex */
@@ -102,4 +101,16 @@
   to {
     opacity: 0;
   }
+}
+
+.img-background {
+  /* Set the image as the background */
+  width: 100%; /* Set the width to fill the container */
+  height: 100%; /* Set the height to fill the container */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+  position: absolute; /* Position the image absolutely within the container */
+  top: 0;
+  left: 0;
+  z-index: -1; /* Place the image behind other content */
+  opacity: 0.7; /* Adjust the opacity as needed */
 }

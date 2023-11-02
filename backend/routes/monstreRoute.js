@@ -1,14 +1,12 @@
-app.get("/api/Monstres/mapLevel/:mapLevel", async (req, res) => {
+const express = require("express");
+const router = express.Router();
+
+// Define a route to fetch the "Combat" component based on the selected mapLevel
+router.get("/combat/:mapLevel", (req, res) => {
+  // You can handle the request for the "Combat" component here
   const mapLevel = req.params.mapLevel;
-
-  try {
-    // Query the "Monstres" collection based on the selected map level
-    const monsters = await Monstres.find({ mapLevel: mapLevel });
-
-    // Return the monsters as JSON
-    res.json(monsters);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
+  // Render the "Combat" component or perform any necessary actions
+  res.send(`Loading Combat component for mapLevel ${mapLevel}`);
 });
+
+module.exports = router;

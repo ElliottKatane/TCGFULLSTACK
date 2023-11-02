@@ -17,9 +17,13 @@ const monstresSchema = new mongoose.Schema({
   ],
   HP: Number,
   image: String,
-  mapLevel: Number,
+  //reference au mapLevel dans collection levels
+  mapLevel: {
+    type: Number, // Data type for mapLevel (you can change this to match your data)
+    required: true, // Map level is required for each level
+  },
 });
 
-const Monstres = mongoose.model("Monstres", monstresSchema);
+const monstres = mongoose.model("Monstres", monstresSchema);
 
-module.exports = Monstres;
+module.exports = monstres;

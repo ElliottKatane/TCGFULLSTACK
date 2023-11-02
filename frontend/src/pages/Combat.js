@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../CSS/Combat.css";
 import "../CSS/Card.css";
-import orc from "../assets/orc.png";
 
 const Combat = () => {
   const [joueurHP, setJoueurHP] = useState(100);
@@ -92,7 +91,7 @@ const Combat = () => {
 
   useEffect(() => {
     // Fetch monster data based on the selected map level
-    fetch(`/api/Monstres/mapLevel/${mapLevel}`)
+    fetch(`/api/monstres/mapLevel/${mapLevel}`)
       .then((response) => response.json())
       .then((data) => {
         setMonsters(data);
@@ -115,11 +114,13 @@ const Combat = () => {
         </div>
 
         <div className="wolf">
-          {/* <div className="monster">
-            <h2>{monsters.nom}</h2>
-            <img src={orc} alt={monsters.nom} />
-            <p>HP: {monsters.HP}</p>
-          </div> */}
+          {monsters.map((monster, index) => (
+            <div key={index}>
+              <h2>{monster.nom}</h2>
+              <h2>{monster.HP}</h2>
+              <img src={`/assets/${monster.image}`} alt={monster.nom} />
+            </div>
+          ))}
         </div>
 
         {/* <Loup hp={loupHP} /> */}

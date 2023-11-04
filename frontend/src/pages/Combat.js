@@ -107,6 +107,9 @@ const Combat = () => {
       className="combat-container"
       style={{
         backgroundImage: `url(/api/levels/${mapLevel}/backgroundImage)`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
       }}
     >
       <div className="container-fighter-wolf">

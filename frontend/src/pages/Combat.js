@@ -90,16 +90,17 @@ const Combat = () => {
   }, [mapLevel]);
 
   useEffect(() => {
-    // Fetch monster data based on the selected map level
-    fetch(`/api/monstres/mapLevel/${mapLevel}`)
+    fetch(`/api/monstres/${mapLevel}/image`)
       .then((response) => response.json())
       .then((data) => {
+        console.log("Fetched monster data:", data);
         setMonsters(data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, [mapLevel]);
+  
 
   return (
     <div
@@ -113,15 +114,20 @@ const Combat = () => {
           <Joueur hp={joueurHP} />
         </div>
 
-        <div className="wolf">
-          {monsters.map((monster, index) => (
-            <div key={index}>
-              <h2>{monster.nom}</h2>
-              <h2>{monster.HP}</h2>
-              <img src={`/assets/${monster.image}`} alt={monster.nom} />
-            </div>
-          ))}
-        </div>
+        <div className="monster">
+  {monsters.map((monster, index) => {
+    console.log("Monster image data:", monster.image);
+    console.log("Constructed image source:", `/assets/${monster.image}`);
+    return (
+      <div key={index}>
+        <h2>{monster.nom}</h2>
+        <h2>{monster.HP}</h2>
+        <img src={`/assets/${monster.image}`} alt={monster.nom} />
+      </div>
+    );
+  })}
+</div>
+
 
         {/* <Loup hp={loupHP} /> */}
       </div>

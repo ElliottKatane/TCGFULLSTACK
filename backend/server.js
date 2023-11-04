@@ -32,7 +32,7 @@ app.get(
   levelController.getLevelBackgroundImage
 );
 app.get(
-  "/api/monstres/mapLevel/:mapLevel",
+  "/api/monstres/:mapLevel/image",
   monsterController.getMonstersByMapLevel
 );
 

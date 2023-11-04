@@ -51,9 +51,12 @@
   width: 100%; /* Make the Cardboard container take full width */
   display: flex;
   justify-content: center; /* Center the Cardboard horizontally */
+  flex-wrap: wrap; /* Allow Cards to wrap to the next line if needed */
 }
 
 .cardboard {
+  flex-wrap: wrap; /* Allow Cards to wrap to the next line if needed */
+  display: flex;
   max-height: 45vh;
   width: 80%;
   padding: 20px;

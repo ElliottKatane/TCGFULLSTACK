@@ -14,17 +14,19 @@ const Card = () => {
   return (
     <div>
       {randomCards.map((card, index) => (
-        <div // Render each card as a div. bg color's card changes with type
-          className={`card-container card-${card.type.toLowerCase()}`}
-          key={index}
-        >
-          <h2 className="card-title">{card.name}</h2>
-          <p className="card-description">{card.description}</p>
-          <div className="card-details">
-            <p>Rarity: {card.rarity}</p>
-            <p>Type: {card.type}</p>
+        <div className="card-align">
+          <div // Render each card as a div. bg color's card changes with type
+            className={`card-container card-${card.type.toLowerCase()}`}
+            key={index}
+          >
+            <h2 className="card-title">{card.name}</h2>
+            <p className="card-description">{card.description}</p>
+            <div className="card-details">
+              <p>Rarity: {card.rarity}</p>
+              <p>Type: {card.type}</p>
+            </div>
+            <div className="card-cost">{card.cost}</div>
           </div>
-          <div className="card-cost">{card.cost}</div>
         </div>
       ))}
     </div>

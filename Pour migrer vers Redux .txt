@@ -1,0 +1,16 @@
+Pour migrer vers Redux //
+
+npm install @reduxjs/toolkit
+npm install redux react-redux redux-thunk
+
+ere's a high-level guide on how to modify your Combat component to work with Redux:
+
+Remove Local State: You can replace the local component state, such as joueurHP, loupHP, manaPool, currentMana, cardsUsed, and currentlyPlaying, with Redux state. 
+=> Define corresponding actions to update these values.
+
+Move Logic to Actions and Reducers: The logic for reducing HP, managing mana, and turn transitions should be handled in Redux actions and reducers. 
+=> Create Redux actions to perform these actions, and update your reducers accordingly.
+
+Dispatch Redux Actions: In your component, dispatch the relevant Redux actions instead of directly updating the local state.
+
+Keep UI-Related Effects: You can keep the UI-related effects using useEffect for animations and visual cues, as these effects are not directly related to your game state managed by Redux.

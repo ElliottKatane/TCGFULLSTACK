@@ -18,7 +18,6 @@ const Combat = () => {
   const [levelData, setLevelData] = useState(null);
   const [monsters, setMonsters] = useState([]);
 
-
   const [isDamagePopupVisible, setIsDamagePopupVisible] = useState(false);
   const [damageValue, setDamageValue] = useState(0);
 
@@ -101,16 +100,15 @@ const Combat = () => {
         console.error(error);
       });
   }, [mapLevel]);
-  
 
   return (
     <div
       className="combat-container"
       style={{
         backgroundImage: `url(/api/levels/${mapLevel}/backgroundImage)`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
       }}
     >
       <div className="container-fighter-wolf">
@@ -119,33 +117,33 @@ const Combat = () => {
         </div>
 
         <div className="monster">
-  {monsters.map((monster, index) => {
-    console.log("Monster image data:", monster.image);
-    console.log("Constructed image source:", `/assets/${monster.image}`);
-    return (
-      <div key={index}>
-        <h2>{monster.nom}</h2>
-        <h2>{monster.HP}</h2>
-        <img src={`/assets/${monster.image}`} alt={monster.nom} />
-      </div>
-    );
-  })}
-</div>
-
+          {monsters.map((monster, index) => {
+            console.log("Monster image data:", monster.image);
+            console.log(
+              "Constructed image source:",
+              `/assets/${monster.image}`
+            );
+            return (
+              <div key={index}>
+                <h2>{monster.name}</h2>
+                <h2>{monster.health}</h2>
+                <img src={`/${monster.image}`} alt={monster.name} />
+              </div>
+            );
+          })}
+        </div>
 
         {/* <Loup hp={loupHP} /> */}
       </div>
 
       <div className="cardboard-container">
-
-<div className="cardboard">
+        <div className="cardboard">
           <CardBoard
             attaquerLoup={attaquerLoup}
             currentMana={currentMana}
             manaPool={manaPool}
           />
         </div>
-
       </div>
 
       <div className="fintourbtn">

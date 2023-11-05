@@ -3,12 +3,11 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
 const cardRoutes = require("./routes/cardForm");
-const path = require("path");
-const Level = require("./models/levelModel");
-const Monstres = require("./models/monstreModel");
+const levelRoute = require("./routes/levelRoute");
+const monstreRoute = require("./routes/monstreRoute");
 const levelController = require("./controller/levelController");
 const monsterController = require("./controller/monsterController");
-
+const path = require("path");
 //express app
 const app = express();
 
@@ -24,8 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 //routes
 app.use("/api/user", userRoutes);
 app.use("/api/card-form", cardRoutes);
-app.use("/api", require("./routes/levelRoute"));
-app.use("/api", require("./routes/monstreRoute"));
+app.use("/api/levels", levelRoute);
+app.use("/api/monstres", monstreRoute);
 
 app.get(
   "/api/levels/:mapLevel/backgroundImage",

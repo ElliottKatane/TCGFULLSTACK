@@ -12,11 +12,14 @@ const CardBoard = ({ attaquerLoup, currentMana, manaPool }) => {
 
   return (
     <div className="cardboard-container">
+
       {/* <CardATK ATKvalue={6} name="Strike" onAttaque={handleAttack} />
       <CardATK ATKvalue={8} name="Strike" onAttaque={handleAttack} />
       <CardATK ATKvalue={10} name="Strike" onAttaque={handleAttack} /> */}
       <Card />
       {/* Card component from backend. Retrieves x random cards (determined in cardController) */}
+
+
       <div className="manadisplay">
         Mana: {currentMana}/{manaPool}
       </div>

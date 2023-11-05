@@ -18,6 +18,7 @@ const Combat = () => {
   const [levelData, setLevelData] = useState(null);
   const [monsters, setMonsters] = useState([]);
 
+
   const [isDamagePopupVisible, setIsDamagePopupVisible] = useState(false);
   const [damageValue, setDamageValue] = useState(0);
 
@@ -134,14 +135,17 @@ const Combat = () => {
 
         {/* <Loup hp={loupHP} /> */}
       </div>
+
       <div className="cardboard-container">
-        <div className="cardboard">
+
+<div className="cardboard">
           <CardBoard
             attaquerLoup={attaquerLoup}
             currentMana={currentMana}
             manaPool={manaPool}
           />
         </div>
+
       </div>
 
       <div className="fintourbtn">
@@ -155,6 +159,7 @@ const Combat = () => {
           <div className="damage-popup">{damageValue}</div>
         )}
       </div>
+      {showLootScreen && <LootScreen />}
     </div>
   );
 };

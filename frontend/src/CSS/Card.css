@@ -1,15 +1,15 @@
 .cardcomp {
-  width: calc(
-    33.33% - 20px
-  ); /* Largeur de chaque carte (ajustez selon vos besoins) */
   margin-bottom: 20px; /* Espace entre les cartes (ajustez selon vos besoins) */
   padding: 10px; /* Espace intérieur de chaque carte (ajustez selon vos besoins) */
   flex: 0 0 auto; /* Empêche la carte de se développer au-delà de sa taille intrinsèque */
   margin: 10px;
+  width: 170px;
+  height: 230px;
 }
-p#card {
+
+p.card {
   align-self: flex-start;
-  color: white;
+  color: rgb(255, 255, 255);
   text-align: center;
   padding: 0.5vh;
   background-color: blue;

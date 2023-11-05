@@ -1,4 +1,10 @@
 /* Combat.css */
+
+body {
+  background-image: url("../assets/background.png");
+  background-size: cover; /* Set the size of the background image */
+  background-repeat: no-repeat;
+}
 .combat-container {
   height: 100vh;
   background-size: cover;
@@ -47,17 +53,12 @@
 }
 
 .cardboard-container {
-  width: 100%; /* Make the Cardboard container take full width */
+  width: 85%; /* Make the Cardboard container take full width */
+  overflow: auto;
   display: flex;
-  justify-content: center; /* Center the Cardboard horizontally */
-}
-
-.cardboard {
-  max-height: 45vh;
-  width: 80%;
-  padding: 20px;
-  background-color: rgb(111, 101, 101);
+  justify-content: center;
   margin-top: 20px; /* Add some space between Cardboard and fighter/wolf */
+  background-color: burlywood;
 }
 
 .fintourbtn {
@@ -113,4 +114,5 @@
   left: 0;
   z-index: -1; /* Place the image behind other content */
   opacity: 0.7; /* Adjust the opacity as needed */
+
 }

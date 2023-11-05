@@ -9,6 +9,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./redux/reducers/rootReducer"; // Update the import path to access the rootReducer.js file
 import { Provider } from "react-redux"; // Redux Provider
 import thunk from "redux-thunk";
+import '@fortawesome/fontawesome-free/css/all.css';
 
 // Create the Redux store using configureStore
 const store = configureStore({
@@ -16,7 +17,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk), // Add your middleware (e.g., Redux Thunk) here
 });
 
-import '@fortawesome/fontawesome-free/css/all.css';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

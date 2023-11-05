@@ -119,18 +119,15 @@ const Combat = () => {
         </div>
 
         <div className="monster">
-  {monsters.map((monster, index) => {
-    console.log("Monster image data:", monster.image);
-    console.log("Constructed image source:", `/assets/${monster.image}`);
-    return (
-      <div key={index}>
-        <h2>{monster.nom}</h2>
-        <h2>{monster.HP}</h2>
-        <img src={`/assets/${monster.image}`} alt={monster.nom} />
-      </div>
-    );
-  })}
+  {monsters.map((monster, index) => (
+    <div key={index}>
+      <h2>{monster.nom}</h2>
+      <h2>{monster.HP}</h2>
+      <img src={`/assets/${monster.image}`} alt={monster.nom} />
+    </div>
+  ))}
 </div>
+
 
 
         {/* <Loup hp={loupHP} /> */}

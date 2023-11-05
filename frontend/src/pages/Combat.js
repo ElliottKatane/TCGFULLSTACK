@@ -159,7 +159,6 @@ const Combat = () => {
           <div className="damage-popup">{damageValue}</div>
         )}
       </div>
-      {showLootScreen && <LootScreen />}
     </div>
   );
 };

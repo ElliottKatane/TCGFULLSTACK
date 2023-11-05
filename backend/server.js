@@ -3,23 +3,38 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
 const cardRoutes = require("./routes/cardForm");
+const path = require("path");
+const Level = require("./models/levelModel");
+const Monstres = require("./models/monstreModel");
+const levelController = require("./controller/levelController");
+const monsterController = require("./controller/monsterController");
 
 //express app
 const app = express();
 
 // middleware
+app.use(express.static(path.join(__dirname, "frontend", "src", "assets")));
 app.use(express.json());
 require("dotenv").config({ path: "./config.env" });
 app.use(cors());
-
 // ejs
 app.set("view engine", "ejs"); // Set EJS as the view engine
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public")); // Serve static files from the 'public' folder
 
 //routes
 app.use("/api/user", userRoutes);
 app.use("/api/card-form", cardRoutes);
+app.use("/api", require("./routes/levelRoute"));
+app.use("/api", require("./routes/monstreRoute"));
+
+app.get(
+  "/api/levels/:mapLevel/backgroundImage",
+  levelController.getLevelBackgroundImage
+);
+app.get(
+  "/api/monstres/:mapLevel/image",
+  monsterController.getMonstersByMapLevel
+);
 
 mongoose
   .connect(process.env.MONGO_URI)

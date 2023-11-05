@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
+
 //redux imports
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./redux/reducers/rootReducer"; // Update the import path to access the rootReducer.js file
@@ -14,6 +15,9 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk), // Add your middleware (e.g., Redux Thunk) here
 });
+
+import '@fortawesome/fontawesome-free/css/all.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

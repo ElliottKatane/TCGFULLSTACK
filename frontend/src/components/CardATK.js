@@ -13,8 +13,6 @@ const CardATK = ({ ATKvalue, onAttaque }) => {
 
   // taille de la carte et son image
   const style = {
-    width: "170px",
-    height: "230px",
     backgroundImage: `url(${imageATK})`,
     backgroundRepeat: "no-repeat",
   };

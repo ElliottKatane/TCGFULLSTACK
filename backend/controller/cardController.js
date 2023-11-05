@@ -45,8 +45,7 @@ const getAllCardsWithCounts = async (req, res) => {
 const getRandomCards = async (req, res) => {
   try {
     const cardCount = await Card.countDocuments();
-    const sampleSize = Math.min(10, cardCount); // Determine the sample size
-
+    const sampleSize = Math.min(5, cardCount); // Determine the sample size
     const randomCards = await Card.aggregate([
       { $sample: { size: sampleSize } }, // Retrieve random cards based on the sample size
     ]);

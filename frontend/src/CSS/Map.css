@@ -1,0 +1,89 @@
+.mapStyle {
+    background-image: url(../assets/map.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 810px;
+    width: 1440px;
+    overflow: auto;
+    margin: 0 auto;
+
+  }
+
+
+.map-button.button-1 {
+    position: relative;
+    
+    left: 8.4%;
+    bottom: -85%;
+    color: black;
+    font-size: 24px;
+  }
+  
+  .map-button.button-2 {
+    position: relative;
+bottom: -76.5%;    
+left: 19%;
+    color: black;
+    font-size: 24px;
+  }
+  .map-button.button-3 {
+    position: relative;
+    bottom: -64%;
+    left: 33%;
+    color: black;
+    font-size: 24px;
+  }
+  .map-button.button-4 {
+    position: relative;
+    bottom: -50%;
+    left: 39.7%;
+    color: black;
+    font-size: 24px;
+  }
+  .map-button.button-5 {
+    position: relative;
+    bottom: -45%;
+    left: 48%;
+    color: black;
+    font-size: 24px;
+  }
+  .map-button.button-6 {
+    position: relative;
+    bottom: -62%;
+    left: 58%;
+    color: black;
+    font-size: 24px;
+  }
+  .map-button.button-7 {
+    position: relative;
+    bottom: -46%;
+    left: 63%;
+    color: black;
+    font-size: 24px;
+  }
+  .map-button.button-8 {
+    position: relative;
+    bottom: -35%;
+    left: 65%;
+    color: black;
+    font-size: 24px;
+  }
+  .map-button.button-9 {
+    position: relative;
+    bottom: -25%;
+    left: 66%;
+    color: black;
+    font-size: 24px;
+  }
+  .map-button.button-10 {
+    position: relative;
+    bottom: -14%;
+    left: 72%;
+    color: black;
+    font-size: 24px;
+  }
+
+.fa-flag:hover {
+    color: red; /* Change the color to red when hovering */
+  }

@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 
 // Import your reducers here
-import ennemiReducer from "./ennemiReducer";
+import monstresReducer from "./monstresReducer";
 import joueurReducer from "./joueurReducer";
 import cartesReducer from "./cartesReducer";
 
 const rootReducer = combineReducers({
-  ennemi: ennemiReducer,
+  monstres: monstresReducer,
   joueur: joueurReducer,
   cartes: cartesReducer,
 });

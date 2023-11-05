@@ -14,3 +14,28 @@ Move Logic to Actions and Reducers: The logic for reducing HP, managing mana, an
 Dispatch Redux Actions: In your component, dispatch the relevant Redux actions instead of directly updating the local state.
 
 Keep UI-Related Effects: You can keep the UI-related effects using useEffect for animations and visual cues, as these effects are not directly related to your game state managed by Redux.
+
+
+--------------------------------------------------------------------------
+
+Pour gérer les cartes de manière aléatoire avec des pouvoirs uniques et les utiliser avec Redux, vous pouvez suivre une approche similaire à celle que nous avons utilisée pour la récupération des cartes. Voici comment vous pourriez l'aborder :
+
+Créez un action Redux pour utiliser une carte avec un pouvoir unique :
+
+Vous pouvez définir une action pour utiliser une carte avec un pouvoir unique. Par exemple, si vous voulez gérer l'utilisation d'une carte "Frappe", vous pouvez créer une action USE_FRAPPE_CARD comme vous l'avez mentionné précédemment. Vous pouvez créer des actions similaires pour chaque type de carte avec un pouvoir unique.
+Mettez à jour le reducer pour gérer l'utilisation des cartes :
+
+Mettez à jour votre reducer pour gérer l'utilisation des cartes avec des pouvoirs uniques en utilisant les actions que vous avez créées. Par exemple, pour gérer l'utilisation d'une carte "Frappe", vous pouvez ajouter un cas USE_FRAPPE_CARD dans votre reducer pour appliquer la logique associée à cette carte.
+Gérez le deck du joueur avec Redux :
+
+Vous pouvez gérer le deck du joueur en utilisant Redux. Créez un état dans le store Redux pour stocker les cartes actuellement dans le deck du joueur. Vous pouvez ajouter ou supprimer des cartes du deck en fonction des actions de l'utilisateur.
+Appliquez la logique de pouvoir unique dans le reducer :
+
+Lorsqu'un joueur utilise une carte avec un pouvoir unique, vous pouvez appliquer la logique spécifique à cette carte dans le reducer associé. Par exemple, dans le cas de USE_FRAPPE_CARD, vous pouvez appliquer l'effet spécifique à la carte "Frappe" dans le reducer.
+Mettez en place des sélecteurs pour accéder aux données du deck du joueur :
+
+Utilisez des sélecteurs pour accéder aux données du deck du joueur depuis le store Redux. Cela vous permettra de déterminer si une carte spécifique est présente dans le deck du joueur avant d'autoriser son utilisation.
+Mettez en place des composants pour afficher le deck du joueur :
+
+Créez des composants qui affichent le deck du joueur et permettent aux joueurs d'utiliser des cartes du deck. Ces composants peuvent déclencher les actions Redux pour utiliser des cartes avec des pouvoirs uniques.
+En résumé, en utilisant Redux, vous pouvez gérer les cartes avec des pouvoirs uniques en stockant leur état dans le store Redux et en appliquant la logique spécifique à chaque carte dans le reducer associé. Vous pouvez également gérer le deck du joueur et permettre aux joueurs d'utiliser les cartes du deck en fonction de leur état et des actions de l'utilisateur.

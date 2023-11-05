@@ -1,19 +1,29 @@
+import {
+  USE_FRAPPE_CARD,
+  FETCH_RANDOM_CARDS_SUCCESS,
+} from "../actions/cartesActions"; // Importez l'action type
+
+// État initial de votre reducer
 const initialState = {
-  cards: [],
+  damage: 0, // Initial damage value
+  randomCards: [],
 };
 
 const cartesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_CARD":
+    case USE_FRAPPE_CARD:
+      // Vous pouvez définir la logique pour mettre à jour l'état en fonction de l'action
+      // Par exemple, ajouter la valeur de dommages à l'état actuel
       return {
         ...state,
-        cards: [...state.cards, action.payload],
+        damage: state.damage + action.payload,
       };
-    case "REMOVE_CARD":
+    case FETCH_RANDOM_CARDS_SUCCESS:
       return {
         ...state,
-        cards: state.cards.filter((card) => card.id !== action.payload),
+        randomCards: action.payload,
       };
+    // Vous pouvez ajouter d'autres cas pour d'autres types d'action ici
     default:
       return state;
   }

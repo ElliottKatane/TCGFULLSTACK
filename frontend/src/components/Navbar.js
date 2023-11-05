@@ -1,51 +1,46 @@
 import React from "react";
+import poelogo from "../assets/poelogo.png";
+import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // We import bootstrap to make our application look better.
 import "bootstrap/dist/css/bootstrap.css";
 
 // We import NavLink to utilize the react router.
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 // Here, we display our Navbar
 export default function Navbar() {
-  return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <NavLink className="navbar-brand" to="/">
-          <img
-            style={{ width: 25 + "%" }}
-            src="https://d3cy9zhslanhfa.cloudfront.net/media/3800C044-6298-4575-A05D5C6B7623EE37/4B45D0EC-3482-4759-82DA37D8EA07D229/webimage-8A27671A-8A53-45DC-89D7BF8537F15A0D.png"
-            alt="oui"
-          ></img>
-        </NavLink>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+  // hooks import
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/createmonster">
-                Create Monster
-              </NavLink>
-              <NavLink className="nav-link" to="/monstres">
-                Show Monster Collection
-              </NavLink>
-              <NavLink className="nav-link" to="/">
-                Combat
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+  const handleClick = () => {
+    logout();
+  };
+  return (
+    <header>
+      <div className="container">
+        <Link to="/">Combat</Link>
+        <NavLink className="navbar-brand" to="/">
+          <img style={{ width: "45%" }} src={poelogo} alt="oui"></img>
+        </NavLink>
+        <nav>
+          {/* if user is logged in, show email and logout button */}
+          {user && (
+            <div>
+              <span>{user.email}</span>
+              <button onClick={handleClick}>Log out</button>
+            </div>
+          )}
+          {!user && (
+            <div>
+              <Link to="/login">S'identifier</Link>
+              <Link to="/signup">S'enregistrer</Link>
+            </div>
+          )}
+        </nav>
+      </div>
+    </header>
   );
 }

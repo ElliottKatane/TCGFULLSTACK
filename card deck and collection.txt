@@ -1,0 +1,48 @@
+-- Card collection model :
+
+Create a model for the player's card collection. This model should store the player's unique cards and the number of each card they own. 
+
+const Schema = mongoose.Schema;
+
+const cardCollectionSchema = new Schema({
+  playerId: { type: String, required: true }, // Reference to the player
+  cards: [
+    {
+      cardId: { type: String, required: true }, // Reference to the card
+      quantity: { type: Number, default: 1 }, // Number of cards in the collection
+    },
+  ],
+});
+
+const CardCollection = mongoose.model('CardCollection', cardCollectionSchema);
+
+module.exports = CardCollection;
+
+
+-- Card Deck Model
+
+const Schema = mongoose.Schema;
+
+const cardDeckSchema = new Schema({
+  playerId: { type: String, required: true }, // Reference to the player
+  cards: [
+    {
+      cardId: { type: String, required: true }, // Reference to the card
+    },
+  ],
+});
+
+const CardDeck = mongoose.model('CardDeck', cardDeckSchema);
+
+module.exports = CardDeck;
+
+
+Initial Card Collection:
+
+When a new player signs up or starts the game, you can create their initial card collection with 10 unique cards, one of each. You can insert these cards into the cardCollection database.
+
+
+
+
+
+

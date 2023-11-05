@@ -1,5 +1,5 @@
 import React from "react";
-import loupSprite from "../assets/loup-sprite.png";
+import loupSprite from "../assets/loup.png";
 import { useState, useEffect } from "react";
 import HPBar from "./HPBar";
 const Loup = ({ hp }) => {

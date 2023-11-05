@@ -4,7 +4,7 @@ import imageATK from "../assets/rsz_strike_r.png";
 // valeur : +3atk, +3 def, +3pv jusqu'à la fin du combat
 // image : image de la carte
 // onAttaque : fonction qui permet d'attaquer
-const CardATK = ({ ATKvalue, onAttaque, name }) => {
+const CardATK = ({ ATKvalue, onAttaque }) => {
   // gère le click sur la carte : l'attribut "onAttaque" reçoit ATKvalue. ATKvalue est envoyé à la fonction attaquerLoup dans CardBoard.js
   const handleClick = () => {
     console.log("handleClick, ATKvalue dans CardATK.js: " + ATKvalue);

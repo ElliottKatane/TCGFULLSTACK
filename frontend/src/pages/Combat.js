@@ -133,6 +133,7 @@ const Combat = () => {
           })}
         </div>
 
+
         {/* <Loup hp={loupHP} /> */}
       </div>
 

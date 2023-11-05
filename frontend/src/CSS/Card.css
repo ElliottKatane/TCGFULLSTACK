@@ -15,18 +15,20 @@ p.card {
   background-color: blue;
 } /* card.css */
 
+.card-align {
+  /* Création d'une div englobant le rendering de chaque carte */
+  /* inline-flex est ce qui m'a permis d'aligner les cartes */
+  display: inline-flex;
+}
 /* Style for the card container */
 .card-container {
-  position: relative; /* Make the container relative for absolute positioning */
-  display: flex;
-  flex-direction: column;
+  position: relative;
   width: 200px;
   height: 280px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 5px;
   padding: 16px;
   margin: 10px;
-  background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 

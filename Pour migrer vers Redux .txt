@@ -39,3 +39,5 @@ Mettez en place des composants pour afficher le deck du joueur :
 
 Créez des composants qui affichent le deck du joueur et permettent aux joueurs d'utiliser des cartes du deck. Ces composants peuvent déclencher les actions Redux pour utiliser des cartes avec des pouvoirs uniques.
 En résumé, en utilisant Redux, vous pouvez gérer les cartes avec des pouvoirs uniques en stockant leur état dans le store Redux et en appliquant la logique spécifique à chaque carte dans le reducer associé. Vous pouvez également gérer le deck du joueur et permettre aux joueurs d'utiliser les cartes du deck en fonction de leur état et des actions de l'utilisateur.
+
+import '@fortawesome/fontawesome-free/css/all.css';

@@ -15,7 +15,7 @@ const createCard = async (req, res) => {
 // Retrieve all cards
 const getAllCardsWithCounts = async (req, res) => {
   try {
-    const cards = await Card.find(); // Retrieve all documents from the 'Card' collection
+    const cards = await Card.find(); // Retrieve all documents from the 'Card' collection, but using "Card" from the model import
 
     // Calculate the counts for each card type
     const skillCount = cards.filter(

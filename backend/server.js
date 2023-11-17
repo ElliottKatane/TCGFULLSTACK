@@ -15,7 +15,13 @@ const app = express();
 app.use(express.static(path.join(__dirname, "frontend", "src", "assets")));
 app.use(express.json());
 require("dotenv").config({ path: "./config.env" });
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://tcg-back.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 // ejs
 app.set("view engine", "ejs"); // Set EJS as the view engine
 app.use(express.urlencoded({ extended: true }));

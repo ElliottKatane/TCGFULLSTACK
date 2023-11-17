@@ -19,8 +19,13 @@ app.use(
   cors({
     origin: ["https://tcg-front.vercel.app"],
     methods: ["POST", "GET"],
+    credentials: true,
   })
 );
+
+// CORS allowance
+res.setHeader("Access-Control-Allow-Origin", "https://tcg-front.vercel.app");
+res.setHeader("Access-Control-Allow-Credentials", "true");
 // ejs
 app.set("view engine", "ejs"); // Set EJS as the view engine
 app.use(express.urlencoded({ extended: true }));

@@ -17,7 +17,7 @@ app.use(express.json());
 require("dotenv").config({ path: "./config.env" });
 app.use(
   cors({
-    origin: ["https://tcg-front.vercel.app"],
+    origin: "*",
     methods: ["POST", "GET"],
     credentials: true,
   })

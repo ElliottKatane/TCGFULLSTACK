@@ -13,7 +13,7 @@ export const useSignup = () => {
 
     // this is the request
     const response = await fetch(
-      "https://tcg-front.vercel.app/api/user/signup",
+      "https://tcg-front-six.vercel.app/api/user/signup",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -17,7 +17,7 @@ app.use(express.json());
 require("dotenv").config({ path: "./config.env" });
 app.use(
   cors({
-    origin: "*",
+    origin: "https://tcg-front-six.vercel.app",
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -53,7 +53,7 @@ app.get(
 );
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     // listen for requests
     app.listen(process.env.PORT, () => {

@@ -19,7 +19,6 @@ app.use(
   cors({
     origin: ["https://tcg-front.vercel.app"],
     methods: ["POST", "GET"],
-    credentials: true,
   })
 );
 // ejs

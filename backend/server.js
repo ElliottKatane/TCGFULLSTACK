@@ -17,7 +17,7 @@ app.use(express.json());
 require("dotenv").config({ path: "./config.env" });
 app.use(
   cors({
-    origin: ["https://tcg-back.vercel.app"],
+    origin: ["https://tcg-front.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -25,6 +25,11 @@ app.use(
 // ejs
 app.set("view engine", "ejs"); // Set EJS as the view engine
 app.use(express.urlencoded({ extended: true }));
+
+// fct de test pour afficher hello
+app.get("/", (req, res) => {
+  res.json("Hello");
+});
 
 //routes
 app.use("/api/user", userRoutes);

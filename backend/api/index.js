@@ -1,15 +1,29 @@
-const express = require("express");
+// express.Router() is a function that returns a router object. This object has methods like .get() and .post() that we can use to create routes. We can then export this router object and import it into our server.js file.
+const express = require("express")();
+const app = express();
+const { v4 } = require("uuid");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const userRoutes = require("./user");
-const cardRoutes = require("./cardForm");
-const levelRoute = require("./levelRoute");
-const monstreRoute = require("./monstreRoute");
-const levelController = require("./controller/levelController");
-const monsterController = require("./controller/monsterController");
 const path = require("path");
-//express app
-const app = express();
+// routes
+const userRoutes = require("user");
+const cardRoutes = require("cardForm");
+const levelRoute = require("levelRoute");
+const monstreRoute = require(".monstreRoute");
+const levelController = require("levelController");
+const monsterController = require("monsterController");
+
+app.get("/api", (req, res) => {
+  const path = `/api/item/${v4()}`;
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+});
+
+app.get("/api/item/:slug", (req, res) => {
+  const { slug } = req.params;
+  res.end(`Item: ${slug}`);
+});
 
 // middleware
 app.use(express.static(path.join(__dirname, "frontend", "src", "assets")));
@@ -61,3 +75,5 @@ mongoose
 app.on("error", (err) => {
   console.error("Express server error:", err);
 });
+// Export the Express API
+module.exports = app;

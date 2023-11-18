@@ -28,11 +28,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // fct de test pour afficher hello
 app.get("/", (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://tcg-front-six.vercel.app"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.json("Hello");
 });
 

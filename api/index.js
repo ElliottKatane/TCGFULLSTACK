@@ -14,8 +14,8 @@ const userRoutes = require("./user");
 const cardRoutes = require("./cardForm");
 const levelRoute = require("./levelRoute");
 const monstreRoute = require("./monstreRoute");
-const levelController = require("../controller/levelController");
-const monsterController = require("../controller/monsterController");
+const levelController = require("../backend/controller/levelController");
+const monsterController = require("../backend/controller/monsterController");
 
 app.get("/api", (req, res) => {
   const path = `/api/item/${v4()}`;

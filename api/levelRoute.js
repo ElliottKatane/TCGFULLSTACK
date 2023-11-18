@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Level = require("../models/levelModel"); // Import your Mongoose model
+const Level = require("../backend/models/levelModel"); // Import your Mongoose model
 
 // Define a route to fetch levels based on the selected mapLevel
 router.get("/levels/:mapLevel", async (req, res) => {

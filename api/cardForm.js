@@ -6,7 +6,7 @@ const {
   createCard,
   getRandomCards,
   getAllCardsWithCounts,
-} = require("../controller/cardController");
+} = require("../backend/controller/cardController");
 
 // Create a new card
 router.post("/createcard", createCard);

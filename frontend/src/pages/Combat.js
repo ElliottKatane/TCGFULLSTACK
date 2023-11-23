@@ -12,26 +12,17 @@ import "../CSS/Card.css";
 const Combat = () => {
   // monster data through redux
   const { mapLevel } = useParams();
-  const [monsters, setMonsters] = useState([]);
-
-  const [joueurHP, setJoueurHP] = useState(100);
   const [manaPool, setManaPool] = useState(3);
   const [currentMana, setCurrentMana] = useState(manaPool);
-  const [cardsUsed, setCardsUsed] = useState(0);
   const [currentlyPlaying, setCurrentlyPlaying] = useState("player");
 
   const [isDamagePopupVisible, setIsDamagePopupVisible] = useState(false);
   const [damageValue, setDamageValue] = useState(0);
 
-  const decreaseJoueurHP = () => {
-    setJoueurHP((prevHP) => prevHP - 10);
-  };
-
   const handleFinTour = () => {
     if (currentlyPlaying === "player") {
       setCurrentlyPlaying("enemy");
-      console.log("Tour du loup");
-      decreaseJoueurHP();
+      console.log("Tour de l'ennemi");
     } else {
       setCurrentlyPlaying("player");
     }
@@ -39,9 +30,7 @@ const Combat = () => {
 
   useEffect(() => {
     if (currentlyPlaying === "enemy") {
-      setCurrentMana(manaPool);
-      setCardsUsed(0);
-      decreaseJoueurHP();
+      console.log("Tour de l'ennemi");
     }
   }, [currentlyPlaying]);
 
@@ -55,17 +44,20 @@ const Combat = () => {
         backgroundPosition: "center center",
       }}
     >
+      {/* Composants Player and Monster */}
       <div className="container-player-monster">
-        <Player hp={joueurHP} />
+        <Player />
         <Monster />
       </div>
 
+      {/* Composant CardBoard */}
       <div className="cardboard-container">
         <div className="cardboard">
           <CardBoard currentMana={currentMana} manaPool={manaPool} />
         </div>
       </div>
 
+      {/* Boutin fin du tour */}
       <div className="fintourbtn">
         <button onClick={handleFinTour}>
           End {currentlyPlaying === "player" ? "Player" : "Enemy"} Turn

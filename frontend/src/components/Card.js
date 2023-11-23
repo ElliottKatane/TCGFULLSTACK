@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 // redux imports
 import { useDispatch, useSelector } from "react-redux"; // Import useDispatch from react-redux
-import {
-  fetchRandomCards,
-  infligerDegats,
-  useFrappeCard,
-} from "../redux/actions/card.action"; // Import the Card actions
+import { ManaCost, fetchRandomCards } from "../redux/actions/card.action"; // Import the Card actions
+import { DegatsSubis } from "../redux/actions/monster.action";
 
 const Card = () => {
-  const randomCards = useSelector((state) => state.cartes.randomCards);
+  // state.card => regarder dans rootReducer pour la réf
+  const randomCards = useSelector((state) => state.card.randomCards);
   const dispatch = useDispatch(); // Initialize the useDispatch hook
 
   useEffect(() => {
@@ -22,22 +20,29 @@ const Card = () => {
       case "Frappe":
         console.log("clickedCard name clicked : ", clickedCard.name);
         console.log("clickedCard.value", clickedCard.value);
-        dispatch(infligerDegats(6));
-        // Autres actions spécifiques à la carte "Frappe" si nécessaire
+        // inflige les dégâts
+        dispatch(DegatsSubis(clickedCard.value));
+        // dépense le mana
+        dispatch(ManaCost(clickedCard.cost));
+        // devrait retirer la carte de la main et la mettre dans la défausse
         break;
 
       case "Conflit":
         console.log("clickedCard name clicked : ", clickedCard.name);
         console.log("clickedCard.value", clickedCard.value);
+        //vérifie si toutes les cartes sont de type Attaque, condition pour jouer la carte Conflit
         const allAttackCards = randomCards.every(
-          (card) => card.type === "Attaque"
+          (card) => card.type === "Attack"
         );
         if (allAttackCards) {
           console.log("Toutes les cartes sont des cartes d'attaque");
-          dispatch(infligerDegats(8));
+          // inflige les dégâts (monster action/reducer)
+          dispatch(DegatsSubis(clickedCard.value));
           // Autres actions spécifiques à la carte "Conflit" si nécessaire
         } else {
-          console.log("Impossible de jouer la carte Conflit");
+          console.log(
+            "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
+          );
         }
         break;
 
@@ -47,7 +52,7 @@ const Card = () => {
 
       default:
         // Gérer le cas par défaut si le nom de la carte n'est pas reconnu
-        console.log("Carte non reconnue : ", clickedCard.name);
+        console.log("Carte non codée encore : ", clickedCard.name);
     }
   };
 

@@ -1,7 +1,6 @@
 import {
   USE_FRAPPE_CARD,
   FETCH_RANDOM_CARDS_SUCCESS,
-  INFLIGER_DEGATS,
 } from "../actions/card.action"; // Importez l'action type
 
 // État initial de votre reducer
@@ -10,7 +9,7 @@ const initialState = {
   randomCards: [],
 };
 
-const cartesReducer = (state = initialState, action) => {
+const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case USE_FRAPPE_CARD:
       // Vous pouvez définir la logique pour mettre à jour l'état en fonction de l'action
@@ -24,16 +23,10 @@ const cartesReducer = (state = initialState, action) => {
         ...state,
         randomCards: action.payload,
       };
-    case INFLIGER_DEGATS:
-      return {
-        ...state,
-        pointsDeVieAdversaire:
-          state.pointsDeVieAdversaire - action.payload.montant,
-      };
     // Vous pouvez ajouter d'autres cas pour d'autres types d'action ici
     default:
       return state;
   }
 };
 
-export default cartesReducer;
+export default cardReducer;

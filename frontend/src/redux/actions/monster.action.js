@@ -1,38 +1,53 @@
+export const FETCH_MONSTER_INFO_SUCCESS = "FETCH_MONSTER_INFO_SUCCESS";
+export const FETCH_MONSTER_INFO_FAILURE = "FETCH_MONSTER_INFO_FAILURE";
 export const FETCH_MONSTER_INFO = "FETCH_MONSTER_INFO";
 export const UPDATE_MONSTER_HP = "UPDATE_MONSTER_HP";
+export const DEGATS_SUBIS = "DEGATS_SUBIS";
+export const INIT_HP_MONSTER = "INIT_HP_MONSTER";
 
-const fetchMonsterInfoFromDatabase = async (monsterName) => {
+export const fetchMonsterInfoSuccess = (monsterInfo) => ({
+  type: FETCH_MONSTER_INFO_SUCCESS,
+  payload: monsterInfo,
+});
+
+export const fetchMonsterInfoFailure = (error) => ({
+  type: FETCH_MONSTER_INFO_FAILURE,
+  payload: error,
+});
+
+export const fetchMonster = (mapLevel) => async (dispatch) => {
   try {
-    const response = await fetch(`/api/monsters/${monsterName}`);
+    const response = await fetch(`/api/monsters/${mapLevel}`);
     if (!response.ok) {
       throw new Error("La requête a échoué");
     }
-
-    const data = await response.json();
-    return data; // Supposons que la réponse contient les informations du monstre
+    const monsterInfo = await response.json();
+    dispatch(fetchMonsterInfoSuccess(monsterInfo));
   } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des informations du monstre :",
-      error
-    );
-    return null; // Gérez les erreurs de manière appropriée
+    dispatch(fetchMonsterInfoFailure(error.message));
   }
 };
-export const fetchMonsterInfo = (monsterName) => {
-  return async (dispatch) => {
-    try {
-      const monsterInfo = await fetchMonsterInfoFromDatabase(monsterName);
-      if (monsterInfo) {
-        dispatch({ type: FETCH_MONSTER_INFO, payload: monsterInfo });
-      }
-    } catch (error) {
-      // Gérez les erreurs de manière appropriée
-    }
+
+// initialiser les points de vie du monstre
+export const initHPMonster = (health) => {
+  return {
+    type: INIT_HP_MONSTER,
+    payload: health,
   };
 };
+
 export const updateMonsterHP = (newHP) => {
   return {
     type: UPDATE_MONSTER_HP,
     payload: newHP,
+  };
+};
+// Action pour infliger les dégâts
+export const DegatsSubis = (damageValue) => {
+  return {
+    type: DEGATS_SUBIS,
+    payload: {
+      damageValue,
+    },
   };
 };

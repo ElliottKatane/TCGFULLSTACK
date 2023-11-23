@@ -4,14 +4,14 @@ import React from "react";
 import "../CSS/Cardboard.css";
 import Card from "./Card";
 
-const CardBoard = ({ attaquerLoup, currentMana, manaPool }) => {
+const CardBoard = ({ currentMana, manaPool }) => {
   return (
     <div className="cardboard-container">
-      <Card />
-      {/* Card component from backend. Retrieves x random cards (determined in cardController) */}
       <div className="manadisplay">
         Mana: {currentMana}/{manaPool}
       </div>
+      <Card />
+      {/* Card component from backend. Retrieves x random cards (determined in cardController) */}
     </div>
   );
 };

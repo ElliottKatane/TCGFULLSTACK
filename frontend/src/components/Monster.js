@@ -1,37 +1,42 @@
 import { useEffect, React, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import HPBar from "./HPBar";
+import { initHPMonster, fetchMonster } from "../redux/actions/monster.action";
 
 const Monster = () => {
+  // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
-  const [monsters, setMonsters] = useState([]);
+  const dispatch = useDispatch(); // Initialisez useDispatch
+  const monster = useSelector((state) => state.monster);
 
   useEffect(() => {
-    fetch(`/api/monsters/${mapLevel}`) //Fetch les monstres a partir du mapLevel
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched monster data:", data);
-        setMonsters(data);
+    // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
+    dispatch(fetchMonster(mapLevel))
+      .then((result) => {
+        console.log("Fetch monster result:", result);
       })
       .catch((error) => {
-        console.error(error);
-      });
-  }, [mapLevel]);
+        console.error("Fetch monster failed:", error);
+      }); // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
+    const result = dispatch(fetchMonster(mapLevel));
+    console.log("Dispatch result:", result);
+  }, [mapLevel, dispatch]);
 
   return (
     <div>
-      {monsters.map((monster, index) => {
-        console.log("Monster image data:", monster.image);
-        console.log("Constructed image source:", `/assets/${monster.image}`);
-
-        return (
-          <div key={index}>
-            <h2>{monster.name}</h2>
-            <HPBar value={monster.health} />
-            <img src={`/assets/${monster.image}`} alt={monster.name} />
-          </div>
-        );
-      })}
+      {monster.monsterInfo ? (
+        <div>
+          <h2>{monster.monsterInfo.name}</h2>
+          <HPBar value={monster.monsterInfo.health} />
+          <img
+            src={`/assets/${monster.monsterInfo.image}`}
+            alt={monster.monsterInfo.name}
+          />
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };

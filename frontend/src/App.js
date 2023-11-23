@@ -1,0 +1,38 @@
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
+import Navbar from "./components/Navbar";
+import Combat from "./pages/Combat";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import CardCreationPage from "./pages/CardCreation";
+import Map from "./pages/Map";
+
+const App = () => {
+  const { user } = useAuthContext();
+
+  return (
+    <div>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={user ? <Navigate to="/map" /> : <Navigate to="/login" />}
+        />
+        <Route path="/map" element={<Map />} />
+        <Route path="/combat/:mapLevel" element={<Combat />} />
+        <Route
+          path="/login"
+          element={!user ? <Login /> : <Navigate to="/map" />}
+        />
+        <Route
+          path="/signup"
+          element={!user ? <Signup /> : <Navigate to="/map" />}
+        />
+        <Route path="/createcard" element={<CardCreationPage />} />
+      </Routes>
+    </div>
+  );
+};
+
+export default App;

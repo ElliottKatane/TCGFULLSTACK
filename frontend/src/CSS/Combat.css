@@ -1,0 +1,125 @@
+/* Combat.css */
+
+.combat-container {
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex; /* Add display: flex */
+  flex-direction: column;
+  justify-content: center; /* Vertically center the content */
+  align-items: center;
+}
+
+.container-player-monster {
+  display: flex;
+  flex: 1; /* Make sure the fighter and wolf expand to fill the space */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Rest of your CSS */
+
+/* Default styles with a margin for all screen sizes */
+.fighter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50%; /* Add a 20px margin to the right of the fighter */
+}
+/* 
+.monster {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 50%; /* Add a 20px margin to the left of the wolf 
+} */
+
+/* Add margins for screens with a width of 768px or larger */
+@media screen and (max-width: 768px) {
+  .fighter {
+    margin-right: 50px; /* Adjust the margin for larger screens */
+  }
+
+  .wolf {
+    margin-left: 50px; /* Adjust the margin for larger screens */
+  }
+}
+
+.cardboard-container {
+  width: 85%; /* Make the Cardboard container take full width */
+  overflow: auto;
+  display: flex;
+
+  justify-content: center; /* Center the Cardboard horizontally */
+  flex-wrap: wrap; /* Allow Cards to wrap to the next line if needed */
+}
+
+.cardboard {
+  flex-wrap: wrap; /* Allow Cards to wrap to the next line if needed */
+  display: flex;
+  max-height: 45vh;
+  width: 80%;
+  padding: 20px;
+
+  justify-content: center;
+
+  margin-top: 20px; /* Add some space between Cardboard and fighter/wolf */
+  background-color: burlywood;
+}
+
+.fintourbtn {
+  flex: 1;
+}
+
+.damage-popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.damage-popup {
+  background-color: red;
+  color: white;
+  font-size: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0s ease-in-out, fadeOut 0.3s ease-in-out 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.img-background {
+  /* Set the image as the background */
+  width: 100%; /* Set the width to fill the container */
+  height: 100%; /* Set the height to fill the container */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+  position: absolute; /* Position the image absolutely within the container */
+  top: 0;
+  left: 0;
+  z-index: -1; /* Place the image behind other content */
+  opacity: 0.7; /* Adjust the opacity as needed */
+}

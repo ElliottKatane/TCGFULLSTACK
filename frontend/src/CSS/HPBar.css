@@ -1,0 +1,47 @@
+.hp-bar-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  position: relative; /* Add relative positioning to contain absolute children */
+}
+
+.hp-bar {
+  width: 150px;
+  height: 20px;
+  background-color: #ccc;
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin: 0 auto; /* Center the bar horizontally */
+  position: relative; /* Add relative positioning to contain absolute children */
+}
+
+.hp-fill.hp-green,
+.hp-fill.hp-red {
+  height: 100%;
+  position: absolute; /* Position absolute to the .hp-bar */
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+}
+
+.hp-fill.hp-green {
+  background-color: #00cc00;
+  transition: width 0.2s ease-in-out;
+}
+
+.hp-fill.hp-red {
+  background-color: #ff0000;
+}
+
+.hp-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px; /* Adjust padding as needed */
+  color: #fff; /* Text color */
+}

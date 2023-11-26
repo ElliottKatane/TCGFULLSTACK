@@ -1,6 +1,5 @@
 export const FETCH_MONSTER_INFO_SUCCESS = "FETCH_MONSTER_INFO_SUCCESS";
 export const FETCH_MONSTER_INFO_FAILURE = "FETCH_MONSTER_INFO_FAILURE";
-export const FETCH_MONSTER_INFO = "FETCH_MONSTER_INFO";
 export const UPDATE_MONSTER_HP = "UPDATE_MONSTER_HP";
 export const DEGATS_SUBIS = "DEGATS_SUBIS";
 export const INIT_HP_MONSTER = "INIT_HP_MONSTER";
@@ -22,6 +21,8 @@ export const fetchMonster = (mapLevel) => async (dispatch) => {
       throw new Error("La requête a échoué");
     }
     const monsterInfo = await response.json();
+    // Log the monsterInfo to the console
+    console.log("Monster Info (redux):", monsterInfo);
     dispatch(fetchMonsterInfoSuccess(monsterInfo));
   } catch (error) {
     dispatch(fetchMonsterInfoFailure(error.message));

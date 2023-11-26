@@ -1,6 +1,7 @@
 import {
   USE_FRAPPE_CARD,
   FETCH_RANDOM_CARDS_SUCCESS,
+  MANA_COST,
 } from "../actions/card.action"; // Importez l'action type
 
 // État initial de votre reducer
@@ -22,6 +23,11 @@ const cardReducer = (state = initialState, action) => {
       return {
         ...state,
         randomCards: action.payload,
+      };
+    case MANA_COST:
+      return {
+        ...state,
+        mana: state.mana - action.payload,
       };
     // Vous pouvez ajouter d'autres cas pour d'autres types d'action ici
     default:

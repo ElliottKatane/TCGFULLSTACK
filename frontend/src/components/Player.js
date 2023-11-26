@@ -1,46 +1,47 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import image from "../assets/guerrier.png";
 import HPBar from "./HPBar";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { connect } from "react-redux";
+import { fetchPlayer } from "../redux/actions/player.action";
 
-const Player = () => {
+const Player = ({ player, dispatch }) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
-  const [playerData, setPlayerData] = useState(null);
-  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // si l'user existe (ce qui est forcément le cas puisqu'il a besoin de se connecter pour accéder à cette page), on récupère son email
     if (user) {
       const userEmail = user.email;
-
-      fetch(`/api/player/profile/${userEmail}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setPlayerData(data);
-          setLoading(false);
+      dispatch(fetchPlayer(userEmail))
+        .then((result) => {
+          console.log("Fetch player result:", result);
         })
         .catch((error) => {
-          console.error("Error fetching player data:", error);
-          setLoading(false);
+          console.error("Fetch player failed:", error);
         });
     }
-  }, [user]);
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  }, [user, dispatch]);
 
-  if (!playerData) {
-    return <p>Error loading player data.</p>;
-  }
+  console.log("Player state:", player.playerInfo);
 
   return (
     <div>
-      <h1>FIGHTER</h1>
-      <img src={image} alt="copie" />
-      <HPBar value={playerData.HP} />
+      {player.playerInfo ? (
+        <div>
+          <h1>FIGHTER</h1>
+          <img src={image} alt="copie" />
+          <HPBar value={player.playerInfo.HP} />
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
-
-export default Player;
+const mapStateToProps = (state) => {
+  return {
+    player: state.player,
+  };
+};
+export default connect(mapStateToProps)(Player);

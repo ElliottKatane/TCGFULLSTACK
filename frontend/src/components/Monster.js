@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import HPBar from "./HPBar";
+import StatsBar from "./StatsBar";
 import { fetchMonster } from "../redux/actions/monster.action";
 
 const Monster = ({ monster, dispatch }) => {
@@ -26,7 +26,7 @@ const Monster = ({ monster, dispatch }) => {
       {monster.monsterInfo ? (
         <div>
           <h2>{monster.monsterInfo.name}</h2>
-          <HPBar value={monster.monsterInfo.health} />
+          <StatsBar HPValue={monster.monsterInfo.health} isPlayer={false} />
           <img
             src={`/assets/${monster.monsterInfo.image}`}
             alt={monster.monsterInfo.name}

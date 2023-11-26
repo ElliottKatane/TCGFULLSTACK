@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import image from "../assets/guerrier.png";
-import HPBar from "./HPBar";
+import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
 import { fetchPlayer } from "../redux/actions/player.action";
@@ -31,7 +31,12 @@ const Player = ({ player, dispatch }) => {
         <div>
           <h1>FIGHTER</h1>
           <img src={image} alt="copie" />
-          <HPBar value={player.playerInfo.HP} />
+          <StatsBar
+            HPValue={player.playerInfo.HP}
+            currentMana={2}
+            manaPool={player.playerInfo.manaPool}
+            isPlayer={true}
+          />
         </div>
       ) : (
         <p>Loading...</p>

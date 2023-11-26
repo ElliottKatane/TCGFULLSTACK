@@ -1,7 +1,6 @@
 import {
   FETCH_MONSTER_INFO_SUCCESS,
   FETCH_MONSTER_INFO_FAILURE,
-  UPDATE_MONSTER_HP,
   DEGATS_SUBIS,
 } from "../actions/monster.action";
 
@@ -21,11 +20,7 @@ const monsterReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
       };
-    case UPDATE_MONSTER_HP:
-      return {
-        ...state,
-        health: action.payload, // Mettez à jour les points de vie du monstre
-      };
+
     case DEGATS_SUBIS:
       console.log("Reducing damage. Current health:", state.monsterInfo.health);
       console.log("Damage value:", action.payload.damageValue);

@@ -24,6 +24,7 @@ const Player = ({ player, dispatch }) => {
   }, [user, dispatch]);
 
   console.log("Player state:", player.playerInfo);
+  // initialisation de la manaPool et enregistrement dans une constante
 
   return (
     <div>
@@ -33,7 +34,7 @@ const Player = ({ player, dispatch }) => {
           <img src={image} alt="copie" />
           <StatsBar
             HPValue={player.playerInfo.HP}
-            currentMana={2}
+            currentMana={player.playerInfo.manaPool}
             manaPool={player.playerInfo.manaPool}
             isPlayer={true}
           />

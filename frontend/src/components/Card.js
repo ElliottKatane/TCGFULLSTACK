@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 // redux imports
 import { useDispatch, useSelector } from "react-redux"; // Import useDispatch from react-redux
-import { ManaCost, fetchRandomCards } from "../redux/actions/card.action"; // Import the Card actions
+import { fetchRandomCards } from "../redux/actions/card.action"; // Import the Card actions
+import { ManaCost } from "../redux/actions/player.action";
 import { DegatsSubis } from "../redux/actions/monster.action";
 
 const Card = () => {

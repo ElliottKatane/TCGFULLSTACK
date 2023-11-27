@@ -23,6 +23,7 @@ const cardReducer = (state = initialState, action) => {
         ...state,
         randomCards: action.payload,
       };
+
     // Vous pouvez ajouter d'autres cas pour d'autres types d'action ici
     default:
       return state;

@@ -8,8 +8,6 @@ export const FETCH_RANDOM_CARDS_SUCCESS = "FETCH_RANDOM_CARDS_SUCCESS";
 export const FETCH_ALL_CARDS_SUCCESS = "FETCH_ALL_CARDS_SUCCESS";
 export const CREATE_CARD = "CREATE_CARD";
 export const FETCH_CARDS = "FETCH_CARDS";
-// Modificateurs d'état";
-export const MANA_COST = "MANA_COST";
 
 //Action creator for CardForm
 export const createCard = (formData) => {
@@ -68,15 +66,6 @@ export const fetchAllCards = () => {
   };
 };
 
-// Action pour réduire le coût du mana selon la carte jouée
-export const ManaCost = (mana) => {
-  return {
-    type: MANA_COST,
-    payload: {
-      mana,
-    },
-  };
-};
 export const useFrappeCard = (damageValue) => {
   return {
     type: USE_FRAPPE_CARD,

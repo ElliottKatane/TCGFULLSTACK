@@ -5,6 +5,10 @@ const playerSchema = new Schema({
     type: Number,
     default: 100,
   },
+  manaPool: {
+    type: Number,
+    default: 3,
+  },
   Gold: {
     type: Number,
     default: 0,

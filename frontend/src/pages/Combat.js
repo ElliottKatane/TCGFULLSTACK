@@ -12,8 +12,6 @@ import "../CSS/Card.css";
 const Combat = () => {
   // monster data through redux
   const { mapLevel } = useParams();
-  const [manaPool, setManaPool] = useState(3);
-  const [currentMana, setCurrentMana] = useState(manaPool);
   const [currentlyPlaying, setCurrentlyPlaying] = useState("player");
 
   const [isDamagePopupVisible, setIsDamagePopupVisible] = useState(false);
@@ -53,7 +51,7 @@ const Combat = () => {
       {/* Composant CardBoard */}
       <div className="cardboard-container">
         <div className="cardboard">
-          <CardBoard currentMana={currentMana} manaPool={manaPool} />
+          <CardBoard />
         </div>
       </div>
 

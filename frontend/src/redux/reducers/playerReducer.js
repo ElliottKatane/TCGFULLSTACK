@@ -1,23 +1,35 @@
+import {
+  FETCH_PLAYER_INFO_FAILURE,
+  FETCH_PLAYER_INFO_SUCCESS,
+  MANA_COST,
+} from "../actions/player.action";
+
 const initialState = {
-  health: 100,
-  mana: 3,
+  playerInfo: null,
 };
 
-const joueurReducer = (state = initialState, action) => {
+const playerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "PLAYER_ATTACK":
+    case FETCH_PLAYER_INFO_SUCCESS:
+      console.log("Player info from action (reducer)", action.payload[0]);
+
       return {
         ...state,
-        health: state.health - action.payload,
+        playerInfo: action.payload, // Stockez les informations du monstre, 1er élément du tableau
       };
-    case "PLAYER_REGENERATE_MANA":
+    case FETCH_PLAYER_INFO_FAILURE:
       return {
         ...state,
-        mana: state.mana + action.payload,
+        error: action.payload,
+      };
+    case MANA_COST:
+      return {
+        ...state,
+        currentMana: state.mana - action.payload,
       };
     default:
       return state;
   }
 };
 
-export default joueurReducer;
+export default playerReducer;

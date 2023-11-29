@@ -1,6 +1,7 @@
 export const FETCH_PLAYER_INFO_SUCCESS = "FETCH_PLAYER_INFO_SUCCESS";
 export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
 export const MANA_COST = "MANA_COST";
+export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
 
 export const fetchPlayerInfoSuccess = (playerInfo) => ({
   type: FETCH_PLAYER_INFO_SUCCESS,
@@ -18,6 +19,14 @@ export const ManaCost = (mana) => {
     type: MANA_COST,
     payload: {
       mana,
+    },
+  };
+};
+export const initializeCurrentMana = (manaPool) => {
+  return {
+    type: INITIALIZE_CURRENT_MANA,
+    payload: {
+      manaPool,
     },
   };
 };

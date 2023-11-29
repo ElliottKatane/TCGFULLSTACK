@@ -4,7 +4,10 @@ import image from "../assets/guerrier.png";
 import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
-import { fetchPlayer } from "../redux/actions/player.action";
+import {
+  fetchPlayer,
+  initializeCurrentMana,
+} from "../redux/actions/player.action";
 
 const Player = ({ player, dispatch }) => {
   // importer le contexte d'authentification
@@ -16,6 +19,8 @@ const Player = ({ player, dispatch }) => {
       dispatch(fetchPlayer(userEmail))
         .then((result) => {
           console.log("Fetch player result:", result);
+          console.log("Mana pool:", result.manaPool);
+          dispatch(initializeCurrentMana(result.manaPool));
         })
         .catch((error) => {
           console.error("Fetch player failed:", error);
@@ -34,7 +39,7 @@ const Player = ({ player, dispatch }) => {
           <img src={image} alt="copie" />
           <StatsBar
             HPValue={player.playerInfo.HP}
-            currentMana={player.playerInfo.manaPool}
+            currentMana={player.currentMana}
             manaPool={player.playerInfo.manaPool}
             isPlayer={true}
           />

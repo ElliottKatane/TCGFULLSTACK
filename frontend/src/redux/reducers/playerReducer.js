@@ -2,17 +2,17 @@ import {
   FETCH_PLAYER_INFO_FAILURE,
   FETCH_PLAYER_INFO_SUCCESS,
   MANA_COST,
+  INITIALIZE_CURRENT_MANA,
 } from "../actions/player.action";
 
 const initialState = {
   playerInfo: null,
+  currentMana: 0,
 };
 
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PLAYER_INFO_SUCCESS:
-      console.log("Player info from action (reducer)", action.payload[0]);
-
       return {
         ...state,
         playerInfo: action.payload, // Stockez les informations du monstre, 1er élément du tableau
@@ -22,13 +22,15 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
       };
+    case INITIALIZE_CURRENT_MANA:
+      return {
+        ...state,
+        currentMana: action.payload.manaPool,
+      };
     case MANA_COST:
       return {
         ...state,
-        playerInfo: {
-          ...state.playerInfo,
-          manaPool: state.playerInfo.manaPool - action.payload.mana,
-        },
+        currentMana: state.currentMana - action.payload.mana,
       };
     default:
       return state;

@@ -1,8 +1,3 @@
-// Action des cartes
-export const USE_FRAPPE_CARD = "USE_FRAPPE_CARD";
-export const USE_COUPDEBOULE_CARD = "USE_COUPDEBOULE_CARD";
-export const USE_CONFLIT_CARD = "USE_CONFLIT_CARD";
-export const USE_COLERE_CARD = "USE_COLERE_CARD";
 // Fetch des cartes
 export const FETCH_RANDOM_CARDS_SUCCESS = "FETCH_RANDOM_CARDS_SUCCESS";
 export const FETCH_ALL_CARDS_SUCCESS = "FETCH_ALL_CARDS_SUCCESS";
@@ -63,30 +58,5 @@ export const fetchAllCards = () => {
     } catch (error) {
       // Handle the error, dispatch an error action, etc.
     }
-  };
-};
-
-export const useFrappeCard = (damageValue) => {
-  return {
-    type: USE_FRAPPE_CARD,
-    payload: damageValue, // Include the damage value as payload
-  };
-};
-export const useColereCard = (damageValue) => {
-  return {
-    type: USE_COLERE_CARD,
-    payload: damageValue, // Include the damage value as payload
-  };
-};
-export const useConflitCard = (damageValue) => {
-  return {
-    type: USE_CONFLIT_CARD,
-    payload: damageValue, // Include the damage value as payload
-  };
-};
-export const useCoupDeBouleCard = (damageValue) => {
-  return {
-    type: USE_COUPDEBOULE_CARD,
-    payload: damageValue, // Include the damage value as payload
   };
 };

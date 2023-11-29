@@ -1,6 +1,7 @@
 export const FETCH_PLAYER_INFO_SUCCESS = "FETCH_PLAYER_INFO_SUCCESS";
 export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
 export const MANA_COST = "MANA_COST";
+
 export const fetchPlayerInfoSuccess = (playerInfo) => ({
   type: FETCH_PLAYER_INFO_SUCCESS,
   payload: playerInfo,

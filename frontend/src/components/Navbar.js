@@ -1,5 +1,5 @@
 import React from "react";
-import poelogo from "../assets/poelogo.png";
+import stslogo from "../assets/stslogo.png";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
@@ -23,7 +23,7 @@ export default function Navbar() {
       <div className="container">
         <Link to="/">Combat</Link>
         <NavLink className="navbar-brand" to="/">
-          <img style={{ width: "45%" }} src={poelogo} alt="oui"></img>
+          <img style={{ width: "25%" }} src={stslogo} alt="oui"></img>
         </NavLink>
         <nav>
           {/* if user is logged in, show email and logout button */}

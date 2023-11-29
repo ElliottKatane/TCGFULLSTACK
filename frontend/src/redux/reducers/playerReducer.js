@@ -25,7 +25,10 @@ const playerReducer = (state = initialState, action) => {
     case MANA_COST:
       return {
         ...state,
-        currentMana: state.mana - action.payload,
+        playerInfo: {
+          ...state.playerInfo,
+          manaPool: state.playerInfo.manaPool - action.payload.mana,
+        },
       };
     default:
       return state;

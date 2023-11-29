@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import StatsBar from "./StatsBar";
 import { fetchMonster } from "../redux/actions/monster.action";
+import { handleVictory } from "../redux/actions/game.action";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Monster = ({ monster, dispatch }) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
+  const { user } = useAuthContext();
 
   useEffect(() => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
@@ -21,12 +24,21 @@ const Monster = ({ monster, dispatch }) => {
 
   console.log("Monster state:", monster.monsterInfo);
 
+
+  
+  useEffect(() => {
+    if (monster.monsterInfo && monster.monsterInfo.health <= 0) {
+      const userEmail = user.email; 
+      dispatch(handleVictory(userEmail,mapLevel));
+    }
+  }, [monster.monsterInfo, dispatch]);
+
   return (
     <div>
       {monster.monsterInfo ? (
         <div>
           <h2>{monster.monsterInfo.name}</h2>
-          <StatsBar HPValue={monster.monsterInfo.health} isPlayer={false} />
+          <StatsBar HPValue={monster.monsterInfo.health}  />
           <img
             src={`/assets/${monster.monsterInfo.image}`}
             alt={monster.monsterInfo.name}

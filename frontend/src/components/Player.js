@@ -5,6 +5,8 @@ import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
 import { fetchPlayer } from "../redux/actions/player.action";
+import { DEFEAT } from "../redux/actions/game.action";
+
 
 const Player = ({ player, dispatch }) => {
   // importer le contexte d'authentification
@@ -25,6 +27,12 @@ const Player = ({ player, dispatch }) => {
 
   console.log("Player state:", player.playerInfo);
   // initialisation de la manaPool et enregistrement dans une constante
+
+  useEffect(() => {
+    if (player.playerInfo && player.playerInfo.HP <= 0) {
+      dispatch({ type: DEFEAT }); // Dispatch DEFEAT action
+    }
+  }, [player.playerInfo, dispatch]);
 
   return (
     <div>

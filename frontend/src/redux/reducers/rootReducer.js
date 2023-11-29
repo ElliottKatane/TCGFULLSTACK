@@ -4,11 +4,13 @@ import { combineReducers } from "redux";
 import monsterReducer from "./monsterReducer";
 import playerReducer from "./playerReducer";
 import cardReducer from "./cardReducer";
+import gameReducer from "./gameReducer";
 
 const rootReducer = combineReducers({
   monster: monsterReducer,
   player: playerReducer,
   card: cardReducer,
+  game: gameReducer,
 });
 
 export default rootReducer;

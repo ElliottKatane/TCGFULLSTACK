@@ -6,6 +6,8 @@ import {
   ManaCost,
   activateEnflammer,
   deactivateEnflammer,
+  activateCombustion,
+  deactivateCombustion,
 } from "../redux/actions/player.action";
 import { DegatsSubis } from "../redux/actions/monster.action";
 
@@ -69,6 +71,12 @@ const Card = () => {
         // dépense le mana
         dispatch(ManaCost(clickedCard.cost));
         break;
+      case "Combustion": // 1 - Perdez 1HP et infligez 5 de dégâts à tous les ennemis à la fin de votre tour.
+        // inflige les dégâts
+        dispatch(activateCombustion());
+        // dépense le mana
+        dispatch(ManaCost(clickedCard.cost));
+        break;
       case "Défendre": // 1 - Gagnez 5 de blocage.
         break;
       case "Charge imprudente": // 1 - Infligez 7 dégâts. Ajoutez un Hébétement à votre pioche
@@ -85,10 +93,10 @@ const Card = () => {
   useEffect(() => {
     // Désactive l'effet Enflammer à la fin du combat
     dispatch(deactivateEnflammer());
+    dispatch(deactivateCombustion());
   }, [dispatch]);
 
-  // ...
-
+  // Fonction pour calculer les dégâts avec les effets spéciaux
   const calculateExtraDMG = (baseDamage) => {
     // Si l'effet Enflammer est activé, ajoute +2 aux dégâts
     return enflammerActivated ? baseDamage + 2 : baseDamage;

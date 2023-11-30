@@ -1,9 +1,14 @@
+// fetches
 export const FETCH_PLAYER_INFO_SUCCESS = "FETCH_PLAYER_INFO_SUCCESS";
 export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
+// mana
 export const MANA_COST = "MANA_COST";
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
+// carte Enflammer et Combustion
 export const ACTIVATE_ENFLAMMER = "ACTIVATE_ENFLAMMER";
 export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
+export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
+export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
 
 export const fetchPlayerInfoSuccess = (playerInfo) => ({
   type: FETCH_PLAYER_INFO_SUCCESS,
@@ -15,6 +20,13 @@ export const fetchPlayerInfoFailure = (error) => ({
   payload: error,
 });
 
+export const activateCombustion = () => ({
+  type: ACTIVATE_COMBUSTION,
+});
+
+export const deactivateCombustion = () => ({
+  type: DEACTIVATE_COMBUSTION,
+});
 // carte Enflammer
 export const activateEnflammer = () => ({
   type: ACTIVATE_ENFLAMMER,

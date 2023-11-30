@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import {
   fetchPlayer,
   initializeCurrentMana,
+  initializeCurrentTurn,
 } from "../redux/actions/player.action";
 import flameIcon from "../assets/flame-icon.png";
 import combustionIcon from "../assets/combustion-icon.png";
@@ -32,6 +33,8 @@ const Player = ({
           console.log("Fetch player result:", result);
           console.log("Mana pool:", result.manaPool);
           dispatch(initializeCurrentMana(result.manaPool));
+          dispatch(initializeCurrentTurn(result.currentTurn));
+          console.log("currentTurn:", result.currentTurn);
         })
         .catch((error) => {
           console.error("Fetch player failed:", error);
@@ -44,13 +47,10 @@ const Player = ({
 
   useEffect(() => {
     if (player.playerInfo && player.playerInfo.HP <= 0) {
-
       dispatch(handleDefeat());
       alert("Defaite");
       navigate("/map");
     }
- 
-      
   }, [player.playerInfo, dispatch]);
 
   return (

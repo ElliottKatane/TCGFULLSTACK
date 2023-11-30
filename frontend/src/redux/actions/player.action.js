@@ -4,11 +4,34 @@ export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
 // mana
 export const MANA_COST = "MANA_COST";
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
+export const INITIALIZE_CURRENT_TURN = "INIZIALIZE_CURRENT_TURN";
 // carte Enflammer et Combustion
 export const ACTIVATE_ENFLAMMER = "ACTIVATE_ENFLAMMER";
 export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
 export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
 export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
+// fin de tour
+export const END_PLAYER_TURN = "END_PLAYER_TURN";
+export const END_MONSTER_TURN = "END_MONSTER_TURN";
+
+export const switchTurn = (currentTurn) => (dispatch) => {
+  if (currentTurn === "player") {
+    dispatch(endPlayerTurn());
+  } else if (currentTurn === "monster") {
+    dispatch(endMonsterTurn());
+    // probablement qu'il faudra rajouter :
+    // vérifier si la pioche est vide. si oui, il faut aller transvaser les cartes de la défausse dans la pioche
+    // la logique pour fetch de nouvelles cartes depuis la pioche
+    // le reset de currentMana
+  }
+};
+
+export const endPlayerTurn = () => ({
+  type: END_PLAYER_TURN,
+});
+export const endMonsterTurn = () => ({
+  type: END_MONSTER_TURN,
+});
 
 export const fetchPlayerInfoSuccess = (playerInfo) => ({
   type: FETCH_PLAYER_INFO_SUCCESS,
@@ -41,6 +64,15 @@ export const ManaCost = (mana) => {
     type: MANA_COST,
     payload: {
       mana,
+    },
+  };
+};
+
+export const initializeCurrentTurn = (currentTurn) => {
+  return {
+    type: INITIALIZE_CURRENT_TURN,
+    payload: {
+      currentTurn,
     },
   };
 };

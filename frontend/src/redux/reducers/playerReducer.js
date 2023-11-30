@@ -3,21 +3,38 @@ import {
   FETCH_PLAYER_INFO_SUCCESS,
   MANA_COST,
   INITIALIZE_CURRENT_MANA,
+  INITIALIZE_CURRENT_TURN,
   ACTIVATE_ENFLAMMER,
   DEACTIVATE_ENFLAMMER,
   ACTIVATE_COMBUSTION,
   DEACTIVATE_COMBUSTION,
+  END_PLAYER_TURN,
+  END_MONSTER_TURN,
 } from "../actions/player.action";
 
 const initialState = {
   playerInfo: null,
   currentMana: 0,
+  currentTurn: "player",
   enflammerActivated: false,
   combustionActivated: false,
 };
 
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case INITIALIZE_CURRENT_TURN:
+      return {
+        ...state,
+        currentTurn: "player",
+      };
+    case END_PLAYER_TURN:
+      return {
+        ...state,
+        currentTurn: "monster",
+      };
+    case END_MONSTER_TURN:
+      return { ...state, currentTurn: "player" };
+    // carte Combustion
     case ACTIVATE_COMBUSTION:
       return {
         ...state,
@@ -28,6 +45,7 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         combustionActivated: false,
       };
+    // carte Enflammer
     case ACTIVATE_ENFLAMMER:
       return {
         ...state,
@@ -38,6 +56,7 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         enflammerActivated: false,
       };
+    // fetch des infos du joueur
     case FETCH_PLAYER_INFO_SUCCESS:
       return {
         ...state,
@@ -48,6 +67,7 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
       };
+    // Coûts en mana et initialisation de la manaPool
     case INITIALIZE_CURRENT_MANA:
       return {
         ...state,
@@ -58,6 +78,7 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         currentMana: state.currentMana - action.payload.mana,
       };
+    // default
     default:
       return state;
   }

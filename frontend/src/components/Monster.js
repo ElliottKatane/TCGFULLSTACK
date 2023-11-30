@@ -11,7 +11,7 @@ const Monster = ({ monster, dispatch }) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
@@ -26,15 +26,12 @@ const navigate = useNavigate();
 
   console.log("Monster state:", monster.monsterInfo);
 
-
-  
   useEffect(() => {
     if (monster.monsterInfo && monster.monsterInfo.health <= 0) {
-      const userEmail = user.email; 
-      dispatch(handleVictory(userEmail,mapLevel));
+      const userEmail = user.email;
+      dispatch(handleVictory(userEmail, mapLevel));
       alert("Victoire!");
       navigate("/map");
-
     }
   }, [monster.monsterInfo, dispatch]);
 
@@ -43,10 +40,11 @@ const navigate = useNavigate();
       {monster.monsterInfo ? (
         <div>
           <h2>{monster.monsterInfo.name}</h2>
-          <StatsBar HPValue={monster.monsterInfo.health}  />
+          <StatsBar HPValue={monster.monsterInfo.health} />
           <img
             src={`/assets/${monster.monsterInfo.image}`}
             alt={monster.monsterInfo.name}
+            style={{ width: "50%" }}
           />
         </div>
       ) : (

@@ -2,6 +2,8 @@ export const FETCH_PLAYER_INFO_SUCCESS = "FETCH_PLAYER_INFO_SUCCESS";
 export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
 export const MANA_COST = "MANA_COST";
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
+export const ACTIVATE_ENFLAMMER = "ACTIVATE_ENFLAMMER";
+export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
 
 export const fetchPlayerInfoSuccess = (playerInfo) => ({
   type: FETCH_PLAYER_INFO_SUCCESS,
@@ -13,6 +15,14 @@ export const fetchPlayerInfoFailure = (error) => ({
   payload: error,
 });
 
+// carte Enflammer
+export const activateEnflammer = () => ({
+  type: ACTIVATE_ENFLAMMER,
+});
+
+export const deactivateEnflammer = () => ({
+  type: DEACTIVATE_ENFLAMMER,
+});
 // Action pour réduire le coût du mana selon la carte jouée
 export const ManaCost = (mana) => {
   return {

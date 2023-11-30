@@ -5,16 +5,29 @@ import {
   INITIALIZE_CURRENT_MANA,
   ACTIVATE_ENFLAMMER,
   DEACTIVATE_ENFLAMMER,
+  ACTIVATE_COMBUSTION,
+  DEACTIVATE_COMBUSTION,
 } from "../actions/player.action";
 
 const initialState = {
   playerInfo: null,
   currentMana: 0,
   enflammerActivated: false,
+  combustionActivated: false,
 };
 
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTIVATE_COMBUSTION:
+      return {
+        ...state,
+        combustionActivated: true,
+      };
+    case DEACTIVATE_COMBUSTION:
+      return {
+        ...state,
+        combustionActivated: false,
+      };
     case ACTIVATE_ENFLAMMER:
       return {
         ...state,

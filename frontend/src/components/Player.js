@@ -12,8 +12,14 @@ import {
   initializeCurrentMana,
 } from "../redux/actions/player.action";
 import flameIcon from "../assets/flame-icon.png";
+import combustionIcon from "../assets/combustion-icon.png";
 
-const Player = ({ player, dispatch, enflammerActivated }) => {
+const Player = ({
+  player,
+  dispatch,
+  enflammerActivated,
+  combustionActivated,
+}) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
   const navigate = useNavigate();
@@ -53,13 +59,23 @@ const Player = ({ player, dispatch, enflammerActivated }) => {
         <div>
           <h1>FIGHTER</h1>
           <img src={image} alt="copie" />
-          {enflammerActivated ? (
-            <img
-              src={flameIcon}
-              alt="flame-icon"
-              style={{ width: "30px", height: "30px" }}
-            />
-          ) : null}
+          <div className="power-icons">
+            {enflammerActivated ? (
+              <img
+                src={flameIcon}
+                alt="flame-icon"
+                style={{ width: "30px", height: "30px" }}
+              />
+            ) : null}
+
+            {combustionActivated ? (
+              <img
+                src={combustionIcon}
+                alt="combustion-icon"
+                style={{ width: "30px", height: "30px" }}
+              />
+            ) : null}
+          </div>
           <StatsBar
             HPValue={player.playerInfo.HP}
             currentMana={player.currentMana}
@@ -77,6 +93,7 @@ const mapStateToProps = (state) => {
   return {
     player: state.player,
     enflammerActivated: state.player.enflammerActivated,
+    combustionActivated: state.player.combustionActivated,
   };
 };
 export default connect(mapStateToProps)(Player);

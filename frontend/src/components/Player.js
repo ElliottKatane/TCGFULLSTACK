@@ -4,12 +4,16 @@ import image from "../assets/guerrier.png";
 import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
-import { fetchPlayer } from "../redux/actions/player.action";
 import { handleDefeat } from "../redux/actions/game.action";
 import { useNavigate } from "react-router-dom";
 
+import {
+  fetchPlayer,
+  initializeCurrentMana,
+} from "../redux/actions/player.action";
+import flameIcon from "../assets/flame-icon.png";
 
-const Player = ({ player, dispatch }) => {
+const Player = ({ player, dispatch, enflammerActivated }) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
   const navigate = useNavigate();
@@ -20,6 +24,8 @@ const Player = ({ player, dispatch }) => {
       dispatch(fetchPlayer(userEmail))
         .then((result) => {
           console.log("Fetch player result:", result);
+          console.log("Mana pool:", result.manaPool);
+          dispatch(initializeCurrentMana(result.manaPool));
         })
         .catch((error) => {
           console.error("Fetch player failed:", error);
@@ -47,9 +53,16 @@ const Player = ({ player, dispatch }) => {
         <div>
           <h1>FIGHTER</h1>
           <img src={image} alt="copie" />
+          {enflammerActivated ? (
+            <img
+              src={flameIcon}
+              alt="flame-icon"
+              style={{ width: "30px", height: "30px" }}
+            />
+          ) : null}
           <StatsBar
             HPValue={player.playerInfo.HP}
-            currentMana={player.playerInfo.manaPool}
+            currentMana={player.currentMana}
             manaPool={player.playerInfo.manaPool}
             isPlayer={true}
           />
@@ -63,6 +76,7 @@ const Player = ({ player, dispatch }) => {
 const mapStateToProps = (state) => {
   return {
     player: state.player,
+    enflammerActivated: state.player.enflammerActivated,
   };
 };
 export default connect(mapStateToProps)(Player);

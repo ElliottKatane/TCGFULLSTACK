@@ -2,17 +2,30 @@ import {
   FETCH_PLAYER_INFO_FAILURE,
   FETCH_PLAYER_INFO_SUCCESS,
   MANA_COST,
+  INITIALIZE_CURRENT_MANA,
+  ACTIVATE_ENFLAMMER,
+  DEACTIVATE_ENFLAMMER,
 } from "../actions/player.action";
 
 const initialState = {
   playerInfo: null,
+  currentMana: 0,
+  enflammerActivated: false,
 };
 
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTIVATE_ENFLAMMER:
+      return {
+        ...state,
+        enflammerActivated: true,
+      };
+    case DEACTIVATE_ENFLAMMER:
+      return {
+        ...state,
+        enflammerActivated: false,
+      };
     case FETCH_PLAYER_INFO_SUCCESS:
-      console.log("Player info from action (reducer)", action.payload[0]);
-
       return {
         ...state,
         playerInfo: action.payload, // Stockez les informations du monstre, 1er élément du tableau
@@ -22,10 +35,15 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
       };
+    case INITIALIZE_CURRENT_MANA:
+      return {
+        ...state,
+        currentMana: action.payload.manaPool,
+      };
     case MANA_COST:
       return {
         ...state,
-        currentMana: state.mana - action.payload,
+        currentMana: state.currentMana - action.payload.mana,
       };
     default:
       return state;

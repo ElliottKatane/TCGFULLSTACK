@@ -8,8 +8,9 @@ import {
   fetchPlayer,
   initializeCurrentMana,
 } from "../redux/actions/player.action";
+import flameIcon from "../assets/flame-icon.png";
 
-const Player = ({ player, dispatch }) => {
+const Player = ({ player, dispatch, enflammerActivated }) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
 
@@ -37,6 +38,13 @@ const Player = ({ player, dispatch }) => {
         <div>
           <h1>FIGHTER</h1>
           <img src={image} alt="copie" />
+          {enflammerActivated ? (
+            <img
+              src={flameIcon}
+              alt="flame-icon"
+              style={{ width: "30px", height: "30px" }}
+            />
+          ) : null}
           <StatsBar
             HPValue={player.playerInfo.HP}
             currentMana={player.currentMana}
@@ -53,6 +61,7 @@ const Player = ({ player, dispatch }) => {
 const mapStateToProps = (state) => {
   return {
     player: state.player,
+    enflammerActivated: state.player.enflammerActivated,
   };
 };
 export default connect(mapStateToProps)(Player);

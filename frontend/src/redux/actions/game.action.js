@@ -11,7 +11,9 @@ export const defeat = () => ({
   type: DEFEAT,
 });
 
-export const handleVictory = (userEmail,mapLevel) => async (dispatch, getState) => {
+
+
+export const handleVictory = (userEmail,mapLevel,navigate) => async (dispatch, getState) => {
   try {
     // Check if a user is available
     if (userEmail) {
@@ -23,11 +25,9 @@ export const handleVictory = (userEmail,mapLevel) => async (dispatch, getState) 
 
       // Log the received player data and update the state
       console.log("Player data received:", playerData);
-
-
       console.log("Current levelReached:", playerData.levelReached);
       console.log("Current mapLevel:", mapLevel);
-
+      //Check if the player's already beat the level, if true , don't increment
       if (playerData.levelReached <= parseInt(mapLevel, 10)) {
 
       const newLevelReached = playerData.levelReached + 1;
@@ -45,12 +45,27 @@ export const handleVictory = (userEmail,mapLevel) => async (dispatch, getState) 
         throw new Error("Failed to update levelReached");
       }
 
+
+
       // Dispatch the VICTORY action
       dispatch(victory());
         
     }}
   } catch (error) {
     console.error("Error handling victory:", error);
+    // Handle error as needed
+  }
+};
+
+
+
+export const handleDefeat = () => (dispatch) => {
+  try {
+    // Dispatch the DEFEAT action
+    dispatch(defeat());
+
+  } catch (error) {
+    console.error("Error handling defeat:", error);
     // Handle error as needed
   }
 };

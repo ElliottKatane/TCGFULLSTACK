@@ -5,11 +5,13 @@ import StatsBar from "./StatsBar";
 import { fetchMonster } from "../redux/actions/monster.action";
 import { handleVictory } from "../redux/actions/game.action";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Monster = ({ monster, dispatch }) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
+const navigate = useNavigate();
 
   useEffect(() => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
@@ -30,6 +32,9 @@ const Monster = ({ monster, dispatch }) => {
     if (monster.monsterInfo && monster.monsterInfo.health <= 0) {
       const userEmail = user.email; 
       dispatch(handleVictory(userEmail,mapLevel));
+      alert("Victoire!");
+      navigate("/map");
+
     }
   }, [monster.monsterInfo, dispatch]);
 

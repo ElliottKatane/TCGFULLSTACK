@@ -5,12 +5,14 @@ import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
 import { fetchPlayer } from "../redux/actions/player.action";
-import { DEFEAT } from "../redux/actions/game.action";
+import { handleDefeat } from "../redux/actions/game.action";
+import { useNavigate } from "react-router-dom";
 
 
 const Player = ({ player, dispatch }) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -30,8 +32,13 @@ const Player = ({ player, dispatch }) => {
 
   useEffect(() => {
     if (player.playerInfo && player.playerInfo.HP <= 0) {
-      dispatch({ type: DEFEAT }); // Dispatch DEFEAT action
+
+      dispatch(handleDefeat());
+      alert("Defaite");
+      navigate("/map");
     }
+ 
+      
   }, [player.playerInfo, dispatch]);
 
   return (

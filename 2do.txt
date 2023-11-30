@@ -26,5 +26,5 @@ transformer login/signup en "new game" / "continue"
 
 
 
-Fix +1 in levelReached happening even after beating once
 Make handle defeat logic
+Make loot pop up after victory/defeat & return to map

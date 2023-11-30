@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import image from "../assets/guerrier.png";
+import image from "../assets/guerrier.gif";
 import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";

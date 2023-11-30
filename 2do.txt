@@ -1,0 +1,30 @@
+Pour la V2:
+
+gérer le coût du mana par carte
+coder plusieurs autres cartes (au moins les cartes attaque, faire les damage value et les mana cost)
+
+Gérer les cas "0 hp" : 
+_combat échoué si joueur meurt
+_combat gagné si ennemi meurt : loot, levelReached + 1
+
+Créer les attaques du loup :
+"griffe" : random 1-10 dmg
+"morsure": random 3-8 dmg
+
+Barre de HP: rendre la barre verte proportionnelle au HP de départ
+(actuellement les 60Hp du loup font que la barre est 60% pleine)
+
+--------------------
+V3 :
+
+Créer le système de pioche et de défausse
+Créer plus de cartes
+Coder cartes défense, pouvoirs, avec redux
+Coder les effets spéciaux des cartes (pioche une carte quand carte jouée, crée une copie de la carte, etc.)
+
+transformer login/signup en "new game" / "continue"
+
+
+
+Make handle defeat logic
+Make loot pop up after victory/defeat & return to map

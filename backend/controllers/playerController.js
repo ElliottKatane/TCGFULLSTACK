@@ -1,10 +1,10 @@
 const User = require("../models/userModel");
+const Player = require("../models/playerModel"); // Import Player model
 
 const getPlayerData = async (req, res) => {
-  // récupère toutes les infos du joueur : HP, gold, cartes, etc.
   try {
     const userEmail = req.params.userEmail;
-    // terminal dans VSCode
+    
     console.log(`Fetching player data for user with email: ${userEmail}`);
 
     const user = await User.findOne({ email: userEmail }).populate({
@@ -26,4 +26,32 @@ const getPlayerData = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-module.exports = { getPlayerData };
+
+// Controller method for updating the levelReached field
+const updateLevelReached = async (req, res) => {
+  const { userEmail, newLevelReached } = req.body;
+  
+  console.log("Received request to update level for user:", userEmail);
+  
+  try {
+    const updatedPlayer = await Player.findOneAndUpdate(
+      { emailUser: userEmail },
+      { $set: { levelReached: newLevelReached } },
+      { new: true }
+    );
+
+    if (!updatedPlayer) {
+      return res.status(404).json({ error: "Player not found" });
+    }
+
+    res.json({ message: "LevelReached updated successfully", player: updatedPlayer });
+  } catch (error) {
+    console.error("Error updating levelReached:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+module.exports = {
+  updateLevelReached,
+  getPlayerData
+};

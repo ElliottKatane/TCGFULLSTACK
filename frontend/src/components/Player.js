@@ -4,6 +4,9 @@ import image from "../assets/guerrier.png";
 import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
+import { handleDefeat } from "../redux/actions/game.action";
+import { useNavigate } from "react-router-dom";
+
 import {
   fetchPlayer,
   initializeCurrentMana,
@@ -19,6 +22,7 @@ const Player = ({
 }) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -37,6 +41,17 @@ const Player = ({
 
   console.log("Player state:", player.playerInfo);
   // initialisation de la manaPool et enregistrement dans une constante
+
+  useEffect(() => {
+    if (player.playerInfo && player.playerInfo.HP <= 0) {
+
+      dispatch(handleDefeat());
+      alert("Defaite");
+      navigate("/map");
+    }
+ 
+      
+  }, [player.playerInfo, dispatch]);
 
   return (
     <div>

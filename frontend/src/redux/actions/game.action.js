@@ -13,12 +13,13 @@ export const defeat = () => ({
 
 
 
-export const handleVictory = (userEmail,mapLevel,navigate) => async (dispatch, getState) => {
+export const handleVictory = (userEmail, mapLevel) => async (dispatch, getState) => {
   try {
+    console.log("Entering handleVictory action");
+
     // Check if a user is available
     if (userEmail) {
       console.log("Fetching player data for user with email:", userEmail);
-
 
       // Dispatch the action to fetch player data from the API using Redux
       const playerData = await dispatch(fetchPlayer(userEmail));
@@ -27,30 +28,31 @@ export const handleVictory = (userEmail,mapLevel,navigate) => async (dispatch, g
       console.log("Player data received:", playerData);
       console.log("Current levelReached:", playerData.levelReached);
       console.log("Current mapLevel:", mapLevel);
-      //Check if the player's already beat the level, if true , don't increment
-      if (playerData.levelReached <= parseInt(mapLevel, 10)) {
 
-      const newLevelReached = playerData.levelReached + 1;
-
-      // Make a server request to update the levelReached
-      const response = await fetch(`/api/player/update-level`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userEmail, newLevelReached }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update levelReached");
-      }
-
-
-
-      // Dispatch the VICTORY action
       dispatch(victory());
-        
-    }}
+
+      console.log("VICTORY action dispatched");
+      // Log the updated state
+      console.log("Updated state:", getState());
+
+      // Check if the player's already beaten the level, if true, don't increment
+      if (playerData.levelReached <= parseInt(mapLevel, 10)) {
+        const newLevelReached = playerData.levelReached + 1;
+
+        // Make a server request to update the levelReached
+        const response = await fetch(`/api/player/update-level`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userEmail, newLevelReached }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update levelReached");
+        }
+      }
+    }
   } catch (error) {
     console.error("Error handling victory:", error);
     // Handle error as needed
@@ -63,6 +65,7 @@ export const handleDefeat = () => (dispatch) => {
   try {
     // Dispatch the DEFEAT action
     dispatch(defeat());
+    console.log("DEFEAT action dispatched");
 
   } catch (error) {
     console.error("Error handling defeat:", error);

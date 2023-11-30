@@ -14,6 +14,3 @@ const LootScreen = () => {
 };
 
 export default LootScreen;
-
-
-//TESTTTTTT

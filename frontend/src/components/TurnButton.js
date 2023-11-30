@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { switchTurn } from "../redux/actions/player.action";
+import { switchTurn, MonsterAttack } from "../redux/actions/player.action";
 import { connect } from "react-redux";
 
 const TurnButton = () => {
@@ -8,7 +8,6 @@ const TurnButton = () => {
   const currentTurn = useSelector((state) => state.player.currentTurn);
 
   const handleEndTurn = () => {
-    console.log("Current turn before switching:", currentTurn);
     dispatch(switchTurn(currentTurn));
 
     // Utilisez la valeur actualisée après la mise à jour
@@ -16,8 +15,11 @@ const TurnButton = () => {
       "Turn switched to",
       currentTurn === "player" ? "Monster" : "Player"
     );
+    if (currentTurn === "player") {
+      // Utilisez votre action MonsterAttack ici
+      dispatch(MonsterAttack(parseInt(10)));
+    }
   };
-
   return (
     <div className="fintourbtn">
       <button onClick={handleEndTurn}>

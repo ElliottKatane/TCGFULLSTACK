@@ -3,6 +3,7 @@ export const FETCH_PLAYER_INFO_SUCCESS = "FETCH_PLAYER_INFO_SUCCESS";
 export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
 // mana
 export const MANA_COST = "MANA_COST";
+export const MONSTER_ATTACK = "MONSTER_ATTACK";
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
 export const INITIALIZE_CURRENT_TURN = "INIZIALIZE_CURRENT_TURN";
 // carte Enflammer et Combustion
@@ -64,6 +65,15 @@ export const ManaCost = (mana) => {
     type: MANA_COST,
     payload: {
       mana,
+    },
+  };
+};
+// Action pour infliger les dégâts
+export const MonsterAttack = (damageValue) => {
+  return {
+    type: MONSTER_ATTACK,
+    payload: {
+      damageValue,
     },
   };
 };

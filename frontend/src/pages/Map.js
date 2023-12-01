@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useDispatch } from 'react-redux';
-import { fetchPlayer } from '../redux/actions/player.action';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPlayer } from "../redux/actions/player.action";
+import { resetVictory } from "../redux/actions/game.action";
 
 import "../CSS/Map.css";
 
@@ -10,6 +11,7 @@ const Map = () => {
   // Using the useAuthContext hook to get the user information
   const { user } = useAuthContext();
   const dispatch = useDispatch();
+  const { isVictory } = useSelector((state) => state.game);
 
   // State to store the level reached by the user and loading state
   const [levelReached, setLevelReached] = useState(1);
@@ -20,9 +22,9 @@ const Map = () => {
     // Check if a user is available
     if (user) {
       const userEmail = user.email;
-  
+
       console.log("Fetching player data for user with email:", userEmail);
-  
+
       // Dispatch the action to fetch player data from the API using Redux
       dispatch(fetchPlayer(userEmail))
         .then((data) => {
@@ -38,12 +40,18 @@ const Map = () => {
         });
     }
   }, [dispatch, user]); // Include dispatch in the dependency array to avoid lint warnings
-  
 
   // Function to determine if a map button is clickable based on the level reached
   const isButtonClickable = (buttonLevel) => {
     return buttonLevel <= levelReached;
   };
+
+  useEffect(() => {
+    // Reset isVictory when the component mounts
+    if (isVictory) {
+      dispatch(resetVictory());
+    }
+  }, [dispatch, isVictory]);
 
   // Render the map buttons using an array of levels
   return (

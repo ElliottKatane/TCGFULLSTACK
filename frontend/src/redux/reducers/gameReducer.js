@@ -1,5 +1,5 @@
 // game.reducer.js
-import { VICTORY, DEFEAT } from "../actions/game.action";
+import { VICTORY, DEFEAT, RESET_VICTORY } from "../actions/game.action";
 
 const initialState = {
   isVictory: false,
@@ -19,6 +19,11 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         isVictory: false, // Reset victory status
         isDefeat: true,
+      };
+    case RESET_VICTORY:
+      return {
+        ...state,
+        isVictory: false,
       };
     default:
       return state;

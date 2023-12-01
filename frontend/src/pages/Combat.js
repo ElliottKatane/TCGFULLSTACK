@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Monster from "../components/Monster";
 import "../CSS/Combat.css";
+import "../CSS/Positions.css";
 import "../CSS/Card.css";
 
 //redux imports
@@ -39,14 +40,10 @@ const Combat = () => {
         backgroundImage: `url(/api/levels/${mapLevel}/backgroundImage)`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-      }}
+        backgroundPosition: "center center",   
+         }}
     >
-      {/* Composants Player and Monster */}
-      <div className="container-player-monster">
-        <Player />
-        <Monster />
-      </div>
+
 
       {/* Composant CardBoard */}
       <div className="cardboard-container">
@@ -55,18 +52,25 @@ const Combat = () => {
         </div>
       </div>
 
+            {/* Composants Player and Monster */}
+            <div className="container-player-monster">
+        <Player />
+        <Monster />
+      </div>
+
       {/* Boutin fin du tour */}
-      <div className="fintourbtn">
+      {/* <div className="fintourbtn">
         <button onClick={handleFinTour}>
           End {currentlyPlaying === "player" ? "Player" : "Enemy"} Turn
         </button>
-      </div>
+      </div> */}
 
-      <div className="damage-popup-container">
+      {/* <div className="damage-popup-container">
         {isDamagePopupVisible && (
           <div className="damage-popup">{damageValue}</div>
-        )}
-      </div>
+          )}</div> */}
+
+          
     </div>
   );
 };

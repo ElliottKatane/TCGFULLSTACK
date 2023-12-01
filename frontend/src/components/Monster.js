@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState,Redirect  } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import StatsBar from "./StatsBar";
@@ -7,11 +7,12 @@ import { handleVictory, resetVictory } from "../redux/actions/game.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 
-const Monster = ({ monster, dispatch, history }) => {
+const Monster = ({ monster, dispatch }) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
   const navigate = useNavigate();
+
 
   useEffect(() => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
@@ -24,7 +25,12 @@ const Monster = ({ monster, dispatch, history }) => {
       });
   }, [mapLevel, dispatch]);
 
+
+
   console.log("Monster state:", monster.monsterInfo);
+
+
+
 
   useEffect(() => {
     if (monster.monsterInfo && monster.monsterInfo.health <= 0) {
@@ -32,19 +38,29 @@ const Monster = ({ monster, dispatch, history }) => {
 
       dispatch(handleVictory(userEmail, mapLevel));
       dispatch(resetVictory());
-      history.push("/map");
+      window.alert("Félicitations ! Vous avez remporté la victoire !");
+      window.location.href = "/map";
+
     }
-  }, [monster.monsterInfo, dispatch]);
+  }, [monster.monsterInfo, dispatch,navigate]);
+
+
+  const levelClassName = `level${mapLevel}`;
+  const enemyLevelClassName = `enemy-level${mapLevel}`;
 
   return (
     <div>
+
+
       {monster.monsterInfo ? (
         <div>
-          <h2>{monster.monsterInfo.name}</h2>
+          {/* <h2>{monster.monsterInfo.name}</h2> */}
           <StatsBar HPValue={monster.monsterInfo.health} />
           <img
             src={`/assets/${monster.monsterInfo.image}`}
             alt={monster.monsterInfo.name}
+            className={`enemy ${levelClassName} ${enemyLevelClassName}`}
+
           />
         </div>
       ) : (

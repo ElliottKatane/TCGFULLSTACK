@@ -33,11 +33,6 @@ export const handleVictory =
         console.log("Current levelReached:", playerData.levelReached);
         console.log("Current mapLevel:", mapLevel);
 
-        dispatch(victory());
-
-        console.log("VICTORY action dispatched");
-        // Log the updated state
-        console.log("Updated state:", getState());
 
         // Check if the player's already beaten the level, if true, don't increment
         if (playerData.levelReached <= parseInt(mapLevel, 10)) {
@@ -55,7 +50,16 @@ export const handleVictory =
           if (!response.ok) {
             throw new Error("Failed to update levelReached");
           }
+
+  
         }
+        dispatch(victory());
+
+        console.log("VICTORY action dispatched");
+        // Log the updated state
+        console.log("Updated state:", getState());
+ 
+
       }
     } catch (error) {
       console.error("Error handling victory:", error);

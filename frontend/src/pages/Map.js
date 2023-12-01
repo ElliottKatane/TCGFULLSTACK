@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchPlayer } from "../redux/actions/player.action";
-import { resetVictory } from "../redux/actions/game.action";
 
 import "../CSS/Map.css";
 
@@ -11,7 +10,6 @@ const Map = () => {
   // Using the useAuthContext hook to get the user information
   const { user } = useAuthContext();
   const dispatch = useDispatch();
-  const { isVictory } = useSelector((state) => state.game);
 
   // State to store the level reached by the user and loading state
   const [levelReached, setLevelReached] = useState(1);
@@ -46,12 +44,7 @@ const Map = () => {
     return buttonLevel <= levelReached;
   };
 
-  useEffect(() => {
-    // Reset isVictory when the component mounts
-    if (isVictory) {
-      dispatch(resetVictory());
-    }
-  }, [dispatch, isVictory]);
+
 
   // Render the map buttons using an array of levels
   return (

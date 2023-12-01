@@ -1,0 +1,115 @@
+.enemy {
+    position: absolute;
+  }
+
+  .player {
+    position: absolute;
+  }
+
+  
+  
+
+  .player-level1 {
+    top: 70%;
+    left:15%;
+  }
+  .enemy-level1 {
+    top: 65%;
+    right: 15%;
+  }
+
+  .player-level2 {
+    top: 80%;
+    left:15%;
+
+  }
+  
+  .enemy-level2 {
+    top: 80%;
+    right: 15%;
+
+  }
+  .player-level3 {
+    top: 70%;
+    left:15%;
+
+  }
+  .enemy-level3 {
+    top: 60%;
+    right: 15%;
+
+  }
+  .player-level4 {
+    top: 75%;
+    left:15%;
+
+  }
+  
+  .enemy-level4 {
+    top: 70%;
+    right: 15%;
+
+  }
+
+  .player-level5 {
+    top: 75%;
+    left:15%;
+
+  }
+  .enemy-level5 {
+    top: 80%;
+    right: 15%;
+
+  }
+  
+
+  .player-level6 {
+    top: 80%;
+    left:10%;
+
+  }
+  .enemy-level6 {
+    top: 70%;
+    right: 10%;
+
+  }
+  .player-level7 {
+    top: 85%;
+    left:10%;
+
+  }
+  .enemy-level7 {
+    top: 80%;
+    right: 10%;
+
+  }
+  .player-level8 {
+    top: 75%;
+    left:10%;
+
+  }
+  .enemy-level8 {
+    top: 74%;
+    right: 10%;
+
+  }
+  .player-level9 {
+    top: 87%;
+    left:5%;
+
+  }
+  .enemy-level9 {
+    top: 76%;
+    right: 5%;
+
+  }
+  .player-level10 {
+    top: 70%;
+    left:0%;
+
+  }
+  .enemy-level10 {
+    top: 45%;
+    right:0%;
+
+  }

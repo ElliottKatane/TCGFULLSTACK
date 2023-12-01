@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import image from "../assets/guerrier.gif";
 import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
 import { handleDefeat } from "../redux/actions/game.action";
-import { useNavigate } from "react-router-dom";
 
 import {
   fetchPlayer,
@@ -22,7 +22,7 @@ const Player = ({
 }) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
-  const navigate = useNavigate();
+  const { mapLevel } = useParams();
 
   useEffect(() => {
     if (user) {
@@ -46,19 +46,23 @@ const Player = ({
     if (player.playerInfo && player.playerInfo.HP <= 0) {
 
       dispatch(handleDefeat());
-      alert("Defaite");
-      navigate("/map");
+      window.alert("Game Over...");
+      window.location.href = "/map";
     }
  
       
   }, [player.playerInfo, dispatch]);
 
+  const playerLevelClassName = `player-level${mapLevel}`;
+
+
   return (
     <div>
       {player.playerInfo ? (
         <div>
-          <h1>FIGHTER</h1>
-          <img src={image} alt="copie" />
+          {/* <h1>FIGHTER</h1> */}
+          <img src={image} alt="copie"
+          className={`player ${playerLevelClassName}`} />
           <div className="power-icons">
             {enflammerActivated ? (
               <img

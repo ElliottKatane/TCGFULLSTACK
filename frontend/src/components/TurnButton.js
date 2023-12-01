@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 const TurnButton = () => {
   const dispatch = useDispatch();
   const currentTurn = useSelector((state) => state.player.currentTurn);
+  const monsterInfo = useSelector((state) => state.monster.monsterInfo);
+  console.log("Monster Info in component TURNBUTTON:", monsterInfo);
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
@@ -16,8 +18,9 @@ const TurnButton = () => {
       currentTurn === "player" ? "Monster" : "Player"
     );
     if (currentTurn === "player") {
-      // Utilisez votre action MonsterAttack ici
-      dispatch(MonsterAttack(parseInt(10)));
+      const monsterAttackValue = monsterInfo.attacks[1].damage;
+      console.log("Monster attack value:", monsterAttackValue);
+      dispatch(MonsterAttack(monsterAttackValue));
     }
   };
   return (

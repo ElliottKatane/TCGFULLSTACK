@@ -80,10 +80,6 @@ const playerReducer = (state = initialState, action) => {
         currentMana: state.currentMana - action.payload.mana,
       };
     case MONSTER_ATTACK:
-      console.log("Reducing damage. Current health:", state.playerInfo.HP);
-      console.log("Damage value:", action.payload.damageValue);
-      const newHP = state.playerInfo.HP - action.payload.damageValue; //J'ai modifier le log (ligne 28) pour montrer la vie courante. Avant ca afficher la vie avant l'attaque
-      console.log("HP after dmg", newHP);
       return {
         ...state,
         playerInfo: {

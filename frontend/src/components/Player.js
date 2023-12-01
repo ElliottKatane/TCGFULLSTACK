@@ -5,7 +5,7 @@ import image from "../assets/guerrier.gif";
 import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
-import { handleDefeat } from "../redux/actions/game.action";
+import { handleDefeat,resetVictory } from "../redux/actions/game.action";
 
 import {
   fetchPlayer,
@@ -46,6 +46,7 @@ const Player = ({
     if (player.playerInfo && player.playerInfo.HP <= 0) {
 
       dispatch(handleDefeat());
+      dispatch(resetVictory());
       window.alert("Game Over...");
       window.location.href = "/map";
     }

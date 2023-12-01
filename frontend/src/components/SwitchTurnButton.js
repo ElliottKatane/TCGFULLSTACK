@@ -1,13 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { switchTurn, MonsterAttack } from "../redux/actions/player.action";
-import { connect } from "react-redux";
+import {
+  switchTurn,
+  MonsterAttack,
+  initializeCurrentMana,
+} from "../redux/actions/player.action";
 
-const TurnButton = () => {
+const SwitchTurnButton = () => {
   const dispatch = useDispatch();
+  const player = useSelector((state) => state.player);
   const currentTurn = useSelector((state) => state.player.currentTurn);
   const monsterInfo = useSelector((state) => state.monster.monsterInfo);
-  console.log("Monster Info in component TURNBUTTON:", monsterInfo);
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
@@ -18,9 +21,12 @@ const TurnButton = () => {
       currentTurn === "player" ? "Monster" : "Player"
     );
     if (currentTurn === "player") {
-      const monsterAttackValue = monsterInfo.attacks[1].damage;
+      // on devrait mette un set TimeOut pour qu'il y ait un délai entre le clic du bouton et l'attaque du monstre
+      const monsterAttackValue = monsterInfo.attacks[1].damage; // [0] = Griffe, 10dmg, [1] = Morsure, 15 dmg
       console.log("Monster attack value:", monsterAttackValue);
       dispatch(MonsterAttack(monsterAttackValue));
+      // réinitialise le mana du joueur après le tour du monstre
+      dispatch(initializeCurrentMana(player.playerInfo.manaPool));
     }
   };
   return (
@@ -32,11 +38,4 @@ const TurnButton = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    player: state.player,
-    enflammerActivated: state.player.enflammerActivated,
-    combustionActivated: state.player.combustionActivated,
-  };
-};
-export default connect(mapStateToProps)(TurnButton);
+export default SwitchTurnButton;

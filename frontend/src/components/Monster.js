@@ -26,15 +26,14 @@ const Monster = ({ monster, dispatch }) => {
 
   console.log("Monster state:", monster.monsterInfo);
 
-  useEffect(() => {
-    if (monster.monsterInfo && monster.monsterInfo.health <= 0) {
-      const userEmail = user.email;
+  // Gestion de la victoire
+  if (monster.monsterInfo && monster.monsterInfo.health <= 0) {
+    const userEmail = user.email;
 
-      dispatch(handleVictory(userEmail, mapLevel));
-      alert("Victoire!");
-      navigate("/map");
-    }
-  }, [monster.monsterInfo, dispatch]);
+    dispatch(handleVictory(userEmail, mapLevel));
+    alert("Victoire!");
+    navigate("/map");
+  }
 
   return (
     <div>

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-
 import React from "react";
 import Player from "../components/Player";
 import CardBoard from "../components/CardBoard";
@@ -21,7 +20,9 @@ const Combat = () => {
   const parsedMapLevel = parseInt(mapLevel, 10);
   if (!user || parsedMapLevel > userLevelReached) {
     // Redirect to the appropriate map level or login page
-    return <Navigate to={user ? `/combat/${userLevelReached}` : "/login"} />;
+    return (
+      <Navigate to={user ? `/combat/${userLevelReached}` : "/cantcheat"} />
+    );
   }
 
   return (

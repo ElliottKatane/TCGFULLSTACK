@@ -29,11 +29,13 @@ const navigate = useNavigate();
 
   
   useEffect(() => {
+
+
     if (monster.monsterInfo && monster.monsterInfo.health <= 0) {
       const userEmail = user.email; 
-      
+
       dispatch(handleVictory(userEmail,mapLevel));
-      alert("Victoire!");
+      //alert("Victoire!");
       navigate("/map");
 
     }

@@ -37,6 +37,7 @@ const Map = () => {
           setLoading(false);
         });
     }
+
   }, [dispatch, user]); // Include dispatch in the dependency array to avoid lint warnings
   
 

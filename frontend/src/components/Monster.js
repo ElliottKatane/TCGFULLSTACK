@@ -31,10 +31,6 @@ const Monster = ({ monster, dispatch }) => {
       const userEmail = user.email;
 
       dispatch(handleVictory(userEmail, mapLevel));
-      //alert("Victoire!");
-      navigate("/map");
-
-      dispatch(handleVictory(userEmail, mapLevel));
       dispatch(resetVictory());
       window.alert("Félicitations ! Vous avez remporté la victoire !");
       window.location.href = "/map";

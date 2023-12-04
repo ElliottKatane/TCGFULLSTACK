@@ -1,10 +1,9 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../CSS/StatsBar.css";
 
 // La valeur de la barre de HP, entre 0 et 100
 const StatsBar = ({ HPValue, currentMana, manaPool, isPlayer }) => {
-
   const [initialHealth, setInitialHealth] = useState(null);
 
   // Use effect to set the initial health once when HPValue is available
@@ -43,7 +42,7 @@ const StatsBar = ({ HPValue, currentMana, manaPool, isPlayer }) => {
       <p className="hp-number">{HPValue}</p>
       {isPlayer ? (
         <div className="manadisplay">
-         {currentMana}/{manaPool}
+          {currentMana}/{manaPool}
         </div>
       ) : null}
     </div>

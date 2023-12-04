@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import React from "react";
@@ -8,17 +7,23 @@ import Monster from "../components/Monster";
 import SwitchTurnButton from "../components/SwitchTurnButton"; // Importez le nouveau composant
 import "../CSS/Combat.css";
 import "../CSS/Card.css";
+import { connect, useSelector } from "react-redux";
 
 //redux imports
 
 const Combat = () => {
   const { user } = useAuthContext();
   const { mapLevel } = useParams();
+  const player = useSelector((state) => state.player.playerInfo);
 
   // Empêche l'utilisateur d'accéder par l'url à un niveau de carte > à son levelReached
-  const userLevelReached = user ? user.levelReached : 1;
+  const userLevelReached = user ? player.levelReached : 1;
   const parsedMapLevel = parseInt(mapLevel, 10);
-  if (!user || parsedMapLevel > userLevelReached) {
+  console.log(
+    "parsedmaplevel et userlevelreached: " + parsedMapLevel,
+    userLevelReached
+  );
+  if (!user || parsedMapLevel > player.levelReached) {
     // Redirect to the appropriate map level or login page
     return (
       <Navigate to={user ? `/combat/${userLevelReached}` : "/cantcheat"} />
@@ -56,4 +61,11 @@ const Combat = () => {
   );
 };
 
-export default Combat;
+const mapStateToProps = (state) => {
+  return {
+    player: state.player,
+    enflammerActivated: state.player.enflammerActivated,
+    combustionActivated: state.player.combustionActivated,
+  };
+};
+export default connect(mapStateToProps)(Combat);

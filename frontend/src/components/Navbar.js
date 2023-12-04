@@ -20,10 +20,17 @@ export default function Navbar() {
   };
   return (
     <header>
-      <div className="container">
-        <Link to="/">Combat</Link>
+      <div className="container" style= 
+      {{backgroundImage: `url(${require("../assets/navbar.jpg")})`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+    
+    }}
+>
+        
         <NavLink className="navbar-brand" to="/">
-          <img style={{ width: "25%" }} src={stslogo} alt="oui"></img>
+          <img src={stslogo} alt="oui"></img>
         </NavLink>
         <nav>
           {/* if user is logged in, show email and logout button */}

@@ -6,7 +6,7 @@ import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
 import { handleDefeat,resetVictory } from "../redux/actions/game.action";
-
+import "../CSS/Positions.css";
 import {
   fetchPlayer,
   initializeCurrentMana,
@@ -81,12 +81,14 @@ const Player = ({
               />
             ) : null}
           </div>
+          <div className="player-hp">
           <StatsBar
             HPValue={player.playerInfo.HP}
             currentMana={player.currentMana}
             manaPool={player.playerInfo.manaPool}
             isPlayer={true}
           />
+          </div>
         </div>
       ) : (
         <p>Loading...</p>

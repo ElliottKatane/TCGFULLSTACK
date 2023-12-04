@@ -53,9 +53,9 @@ const Monster = ({ monster, dispatch }) => {
 
 
       {monster.monsterInfo ? (
-        <div>
-          {/* <h2>{monster.monsterInfo.name}</h2> */}
+        <div><div className="monster-hp">
           <StatsBar HPValue={monster.monsterInfo.health} />
+          </div>
           <img
             src={`/assets/${monster.monsterInfo.image}`}
             alt={monster.monsterInfo.name}

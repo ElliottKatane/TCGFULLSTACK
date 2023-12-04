@@ -113,3 +113,22 @@
     right:0%;
 
   }
+
+
+
+
+.monster-hp {
+
+position: absolute;
+  right: 0;
+  padding-right: 50px;
+}
+
+
+
+.player-hp {
+
+  position: absolute;
+    left: 0;
+    padding-left: 50px;
+  }

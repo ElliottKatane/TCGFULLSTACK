@@ -10,14 +10,11 @@
   display: flex;
   margin: 15px;
   justify-content: center; /* Center the Cardboard horizontally */
-  background-color: rgb(163, 163, 163);
 }
 
 .cardboard {
   display: flex;
   max-height: 45vh;
   width: 90%;
-  padding: 20px;
   justify-content: center;
-  margin-top: 20px; /* Add some space between Cardboard and fighter/wolf */
 }

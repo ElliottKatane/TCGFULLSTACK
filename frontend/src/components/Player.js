@@ -1,15 +1,17 @@
 import React from "react";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import image from "../assets/guerrier.gif";
 import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
-import { handleDefeat } from "../redux/actions/game.action";
-import { useNavigate } from "react-router-dom";
-
+import { handleDefeat,resetVictory } from "../redux/actions/game.action";
+import "../CSS/Positions.css";
 import {
   fetchPlayer,
   initializeCurrentMana,
+  initializeCurrentTurn,
+  initializePlayerPioche,
 } from "../redux/actions/player.action";
 import flameIcon from "../assets/flame-icon.png";
 import combustionIcon from "../assets/combustion-icon.png";
@@ -22,16 +24,16 @@ const Player = ({
 }) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
-  const navigate = useNavigate();
+  const { mapLevel } = useParams();
 
   useEffect(() => {
     if (user) {
       const userEmail = user.email;
       dispatch(fetchPlayer(userEmail))
         .then((result) => {
-          console.log("Fetch player result:", result);
-          console.log("Mana pool:", result.manaPool);
           dispatch(initializeCurrentMana(result.manaPool));
+          dispatch(initializeCurrentTurn(result.currentTurn));
+          dispatch(initializePlayerPioche(result.DeckOfCards));
         })
         .catch((error) => {
           console.error("Fetch player failed:", error);
@@ -39,26 +41,27 @@ const Player = ({
     }
   }, [user, dispatch]);
 
-  console.log("Player state:", player.playerInfo);
   // initialisation de la manaPool et enregistrement dans une constante
 
   useEffect(() => {
     if (player.playerInfo && player.playerInfo.HP <= 0) {
-
       dispatch(handleDefeat());
-      alert("Defaite");
-      navigate("/map");
+      dispatch(resetVictory());
+      window.alert("Game Over...");
+      window.location.href = "/map";
     }
- 
-      
   }, [player.playerInfo, dispatch]);
+
+  const playerLevelClassName = `player-level${mapLevel}`;
+
 
   return (
     <div>
       {player.playerInfo ? (
         <div>
-          <h1>FIGHTER</h1>
-          <img src={image} alt="copie" />
+          {/* <h1>FIGHTER</h1> */}
+          <img src={image} alt="copie"
+          className={`player ${playerLevelClassName}`} />
           <div className="power-icons">
             {enflammerActivated ? (
               <img
@@ -76,12 +79,14 @@ const Player = ({
               />
             ) : null}
           </div>
+          <div className="player-hp">
           <StatsBar
             HPValue={player.playerInfo.HP}
             currentMana={player.currentMana}
             manaPool={player.playerInfo.manaPool}
             isPlayer={true}
           />
+          </div>
         </div>
       ) : (
         <p>Loading...</p>

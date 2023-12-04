@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useDispatch } from 'react-redux';
-import { fetchPlayer } from '../redux/actions/player.action';
+import { useDispatch } from "react-redux";
+import { fetchPlayer } from "../redux/actions/player.action";
 
 import "../CSS/Map.css";
 
@@ -20,14 +20,14 @@ const Map = () => {
     // Check if a user is available
     if (user) {
       const userEmail = user.email;
-  
+
       console.log("Fetching player data for user with email:", userEmail);
-  
+
       // Dispatch the action to fetch player data from the API using Redux
       dispatch(fetchPlayer(userEmail))
         .then((data) => {
           // Log the received player data and update the state
-          console.log("Player data received:", data);
+          console.log("Player data received: (map.js)", data);
           setLevelReached(data.levelReached);
           setLoading(false);
         })
@@ -39,12 +39,13 @@ const Map = () => {
     }
 
   }, [dispatch, user]); // Include dispatch in the dependency array to avoid lint warnings
-  
 
   // Function to determine if a map button is clickable based on the level reached
   const isButtonClickable = (buttonLevel) => {
     return buttonLevel <= levelReached;
   };
+
+
 
   // Render the map buttons using an array of levels
   return (

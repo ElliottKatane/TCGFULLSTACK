@@ -1,36 +1,35 @@
+import { useParams, Navigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 import React from "react";
 import Player from "../components/Player";
 import CardBoard from "../components/CardBoard";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import Monster from "../components/Monster";
+import SwitchTurnButton from "../components/SwitchTurnButton"; // Importez le nouveau composant
 import "../CSS/Combat.css";
+import "../CSS/Positions.css";
 import "../CSS/Card.css";
+import { connect, useSelector } from "react-redux";
 
 //redux imports
 
 const Combat = () => {
-  // monster data through redux
+  const { user } = useAuthContext();
   const { mapLevel } = useParams();
-  const [currentlyPlaying, setCurrentlyPlaying] = useState("player");
+  const player = useSelector((state) => state.player.playerInfo);
 
-  const [isDamagePopupVisible, setIsDamagePopupVisible] = useState(false);
-  const [damageValue, setDamageValue] = useState(0);
-
-  const handleFinTour = () => {
-    if (currentlyPlaying === "player") {
-      setCurrentlyPlaying("enemy");
-      console.log("Tour de l'ennemi");
-    } else {
-      setCurrentlyPlaying("player");
-    }
-  };
-
-  useEffect(() => {
-    if (currentlyPlaying === "enemy") {
-      console.log("Tour de l'ennemi");
-    }
-  }, [currentlyPlaying]);
+  // Empêche l'utilisateur d'accéder par l'url à un niveau de carte > à son levelReached
+  const userLevelReached = user ? player.levelReached : 1;
+  const parsedMapLevel = parseInt(mapLevel, 10);
+  console.log(
+    "parsedmaplevel et userlevelreached: " + parsedMapLevel,
+    userLevelReached
+  );
+  if (!user || parsedMapLevel > player.levelReached) {
+    // Redirect to the appropriate map level or login page
+    return (
+      <Navigate to={user ? `/combat/${userLevelReached}` : "/cantcheat"} />
+    );
+  }
 
   return (
     <div
@@ -42,12 +41,6 @@ const Combat = () => {
         backgroundPosition: "center center",
       }}
     >
-      {/* Composants Player and Monster */}
-      <div className="container-player-monster">
-        <Player />
-        <Monster />
-      </div>
-
       {/* Composant CardBoard */}
       <div className="cardboard-container">
         <div className="cardboard">
@@ -55,20 +48,25 @@ const Combat = () => {
         </div>
       </div>
 
-      {/* Boutin fin du tour */}
-      <div className="fintourbtn">
-        <button onClick={handleFinTour}>
-          End {currentlyPlaying === "player" ? "Player" : "Enemy"} Turn
-        </button>
+      {/* Composants Player and Monster */}
+      <div className="container-player-monster">
+        <Player />
+        <Monster />
       </div>
 
-      <div className="damage-popup-container">
-        {isDamagePopupVisible && (
-          <div className="damage-popup">{damageValue}</div>
-        )}
+      {/* Boutin fin du tour */}
+      <div className="fintourbtn">
+        <SwitchTurnButton />
       </div>
     </div>
   );
 };
 
-export default Combat;
+const mapStateToProps = (state) => {
+  return {
+    player: state.player,
+    enflammerActivated: state.player.enflammerActivated,
+    combustionActivated: state.player.combustionActivated,
+  };
+};
+export default connect(mapStateToProps)(Combat);

@@ -17,4 +17,5 @@ router.get("/getcards", getAllCardsWithCounts);
 router.get("/getRandomCards", getRandomCards);
 // Retrieve all cards, displayed in CardList.js
 router.get("/getAllCards", getAllCards);
+
 module.exports = router;

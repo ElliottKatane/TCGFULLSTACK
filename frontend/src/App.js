@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import CardCreationPage from "./pages/CardCreation";
 import Map from "./pages/Map";
+import Rules from "./pages/Rules";
+import Cantcheat from "./pages/Cantcheat";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -20,9 +22,6 @@ const App = () => {
           element={user ? <Navigate to="/map" /> : <Navigate to="/login" />}
         />
         <Route path="/map" element={<Map />} />
-
-
-
         <Route path="/combat/:mapLevel" element={<Combat />} />
         <Route
           path="/login"
@@ -33,6 +32,8 @@ const App = () => {
           element={!user ? <Signup /> : <Navigate to="/map" />}
         />
         <Route path="/createcard" element={<CardCreationPage />} />
+        <Route path="/cantcheat" element={<Cantcheat />} />
+        <Route path="/rules" element={<Rules />} />
       </Routes>
     </div>
   );

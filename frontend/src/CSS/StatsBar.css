@@ -1,13 +1,12 @@
 .hp-bar-container {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
   align-items: center; /* Center horizontally */
   position: relative; /* Add relative positioning to contain absolute children */
 }
 
 .hp-bar {
   width: 150px;
-  height: 20px;
+  height: 25px;
   background-color: #ccc;
   border: 1px solid #000;
   border-radius: 10px;
@@ -42,8 +41,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 8px; /* Adjust padding as needed */
   color: #fff; /* Text color */
+  margin: 0 auto; /* Center the bar horizontally */
+
 }
 .manadisplay {
   border: 1px solid black;
@@ -55,4 +55,10 @@
     rgba(115, 70, 252, 1) 83%
   );
   color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+margin-top: 2px;
+
 }

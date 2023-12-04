@@ -5,9 +5,6 @@ const { getPlayerData } = require("../controllers/playerController");
 
 // Assuming you have a parameter named userId in your route
 router.get("/profile/:userEmail", getPlayerData);
-
 router.post("/update-level", updateLevelReached);
-
-
 
 module.exports = router;

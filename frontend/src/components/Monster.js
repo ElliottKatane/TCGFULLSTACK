@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Redirect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import StatsBar from "./StatsBar";
@@ -22,6 +22,8 @@ const Monster = ({ monster, dispatch }) => {
       .catch((error) => {
         console.error("Fetch monster failed:", error);
       });
+
+
   }, [mapLevel, dispatch]);
 
   console.log("Monster state:", monster.monsterInfo);
@@ -35,7 +37,7 @@ const Monster = ({ monster, dispatch }) => {
       window.alert("Félicitations ! Vous avez remporté la victoire !");
       window.location.href = "/map";
     }
-  }, [monster.monsterInfo, dispatch, navigate]);
+  }, [monster.monsterInfo, dispatch, navigate,mapLevel, user.email]);
 
   const levelClassName = `level${mapLevel}`;
   const enemyLevelClassName = `enemy-level${mapLevel}`;

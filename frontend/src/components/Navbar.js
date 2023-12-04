@@ -3,12 +3,9 @@ import stslogo from "../assets/stslogo.png";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-// We import bootstrap to make our application look better.
-import "bootstrap/dist/css/bootstrap.css";
-
 // We import NavLink to utilize the react router.
 import { Link, NavLink } from "react-router-dom";
-
+// import "bootstrap/dist/css/bootstrap.css";
 // Here, we display our Navbar
 export default function Navbar() {
   // hooks import
@@ -29,11 +26,11 @@ export default function Navbar() {
           backgroundPosition: "center",
         }}
       >
-        <Link to="/">Combat</Link>
-        <Link to="/rules">Règles du jeu</Link>
         <NavLink className="navbar-brand" to="/">
           <img src={stslogo} alt="oui"></img>
         </NavLink>
+        <Link to="/rules">Règles du jeu</Link>
+
         <nav>
           {/* if user is logged in, show email and logout button */}
           {user && (

@@ -107,7 +107,6 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
 
   return (
     <div>
-      <h2>pioche</h2>
       {player.pioche.map((piocheItem, index) => (
         <div className="card-align" key={index}>
           <div // Render each card as a div. bg color's card changes with type

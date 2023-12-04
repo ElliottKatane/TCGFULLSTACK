@@ -9,16 +9,14 @@ import {
   activateCombustion,
   deactivateCombustion,
 } from "../redux/actions/player.action";
+import { connect } from "react-redux";
+
 import { DegatsSubis } from "../redux/actions/monster.action";
 
-const Card = () => {
+const Card = ({ player, enflammerActivated, combustionActivated }) => {
   // state.card => regarder dans rootReducer pour la réf
   const randomCards = useSelector((state) => state.card.randomCards);
-  const enflammerActivated = useSelector(
-    (state) => state.player.enflammerActivated
-  );
-  const player = useSelector((state) => state.player); // Add this line
-
+  console.log("composant Card, contenu de la pioche: ", player.pioche);
   const dispatch = useDispatch(); // Initialize the useDispatch hook
 
   useEffect(() => {
@@ -109,19 +107,25 @@ const Card = () => {
 
   return (
     <div>
-      {randomCards.map((card, index) => (
+      <h2>pioche</h2>
+      {player.pioche.map((piocheItem, index) => (
         <div className="card-align" key={index}>
           <div // Render each card as a div. bg color's card changes with type
-            className={`card-container card-${card.type.toLowerCase()}`}
-            onClick={() => handleCardClick(card)}
+            className={`card-container card-${piocheItem.card.type.toLowerCase()}`}
+            onClick={() => handleCardClick(piocheItem.card)}
           >
-            <h2 className="card-title">{card.name}</h2>
-            <p className="card-description">{card.description}</p>
+            {/* Afficher les détails de la carte dans la pioche */}
+            <p className="card-title">
+              Nom de la carte : {piocheItem.card.name}
+            </p>
+            <p className="card-description">
+              Description : {piocheItem.card.description}
+            </p>
             <div className="card-details">
-              <p>Rarity: {card.rarity}</p>
-              <p>Type: {card.type}</p>
+              <p>Rarity: {piocheItem.card.rarity}</p>
+              <p>Type: {piocheItem.card.type}</p>
             </div>
-            <div className="card-cost">{card.cost}</div>
+            <div className="card-cost">{piocheItem.card.cost}</div>
           </div>
         </div>
       ))}
@@ -129,4 +133,11 @@ const Card = () => {
   );
 };
 
-export default Card;
+const mapStateToProps = (state) => {
+  return {
+    player: state.player,
+    enflammerActivated: state.player.enflammerActivated,
+    combustionActivated: state.player.combustionActivated,
+  };
+};
+export default connect(mapStateToProps)(Card);

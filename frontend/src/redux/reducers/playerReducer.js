@@ -5,6 +5,7 @@ import {
   MONSTER_ATTACK,
   INITIALIZE_CURRENT_MANA,
   INITIALIZE_CURRENT_TURN,
+  INITIALIZE_PLAYER_PIOCHE,
   ACTIVATE_ENFLAMMER,
   DEACTIVATE_ENFLAMMER,
   ACTIVATE_COMBUSTION,
@@ -19,10 +20,18 @@ const initialState = {
   currentTurn: "player",
   enflammerActivated: false,
   combustionActivated: false,
+  pioche: [],
+  main: [],
+  defausse: [],
 };
 
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case INITIALIZE_PLAYER_PIOCHE:
+      return {
+        ...state,
+        pioche: action.payload.pioche,
+      };
     case INITIALIZE_CURRENT_TURN:
       return {
         ...state,
@@ -61,7 +70,7 @@ const playerReducer = (state = initialState, action) => {
     case FETCH_PLAYER_INFO_SUCCESS:
       return {
         ...state,
-        playerInfo: action.payload, // Stockez les informations du monstre, 1er élément du tableau
+        playerInfo: action.payload,
       };
     case FETCH_PLAYER_INFO_FAILURE:
       return {

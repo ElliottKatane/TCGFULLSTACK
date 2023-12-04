@@ -3,7 +3,6 @@ export const FETCH_RANDOM_CARDS_SUCCESS = "FETCH_RANDOM_CARDS_SUCCESS";
 export const FETCH_ALL_CARDS_SUCCESS = "FETCH_ALL_CARDS_SUCCESS";
 export const CREATE_CARD = "CREATE_CARD";
 export const FETCH_CARDS = "FETCH_CARDS";
-
 //Action creator for CardForm
 export const createCard = (formData) => {
   return {

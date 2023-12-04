@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 const Player = require("./playerModel");
+const Card = require("./cardModel");
 
 const userSchema = new Schema({
   email: {
@@ -48,19 +49,46 @@ userSchema.statics.signup = async function (email, password) {
 
   const user = await this.create({ email, password: hash });
 
-  // Create a player for the user with emailUser set to the user's email
-  const player = await Player.create({ emailUser: user.email });
-  // Create a player for the user with emailUser set to the user's email
-  // Associate the player with the user
-  user.player = player._id;
-  // Save the user with the reference to the player
-  await user.save();
+  // création du joueur
+  try {
+    // Create a player for the user with emailUser set to the user's email
+    const player = await Player.create({
+      emailUser: user.email,
+      DeckOfCards: await initializePlayerDeck(),
+    });
 
-  console.log("User signed up succesfully" + user);
+    // Associate the player with the user
+    user.player = player._id;
+    // Save the user with the reference to the player
+    await user.save();
 
-  return user;
+    return user;
+  } catch (error) {
+    // Handle the error during player creation
+    console.error("Error creating player:", error);
+    // Rollback user creation if player creation fails
+    await user.remove();
+    throw error;
+  }
 };
+const initializePlayerDeck = async () => {
+  try {
+    const card1 = await Card.findOne({ name: "Défense" });
+    const card2 = await Card.findOne({ name: "Frappe" });
 
+    console.log("Card 1 data:", card1.toObject());
+    console.log("Card 2 data:", card2.toObject());
+
+    // Retourne un tableau avec les identifiants des cartes
+    return [
+      { card: card1.toObject(), quantity: 1 },
+      { card: card2.toObject(), quantity: 1 },
+    ];
+  } catch (error) {
+    console.error("Error initializing player deck:", error);
+    throw error;
+  }
+};
 // static login method
 userSchema.statics.login = async function (email, password) {
   // check if fields are filled. We don't even wanna try to login if we don't have email/password

@@ -1,10 +1,11 @@
 const User = require("../models/userModel");
 const Player = require("../models/playerModel"); // Import Player model
 
+// Récupère les infos du Player
 const getPlayerData = async (req, res) => {
   try {
     const userEmail = req.params.userEmail;
-    
+
     console.log(`Fetching player data for user with email: ${userEmail}`);
 
     const user = await User.findOne({ email: userEmail }).populate({
@@ -18,6 +19,7 @@ const getPlayerData = async (req, res) => {
     if (!user || !user.player) {
       return res.status(404).json({ message: "Player not found for the user" });
     }
+    console.log("DeckOfCards before conversion:", user.player.DeckOfCards);
 
     const playerData = user.player.toObject();
     res.json(playerData);
@@ -30,9 +32,9 @@ const getPlayerData = async (req, res) => {
 // Controller method for updating the levelReached field
 const updateLevelReached = async (req, res) => {
   const { userEmail, newLevelReached } = req.body;
-  
+
   console.log("Received request to update level for user:", userEmail);
-  
+
   try {
     const updatedPlayer = await Player.findOneAndUpdate(
       { emailUser: userEmail },
@@ -44,7 +46,10 @@ const updateLevelReached = async (req, res) => {
       return res.status(404).json({ error: "Player not found" });
     }
 
-    res.json({ message: "LevelReached updated successfully", player: updatedPlayer });
+    res.json({
+      message: "LevelReached updated successfully",
+      player: updatedPlayer,
+    });
   } catch (error) {
     console.error("Error updating levelReached:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -53,5 +58,5 @@ const updateLevelReached = async (req, res) => {
 
 module.exports = {
   updateLevelReached,
-  getPlayerData
+  getPlayerData,
 };

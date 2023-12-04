@@ -22,6 +22,7 @@ export default function Navbar() {
     <header>
       <div className="container">
         <Link to="/">Combat</Link>
+        <Link to="/rules">Règles du jeu</Link>
         <NavLink className="navbar-brand" to="/">
           <img style={{ width: "25%" }} src={stslogo} alt="oui"></img>
         </NavLink>

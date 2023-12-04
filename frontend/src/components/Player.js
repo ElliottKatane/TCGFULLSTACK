@@ -11,6 +11,7 @@ import {
   fetchPlayer,
   initializeCurrentMana,
   initializeCurrentTurn,
+  initializePlayerPioche,
 } from "../redux/actions/player.action";
 import flameIcon from "../assets/flame-icon.png";
 import combustionIcon from "../assets/combustion-icon.png";
@@ -30,11 +31,9 @@ const Player = ({
       const userEmail = user.email;
       dispatch(fetchPlayer(userEmail))
         .then((result) => {
-          console.log("Fetch player result:", result);
-          console.log("Mana pool:", result.manaPool);
           dispatch(initializeCurrentMana(result.manaPool));
           dispatch(initializeCurrentTurn(result.currentTurn));
-          console.log("currentTurn:", result.currentTurn);
+          dispatch(initializePlayerPioche(result.DeckOfCards));
         })
         .catch((error) => {
           console.error("Fetch player failed:", error);
@@ -42,7 +41,6 @@ const Player = ({
     }
   }, [user, dispatch]);
 
-  console.log("Player state:", player.playerInfo);
   // initialisation de la manaPool et enregistrement dans une constante
 
   useEffect(() => {

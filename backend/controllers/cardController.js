@@ -64,7 +64,7 @@ const getRandomCards = async (req, res) => {
 
     // Log each card as it's retrieved
     randomCards.forEach((card, index) => {
-      console.log(`Card ${index + 1}:`, card);
+      console.log(`"Controller method" Card ${index + 1}:`, card);
     });
 
     res.status(200).json(randomCards);

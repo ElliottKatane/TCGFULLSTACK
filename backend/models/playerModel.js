@@ -21,7 +21,7 @@ const playerSchema = new Schema({
       },
       quantity: {
         type: Number,
-        default: 1, // Adjust the default as needed
+        default: 1,
       },
     },
   ],

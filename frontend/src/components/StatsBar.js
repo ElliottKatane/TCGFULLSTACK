@@ -23,7 +23,7 @@ const StatsBar = ({ HPValue, currentMana, manaPool, isPlayer }) => {
       <p className="hp-number">{HPValue}</p>
       {isPlayer ? (
         <div className="manadisplay">
-          Mana: {currentMana}/{manaPool}
+         {currentMana}/{manaPool}
         </div>
       ) : null}
     </div>

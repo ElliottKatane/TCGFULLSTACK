@@ -20,11 +20,19 @@ export default function Navbar() {
   };
   return (
     <header>
-      <div className="container">
+      <div
+        className="container"
+        style={{
+          backgroundImage: `url(${require("../assets/navbar.jpg")})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <Link to="/">Combat</Link>
         <Link to="/rules">Règles du jeu</Link>
         <NavLink className="navbar-brand" to="/">
-          <img style={{ width: "25%" }} src={stslogo} alt="oui"></img>
+          <img src={stslogo} alt="oui"></img>
         </NavLink>
         <nav>
           {/* if user is logged in, show email and logout button */}

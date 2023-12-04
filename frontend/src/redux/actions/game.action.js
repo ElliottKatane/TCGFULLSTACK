@@ -2,6 +2,7 @@ import { fetchPlayer } from "./player.action";
 
 export const VICTORY = "VICTORY";
 export const DEFEAT = "DEFEAT";
+export const RESET_VICTORY = "RESET_VICTORY";
 
 export const victory = () => ({
   type: VICTORY,
@@ -9,6 +10,10 @@ export const victory = () => ({
 
 export const defeat = () => ({
   type: DEFEAT,
+});
+
+export const resetVictory = () => ({
+  type: RESET_VICTORY,
 });
 
 export const handleVictory =
@@ -28,12 +33,6 @@ export const handleVictory =
         console.log("Current levelReached:", playerData.levelReached);
         console.log("Current mapLevel:", mapLevel);
 
-        dispatch(victory());
-
-        console.log("VICTORY action dispatched");
-        // Log the updated state
-        console.log("Updated state:", getState());
-
         // Check if the player's already beaten the level, if true, don't increment
         if (playerData.levelReached <= parseInt(mapLevel, 10)) {
           const newLevelReached = playerData.levelReached + 1;
@@ -51,6 +50,11 @@ export const handleVictory =
             throw new Error("Failed to update levelReached");
           }
         }
+        dispatch(victory());
+
+        console.log("VICTORY action dispatched");
+        // Log the updated state
+        console.log("Updated state:", getState());
       }
     } catch (error) {
       console.error("Error handling victory:", error);

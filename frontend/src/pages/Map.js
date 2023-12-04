@@ -44,6 +44,8 @@ const Map = () => {
     return buttonLevel <= levelReached;
   };
 
+
+
   // Render the map buttons using an array of levels
   return (
     <div className="mapStyle">

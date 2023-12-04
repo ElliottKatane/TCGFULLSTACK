@@ -6,6 +6,7 @@ import CardBoard from "../components/CardBoard";
 import Monster from "../components/Monster";
 import SwitchTurnButton from "../components/SwitchTurnButton"; // Importez le nouveau composant
 import "../CSS/Combat.css";
+import "../CSS/Positions.css";
 import "../CSS/Card.css";
 import { connect, useSelector } from "react-redux";
 
@@ -40,17 +41,17 @@ const Combat = () => {
         backgroundPosition: "center center",
       }}
     >
-      {/* Composants Player and Monster */}
-      <div className="container-player-monster">
-        <Player />
-        <Monster />
-      </div>
-
       {/* Composant CardBoard */}
       <div className="cardboard-container">
         <div className="cardboard">
           <CardBoard />
         </div>
+      </div>
+
+      {/* Composants Player and Monster */}
+      <div className="container-player-monster">
+        <Player />
+        <Monster />
       </div>
 
       {/* Boutin fin du tour */}

@@ -23,15 +23,12 @@ const monsterReducer = (state = initialState, action) => {
       };
 
     case DEGATS_SUBIS:
-      console.log("Reducing damage. Current health:", state.monsterInfo.health);
-      console.log("Damage value:", action.payload.damageValue);
-      const newHP = state.monsterInfo.health - action.payload.damageValue; //J'ai modifier le log (ligne 28) pour montrer la vie courante. Avant ca afficher la vie avant l'attaque
-      console.log("HP after dmg", newHP);
+      const newHP = state.monsterInfo.health - action.payload.damageValue;
       return {
         ...state,
         monsterInfo: {
           ...state.monsterInfo,
-          health: state.monsterInfo.health - action.payload.damageValue,
+          health: newHP,
         },
       };
 

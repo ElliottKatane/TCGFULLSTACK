@@ -5,7 +5,7 @@ import image from "../assets/guerrier.gif";
 import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
-import { handleDefeat,resetVictory } from "../redux/actions/game.action";
+import { handleDefeat, resetVictory } from "../redux/actions/game.action";
 import "../CSS/Positions.css";
 import {
   fetchPlayer,
@@ -33,7 +33,7 @@ const Player = ({
         .then((result) => {
           dispatch(initializeCurrentMana(result.manaPool));
           dispatch(initializeCurrentTurn(result.currentTurn));
-          dispatch(initializePlayerPioche(result.DeckOfCards));
+          dispatch(initializePlayerPioche(result.DeckOfCards)); // initialise la défausse à un tableau vide également
         })
         .catch((error) => {
           console.error("Fetch player failed:", error);
@@ -54,14 +54,16 @@ const Player = ({
 
   const playerLevelClassName = `player-level${mapLevel}`;
 
-
   return (
     <div>
       {player.playerInfo ? (
         <div>
           {/* <h1>FIGHTER</h1> */}
-          <img src={image} alt="copie"
-          className={`player ${playerLevelClassName}`} />
+          <img
+            src={image}
+            alt="copie"
+            className={`player ${playerLevelClassName}`}
+          />
           <div className="power-icons">
             {enflammerActivated ? (
               <img
@@ -80,12 +82,12 @@ const Player = ({
             ) : null}
           </div>
           <div className="player-hp">
-          <StatsBar
-            HPValue={player.playerInfo.HP}
-            currentMana={player.currentMana}
-            manaPool={player.playerInfo.manaPool}
-            isPlayer={true}
-          />
+            <StatsBar
+              HPValue={player.playerInfo.HP}
+              currentMana={player.currentMana}
+              manaPool={player.playerInfo.manaPool}
+              isPlayer={true}
+            />
           </div>
         </div>
       ) : (

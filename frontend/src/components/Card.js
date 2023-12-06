@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 // redux imports
-import { useDispatch, useSelector } from "react-redux"; // Import useDispatch from react-redux
-import { fetchRandomCards } from "../redux/actions/card.action"; // Import the Card actions
+import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import {
+  addCardToDefausse,
   ManaCost,
   activateEnflammer,
   deactivateEnflammer,
@@ -15,13 +15,11 @@ import { DegatsSubis } from "../redux/actions/monster.action";
 
 const Card = ({ player, enflammerActivated, combustionActivated }) => {
   // state.card => regarder dans rootReducer pour la réf
-  const randomCards = useSelector((state) => state.card.randomCards);
-  console.log("composant Card, contenu de la pioche: ", player.pioche);
-  const dispatch = useDispatch(); // Initialize the useDispatch hook
-
   useEffect(() => {
-    dispatch(fetchRandomCards());
-  }, [dispatch]);
+    console.log("état de la pioche (useEffect, Card.js): ", player.pioche);
+    console.log("état de la defausse (useEffect, Card.js): ", player.defausse);
+  }, [player.pioche, player.defausse]);
+  const dispatch = useDispatch(); // Initialize the useDispatch hook
 
   // Logique de clic sur les cartes : dégâts infligés, coût du mana, carte qui doit aller dans la défausse.
 
@@ -37,7 +35,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
 
         case "Conflit": // 0 - Jouable si vous n'avez que des Attaque en main. Infligez 14 dégâts
           //vérifie si toutes les cartes sont de type Attaque, condition pour jouer la carte Conflit
-          const allAttackCards = randomCards.every(
+          const allAttackCards = player.pioche.every(
             (card) => card.type === "Attack"
           );
           if (allAttackCards) {
@@ -87,6 +85,13 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
       // Déduit le mana une fois que la vérification est faite, sinon
       dispatch(ManaCost(clickedCard.cost));
       // méthode pour mettre la carte dans la défausse ici
+      console.log("Before dispatch: état de la pioche", player.pioche);
+      console.log("Before dispatch: état de la defausse", player.defausse);
+
+      dispatch(addCardToDefausse(clickedCard));
+
+      console.log("After dispatch: état de la pioche", player.pioche);
+      console.log("After dispatch: état de la defausse", player.defausse);
     } else {
       // Sinon, on obtient une alerte
       alert("Not enough mana to play this card!");
@@ -114,9 +119,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
             onClick={() => handleCardClick(piocheItem.card)}
           >
             {/* Afficher les détails de la carte dans la pioche */}
-            <p className="card-title">
-              Nom de la carte : {piocheItem.card.name}
-            </p>
+            <p className="card-title">{piocheItem.card.name}</p>
             <p className="card-description">
               Description : {piocheItem.card.description}
             </p>

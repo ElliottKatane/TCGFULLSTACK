@@ -14,16 +14,10 @@ const SwitchTurnButton = () => {
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
-
-    // Utilisez la valeur actualisée après la mise à jour
-    console.log(
-      "Turn switched to",
-      currentTurn === "player" ? "Monster" : "Player"
-    );
     if (currentTurn === "player") {
       // on devrait mette un set TimeOut pour qu'il y ait un délai entre le clic du bouton et l'attaque du monstre
       const monsterAttackValue = monsterInfo.attacks[1].damage; // [0] = Griffe, 10dmg, [1] = Morsure, 15 dmg
-      console.log("Monster attack value:", monsterAttackValue);
+      console.log("Monster attack value: (switch turn)", monsterAttackValue);
       dispatch(MonsterAttack(monsterAttackValue));
       // réinitialise le mana du joueur après le tour du monstre
       dispatch(initializeCurrentMana(player.playerInfo.manaPool));

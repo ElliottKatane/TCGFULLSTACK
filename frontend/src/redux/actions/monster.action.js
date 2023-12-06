@@ -19,11 +19,11 @@ export const fetchMonster = (mapLevel) => async (dispatch) => {
       throw new Error("La requête a échoué");
     }
     const monsterInfo = await response.json();
-    // Log the monsterInfo to the console
-    console.log("Monster Info (redux):", monsterInfo);
     dispatch(fetchMonsterInfoSuccess(monsterInfo));
+    return monsterInfo;
   } catch (error) {
     dispatch(fetchMonsterInfoFailure(error.message));
+    throw error;
   }
 };
 

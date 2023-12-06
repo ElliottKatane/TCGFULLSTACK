@@ -15,13 +15,19 @@ const Monster = ({ monster, dispatch }) => {
 
   useEffect(() => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
-    dispatch(fetchMonster(mapLevel))
-      .then((result) => {
-        console.log("Fetch monster result:", result);
-      })
-      .catch((error) => {
-        console.error("Fetch monster failed:", error);
-      });
+    if (user) {
+      dispatch(fetchMonster(mapLevel))
+        .then((result) => {
+          console.log(
+            "Fetch monster result:",
+            result + " maplevel: ",
+            mapLevel
+          );
+        })
+        .catch((error) => {
+          console.error("Fetch monster failed:", error);
+        });
+    }
   }, [mapLevel, dispatch]);
 
   console.log("Monster state:", monster.monsterInfo);

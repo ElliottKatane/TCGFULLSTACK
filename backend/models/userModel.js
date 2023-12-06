@@ -74,7 +74,10 @@ userSchema.statics.signup = async function (email, password) {
 const initializePlayerDeck = async () => {
   try {
     const card1 = await Card.findOne({ name: "Défense" });
+    //Frappes
     const card2 = await Card.findOne({ name: "Frappe" });
+    const card3 = await Card.findOne({ name: "Frappe" });
+    const card4 = await Card.findOne({ name: "Frappe" });
 
     console.log("Card 1 data:", card1.toObject());
     console.log("Card 2 data:", card2.toObject());
@@ -83,6 +86,8 @@ const initializePlayerDeck = async () => {
     return [
       { card: card1.toObject(), quantity: 1 },
       { card: card2.toObject(), quantity: 1 },
+      { card: card3.toObject(), quantity: 1 },
+      { card: card4.toObject(), quantity: 1 },
     ];
   } catch (error) {
     console.error("Error initializing player deck:", error);

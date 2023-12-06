@@ -22,8 +22,6 @@ root.render(
   <AuthContextProvider>
     <BrowserRouter>
       <Provider store={store}>
-        {" "}
-        {/* Wrap with the Redux Provider */}
         <App />
       </Provider>
     </BrowserRouter>

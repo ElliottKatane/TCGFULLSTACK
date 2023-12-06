@@ -20,10 +20,6 @@ const Combat = () => {
   // Empêche l'utilisateur d'accéder par l'url à un niveau de carte > à son levelReached
   const userLevelReached = user ? player.levelReached : 1;
   const parsedMapLevel = parseInt(mapLevel, 10);
-  console.log(
-    "parsedmaplevel et userlevelreached: " + parsedMapLevel,
-    userLevelReached
-  );
   if (!user || parsedMapLevel > player.levelReached) {
     // Redirect to the appropriate map level or login page
     return (
@@ -54,7 +50,7 @@ const Combat = () => {
         <Monster />
       </div>
 
-      {/* Boutin fin du tour */}
+      {/* Bouton fin du tour */}
       <div className="fintourbtn">
         <SwitchTurnButton />
       </div>

@@ -12,6 +12,7 @@ import {
   DEACTIVATE_COMBUSTION,
   END_PLAYER_TURN,
   END_MONSTER_TURN,
+  ADD_CARD_TO_DEFAUSSE,
 } from "../actions/player.action";
 
 const initialState = {
@@ -27,11 +28,7 @@ const initialState = {
 
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case INITIALIZE_PLAYER_PIOCHE:
-      return {
-        ...state,
-        pioche: action.payload.pioche,
-      };
+    // Initialisation du tour et gestion de fins de tour
     case INITIALIZE_CURRENT_TURN:
       return {
         ...state,
@@ -95,6 +92,22 @@ const playerReducer = (state = initialState, action) => {
           ...state.playerInfo,
           HP: state.playerInfo.HP - action.payload.damageValue,
         },
+      };
+    case ADD_CARD_TO_DEFAUSSE:
+      console.log("Reducer: ADD_CARD_TO_DEFAUSSE action received");
+      console.log("Payload:", action.payload);
+      return {
+        ...state,
+        defausse: [...state.defausse, action.payload],
+        pioche: state.pioche.filter(
+          (piocheItem) => piocheItem !== action.payload
+        ),
+      };
+    case INITIALIZE_PLAYER_PIOCHE:
+      return {
+        ...state,
+        pioche: action.payload.pioche,
+        defausse: [],
       };
     // default
     default:

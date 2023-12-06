@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useDispatch } from "react-redux";
-import { fetchPlayer } from "../redux/actions/player.action";
+import {
+  fetchPlayer,
+  initializePlayerPioche,
+} from "../redux/actions/player.action";
 
 import "../CSS/Map.css";
 
@@ -20,16 +23,15 @@ const Map = () => {
     // Check if a user is available
     if (user) {
       const userEmail = user.email;
-
-      console.log("Fetching player data for user with email:", userEmail);
-
       // Dispatch the action to fetch player data from the API using Redux
       dispatch(fetchPlayer(userEmail))
         .then((data) => {
           // Log the received player data and update the state
-          console.log("Player data received: (map.js)", data);
           setLevelReached(data.levelReached);
           setLoading(false);
+          // rajout de cette ligne pour réinitialiser la pioche et la défausse après un combat (lors du retour au map)
+          dispatch(initializePlayerPioche(data.DeckOfCards)); // initialise la défausse à un tableau vide également
+          console.log("map.js useEffect data: ", data);
         })
         .catch((error) => {
           // Log an error if fetching data fails and set loading to false
@@ -43,8 +45,6 @@ const Map = () => {
   const isButtonClickable = (buttonLevel) => {
     return buttonLevel <= levelReached;
   };
-
-
 
   // Render the map buttons using an array of levels
   return (

@@ -1,8 +1,11 @@
-import React, { useEffect, useState, Redirect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import StatsBar from "./StatsBar";
-import { fetchMonster } from "../redux/actions/monster.action";
+import {
+  InitializeMonsterHP,
+  fetchMonster,
+} from "../redux/actions/monster.action";
 import { handleVictory, resetVictory } from "../redux/actions/game.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +36,7 @@ const Monster = ({ monster, dispatch }) => {
   console.log("Monster state:", monster.monsterInfo);
 
   useEffect(() => {
-    if (monster.monsterInfo && monster.monsterInfo.health <= 0) {
+    if (monster.monsterInfo && monster.currentHealth <= 0) {
       const userEmail = user.email;
 
       dispatch(handleVictory(userEmail, mapLevel));
@@ -41,7 +44,14 @@ const Monster = ({ monster, dispatch }) => {
       window.alert("Félicitations ! Vous avez remporté la victoire !");
       window.location.href = "/map";
     }
-  }, [monster.monsterInfo, dispatch, navigate]);
+  }, [
+    monster.monsterInfo,
+    monster.currentHealth,
+    dispatch,
+    navigate,
+    mapLevel,
+    user.email,
+  ]);
 
   const levelClassName = `level${mapLevel}`;
   const enemyLevelClassName = `enemy-level${mapLevel}`;
@@ -51,7 +61,10 @@ const Monster = ({ monster, dispatch }) => {
       {monster.monsterInfo ? (
         <div>
           <div className="monster-hp">
-            <StatsBar HPValue={monster.monsterInfo.health} />
+            <StatsBar
+              HPValue={monster.monsterInfo.health}
+              currentHealth={monster.currentHealth}
+            />
           </div>
           <img
             src={`/assets/${monster.monsterInfo.image}`}

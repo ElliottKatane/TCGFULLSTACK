@@ -39,6 +39,7 @@ const Map = () => {
           setLoading(false);
         });
     }
+
   }, [dispatch, user]); // Include dispatch in the dependency array to avoid lint warnings
 
   // Function to determine if a map button is clickable based on the level reached

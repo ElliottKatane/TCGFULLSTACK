@@ -12,6 +12,7 @@ import {
   initializeCurrentMana,
   initializeCurrentTurn,
   initializePlayerPioche,
+  initializeCurrentPlayerHP,
 } from "../redux/actions/player.action";
 import flameIcon from "../assets/flame-icon.png";
 import combustionIcon from "../assets/combustion-icon.png";
@@ -33,7 +34,8 @@ const Player = ({
         .then((result) => {
           dispatch(initializeCurrentMana(result.manaPool));
           dispatch(initializeCurrentTurn(result.currentTurn));
-          dispatch(initializePlayerPioche(result.DeckOfCards)); // initialise la défausse à un tableau vide également
+          dispatch(initializePlayerPioche(result.DeckOfCards));
+          dispatch(initializeCurrentPlayerHP(result.HP));
         })
         .catch((error) => {
           console.error("Fetch player failed:", error);
@@ -44,13 +46,13 @@ const Player = ({
   // initialisation de la manaPool et enregistrement dans une constante
 
   useEffect(() => {
-    if (player.playerInfo && player.playerInfo.HP <= 0) {
+    if (player.playerInfo && player.currentPlayerHealth <= 0) {
       dispatch(handleDefeat());
       dispatch(resetVictory());
       window.alert("Game Over...");
       window.location.href = "/map";
     }
-  }, [player.playerInfo, dispatch]);
+  }, [player.playerInfo, player.currentPlayerHealth, dispatch]);
 
   const playerLevelClassName = `player-level${mapLevel}`;
 
@@ -84,6 +86,7 @@ const Player = ({
           <div className="player-hp">
             <StatsBar
               HPValue={player.playerInfo.HP}
+              currentHealth={player.currentPlayerHealth}
               currentMana={player.currentMana}
               manaPool={player.playerInfo.manaPool}
               isPlayer={true}

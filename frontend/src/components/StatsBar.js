@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../CSS/StatsBar.css";
 
-// La valeur de la barre de HP, entre 0 et 100
-const StatsBar = ({ HPValue, currentMana, manaPool, isPlayer }) => {
-  // largeur de la partie verte (hp restants) et la largeur de la partie rouge (hp faibles)
-  let greenWidth = HPValue;
+const StatsBar = ({ HPValue, currentHealth,currentMana, manaPool, isPlayer }) => {
+  const [initialHealth, setInitialHealth] = useState(null);
+
+  useEffect(() => {
+    console.log("StatsBar component mounted!");
+    if (HPValue !== null && initialHealth === null) {
+      console.log("Setting initial health:", HPValue);
+      setInitialHealth(HPValue);
+    }
+  }, [HPValue]); // Add keyForRemount to the dependency array
+
+
+  if (initialHealth === null) {
+    return <p>Loading...</p>;
+  }
+
+  const percentageRemaining = (currentHealth / HPValue) * 100;
+
+  let greenWidth = percentageRemaining;
   let redWidth = 0;
 
-  // Si le pourcentage est < à 30, la partie verte est à 0 et la partie rouge prend la place
-  if (HPValue <= 30) {
+  if (percentageRemaining <= 30) {
     greenWidth = 0;
-    redWidth = HPValue;
+    redWidth = percentageRemaining;
   }
 
   return (
@@ -19,11 +33,11 @@ const StatsBar = ({ HPValue, currentMana, manaPool, isPlayer }) => {
         className="hp-fill hp-green"
         style={{ width: `${greenWidth}%` }}
       ></div>
-      <div className="hp-fill hp-red" style={{ width: `${redWidth}%` }}></div>^
-      <p className="hp-number">{HPValue}</p>
+      <div className="hp-fill hp-red" style={{ width: `${redWidth}%` }}></div>
+      <p className="hp-number">{currentHealth}/{HPValue}</p>
       {isPlayer ? (
         <div className="manadisplay">
-         {currentMana}/{manaPool}
+          {currentMana}/{manaPool}
         </div>
       ) : null}
     </div>

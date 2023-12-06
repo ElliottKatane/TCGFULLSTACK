@@ -6,6 +6,7 @@ export const MANA_COST = "MANA_COST";
 export const MONSTER_ATTACK = "MONSTER_ATTACK";
 // initialisation
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
+export const INITIALIZE_CURRENT_PLAYER_HP = "INITIALIZE_CURRENT_PLAYER_HP";
 export const INITIALIZE_CURRENT_TURN = "INIZIALIZE_CURRENT_TURN";
 export const INITIALIZE_PLAYER_PIOCHE = "INITIALIZE_PLAYER_PIOCHE";
 // carte Enflammer et Combustion
@@ -115,6 +116,16 @@ export const initializeCurrentMana = (manaPool) => {
     },
   };
 };
+
+export const initializeCurrentPlayerHP = (HP) => {
+  return {
+    type: INITIALIZE_CURRENT_PLAYER_HP,
+    payload: {
+      HP,
+    },
+  };
+};
+
 export const initializePlayerPioche = (pioche) => {
   return { type: INITIALIZE_PLAYER_PIOCHE, payload: { pioche } };
 };

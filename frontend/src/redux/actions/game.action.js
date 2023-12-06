@@ -50,11 +50,12 @@ export const handleVictory =
             throw new Error("Failed to update levelReached");
           }
         }
-        dispatch(victory());
+        
 
         console.log("VICTORY action dispatched");
         // Log the updated state
         console.log("Updated state:", getState());
+        dispatch(victory());
       }
     } catch (error) {
       console.error("Error handling victory:", error);

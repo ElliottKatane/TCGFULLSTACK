@@ -12,17 +12,20 @@ import {
   DEACTIVATE_COMBUSTION,
   END_PLAYER_TURN,
   END_MONSTER_TURN,
+  INITIALIZE_CURRENT_PLAYER_HP,
 } from "../actions/player.action";
 
 const initialState = {
   playerInfo: null,
   currentMana: 0,
+  currentPlayerHealth: 100,
   currentTurn: "player",
   enflammerActivated: false,
   combustionActivated: false,
   pioche: [],
   main: [],
   defausse: [],
+  
 };
 
 const playerReducer = (state = initialState, action) => {
@@ -83,6 +86,12 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         currentMana: action.payload.manaPool,
       };
+
+          case INITIALIZE_CURRENT_PLAYER_HP:
+      return {
+        ...state,
+        currentPlayerHealth: action.payload.HP,
+      };
     case MANA_COST:
       return {
         ...state,
@@ -91,11 +100,10 @@ const playerReducer = (state = initialState, action) => {
     case MONSTER_ATTACK:
       return {
         ...state,
-        playerInfo: {
-          ...state.playerInfo,
-          HP: state.playerInfo.HP - action.payload.damageValue,
-        },
-      };
+  
+          currentPlayerHealth: state.currentPlayerHealth - action.payload.damageValue,
+        }
+      
     // default
     default:
       return state;

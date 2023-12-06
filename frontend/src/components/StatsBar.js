@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../CSS/StatsBar.css";
 
-const StatsBar = ({ HPValue, currentMana, manaPool, isPlayer }) => {
+const StatsBar = ({ HPValue, currentHealth,currentMana, manaPool, isPlayer }) => {
   const [initialHealth, setInitialHealth] = useState(null);
 
   useEffect(() => {
@@ -17,8 +17,7 @@ const StatsBar = ({ HPValue, currentMana, manaPool, isPlayer }) => {
     return <p>Loading...</p>;
   }
 
-  const MAXHP = initialHealth;
-  const percentageRemaining = (HPValue / MAXHP) * 100;
+  const percentageRemaining = (currentHealth / HPValue) * 100;
 
   let greenWidth = percentageRemaining;
   let redWidth = 0;
@@ -35,7 +34,7 @@ const StatsBar = ({ HPValue, currentMana, manaPool, isPlayer }) => {
         style={{ width: `${greenWidth}%` }}
       ></div>
       <div className="hp-fill hp-red" style={{ width: `${redWidth}%` }}></div>
-      <p className="hp-number">{HPValue}</p>
+      <p className="hp-number">{currentHealth}/{HPValue}</p>
       {isPlayer ? (
         <div className="manadisplay">
           {currentMana}/{manaPool}

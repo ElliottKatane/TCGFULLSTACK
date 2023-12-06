@@ -5,7 +5,7 @@ const getMonstersByMapLevel = async (req, res) => {
   const mapLevel = req.params.mapLevel;
   try {
     // Query the "Monster" collection based on the selected map level
-    const monsters = await Monster.find({ mapLevel });
+    const monsters = await Monster.findOne({ mapLevel });
     // Return the monsters as JSON
     res.json(monsters);
   } catch (error) {

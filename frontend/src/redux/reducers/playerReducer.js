@@ -26,7 +26,6 @@ const initialState = {
   pioche: [],
   main: [],
   defausse: [],
-  
 };
 
 const playerReducer = (state = initialState, action) => {
@@ -84,7 +83,7 @@ const playerReducer = (state = initialState, action) => {
         currentMana: action.payload.manaPool,
       };
 
-          case INITIALIZE_CURRENT_PLAYER_HP:
+    case INITIALIZE_CURRENT_PLAYER_HP:
       return {
         ...state,
         currentPlayerHealth: action.payload.HP,
@@ -97,10 +96,8 @@ const playerReducer = (state = initialState, action) => {
     case MONSTER_ATTACK:
       return {
         ...state,
-        playerInfo: {
-          ...state.playerInfo,
-          HP: state.playerInfo.HP - action.payload.damageValue,
-        },
+        currentPlayerHealth:
+          state.currentPlayerHealth - action.payload.damageValue,
       };
     case ADD_CARD_TO_DEFAUSSE:
       console.log("Reducer: ADD_CARD_TO_DEFAUSSE action received");
@@ -118,10 +115,7 @@ const playerReducer = (state = initialState, action) => {
         pioche: action.payload.pioche,
         defausse: [],
       };
-  
-          currentPlayerHealth: state.currentPlayerHealth - action.payload.damageValue,
-        }
-      
+
     // default
     default:
       return state;

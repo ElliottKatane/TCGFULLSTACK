@@ -21,7 +21,6 @@ export const fetchMonster = (mapLevel) => async (dispatch) => {
     }
     const monsterInfo = await response.json();
     dispatch(fetchMonsterInfoSuccess(monsterInfo));
-    return monsterInfo;
     dispatch(InitializeMonsterHP(monsterInfo.health));
   } catch (error) {
     dispatch(fetchMonsterInfoFailure(error.message));

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // redux imports
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import {
@@ -8,9 +8,9 @@ import {
   deactivateEnflammer,
   activateCombustion,
   deactivateCombustion,
+  setCardAnimationActive,
 } from "../redux/actions/player.action";
 import { connect } from "react-redux";
-
 import { DegatsSubis } from "../redux/actions/monster.action";
 
 const Card = ({ player, enflammerActivated, combustionActivated }) => {
@@ -19,11 +19,19 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
   // Au clic sur la carte :
   const handleCardClick = (clickedCard) => {
     // Vérifie si le joueur a assez de mana pour jouer la carte
-    if (player.currentMana >= clickedCard.card.cost) {
-      switch (clickedCard.card.name) {
+    if (player.currentMana >= clickedCard.cost) {
+      dispatch(setCardAnimationActive(true));
+
+      // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
+      setTimeout(() => {
+        dispatch(setCardAnimationActive(false));
+      }, 1000);
+
+      switch (clickedCard.name) {
         case "Frappe":
           // inflige les dégâts
-          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.value)));
+
           // devrait retirer la carte de la main et la mettre dans la défausse
           break;
 

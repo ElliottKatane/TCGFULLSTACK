@@ -32,7 +32,7 @@ const App = () => {
           element={!user ? <Signup /> : <Navigate to="/map" />}
         />
         <Route path="/createcard" element={<CardCreationPage />} />
-        <Route path="/cantcheat" element={<Cantcheat />} />
+        <Route path="/cantcheat" element={<Map />} />
         <Route path="/rules" element={<Rules />} />
       </Routes>
     </div>

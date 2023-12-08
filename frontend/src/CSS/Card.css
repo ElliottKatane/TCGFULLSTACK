@@ -1,10 +1,12 @@
+/* card.css */
+
 p.card {
   align-self: flex-start;
   color: rgb(255, 255, 255);
   text-align: center;
   padding: 0.5vh;
   background-color: blue;
-} /* card.css */
+}
 
 .card-align {
   /* Création d'une div englobant le rendering de chaque carte */
@@ -26,17 +28,13 @@ p.card {
   transition: transform 0.2s linear, box-shadow 0.2s linear; /* Adjust duration and timing function */
   z-index: 1; /* Set initial z-index */
   will-change: transform;
-
 }
 
 .card-container:hover {
-  transform:translateZ(0) scale(1.1); /* Adjust the scale factor as needed */
+  transform: translateZ(0) scale(1.1); /* Adjust the scale factor as needed */
   box-shadow: 0 0 10px rgba(0, 0, 255, 0.7); /* Adjust the color and size of the glow as needed */
   z-index: 2;
 }
-
-
-
 
 /* Style for the card title */
 .card-title {

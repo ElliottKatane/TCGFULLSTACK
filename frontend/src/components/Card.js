@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 // redux imports
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import {
-  addCardToDefausse,
+  addCardToDefausseAndRemoveFromPioche,
   ManaCost,
   activateEnflammer,
   deactivateEnflammer,
@@ -14,22 +14,16 @@ import { connect } from "react-redux";
 import { DegatsSubis } from "../redux/actions/monster.action";
 
 const Card = ({ player, enflammerActivated, combustionActivated }) => {
-  // state.card => regarder dans rootReducer pour la réf
-  useEffect(() => {
-    console.log("état de la pioche (useEffect, Card.js): ", player.pioche);
-    console.log("état de la defausse (useEffect, Card.js): ", player.defausse);
-  }, [player.pioche, player.defausse]);
   const dispatch = useDispatch(); // Initialize the useDispatch hook
 
-  // Logique de clic sur les cartes : dégâts infligés, coût du mana, carte qui doit aller dans la défausse.
-
+  // Au clic sur la carte :
   const handleCardClick = (clickedCard) => {
     // Vérifie si le joueur a assez de mana pour jouer la carte
-    if (player.currentMana >= clickedCard.cost) {
-      switch (clickedCard.name) {
+    if (player.currentMana >= clickedCard.card.cost) {
+      switch (clickedCard.card.name) {
         case "Frappe":
           // inflige les dégâts
-          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.value)));
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           // devrait retirer la carte de la main et la mettre dans la défausse
           break;
 
@@ -41,7 +35,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
           if (allAttackCards) {
             console.log("Toutes les cartes sont des cartes d'attaque");
             // inflige les dégâts (monster action/reducer)
-            dispatch(DegatsSubis(calculateExtraDMG(clickedCard.value)));
+            dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
             // Autres actions spécifiques à la carte "Conflit" si nécessaire
           } else {
             console.log(
@@ -51,14 +45,14 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
           break;
         case "Frappe double":
           // inflige les dégâts
-          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.value)));
-          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.value)));
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           // devrait retirer la carte de la main et la mettre dans la défausse
           break;
 
         case "Coup de tonnerre": // Infligez 4 dégâts et appliquez 1 de Vulnérabilité à tous les ennemis
-          console.log("clickedCard name clicked : ", clickedCard.name);
-          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.value)));
+          console.log("clickedCard name clicked : ", clickedCard.card.name);
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           break;
 
         case "Enflammer": // 1 - Gagnez 2 de force.
@@ -74,23 +68,22 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
           break;
 
         case "Charge imprudente": // 1 - Infligez 7 dégâts. Ajoutez un Hébétement à votre pioche
-          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.value)));
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
 
           break;
         default:
           // Gérer le cas par défaut si le nom de la carte n'est pas reconnu
-          console.log("Carte non codée encore : ", clickedCard.name);
+          console.log("Carte non codée encore : ", clickedCard.card.name);
           break;
       }
       // Déduit le mana une fois que la vérification est faite, sinon
-      dispatch(ManaCost(clickedCard.cost));
+      dispatch(ManaCost(clickedCard.card.cost));
       // méthode pour mettre la carte dans la défausse ici
-      console.log("Before dispatch: état de la pioche", player.pioche);
-      console.log("Before dispatch: état de la defausse", player.defausse);
+      console.log("Clicked Card ID avant le dispatch:", clickedCard.id);
 
-      dispatch(addCardToDefausse(clickedCard));
-
-      console.log("After dispatch: état de la pioche", player.pioche);
+      dispatch(
+        addCardToDefausseAndRemoveFromPioche(clickedCard.card, clickedCard.id)
+      );
       console.log("After dispatch: état de la defausse", player.defausse);
     } else {
       // Sinon, on obtient une alerte
@@ -116,7 +109,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
         <div className="card-align" key={index}>
           <div // Render each card as a div. bg color's card changes with type
             className={`card-container card-${piocheItem.card.type.toLowerCase()}`}
-            onClick={() => handleCardClick(piocheItem.card)}
+            onClick={() => handleCardClick(piocheItem)}
           >
             {/* Afficher les détails de la carte dans la pioche */}
             <p className="card-title">{piocheItem.card.name}</p>

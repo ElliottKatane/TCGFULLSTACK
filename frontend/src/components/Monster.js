@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import StatsBar from "./StatsBar";
-import {
-  InitializeMonsterHP,
-  fetchMonster,
-} from "../redux/actions/monster.action";
+import { fetchMonster } from "../redux/actions/monster.action";
 import { handleVictory, resetVictory } from "../redux/actions/game.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";

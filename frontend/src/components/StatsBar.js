@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "../CSS/StatsBar.css";
 
-const StatsBar = ({ HPValue, currentHealth,currentMana, manaPool, isPlayer }) => {
+const StatsBar = ({
+  HPValue,
+  currentHealth,
+  currentMana,
+  manaPool,
+  isPlayer,
+}) => {
   const [initialHealth, setInitialHealth] = useState(null);
 
   useEffect(() => {
-    console.log("StatsBar component mounted!");
     if (HPValue !== null && initialHealth === null) {
-      console.log("Setting initial health:", HPValue);
+      // console.log("Setting initial health:", HPValue);
       setInitialHealth(HPValue);
     }
   }, [HPValue]); // Add keyForRemount to the dependency array
-
 
   if (initialHealth === null) {
     return <p>Loading...</p>;
@@ -34,7 +38,9 @@ const StatsBar = ({ HPValue, currentHealth,currentMana, manaPool, isPlayer }) =>
         style={{ width: `${greenWidth}%` }}
       ></div>
       <div className="hp-fill hp-red" style={{ width: `${redWidth}%` }}></div>
-      <p className="hp-number">{currentHealth}/{HPValue}</p>
+      <p className="hp-number">
+        {currentHealth}/{HPValue}
+      </p>
       {isPlayer ? (
         <div className="manadisplay">
           {currentMana}/{manaPool}

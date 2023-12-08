@@ -1,3 +1,6 @@
+// import unique id generator
+import { v4 as uuidv4 } from "uuid";
+
 // fetches
 export const FETCH_PLAYER_INFO_SUCCESS = "FETCH_PLAYER_INFO_SUCCESS";
 export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
@@ -18,7 +21,8 @@ export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
 export const END_PLAYER_TURN = "END_PLAYER_TURN";
 export const END_MONSTER_TURN = "END_MONSTER_TURN";
 // carte dans la défausse
-export const ADD_CARD_TO_DEFAUSSE = "ADD_CARD_TO_DEFAUSSE";
+export const ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE =
+  "ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE";
 
 export const switchTurn = (currentTurn) => (dispatch) => {
   if (currentTurn === "player") {
@@ -127,9 +131,27 @@ export const initializeCurrentPlayerHP = (HP) => {
 };
 
 export const initializePlayerPioche = (pioche) => {
-  return { type: INITIALIZE_PLAYER_PIOCHE, payload: { pioche } };
+  // Initialise la pioche en ajoutant un identifiant unique à chaque carte au moment de l'initialisation
+  const piocheWithUniqueId = pioche.map((piocheItem) => ({
+    ...piocheItem,
+    id: uuidv4(), // Utilisez un identifiant unique pour chaque carte dans la pioche
+  }));
+
+  // Prend en compte la quantité de chaque carte
+  const piocheWithQuantity = piocheWithUniqueId.reduce((acc, card) => {
+    for (let i = 0; i < card.quantity; i++) {
+      acc.push({ card: card.card, id: uuidv4(), quantity: 1 });
+    }
+    return acc;
+  }, []);
+
+  return {
+    type: INITIALIZE_PLAYER_PIOCHE,
+    payload: { pioche: piocheWithQuantity },
+  };
 };
-export const addCardToDefausse = (card) => ({
-  type: ADD_CARD_TO_DEFAUSSE,
-  payload: card,
+
+export const addCardToDefausseAndRemoveFromPioche = (card, id) => ({
+  type: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
+  payload: { card, id, quantity: 1 },
 });

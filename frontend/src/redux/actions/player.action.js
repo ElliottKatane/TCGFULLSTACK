@@ -20,6 +20,8 @@ export const END_MONSTER_TURN = "END_MONSTER_TURN";
 // carte dans la défausse
 export const ADD_CARD_TO_DEFAUSSE = "ADD_CARD_TO_DEFAUSSE";
 
+export const SET_CARD_ANIMATION_ACTIVE = "SET_CARD_ANIMATION_ACTIVE";
+
 export const switchTurn = (currentTurn) => (dispatch) => {
   if (currentTurn === "player") {
     dispatch(endPlayerTurn());
@@ -132,4 +134,9 @@ export const initializePlayerPioche = (pioche) => {
 export const addCardToDefausse = (card) => ({
   type: ADD_CARD_TO_DEFAUSSE,
   payload: card,
+});
+
+export const setCardAnimationActive = (isActive) => ({
+  type: SET_CARD_ANIMATION_ACTIVE,
+  payload: isActive,
 });

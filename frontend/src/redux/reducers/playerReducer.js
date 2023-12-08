@@ -14,6 +14,7 @@ import {
   END_MONSTER_TURN,
   ADD_CARD_TO_DEFAUSSE,
   INITIALIZE_CURRENT_PLAYER_HP,
+  SET_CARD_ANIMATION_ACTIVE,
 } from "../actions/player.action";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   pioche: [],
   main: [],
   defausse: [],
+  cardAnimationActive: false,
 };
 
 const playerReducer = (state = initialState, action) => {
@@ -115,7 +117,11 @@ const playerReducer = (state = initialState, action) => {
         pioche: action.payload.pioche,
         defausse: [],
       };
-
+    case SET_CARD_ANIMATION_ACTIVE:
+      return {
+        ...state,
+        cardAnimationActive: action.payload,
+      };
     // default
     default:
       return state;

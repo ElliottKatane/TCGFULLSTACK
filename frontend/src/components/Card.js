@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // redux imports
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import {
@@ -19,7 +19,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
   // Au clic sur la carte :
   const handleCardClick = (clickedCard) => {
     // Vérifie si le joueur a assez de mana pour jouer la carte
-    if (player.currentMana >= clickedCard.cost) {
+    if (player.currentMana >= clickedCard.card.cost) {
       dispatch(setCardAnimationActive(true));
 
       // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
@@ -27,10 +27,10 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
         dispatch(setCardAnimationActive(false));
       }, 1000);
 
-      switch (clickedCard.name) {
+      switch (clickedCard.card.name) {
         case "Frappe":
           // inflige les dégâts
-          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.value)));
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
 
           // devrait retirer la carte de la main et la mettre dans la défausse
           break;
@@ -96,6 +96,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
     } else {
       // Sinon, on obtient une alerte
       alert("Not enough mana to play this card!");
+      console.log(clickedCard.card, "clickedCard.card");
     }
   };
 

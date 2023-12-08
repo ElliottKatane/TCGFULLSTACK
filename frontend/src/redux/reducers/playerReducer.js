@@ -15,6 +15,7 @@ import {
   ADD_CARD_TO_DEFAUSSE,
   INITIALIZE_CURRENT_PLAYER_HP,
   SET_CARD_ANIMATION_ACTIVE,
+  ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
 } from "../actions/player.action";
 
 const initialState = {
@@ -101,16 +102,32 @@ const playerReducer = (state = initialState, action) => {
         currentPlayerHealth:
           state.currentPlayerHealth - action.payload.damageValue,
       };
-    case ADD_CARD_TO_DEFAUSSE:
-      console.log("Reducer: ADD_CARD_TO_DEFAUSSE action received");
-      console.log("Payload:", action.payload);
+    case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE:
+      console.log(
+        "Reducer: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE action received"
+      );
+      console.log("Payload:", action.payload.id);
+      console.log("Pioche before update:", state.pioche);
+
+      const updatedPioche = state.pioche.map((piocheItem) => {
+        if (piocheItem.id === action.payload.id) {
+          console.log("Updating piocheItem:", piocheItem);
+          return { ...piocheItem, quantity: piocheItem.quantity - 1 };
+        }
+        return piocheItem;
+      });
+
+      console.log("Updated pioche:", updatedPioche);
+
       return {
         ...state,
-        defausse: [...state.defausse, action.payload],
-        pioche: state.pioche.filter(
-          (piocheItem) => piocheItem !== action.payload
-        ),
+        defausse: [
+          ...state.defausse,
+          { card: action.payload.card, id: action.payload.id, quantity: 1 },
+        ],
+        pioche: updatedPioche.filter((piocheItem) => piocheItem.quantity !== 0),
       };
+
     case INITIALIZE_PLAYER_PIOCHE:
       return {
         ...state,

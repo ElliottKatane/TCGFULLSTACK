@@ -8,6 +8,7 @@ export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
 export const MANA_COST = "MANA_COST";
 export const MONSTER_ATTACK = "MONSTER_ATTACK";
 export const UPDATE_ARMOR = "UPDATE_ARMOR";
+export const RESET_ARMOR = "RESET_ARMOR";
 // initialisation
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
 export const INITIALIZE_CURRENT_PLAYER_HP = "INITIALIZE_CURRENT_PLAYER_HP";
@@ -114,7 +115,11 @@ export const updateArmor = (armorValue) => {
     payload: { armorValue },
   };
 };
-
+export const resetArmor = () => {
+  return {
+    type: RESET_ARMOR,
+  };
+};
 // Initialisations (tour, mana, pioche)
 export const initializeCurrentTurn = (currentTurn) => {
   return {

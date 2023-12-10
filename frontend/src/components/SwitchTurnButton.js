@@ -5,6 +5,7 @@ import {
   switchTurn,
   MonsterAttack,
   initializeCurrentMana,
+  resetArmor,
 } from "../redux/actions/player.action";
 import enemyAttack from "../assets/enemy-attack.gif";
 const SwitchTurnButton = () => {
@@ -34,6 +35,9 @@ const SwitchTurnButton = () => {
       }, 1000);
       // réinitialise le mana du joueur après le tour du monstre
       dispatch(initializeCurrentMana(player.playerInfo.manaPool));
+    } else {
+      // Si c'est le tour du monstre, réinitialise l'armure du joueur à zéro
+      dispatch(resetArmor());
     }
   };
   return (

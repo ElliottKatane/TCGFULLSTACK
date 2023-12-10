@@ -16,6 +16,7 @@ import {
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
   SET_CARD_ANIMATION_ACTIVE,
   UPDATE_ARMOR,
+  RESET_ARMOR,
 } from "../actions/player.action";
 
 const initialState = {
@@ -106,7 +107,7 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         currentMana: state.currentMana - action.payload.mana,
       };
-    // attaque du monstre
+    // attaque du monstre et calcul des dégâts en tenant compte de l'armure
     case MONSTER_ATTACK:
       // Vérifier s'il y a de l'armure
       if (state.armor > 0) {
@@ -139,6 +140,12 @@ const playerReducer = (state = initialState, action) => {
           currentArmor: 0,
         };
       }
+    // gestion de l'armure
+    case RESET_ARMOR:
+      return {
+        ...state,
+        armor: 0,
+      };
     case UPDATE_ARMOR:
       return {
         ...state,

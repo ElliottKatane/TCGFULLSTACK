@@ -15,18 +15,24 @@ import {
   INITIALIZE_CURRENT_PLAYER_HP,
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
   SET_CARD_ANIMATION_ACTIVE,
+  UPDATE_ARMOR,
 } from "../actions/player.action";
 
 const initialState = {
+  // stats
   playerInfo: null,
   currentMana: 0,
   currentPlayerHealth: 100,
+  armor: 0,
   currentTurn: "player",
+  // pouvoirs
   enflammerActivated: false,
   combustionActivated: false,
+  // cartes
   pioche: [],
   main: [],
   defausse: [],
+  //animation
   cardAnimationActive: false,
 };
 
@@ -84,7 +90,12 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         currentMana: action.payload.manaPool,
       };
-
+    case INITIALIZE_PLAYER_PIOCHE:
+      return {
+        ...state,
+        pioche: action.payload.pioche,
+        defausse: [],
+      };
     case INITIALIZE_CURRENT_PLAYER_HP:
       return {
         ...state,
@@ -95,12 +106,45 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         currentMana: state.currentMana - action.payload.mana,
       };
+    // attaque du monstre
     case MONSTER_ATTACK:
+      // Vérifier s'il y a de l'armure
+      if (state.armor > 0) {
+        // S'il y a de l'armure, réduire d'abord l'armure
+        const remainingArmor = state.armor - action.payload.damageValue;
+
+        // Si l'armure ne suffit pas à absorber toute l'attaque
+        if (remainingArmor < 0) {
+          const remainingHealth = state.currentPlayerHealth + remainingArmor;
+          return {
+            ...state,
+            armor: 0,
+            // ternaire qui permet de ne pas avoir de points de vie négatifs
+            currentPlayerHealth: remainingHealth < 0 ? 0 : remainingHealth,
+          };
+        } else {
+          // Si l'armure suffit à absorber l'attaque, mettre à jour l'armure
+          return {
+            ...state,
+            armor: remainingArmor,
+          };
+        }
+      } else {
+        // S'il n'y a pas d'armure, réduire directement les points de vie
+        const remainingHealth =
+          state.currentPlayerHealth - action.payload.damageValue;
+        return {
+          ...state,
+          currentPlayerHealth: remainingHealth < 0 ? 0 : remainingHealth,
+          currentArmor: 0,
+        };
+      }
+    case UPDATE_ARMOR:
       return {
         ...state,
-        currentPlayerHealth:
-          state.currentPlayerHealth - action.payload.damageValue,
+        armor: state.armor + action.payload.armorValue,
       };
+    // gestion des cartes
     case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE:
       console.log(
         "Reducer: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE action received"
@@ -127,12 +171,6 @@ const playerReducer = (state = initialState, action) => {
         pioche: updatedPioche.filter((piocheItem) => piocheItem.quantity !== 0),
       };
 
-    case INITIALIZE_PLAYER_PIOCHE:
-      return {
-        ...state,
-        pioche: action.payload.pioche,
-        defausse: [],
-      };
     case SET_CARD_ANIMATION_ACTIVE:
       return {
         ...state,

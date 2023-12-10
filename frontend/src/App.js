@@ -8,7 +8,7 @@ import Signup from "./pages/Signup";
 import CardCreationPage from "./pages/CardCreation";
 import Map from "./pages/Map";
 import Rules from "./pages/Rules";
-import Cantcheat from "./pages/Cantcheat";
+// import Cantcheat from "./pages/Cantcheat";
 
 const App = () => {
   const { user } = useAuthContext();

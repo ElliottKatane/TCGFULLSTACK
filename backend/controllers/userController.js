@@ -58,8 +58,4 @@ const getLevelReached = async (req, res) => {
   }
 };
 
-
-
-module.exports = { loginUser, signupUser,getLevelReached };
-
-
+module.exports = { loginUser, signupUser, getLevelReached };

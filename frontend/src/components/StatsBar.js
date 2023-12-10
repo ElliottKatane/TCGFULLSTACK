@@ -7,6 +7,7 @@ const StatsBar = ({
   currentMana,
   manaPool,
   isPlayer,
+  armor,
 }) => {
   const [initialHealth, setInitialHealth] = useState(null);
 
@@ -46,6 +47,11 @@ const StatsBar = ({
           {currentMana}/{manaPool}
         </div>
       ) : null}
+      {!isPlayer || armor > 0 ? (
+        <div className="armordisplay">{armor}</div>
+      ) : (
+        <p>pas d'armure</p>
+      )}
     </div>
   );
 };

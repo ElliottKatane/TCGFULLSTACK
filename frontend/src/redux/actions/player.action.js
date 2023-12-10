@@ -4,9 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 // fetches
 export const FETCH_PLAYER_INFO_SUCCESS = "FETCH_PLAYER_INFO_SUCCESS";
 export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
-// mana et dégats infligés par le monstre
+// mana, défense et dégats infligés par le monstre
 export const MANA_COST = "MANA_COST";
 export const MONSTER_ATTACK = "MONSTER_ATTACK";
+export const UPDATE_ARMOR = "UPDATE_ARMOR";
 // initialisation
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
 export const INITIALIZE_CURRENT_PLAYER_HP = "INITIALIZE_CURRENT_PLAYER_HP";
@@ -105,6 +106,15 @@ export const MonsterAttack = (damageValue) => {
     },
   };
 };
+export const updateArmor = (armorValue) => {
+  console.log("Action dispatched with payload:", armorValue);
+
+  return {
+    type: UPDATE_ARMOR,
+    payload: { armorValue },
+  };
+};
+
 // Initialisations (tour, mana, pioche)
 export const initializeCurrentTurn = (currentTurn) => {
   return {

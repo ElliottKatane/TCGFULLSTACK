@@ -9,6 +9,7 @@ import {
   activateCombustion,
   deactivateCombustion,
   setCardAnimationActive,
+  updateArmor,
 } from "../redux/actions/player.action";
 import { connect } from "react-redux";
 import { DegatsSubis } from "../redux/actions/monster.action";
@@ -31,8 +32,6 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
         case "Frappe":
           // inflige les dégâts
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
-
-          // devrait retirer la carte de la main et la mettre dans la défausse
           break;
 
         case "Conflit": // 0 - Jouable si vous n'avez que des Attaque en main. Infligez 14 dégâts
@@ -55,7 +54,6 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
           // inflige les dégâts
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
-          // devrait retirer la carte de la main et la mettre dans la défausse
           break;
 
         case "Coup de tonnerre": // Infligez 4 dégâts et appliquez 1 de Vulnérabilité à tous les ennemis
@@ -72,7 +70,8 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
           dispatch(activateCombustion());
           break;
 
-        case "Défendre": // 1 - Gagnez 5 de blocage.
+        case "Défense": // 1 - Gagnez 5 de blocage.
+          dispatch(updateArmor(clickedCard.card.value));
           break;
 
         case "Charge imprudente": // 1 - Infligez 7 dégâts. Ajoutez un Hébétement à votre pioche
@@ -86,17 +85,13 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
       }
       // Déduit le mana une fois que la vérification est faite, sinon
       dispatch(ManaCost(clickedCard.card.cost));
-      // méthode pour mettre la carte dans la défausse ici
-      console.log("Clicked Card ID avant le dispatch:", clickedCard.id);
-
+      // Ajoute la carte à la défausse et la retire de la pioche
       dispatch(
         addCardToDefausseAndRemoveFromPioche(clickedCard.card, clickedCard.id)
       );
-      console.log("After dispatch: état de la defausse", player.defausse);
     } else {
       // Sinon, on obtient une alerte
       alert("Not enough mana to play this card!");
-      console.log(clickedCard.card, "clickedCard.card");
     }
   };
 

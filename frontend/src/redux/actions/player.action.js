@@ -19,6 +19,7 @@ export const ACTIVATE_ENFLAMMER = "ACTIVATE_ENFLAMMER";
 export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
 export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
 export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
+export const UPDATE_COMBUSTION_COUNT = "UPDATE_COMBUSTION_COUNT";
 // fin de tour
 export const END_PLAYER_TURN = "END_PLAYER_TURN";
 export const END_MONSTER_TURN = "END_MONSTER_TURN";
@@ -89,6 +90,12 @@ export const activateEnflammer = () => ({
 export const deactivateEnflammer = () => ({
   type: DEACTIVATE_ENFLAMMER,
 });
+export const updateCombustionCount = (combustionPlayedCount) => {
+  return {
+    type: UPDATE_COMBUSTION_COUNT,
+    payload: { combustionPlayedCount },
+  };
+};
 // Action pour réduire le coût du mana selon la carte jouée
 export const ManaCost = (mana) => {
   return {

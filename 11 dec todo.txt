@@ -9,7 +9,9 @@ A faire aujourd'hui :
 
 - coder les cartes Colère (difficulté : faire disparaitre les cartes à la fin du combat)
 - Conflit (presque faite, à vérifier) <= FAIT
-- Combustion
+- Combustion // presque, restent 2 cas à couvrir :
+-- combinaison avec Enflammer
+-- Prendre en compte le nombre de foisJouees (DONE)
 - Même pas mal
 - Charge imprudente
 

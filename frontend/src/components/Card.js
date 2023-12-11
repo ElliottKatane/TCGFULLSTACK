@@ -8,13 +8,14 @@ import {
   deactivateEnflammer,
   activateCombustion,
   deactivateCombustion,
+  updateCombustionCount,
   setCardAnimationActive,
   updateArmor,
 } from "../redux/actions/player.action";
 import { connect } from "react-redux";
 import { DegatsSubis } from "../redux/actions/monster.action";
 
-const Card = ({ player, enflammerActivated, combustionActivated }) => {
+const Card = ({ player, enflammerActivated }) => {
   const dispatch = useDispatch(); // Initialize the useDispatch hook
 
   // Au clic sur la carte :
@@ -67,7 +68,9 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
           break;
 
         case "Combustion": // 1 - Perdez 1HP et infligez 5 de dégâts à tous les ennemis à la fin de votre tour.
-          // inflige les dégâts
+          // met à jour le compteur de Combustion
+          dispatch(updateCombustionCount());
+          // active l'effet Combustion
           dispatch(activateCombustion());
           break;
 

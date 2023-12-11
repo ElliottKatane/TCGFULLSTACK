@@ -10,6 +10,7 @@ import {
   DEACTIVATE_ENFLAMMER,
   ACTIVATE_COMBUSTION,
   DEACTIVATE_COMBUSTION,
+  UPDATE_COMBUSTION_COUNT,
   END_PLAYER_TURN,
   END_MONSTER_TURN,
   INITIALIZE_CURRENT_PLAYER_HP,
@@ -29,7 +30,7 @@ const initialState = {
   // pouvoirs
   enflammerActivated: false,
   combustionActivated: false,
-  combustionPlayedCount: 0, // Nombre de fois que la carte "Combustion" a été jouée pendant le
+  combustionPlayedCount: 0, // Nombre de fois que la carte "Combustion" a été jouée
   // cartes
   pioche: [],
   main: [],
@@ -63,6 +64,12 @@ const playerReducer = (state = initialState, action) => {
       return {
         ...state,
         combustionActivated: false,
+      };
+    case UPDATE_COMBUSTION_COUNT:
+      console.log("combustionPlayedCount:", state.combustionPlayedCount);
+      return {
+        ...state,
+        combustionPlayedCount: state.combustionPlayedCount + 1,
       };
     // carte Enflammer
     case ACTIVATE_ENFLAMMER:

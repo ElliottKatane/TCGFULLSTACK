@@ -8,6 +8,7 @@ import {
   resetArmor,
 } from "../redux/actions/player.action";
 import enemyAttack from "../assets/enemy-attack.gif";
+import { DegatsSubis } from "../redux/actions/monster.action";
 const SwitchTurnButton = () => {
   const dispatch = useDispatch();
   const player = useSelector((state) => state.player);
@@ -33,6 +34,14 @@ const SwitchTurnButton = () => {
         console.log(`Monster attacks with ${monsterAttackValue} damage!`);
         setShowMonsterImage(false);
       }, 1000);
+
+      // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
+      if (player.combustionActivated) {
+        const combustionDamageToPlayer = player.combustionPlayedCount * 1;
+        const combustionDamageToMonster = player.combustionPlayedCount * 5;
+        dispatch(MonsterAttack(combustionDamageToPlayer));
+        dispatch(DegatsSubis(combustionDamageToMonster));
+      }
     } else {
       // Refill/Reset des stats du joueur : armure et mana
       dispatch(initializeCurrentMana(player.playerInfo.manaPool));

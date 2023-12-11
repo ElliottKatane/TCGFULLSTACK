@@ -16,6 +16,7 @@ import {
   initializePlayerPioche,
   initializeCurrentPlayerHP,
   updateArmor,
+  initializeCombustionCount,
 } from "../redux/actions/player.action";
 import flameIcon from "../assets/flame-icon.png";
 import combustionIcon from "../assets/combustion-icon.png";
@@ -42,6 +43,8 @@ const Player = ({
           dispatch(initializeCurrentPlayerHP(result.HP));
           // si le joueur avait de l'armure au combat précédent, on ajoute le même nombre mais en négatif pour avoir 0.
           dispatch(updateArmor(-player.armor));
+          dispatch(initializeCombustionCount());
+          console.log("player combustion count ", player.combustionPlayedCount);
         })
         .catch((error) => {
           console.error("Fetch player failed:", error);

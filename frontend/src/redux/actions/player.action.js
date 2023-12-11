@@ -14,12 +14,13 @@ export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
 export const INITIALIZE_CURRENT_PLAYER_HP = "INITIALIZE_CURRENT_PLAYER_HP";
 export const INITIALIZE_CURRENT_TURN = "INIZIALIZE_CURRENT_TURN";
 export const INITIALIZE_PLAYER_PIOCHE = "INITIALIZE_PLAYER_PIOCHE";
+export const INITIALIZE_COMBUSTION_COUNT = "INITIALIZE_COMBUSTION_COUNT";
 // carte Enflammer et Combustion
 export const ACTIVATE_ENFLAMMER = "ACTIVATE_ENFLAMMER";
 export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
 export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
 export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
-export const UPDATE_COMBUSTION_COUNT = "UPDATE_COMBUSTION_COUNT";
+export const INCREASE_COMBUSTION_COUNT = "INCREASE_COMBUSTION_COUNT";
 // fin de tour
 export const END_PLAYER_TURN = "END_PLAYER_TURN";
 export const END_MONSTER_TURN = "END_MONSTER_TURN";
@@ -90,9 +91,9 @@ export const activateEnflammer = () => ({
 export const deactivateEnflammer = () => ({
   type: DEACTIVATE_ENFLAMMER,
 });
-export const updateCombustionCount = (combustionPlayedCount) => {
+export const increaseCombustionCount = (combustionPlayedCount) => {
   return {
-    type: UPDATE_COMBUSTION_COUNT,
+    type: INCREASE_COMBUSTION_COUNT,
     payload: { combustionPlayedCount },
   };
 };
@@ -150,6 +151,14 @@ export const initializeCurrentPlayerHP = (HP) => {
     type: INITIALIZE_CURRENT_PLAYER_HP,
     payload: {
       HP,
+    },
+  };
+};
+export const initializeCombustionCount = (count) => {
+  return {
+    type: INITIALIZE_COMBUSTION_COUNT,
+    payload: {
+      count,
     },
   };
 };

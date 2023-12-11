@@ -10,7 +10,8 @@ import {
   DEACTIVATE_ENFLAMMER,
   ACTIVATE_COMBUSTION,
   DEACTIVATE_COMBUSTION,
-  UPDATE_COMBUSTION_COUNT,
+  INCREASE_COMBUSTION_COUNT,
+  INITIALIZE_COMBUSTION_COUNT,
   END_PLAYER_TURN,
   END_MONSTER_TURN,
   INITIALIZE_CURRENT_PLAYER_HP,
@@ -65,7 +66,7 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         combustionActivated: false,
       };
-    case UPDATE_COMBUSTION_COUNT:
+    case INCREASE_COMBUSTION_COUNT:
       console.log("combustionPlayedCount:", state.combustionPlayedCount);
       return {
         ...state,
@@ -109,6 +110,11 @@ const playerReducer = (state = initialState, action) => {
       return {
         ...state,
         currentPlayerHealth: action.payload.HP,
+      };
+    case INITIALIZE_COMBUSTION_COUNT:
+      return {
+        ...state,
+        combustionPlayedCount: 0,
       };
     case MANA_COST:
       return {

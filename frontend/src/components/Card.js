@@ -8,7 +8,7 @@ import {
   deactivateEnflammer,
   activateCombustion,
   deactivateCombustion,
-  updateCombustionCount,
+  increaseCombustionCount,
   setCardAnimationActive,
   updateArmor,
 } from "../redux/actions/player.action";
@@ -69,7 +69,7 @@ const Card = ({ player, enflammerActivated }) => {
 
         case "Combustion": // 1 - Perdez 1HP et infligez 5 de dégâts à tous les ennemis à la fin de votre tour.
           // met à jour le compteur de Combustion
-          dispatch(updateCombustionCount());
+          dispatch(increaseCombustionCount());
           // active l'effet Combustion
           dispatch(activateCombustion());
           break;

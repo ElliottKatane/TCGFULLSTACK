@@ -7,7 +7,7 @@ la PUSH dans la défausse <= OK
 
 A faire aujourd'hui :
 
-- coder les cartes Colère (difficulté : faire disparaitre les cartes à la fin du combat)
+- coder les cartes Colère (faire disparaitre les cartes à la fin du combat)
 - Conflit (presque faite, à vérifier) <= FAIT
 - Combustion // presque, restent 2 cas à couvrir :
 -- combinaison avec Enflammer

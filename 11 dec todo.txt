@@ -1,0 +1,22 @@
+faire une action pour enlever la carte de la main quand elle est jouée
+la PUSH dans la défausse <= OK
+
+
+
+
+
+A faire aujourd'hui :
+
+- coder les cartes Colère (faire disparaitre les cartes à la fin du combat)
+- Conflit (presque faite, à vérifier) <= FAIT
+- Combustion // presque, restent 2 cas à couvrir :
+-- combinaison avec Enflammer
+-- Prendre en compte le nombre de foisJouees (DONE)
+- Même pas mal
+- Charge imprudente
+
+
+créer visuellement 2 compteurs qui représentent la pioche et la défausse
+
+Quand la pioche est vide, ramener les cartes de la défausse dans la pioche
+Faire un shuffle des cartes

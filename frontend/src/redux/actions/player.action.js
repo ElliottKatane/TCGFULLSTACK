@@ -4,19 +4,23 @@ import { v4 as uuidv4 } from "uuid";
 // fetches
 export const FETCH_PLAYER_INFO_SUCCESS = "FETCH_PLAYER_INFO_SUCCESS";
 export const FETCH_PLAYER_INFO_FAILURE = "FETCH_PLAYER_INFO_FAILURE";
-// mana et dégats infligés par le monstre
+// mana, défense et dégats infligés par le monstre
 export const MANA_COST = "MANA_COST";
 export const MONSTER_ATTACK = "MONSTER_ATTACK";
+export const UPDATE_ARMOR = "UPDATE_ARMOR";
+export const RESET_ARMOR = "RESET_ARMOR";
 // initialisation
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
 export const INITIALIZE_CURRENT_PLAYER_HP = "INITIALIZE_CURRENT_PLAYER_HP";
 export const INITIALIZE_CURRENT_TURN = "INIZIALIZE_CURRENT_TURN";
 export const INITIALIZE_PLAYER_PIOCHE = "INITIALIZE_PLAYER_PIOCHE";
+export const INITIALIZE_COMBUSTION_COUNT = "INITIALIZE_COMBUSTION_COUNT";
 // carte Enflammer et Combustion
 export const ACTIVATE_ENFLAMMER = "ACTIVATE_ENFLAMMER";
 export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
 export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
 export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
+export const INCREASE_COMBUSTION_COUNT = "INCREASE_COMBUSTION_COUNT";
 // fin de tour
 export const END_PLAYER_TURN = "END_PLAYER_TURN";
 export const END_MONSTER_TURN = "END_MONSTER_TURN";
@@ -87,6 +91,12 @@ export const activateEnflammer = () => ({
 export const deactivateEnflammer = () => ({
   type: DEACTIVATE_ENFLAMMER,
 });
+export const increaseCombustionCount = (combustionPlayedCount) => {
+  return {
+    type: INCREASE_COMBUSTION_COUNT,
+    payload: { combustionPlayedCount },
+  };
+};
 // Action pour réduire le coût du mana selon la carte jouée
 export const ManaCost = (mana) => {
   return {
@@ -103,6 +113,19 @@ export const MonsterAttack = (damageValue) => {
     payload: {
       damageValue,
     },
+  };
+};
+export const updateArmor = (armorValue) => {
+  console.log("Action dispatched with payload:", armorValue);
+
+  return {
+    type: UPDATE_ARMOR,
+    payload: { armorValue },
+  };
+};
+export const resetArmor = () => {
+  return {
+    type: RESET_ARMOR,
   };
 };
 // Initialisations (tour, mana, pioche)
@@ -128,6 +151,14 @@ export const initializeCurrentPlayerHP = (HP) => {
     type: INITIALIZE_CURRENT_PLAYER_HP,
     payload: {
       HP,
+    },
+  };
+};
+export const initializeCombustionCount = (count) => {
+  return {
+    type: INITIALIZE_COMBUSTION_COUNT,
+    payload: {
+      count,
     },
   };
 };

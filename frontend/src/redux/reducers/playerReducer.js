@@ -29,6 +29,7 @@ const initialState = {
   // pouvoirs
   enflammerActivated: false,
   combustionActivated: false,
+  combustionPlayedCount: 0, // Nombre de fois que la carte "Combustion" a été jouée pendant le
   // cartes
   pioche: [],
   main: [],

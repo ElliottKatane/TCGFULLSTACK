@@ -33,10 +33,9 @@ const SwitchTurnButton = () => {
         console.log(`Monster attacks with ${monsterAttackValue} damage!`);
         setShowMonsterImage(false);
       }, 1000);
-      // réinitialise le mana du joueur après le tour du monstre
-      dispatch(initializeCurrentMana(player.playerInfo.manaPool));
     } else {
-      // Si c'est le tour du monstre, réinitialise l'armure du joueur à zéro
+      // Refill/Reset des stats du joueur : armure et mana
+      dispatch(initializeCurrentMana(player.playerInfo.manaPool));
       dispatch(resetArmor());
     }
   };

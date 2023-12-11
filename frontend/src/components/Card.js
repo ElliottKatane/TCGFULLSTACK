@@ -37,7 +37,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
         case "Conflit": // 0 - Jouable si vous n'avez que des Attaque en main. Infligez 14 dégâts
           //vérifie si toutes les cartes sont de type Attaque, condition pour jouer la carte Conflit
           const allAttackCards = player.pioche.every(
-            (card) => card.type === "Attack"
+            (card) => card.card.type === "Attack"
           );
           if (allAttackCards) {
             console.log("Toutes les cartes sont des cartes d'attaque");
@@ -48,6 +48,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
             console.log(
               "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
             );
+            break;
           }
           break;
         case "Frappe double":
@@ -117,9 +118,7 @@ const Card = ({ player, enflammerActivated, combustionActivated }) => {
           >
             {/* Afficher les détails de la carte dans la pioche */}
             <p className="card-title">{piocheItem.card.name}</p>
-            <p className="card-description">
-              Description : {piocheItem.card.description}
-            </p>
+            <p className="card-description">{piocheItem.card.description}</p>
             <div className="card-details">
               <p>Rarity: {piocheItem.card.rarity}</p>
               <p>Type: {piocheItem.card.type}</p>

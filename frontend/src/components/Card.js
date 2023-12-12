@@ -11,6 +11,7 @@ import {
   increaseCombustionCount,
   setCardAnimationActive,
   updateArmor,
+  addColereCopy,
 } from "../redux/actions/player.action";
 import { connect } from "react-redux";
 import { DegatsSubis } from "../redux/actions/monster.action";
@@ -73,7 +74,18 @@ const Card = ({ player, enflammerActivated }) => {
           // active l'effet Combustion
           dispatch(activateCombustion());
           break;
+        case "Colère":
+          // inflige les dégâts
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          // add colere copy to pioche
+          console.log(
+            "Clicked Card ID CASE COLERE COMPOSANT CARD:",
+            clickedCard.id
+          );
+          dispatch(addColereCopy(clickedCard.id));
 
+          console.log("Colere copy added to pioche");
+          break;
         case "Défense": // 1 - Gagnez 5 de blocage.
           dispatch(updateArmor(clickedCard.card.value));
           break;

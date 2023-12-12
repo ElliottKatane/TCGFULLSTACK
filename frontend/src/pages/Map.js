@@ -30,7 +30,7 @@ const Map = () => {
           setLevelReached(data.levelReached);
           setLoading(false);
           // rajout de cette ligne pour réinitialiser la pioche et la défausse après un combat (lors du retour au map)
-          dispatch(initializePlayerPioche(data.DeckOfCards)); // initialise la défausse à un tableau vide également
+          dispatch(initializePlayerPioche([])); // initialise la défausse à un tableau vide également
           console.log("map.js useEffect data: ", data);
         })
         .catch((error) => {
@@ -39,7 +39,6 @@ const Map = () => {
           setLoading(false);
         });
     }
-
   }, [dispatch, user]); // Include dispatch in the dependency array to avoid lint warnings
 
   // Function to determine if a map button is clickable based on the level reached

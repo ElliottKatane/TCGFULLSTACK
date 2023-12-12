@@ -46,6 +46,9 @@ const SwitchTurnButton = () => {
       // Refill/Reset des stats du joueur : armure et mana
       dispatch(initializeCurrentMana(player.playerInfo.manaPool));
       dispatch(resetArmor());
+      // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche
+      // faire un shuffle de la pioche
+      // fetch de nouvelles cartes depuis la pioche
     }
   };
   return (

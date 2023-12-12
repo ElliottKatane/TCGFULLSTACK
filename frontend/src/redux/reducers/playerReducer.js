@@ -19,8 +19,9 @@ import {
   SET_CARD_ANIMATION_ACTIVE,
   UPDATE_ARMOR,
   RESET_ARMOR,
+  ADD_COLERE_COPY,
 } from "../actions/player.action";
-
+import { v4 as uuidv4 } from "uuid";
 const initialState = {
   // stats
   playerInfo: null,
@@ -83,6 +84,39 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         enflammerActivated: false,
       };
+    // carte Colère
+
+    case ADD_COLERE_COPY:
+      const clickedCardId = action.payload.id;
+      console.log("Reducer - ADD_COLERE_COPY - clickedCardId:", clickedCardId);
+
+      const existingColereCard = state.pioche.find(
+        (card) => card.card.name === "Colère" && card.id === clickedCardId
+      );
+
+      if (existingColereCard) {
+        const newColereCopy = {
+          ...existingColereCard,
+          id: uuidv4(), // Utilisez uuid pour générer un nouvel id unique
+          quantity: 1,
+        };
+
+        console.log(
+          `Adding a copy of Colère with new id ${newColereCopy.id} to Defausse.`
+        );
+
+        return {
+          ...state,
+          defausse: [...state.defausse, newColereCopy],
+        };
+      }
+
+      // Si la carte "Colère" n'est pas trouvée, vous pouvez éventuellement ajouter un message de console.log pour le suivi
+      console.log("Colère not found in Pioche. No update needed.");
+
+      // Renvoie simplement l'état actuel car aucune modification n'est nécessaire
+      return state;
+
     // fetch des infos du joueur
     case FETCH_PLAYER_INFO_SUCCESS:
       return {
@@ -167,12 +201,6 @@ const playerReducer = (state = initialState, action) => {
       };
     // gestion des cartes
     case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE:
-      console.log(
-        "Reducer: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE action received"
-      );
-      console.log("Payload:", action.payload.id);
-      console.log("Pioche before update:", state.pioche);
-
       const updatedPioche = state.pioche.map((piocheItem) => {
         if (piocheItem.id === action.payload.id) {
           console.log("Updating piocheItem:", piocheItem);

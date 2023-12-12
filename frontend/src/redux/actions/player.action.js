@@ -21,6 +21,8 @@ export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
 export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
 export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
 export const INCREASE_COMBUSTION_COUNT = "INCREASE_COMBUSTION_COUNT";
+// carte Colère
+export const ADD_COLERE_COPY = "ADD_COLERE_COPY";
 // fin de tour
 export const END_PLAYER_TURN = "END_PLAYER_TURN";
 export const END_MONSTER_TURN = "END_MONSTER_TURN";
@@ -87,7 +89,6 @@ export const deactivateCombustion = () => ({
 export const activateEnflammer = () => ({
   type: ACTIVATE_ENFLAMMER,
 });
-
 export const deactivateEnflammer = () => ({
   type: DEACTIVATE_ENFLAMMER,
 });
@@ -97,6 +98,11 @@ export const increaseCombustionCount = (combustionPlayedCount) => {
     payload: { combustionPlayedCount },
   };
 };
+// carte Colère (création d'une copie)
+export const addColereCopy = (id) => ({
+  type: ADD_COLERE_COPY,
+  payload: { id },
+});
 // Action pour réduire le coût du mana selon la carte jouée
 export const ManaCost = (mana) => {
   return {

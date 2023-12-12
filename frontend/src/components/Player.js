@@ -11,6 +11,7 @@ import "../CSS/Positions.css";
 
 import {
   fetchPlayer,
+  fetch5CardsFromPioche,
   initializeCurrentMana,
   initializeCurrentTurn,
   initializePlayerPioche,
@@ -40,6 +41,7 @@ const Player = ({
           dispatch(initializeCurrentMana(result.manaPool));
           dispatch(initializeCurrentTurn(result.currentTurn));
           dispatch(initializePlayerPioche(result.DeckOfCards));
+          dispatch(fetch5CardsFromPioche());
           dispatch(initializeCurrentPlayerHP(result.HP));
           // si le joueur avait de l'armure au combat précédent, on ajoute le même nombre mais en négatif pour avoir 0.
           dispatch(updateArmor(-player.armor));

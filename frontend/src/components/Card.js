@@ -142,6 +142,25 @@ const Card = ({ player, enflammerActivated }) => {
           </div>
         </div>
       ))}
+      {/* mapping de la main */}
+      <div>
+        {player.main.map((mainItem, index) => (
+          <div className="card-align" key={index}>
+            <div
+              className={`card-container card-${mainItem.card.type.toLowerCase()}`}
+              onClick={() => handleCardClick(mainItem)}
+            >
+              <p className="card-title">{mainItem.card.name}</p>
+              <p className="card-description">{mainItem.card.description}</p>
+              <div className="card-details">
+                <p>Rarity: {mainItem.card.rarity}</p>
+                <p>Type: {mainItem.card.type}</p>
+              </div>
+              <div className="card-cost">{mainItem.card.cost}</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

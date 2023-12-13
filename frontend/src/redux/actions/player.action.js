@@ -29,6 +29,9 @@ export const END_MONSTER_TURN = "END_MONSTER_TURN";
 // carte dans la défausse
 export const ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE =
   "ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE";
+// carte dans la défausse
+export const ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN =
+  "ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN";
 // carte de la pioche vers la main
 export const FETCH_5CARDS_FROM_PIOCHE = "FETCH_5CARDS_FROM_PIOCHE";
 
@@ -197,6 +200,11 @@ export const initializePlayerPioche = (pioche) => {
 // Action pour ajouter une carte à la défausse et la retirer de la pioche
 export const addCardToDefausseAndRemoveFromPioche = (card, id) => ({
   type: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
+  payload: { card, id, quantity: 1 },
+});
+// Action pour ajouter une carte à la défausse et la retirer de la main
+export const addCardToDefausseAndRemoveFromMain = (card, id) => ({
+  type: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN,
   payload: { card, id, quantity: 1 },
 });
 

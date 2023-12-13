@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import {
   addCardToDefausseAndRemoveFromPioche,
+  addCardToDefausseAndRemoveFromMain,
   ManaCost,
   activateEnflammer,
   deactivateEnflammer,
@@ -101,9 +102,9 @@ const Card = ({ player, enflammerActivated }) => {
       }
       // Déduit le mana une fois que la vérification est faite, sinon
       dispatch(ManaCost(clickedCard.card.cost));
-      // Ajoute la carte à la défausse et la retire de la pioche
+      // Ajoute la carte à la défausse et la retire de la main
       dispatch(
-        addCardToDefausseAndRemoveFromPioche(clickedCard.card, clickedCard.id)
+        addCardToDefausseAndRemoveFromMain(clickedCard.card, clickedCard.id)
       );
     } else {
       // Sinon, on obtient une alerte

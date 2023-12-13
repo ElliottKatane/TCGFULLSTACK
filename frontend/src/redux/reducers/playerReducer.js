@@ -16,6 +16,7 @@ import {
   END_MONSTER_TURN,
   INITIALIZE_CURRENT_PLAYER_HP,
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
+  ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN,
   SET_CARD_ANIMATION_ACTIVE,
   UPDATE_ARMOR,
   RESET_ARMOR,
@@ -220,6 +221,23 @@ const playerReducer = (state = initialState, action) => {
           { card: action.payload.card, id: action.payload.id, quantity: 1 },
         ],
         pioche: updatedPioche.filter((piocheItem) => piocheItem.quantity !== 0),
+      };
+    // Ajout d'une carte à la défausse et suppression de la carte de la pioche
+    case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN:
+      const updatedMain = state.main.map((mainItem) => {
+        if (mainItem.id === action.payload.id) {
+          console.log("Updating piocheItem:", mainItem);
+          return { ...mainItem, quantity: mainItem.quantity - 1 };
+        }
+        return mainItem;
+      });
+      return {
+        ...state,
+        defausse: [
+          ...state.defausse,
+          { card: action.payload.card, id: action.payload.id, quantity: 1 },
+        ],
+        main: updatedMain.filter((mainItem) => mainItem.quantity !== 0),
       };
 
     // Ajout de 5 cartes au hasard à la main depuis la pioche

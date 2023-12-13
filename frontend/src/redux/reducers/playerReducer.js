@@ -15,12 +15,16 @@ import {
   END_PLAYER_TURN,
   END_MONSTER_TURN,
   INITIALIZE_CURRENT_PLAYER_HP,
+  ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
+  ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN,
   SET_CARD_ANIMATION_ACTIVE,
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
   UPDATE_ARMOR,
   RESET_ARMOR,
+  ADD_COLERE_COPY,
+  FETCH_5CARDS_FROM_PIOCHE,
 } from "../actions/player.action";
-
+import { v4 as uuidv4 } from "uuid";
 const initialState = {
   // stats
   playerInfo: null,
@@ -55,6 +59,7 @@ const playerReducer = (state = initialState, action) => {
       };
     case END_MONSTER_TURN:
       return { ...state, currentTurn: "player" };
+
     // carte Combustion
     case ACTIVATE_COMBUSTION:
       return {
@@ -83,6 +88,39 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         enflammerActivated: false,
       };
+
+    // carte Colère
+    case ADD_COLERE_COPY:
+      const clickedCardId = action.payload.id;
+      console.log("Reducer - ADD_COLERE_COPY - clickedCardId:", clickedCardId);
+
+      const existingColereCard = state.pioche.find(
+        (card) => card.card.name === "Colère" && card.id === clickedCardId
+      );
+
+      if (existingColereCard) {
+        const newColereCopy = {
+          ...existingColereCard,
+          id: uuidv4(), // Utilisez uuid pour générer un nouvel id unique
+          quantity: 1,
+        };
+
+        console.log(
+          `Adding a copy of Colère with new id ${newColereCopy.id} to Defausse.`
+        );
+
+        return {
+          ...state,
+          defausse: [...state.defausse, newColereCopy],
+        };
+      }
+
+      // Si la carte "Colère" n'est pas trouvée, vous pouvez éventuellement ajouter un message de console.log pour le suivi
+      console.log("Colère not found in Pioche. No update needed.");
+
+      // Renvoie simplement l'état actuel car aucune modification n'est nécessaire
+      return state;
+
     // fetch des infos du joueur
     case FETCH_PLAYER_INFO_SUCCESS:
       return {
@@ -105,6 +143,7 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         pioche: action.payload.pioche,
         defausse: [],
+        main: [],
       };
     case INITIALIZE_CURRENT_PLAYER_HP:
       return {
@@ -165,14 +204,10 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         armor: state.armor + action.payload.armorValue,
       };
-    // gestion des cartes
-    case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE:
-      console.log(
-        "Reducer: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE action received"
-      );
-      console.log("Payload:", action.payload.id);
-      console.log("Pioche before update:", state.pioche);
 
+    // gestion des cartes
+    // Ajout d'une carte à la défausse et suppression de la carte de la pioche
+    case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE:
       const updatedPioche = state.pioche.map((piocheItem) => {
         if (piocheItem.id === action.payload.id) {
           console.log("Updating piocheItem:", piocheItem);
@@ -180,9 +215,6 @@ const playerReducer = (state = initialState, action) => {
         }
         return piocheItem;
       });
-
-      console.log("Updated pioche:", updatedPioche);
-
       return {
         ...state,
         defausse: [
@@ -191,6 +223,53 @@ const playerReducer = (state = initialState, action) => {
         ],
         pioche: updatedPioche.filter((piocheItem) => piocheItem.quantity !== 0),
       };
+    // Ajout d'une carte à la défausse et suppression de la carte de la pioche
+    case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN:
+      const updatedMain = state.main.map((mainItem) => {
+        if (mainItem.id === action.payload.id) {
+          console.log("Updating piocheItem:", mainItem);
+          return { ...mainItem, quantity: mainItem.quantity - 1 };
+        }
+        return mainItem;
+      });
+      return {
+        ...state,
+        defausse: [
+          ...state.defausse,
+          { card: action.payload.card, id: action.payload.id, quantity: 1 },
+        ],
+        main: updatedMain.filter((mainItem) => mainItem.quantity !== 0),
+      };
+
+    // Ajout de 5 cartes au hasard à la main depuis la pioche
+    case FETCH_5CARDS_FROM_PIOCHE:
+      const { pioche } = state;
+      const numberOfCardsToDraw = 5;
+
+      // Vérifiez si la pioche a suffisamment de cartes pour piocher
+      if (pioche.length >= numberOfCardsToDraw) {
+        const drawnCards = [];
+
+        // Algorithme Fisher-Yates pour piocher les cartes au hasard
+        for (
+          let i = pioche.length - 1;
+          i >= 0 && drawnCards.length < numberOfCardsToDraw;
+          i--
+        ) {
+          const randomIndex = Math.floor(Math.random() * (i + 1));
+          [pioche[i], pioche[randomIndex]] = [pioche[randomIndex], pioche[i]]; // Échange les éléments pour le mélange
+          drawnCards.push(pioche.pop()); // Pioche la carte au hasard et l'ajoute aux cartes piochées
+        }
+
+        // Mettez à jour l'état en ajoutant les cartes piochées à la main
+        return {
+          ...state,
+          main: [...state.main, ...drawnCards],
+        };
+      }
+
+      // Si la pioche n'a pas suffisamment de cartes, renvoyez simplement l'état actuel
+      return state;
 
     case SET_CARD_ANIMATION_ACTIVE:
       return {

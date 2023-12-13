@@ -21,13 +21,21 @@ export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
 export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
 export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
 export const INCREASE_COMBUSTION_COUNT = "INCREASE_COMBUSTION_COUNT";
+// carte Colère
+export const ADD_COLERE_COPY = "ADD_COLERE_COPY";
 // fin de tour
 export const END_PLAYER_TURN = "END_PLAYER_TURN";
 export const END_MONSTER_TURN = "END_MONSTER_TURN";
 // carte dans la défausse
 export const ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE =
   "ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE";
+// carte dans la défausse
+export const ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN =
+  "ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN";
+// carte de la pioche vers la main
+export const FETCH_5CARDS_FROM_PIOCHE = "FETCH_5CARDS_FROM_PIOCHE";
 
+// animation
 export const SET_CARD_ANIMATION_ACTIVE = "SET_CARD_ANIMATION_ACTIVE";
 
 export const switchTurn = (currentTurn) => (dispatch) => {
@@ -87,7 +95,6 @@ export const deactivateCombustion = () => ({
 export const activateEnflammer = () => ({
   type: ACTIVATE_ENFLAMMER,
 });
-
 export const deactivateEnflammer = () => ({
   type: DEACTIVATE_ENFLAMMER,
 });
@@ -97,6 +104,11 @@ export const increaseCombustionCount = (combustionPlayedCount) => {
     payload: { combustionPlayedCount },
   };
 };
+// carte Colère (création d'une copie)
+export const addColereCopy = (id) => ({
+  type: ADD_COLERE_COPY,
+  payload: { id },
+});
 // Action pour réduire le coût du mana selon la carte jouée
 export const ManaCost = (mana) => {
   return {
@@ -115,6 +127,7 @@ export const MonsterAttack = (damageValue) => {
     },
   };
 };
+// Action pour mettre à jour l'armure
 export const updateArmor = (armorValue) => {
   console.log("Action dispatched with payload:", armorValue);
 
@@ -128,7 +141,7 @@ export const resetArmor = () => {
     type: RESET_ARMOR,
   };
 };
-// Initialisations (tour, mana, pioche)
+// Initialisations (tour, mana, pioche, HP, Combustion)
 export const initializeCurrentTurn = (currentTurn) => {
   return {
     type: INITIALIZE_CURRENT_TURN,
@@ -184,11 +197,21 @@ export const initializePlayerPioche = (pioche) => {
   };
 };
 
+// Action pour ajouter une carte à la défausse et la retirer de la pioche
 export const addCardToDefausseAndRemoveFromPioche = (card, id) => ({
   type: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
   payload: { card, id, quantity: 1 },
 });
+// Action pour ajouter une carte à la défausse et la retirer de la main
+export const addCardToDefausseAndRemoveFromMain = (card, id) => ({
+  type: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN,
+  payload: { card, id, quantity: 1 },
+});
 
+// Action pour fetch 5 cartes depuis la pioche
+export const fetch5CardsFromPioche = () => ({
+  type: FETCH_5CARDS_FROM_PIOCHE,
+});
 export const setCardAnimationActive = (isActive) => ({
   type: SET_CARD_ANIMATION_ACTIVE,
   payload: isActive,

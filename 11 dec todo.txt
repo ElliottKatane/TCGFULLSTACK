@@ -7,7 +7,10 @@ la PUSH dans la défausse <= OK
 
 A faire aujourd'hui :
 
-- coder les cartes Colère (faire disparaitre les cartes à la fin du combat)
+
+faire disparaitre les cartes à la fin du combat -- OK
+
+- coder les cartes Colère -- OK
 - Conflit (presque faite, à vérifier) <= FAIT
 - Combustion // presque, restent 2 cas à couvrir :
 -- combinaison avec Enflammer
@@ -17,6 +20,17 @@ A faire aujourd'hui :
 
 
 créer visuellement 2 compteurs qui représentent la pioche et la défausse
+=> afficher le nombre de cartes dans chaque array
+=> afficher le nom et l'index de chaque carte
+=> faire une méthode shuffle (avec un bouton)
+=> voir si tout change bien 
 
 Quand la pioche est vide, ramener les cartes de la défausse dans la pioche
 Faire un shuffle des cartes
+
+
+
+Mouvement des cartes
+
+Fetch de la DB => playerInfo.DeckOfCards
+Initialisation de la pioche avec DeckOfCards => InitializePioche

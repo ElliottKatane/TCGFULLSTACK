@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import {
   addCardToDefausseAndRemoveFromPioche,
+  addCardToDefausseAndRemoveFromMain,
   ManaCost,
   activateEnflammer,
   deactivateEnflammer,
@@ -11,6 +12,7 @@ import {
   increaseCombustionCount,
   setCardAnimationActive,
   updateArmor,
+  addColereCopy,
 } from "../redux/actions/player.action";
 import { connect } from "react-redux";
 import { DegatsSubis } from "../redux/actions/monster.action";
@@ -73,7 +75,18 @@ const Card = ({ player, enflammerActivated }) => {
           // active l'effet Combustion
           dispatch(activateCombustion());
           break;
+        case "Colère":
+          // inflige les dégâts
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          // add colere copy to pioche
+          console.log(
+            "Clicked Card ID CASE COLERE COMPOSANT CARD:",
+            clickedCard.id
+          );
+          dispatch(addColereCopy(clickedCard.id));
 
+          console.log("Colere copy added to pioche");
+          break;
         case "Défense": // 1 - Gagnez 5 de blocage.
           dispatch(updateArmor(clickedCard.card.value));
           break;
@@ -89,9 +102,9 @@ const Card = ({ player, enflammerActivated }) => {
       }
       // Déduit le mana une fois que la vérification est faite, sinon
       dispatch(ManaCost(clickedCard.card.cost));
-      // Ajoute la carte à la défausse et la retire de la pioche
+      // Ajoute la carte à la défausse et la retire de la main
       dispatch(
-        addCardToDefausseAndRemoveFromPioche(clickedCard.card, clickedCard.id)
+        addCardToDefausseAndRemoveFromMain(clickedCard.card, clickedCard.id)
       );
     } else {
       // Sinon, on obtient une alerte
@@ -130,6 +143,25 @@ const Card = ({ player, enflammerActivated }) => {
           </div>
         </div>
       ))}
+      {/* mapping de la main */}
+      <div>
+        {player.main.map((mainItem, index) => (
+          <div className="card-align" key={index}>
+            <div
+              className={`card-container card-${mainItem.card.type.toLowerCase()}`}
+              onClick={() => handleCardClick(mainItem)}
+            >
+              <p className="card-title">{mainItem.card.name}</p>
+              <p className="card-description">{mainItem.card.description}</p>
+              <div className="card-details">
+                <p>Rarity: {mainItem.card.rarity}</p>
+                <p>Type: {mainItem.card.type}</p>
+              </div>
+              <div className="card-cost">{mainItem.card.cost}</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

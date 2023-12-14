@@ -6,6 +6,9 @@ import {
   MonsterAttack,
   initializeCurrentMana,
   resetArmor,
+  moveCardsToDefausse,
+  fetch5CardsFromPioche,
+  checkAndFetchCards,
 } from "../redux/actions/player.action";
 import enemyAttack from "../assets/enemy-attack.gif";
 import { DegatsSubis } from "../redux/actions/monster.action";
@@ -18,6 +21,7 @@ const SwitchTurnButton = () => {
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
+    // Quand on clique sur "End Player Turn" :
     if (currentTurn === "player") {
       const numberOfAttacks = monsterInfo.attacks.length;
       // Generate a random index within the range of the attacks array
@@ -42,13 +46,17 @@ const SwitchTurnButton = () => {
         dispatch(MonsterAttack(combustionDamageToPlayer));
         dispatch(DegatsSubis(combustionDamageToMonster));
       }
+      // le reste des cartes de la main du joueur sont défaussées
+      dispatch(moveCardsToDefausse(player.main));
     } else {
+      // quand on clique sur "End Monster Turn:"
       // Refill/Reset des stats du joueur : armure et mana
       dispatch(initializeCurrentMana(player.playerInfo.manaPool));
       dispatch(resetArmor());
       // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche
-      // faire un shuffle de la pioche
+      dispatch(checkAndFetchCards());
       // fetch de nouvelles cartes depuis la pioche
+      dispatch(fetch5CardsFromPioche());
     }
   };
   return (

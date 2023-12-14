@@ -9,6 +9,7 @@ export const MANA_COST = "MANA_COST";
 export const MONSTER_ATTACK = "MONSTER_ATTACK";
 export const UPDATE_ARMOR = "UPDATE_ARMOR";
 export const RESET_ARMOR = "RESET_ARMOR";
+export const CHECK_AND_FETCH_CARDS = "CHECK_AND_FETCH_CARDS";
 // initialisation
 export const INITIALIZE_CURRENT_MANA = "INITIALIZE_CURRENT_MANA";
 export const INITIALIZE_CURRENT_PLAYER_HP = "INITIALIZE_CURRENT_PLAYER_HP";
@@ -37,6 +38,8 @@ export const ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN =
   "ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN";
 // enlever une carte dans la main
 export const REMOVE_CARD_FROM_MAIN = "REMOVE_CARD_FROM_MAIN";
+// cartes de la main vont dans la défausse
+export const MOVE_CARDS_TO_DEFAUSSE = "MOVE_CARDS_TO_DEFAUSSE";
 // carte de la pioche vers la main
 export const FETCH_5CARDS_FROM_PIOCHE = "FETCH_5CARDS_FROM_PIOCHE";
 
@@ -264,9 +267,16 @@ export const removeCardFromMain = (cardId) => ({
   type: REMOVE_CARD_FROM_MAIN,
   payload: cardId,
 });
+// Fin du tour, les cartes de la main non jouées vont dans la défausse
+export const moveCardsToDefausse = () => ({
+  type: MOVE_CARDS_TO_DEFAUSSE,
+});
 // Action pour fetch 5 cartes depuis la pioche
 export const fetch5CardsFromPioche = () => ({
   type: FETCH_5CARDS_FROM_PIOCHE,
+});
+export const checkAndFetchCards = () => ({
+  type: CHECK_AND_FETCH_CARDS,
 });
 export const setCardAnimationActive = (isActive) => ({
   type: SET_CARD_ANIMATION_ACTIVE,

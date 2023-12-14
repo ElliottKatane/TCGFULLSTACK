@@ -5,6 +5,7 @@ la PUSH dans la défausse <= OK
 
 
 
+
 A faire aujourd'hui :
 
 
@@ -16,7 +17,7 @@ faire disparaitre les cartes à la fin du combat -- OK
 -- combinaison avec Enflammer
 -- Prendre en compte le nombre de foisJouees (DONE)
 - Même pas mal
-- Charge imprudente
+- Charge imprudente // done
 
 
 créer visuellement 2 compteurs qui représentent la pioche et la défausse
@@ -26,8 +27,11 @@ créer visuellement 2 compteurs qui représentent la pioche et la défausse
 => voir si tout change bien 
 
 Quand la pioche est vide, ramener les cartes de la défausse dans la pioche
-Faire un shuffle des cartes
+Faire un shuffle des cartes // fait
 
+// faire une méthode qui met le reste des cartes non jouées de la main vers la défausse
+// appeler la méthode qui fetch 5 cartes de la pioche vers la main
+// faire une vérification de l'état de la pioche : si elle est vide, transvaser la défausse vers la pioche puis fetch 5 cartes.
 
 
 Mouvement des cartes

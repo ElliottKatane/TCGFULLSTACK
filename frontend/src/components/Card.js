@@ -126,23 +126,25 @@ const Card = ({ player, enflammerActivated }) => {
 
   return (
     <div>
-      {player.pioche.map((piocheItem, index) => (
-        <div className="card-align" key={index}>
-          <div // Render each card as a div. bg color's card changes with type
-            className={`card-container card-${piocheItem.card.type.toLowerCase()}`}
-            onClick={() => handleCardClick(piocheItem)}
-          >
-            {/* Afficher les détails de la carte dans la pioche */}
-            <p className="card-title">{piocheItem.card.name}</p>
-            <p className="card-description">{piocheItem.card.description}</p>
-            <div className="card-details">
-              <p>Rarity: {piocheItem.card.rarity}</p>
-              <p>Type: {piocheItem.card.type}</p>
+      <div className="pioche">
+        {player.pioche.map((piocheItem, index) => (
+          <div className="card-align" key={index}>
+            <div // Render each card as a div. bg color's card changes with type
+              className={`card-container card-${piocheItem.card.type.toLowerCase()}`}
+              onClick={() => handleCardClick(piocheItem)}
+            >
+              {/* Afficher les détails de la carte dans la pioche */}
+              <p className="card-title">{piocheItem.card.name}</p>
+              <p className="card-description">{piocheItem.card.description}</p>
+              <div className="card-details">
+                <p>Rarity: {piocheItem.card.rarity}</p>
+                <p>Type: {piocheItem.card.type}</p>
+              </div>
+              <div className="card-cost">{piocheItem.card.cost}</div>
             </div>
-            <div className="card-cost">{piocheItem.card.cost}</div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       {/* mapping de la main */}
       <div>
         {player.main.map((mainItem, index) => (

@@ -72,10 +72,31 @@ const getRandomCards = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const findCardByName = async (req, res) => {
+  const { name } = req.params;
 
+  if (!name) {
+    return res.status(400).json({ message: 'Le paramètre "name" est requis' });
+  }
+
+  try {
+    // Utilisez votre modèle de carte pour rechercher la carte dans la base de données
+    const card = await Card.findOne({ name });
+
+    if (!card) {
+      return res.status(404).json({ message: "Carte non trouvée" });
+    }
+
+    res.status(200).json(card);
+  } catch (error) {
+    console.error("Erreur lors de la recherche de la carte :", error);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+};
 module.exports = {
   createCard,
   getAllCardsWithCounts,
   getRandomCards,
   getAllCards,
+  findCardByName,
 };

@@ -17,10 +17,12 @@ import {
   INITIALIZE_CURRENT_PLAYER_HP,
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN,
+  REMOVE_CARD_FROM_MAIN,
   SET_CARD_ANIMATION_ACTIVE,
   UPDATE_ARMOR,
   RESET_ARMOR,
   ADD_COLERE_COPY,
+  ADD_CARTE_HEBETEMENT,
   FETCH_5CARDS_FROM_PIOCHE,
 } from "../actions/player.action";
 import { v4 as uuidv4 } from "uuid";
@@ -120,6 +122,12 @@ const playerReducer = (state = initialState, action) => {
       // Renvoie simplement l'état actuel car aucune modification n'est nécessaire
       return state;
 
+    // carte Hébétement
+    case ADD_CARTE_HEBETEMENT:
+      return {
+        ...state,
+        pioche: [...state.pioche, action.payload],
+      };
     // fetch des infos du joueur
     case FETCH_PLAYER_INFO_SUCCESS:
       return {
@@ -226,7 +234,6 @@ const playerReducer = (state = initialState, action) => {
     case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN:
       const updatedMain = state.main.map((mainItem) => {
         if (mainItem.id === action.payload.id) {
-          console.log("Updating piocheItem:", mainItem);
           return { ...mainItem, quantity: mainItem.quantity - 1 };
         }
         return mainItem;
@@ -239,7 +246,11 @@ const playerReducer = (state = initialState, action) => {
         ],
         main: updatedMain.filter((mainItem) => mainItem.quantity !== 0),
       };
-
+    case REMOVE_CARD_FROM_MAIN:
+      return {
+        ...state,
+        main: state.main.filter((mainItem) => mainItem.id !== action.payload),
+      };
     // Ajout de 5 cartes au hasard à la main depuis la pioche
     case FETCH_5CARDS_FROM_PIOCHE:
       const { pioche } = state;

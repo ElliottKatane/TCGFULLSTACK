@@ -73,7 +73,7 @@ userSchema.statics.signup = async function (email, password) {
 };
 const initializePlayerDeck = async () => {
   try {
-    const card1 = await Card.findOne({ name: "Colère" });
+    const card1 = await Card.findOne({ name: "Charge imprudente" });
     const card2 = await Card.findOne({ name: "Frappe" });
 
     console.log("Card 1 data:", card1.toObject());

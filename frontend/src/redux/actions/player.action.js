@@ -23,6 +23,9 @@ export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
 export const INCREASE_COMBUSTION_COUNT = "INCREASE_COMBUSTION_COUNT";
 // carte Colère
 export const ADD_COLERE_COPY = "ADD_COLERE_COPY";
+//carte Hébétement
+export const ADD_CARTE_HEBETEMENT = "ADD_CARTE_HEBETEMENT";
+export const FETCH_CARTE_HEBETEMENT_SUCCESS = "FETCH_CARTE_HEBETEMENT_SUCCESS";
 // fin de tour
 export const END_PLAYER_TURN = "END_PLAYER_TURN";
 export const END_MONSTER_TURN = "END_MONSTER_TURN";
@@ -32,6 +35,8 @@ export const ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE =
 // carte dans la défausse
 export const ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN =
   "ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN";
+// enlever une carte dans la main
+export const REMOVE_CARD_FROM_MAIN = "REMOVE_CARD_FROM_MAIN";
 // carte de la pioche vers la main
 export const FETCH_5CARDS_FROM_PIOCHE = "FETCH_5CARDS_FROM_PIOCHE";
 
@@ -109,6 +114,53 @@ export const addColereCopy = (id) => ({
   type: ADD_COLERE_COPY,
   payload: { id },
 });
+// carte Hébétement
+export const fetchCarteHebetementSuccess = (carteHebetement) => ({
+  type: FETCH_CARTE_HEBETEMENT_SUCCESS,
+  payload: carteHebetement,
+});
+
+// Action creator pour ajouter la carte à la pioche
+export const addCardHebetement = (cardName) => {
+  return async (dispatch) => {
+    try {
+      // Faire la requête à l'API pour récupérer la carte par son nom
+      const response = await fetch(`/api/card-form/findCardByName/${cardName}`);
+
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+      // Assurez-vous de traiter la réponse en tant que JSON
+      const responseData = await response.json();
+
+      // Supposons que la réponse a une structure comme { name, description, value, cost, rarity, type }
+      const carteHebetement = {
+        card: {
+          name: responseData.name,
+          description: responseData.description,
+          value: responseData.value,
+          cost: responseData.cost,
+          rarity: responseData.rarity,
+          type: responseData.type,
+          // Autres propriétés de la carte...
+        },
+        id: uuidv4(), // Utilisation d'uuid pour générer un identifiant unique
+        quantity: 1,
+      };
+      // Dispatch l'action pour indiquer que la carte a été récupérée avec succès
+      dispatch(fetchCarteHebetementSuccess(carteHebetement));
+
+      // Dispatch l'action pour ajouter la carte à la pioche
+      dispatch({
+        type: ADD_CARTE_HEBETEMENT,
+        payload: carteHebetement,
+      });
+    } catch (error) {
+      console.error("Erreur lors de la récupération de la carte:", error);
+      // Vous pouvez gérer l'erreur ici, par exemple, en dispatchant une action d'échec
+    }
+  };
+};
 // Action pour réduire le coût du mana selon la carte jouée
 export const ManaCost = (mana) => {
   return {
@@ -207,7 +259,11 @@ export const addCardToDefausseAndRemoveFromMain = (card, id) => ({
   type: ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN,
   payload: { card, id, quantity: 1 },
 });
-
+//Action pour enlever une carte de la main
+export const removeCardFromMain = (cardId) => ({
+  type: REMOVE_CARD_FROM_MAIN,
+  payload: cardId,
+});
 // Action pour fetch 5 cartes depuis la pioche
 export const fetch5CardsFromPioche = () => ({
   type: FETCH_5CARDS_FROM_PIOCHE,

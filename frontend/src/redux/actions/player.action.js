@@ -42,7 +42,8 @@ export const REMOVE_CARD_FROM_MAIN = "REMOVE_CARD_FROM_MAIN";
 export const MOVE_CARDS_TO_DEFAUSSE = "MOVE_CARDS_TO_DEFAUSSE";
 // carte de la pioche vers la main
 export const FETCH_5CARDS_FROM_PIOCHE = "FETCH_5CARDS_FROM_PIOCHE";
-
+// carte de la pioche vers la main (1 seule)
+export const PIOCHER_UNE_CARTE = "PIOCHER_UNE_CARTE";
 // animation
 export const SET_CARD_ANIMATION_ACTIVE = "SET_CARD_ANIMATION_ACTIVE";
 
@@ -274,6 +275,10 @@ export const moveCardsToDefausse = () => ({
 // Action pour fetch 5 cartes depuis la pioche
 export const fetch5CardsFromPioche = () => ({
   type: FETCH_5CARDS_FROM_PIOCHE,
+});
+// Action pour fetch une carte depuis la pioche
+export const fetchCardFromPioche = () => ({
+  type: PIOCHER_UNE_CARTE,
 });
 export const checkAndFetchCards = () => ({
   type: CHECK_AND_FETCH_CARDS,

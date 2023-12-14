@@ -14,6 +14,7 @@ import {
   addColereCopy,
   addCardHebetement,
   removeCardFromMain,
+  fetchCardFromPioche,
 } from "../redux/actions/player.action";
 import { connect } from "react-redux";
 import { DegatsSubis } from "../redux/actions/monster.action";
@@ -85,7 +86,12 @@ const Card = ({ player, enflammerActivated }) => {
         case "Défense": // 1 - Gagnez 5 de blocage.
           dispatch(updateArmor(clickedCard.card.value));
           break;
+        case "Même pas mal": // 1 - 8 d'armure + piocher une carte
+          dispatch(updateArmor(clickedCard.card.value));
+          // méthode pour piocher une carte
+          dispatch(fetchCardFromPioche());
 
+          break;
         case "Charge imprudente": // 1 - Infligez 7 dégâts. Ajoutez un Hébétement à votre pioche
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           // méthode pour ajouter une carte "Hébétement" à la pioche

@@ -26,6 +26,7 @@ import {
   ADD_CARTE_HEBETEMENT,
   FETCH_5CARDS_FROM_PIOCHE,
   CHECK_AND_FETCH_CARDS,
+  PIOCHER_UNE_CARTE,
 } from "../actions/player.action";
 import { v4 as uuidv4 } from "uuid";
 const initialState = {
@@ -314,6 +315,29 @@ const playerReducer = (state = initialState, action) => {
       }
 
       // Si la pioche n'a pas suffisamment de cartes, renvoyez simplement l'état actuel
+      return state;
+
+    case PIOCHER_UNE_CARTE:
+      // Vérifiez si la pioche n'est pas vide
+      if (state && state.pioche && state.pioche.length > 0) {
+        // Créez une copie de la pioche
+        const piocheCopy = [...state.pioche];
+
+        // Piochez la carte du dessus (premier élément) et créez une copie de la carte
+        const cartePiochee = { ...piocheCopy[0] };
+
+        // Supprimez la carte piochée du dessus de la pile dans la copie
+        piocheCopy.shift();
+
+        // Mettez à jour le state avec la nouvelle pioche (copie) et ajoutez la carte à la main
+        return {
+          ...state,
+          pioche: piocheCopy,
+          main: [...state.main, cartePiochee],
+        };
+      }
+
+      // Si la pioche est vide, retournez simplement l'état actuel
       return state;
 
     case SET_CARD_ANIMATION_ACTIVE:

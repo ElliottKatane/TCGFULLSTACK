@@ -7,6 +7,7 @@ const {
   getRandomCards,
   getAllCardsWithCounts,
   getAllCards,
+  findCardByName,
 } = require("../controllers/cardController");
 
 // Create a new card
@@ -17,5 +18,7 @@ router.get("/getcards", getAllCardsWithCounts);
 router.get("/getRandomCards", getRandomCards);
 // Retrieve all cards, displayed in CardList.js
 router.get("/getAllCards", getAllCards);
+// Get card by name
+router.get("/findCardByName/:name", findCardByName);
 
 module.exports = router;

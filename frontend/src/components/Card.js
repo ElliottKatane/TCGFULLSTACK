@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 // redux imports
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import {
-  addCardToDefausseAndRemoveFromPioche,
   addCardToDefausseAndRemoveFromMain,
   ManaCost,
   activateEnflammer,
@@ -13,6 +12,9 @@ import {
   setCardAnimationActive,
   updateArmor,
   addColereCopy,
+  addCardHebetement,
+  removeCardFromMain,
+  fetchCardFromPioche,
 } from "../redux/actions/player.action";
 import { connect } from "react-redux";
 import { DegatsSubis } from "../redux/actions/monster.action";
@@ -79,21 +81,25 @@ const Card = ({ player, enflammerActivated }) => {
           // inflige les dégâts
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           // add colere copy to pioche
-          console.log(
-            "Clicked Card ID CASE COLERE COMPOSANT CARD:",
-            clickedCard.id
-          );
           dispatch(addColereCopy(clickedCard.id));
-
-          console.log("Colere copy added to pioche");
           break;
         case "Défense": // 1 - Gagnez 5 de blocage.
           dispatch(updateArmor(clickedCard.card.value));
           break;
+        case "Même pas mal": // 1 - 8 d'armure + piocher une carte
+          dispatch(updateArmor(clickedCard.card.value));
+          // méthode pour piocher une carte
+          dispatch(fetchCardFromPioche());
 
+          break;
         case "Charge imprudente": // 1 - Infligez 7 dégâts. Ajoutez un Hébétement à votre pioche
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
-
+          // méthode pour ajouter une carte "Hébétement" à la pioche
+          dispatch(addCardHebetement("Hébétement"));
+          break;
+        case "Hébétement":
+          // carte sans effet. Occupe une place dans la main. cliquez pour la faire disparaître
+          dispatch(removeCardFromMain(clickedCard.id));
           break;
         default:
           // Gérer le cas par défaut si le nom de la carte n'est pas reconnu
@@ -126,23 +132,25 @@ const Card = ({ player, enflammerActivated }) => {
 
   return (
     <div>
-      {player.pioche.map((piocheItem, index) => (
-        <div className="card-align" key={index}>
-          <div // Render each card as a div. bg color's card changes with type
-            className={`card-container card-${piocheItem.card.type.toLowerCase()}`}
-            onClick={() => handleCardClick(piocheItem)}
-          >
-            {/* Afficher les détails de la carte dans la pioche */}
-            <p className="card-title">{piocheItem.card.name}</p>
-            <p className="card-description">{piocheItem.card.description}</p>
-            <div className="card-details">
-              <p>Rarity: {piocheItem.card.rarity}</p>
-              <p>Type: {piocheItem.card.type}</p>
+      <div className="pioche">
+        {player.pioche.map((piocheItem, index) => (
+          <div className="card-align" key={index}>
+            <div // Render each card as a div. bg color's card changes with type
+              className={`card-container card-${piocheItem.card.type.toLowerCase()}`}
+              onClick={() => handleCardClick(piocheItem)}
+            >
+              {/* Afficher les détails de la carte dans la pioche */}
+              <p className="card-title">{piocheItem.card.name}</p>
+              <p className="card-description">{piocheItem.card.description}</p>
+              <div className="card-details">
+                <p>Rarity: {piocheItem.card.rarity}</p>
+                <p>Type: {piocheItem.card.type}</p>
+              </div>
+              <div className="card-cost">{piocheItem.card.cost}</div>
             </div>
-            <div className="card-cost">{piocheItem.card.cost}</div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       {/* mapping de la main */}
       <div>
         {player.main.map((mainItem, index) => (

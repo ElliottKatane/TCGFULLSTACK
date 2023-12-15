@@ -17,12 +17,17 @@ import {
   INITIALIZE_CURRENT_PLAYER_HP,
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN,
+  REMOVE_CARD_FROM_MAIN,
+  MOVE_CARDS_TO_DEFAUSSE,
   SET_CARD_ANIMATION_ACTIVE,
   ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
   UPDATE_ARMOR,
   RESET_ARMOR,
   ADD_COLERE_COPY,
+  ADD_CARTE_HEBETEMENT,
   FETCH_5CARDS_FROM_PIOCHE,
+  CHECK_AND_FETCH_CARDS,
+  PIOCHER_UNE_CARTE,
 } from "../actions/player.action";
 import { v4 as uuidv4 } from "uuid";
 const initialState = {
@@ -121,6 +126,12 @@ const playerReducer = (state = initialState, action) => {
       // Renvoie simplement l'état actuel car aucune modification n'est nécessaire
       return state;
 
+    // carte Hébétement
+    case ADD_CARTE_HEBETEMENT:
+      return {
+        ...state,
+        pioche: [...state.pioche, action.payload],
+      };
     // fetch des infos du joueur
     case FETCH_PLAYER_INFO_SUCCESS:
       return {
@@ -227,7 +238,6 @@ const playerReducer = (state = initialState, action) => {
     case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_MAIN:
       const updatedMain = state.main.map((mainItem) => {
         if (mainItem.id === action.payload.id) {
-          console.log("Updating piocheItem:", mainItem);
           return { ...mainItem, quantity: mainItem.quantity - 1 };
         }
         return mainItem;
@@ -240,7 +250,34 @@ const playerReducer = (state = initialState, action) => {
         ],
         main: updatedMain.filter((mainItem) => mainItem.quantity !== 0),
       };
+    // Enlève une carte de la main
+    case REMOVE_CARD_FROM_MAIN:
+      return {
+        ...state,
+        main: state.main.filter((mainItem) => mainItem.id !== action.payload),
+      };
+    // fin du tour, les cartes de la main vont dans la défausse
+    case MOVE_CARDS_TO_DEFAUSSE:
+      return {
+        ...state,
+        defausse: [...state.defausse, ...state.main],
+        main: [],
+      };
+    // vérifier s'il y a assez de cartes dans la pioche, sinon ramener la défausse dans la pioche
+    case CHECK_AND_FETCH_CARDS:
+      if (state.pioche.length < 5) {
+        // Si la pioche n'a pas assez de cartes, déplacez toutes les cartes de la défausse vers la pioche
+        const updatedPioche = [...state.pioche, ...state.defausse];
+        const updatedDefausse = [];
 
+        return {
+          ...state,
+          pioche: updatedPioche,
+          defausse: updatedDefausse,
+        };
+      }
+      // Sinon, la pioche a suffisamment de cartes, ne faites rien de spécial
+      return state;
     // Ajout de 5 cartes au hasard à la main depuis la pioche
     case FETCH_5CARDS_FROM_PIOCHE:
       const { pioche } = state;
@@ -248,27 +285,60 @@ const playerReducer = (state = initialState, action) => {
 
       // Vérifiez si la pioche a suffisamment de cartes pour piocher
       if (pioche.length >= numberOfCardsToDraw) {
+        const piocheCopy = [...pioche]; // Créez une copie de la pioche
         const drawnCards = [];
 
         // Algorithme Fisher-Yates pour piocher les cartes au hasard
         for (
-          let i = pioche.length - 1;
+          let i = piocheCopy.length - 1;
           i >= 0 && drawnCards.length < numberOfCardsToDraw;
           i--
         ) {
           const randomIndex = Math.floor(Math.random() * (i + 1));
-          [pioche[i], pioche[randomIndex]] = [pioche[randomIndex], pioche[i]]; // Échange les éléments pour le mélange
-          drawnCards.push(pioche.pop()); // Pioche la carte au hasard et l'ajoute aux cartes piochées
+          [piocheCopy[i], piocheCopy[randomIndex]] = [
+            piocheCopy[randomIndex],
+            piocheCopy[i],
+          ]; // Échange les éléments pour le mélange
+          drawnCards.push(piocheCopy.pop()); // Pioche la carte au hasard et l'ajoute aux cartes piochées
         }
 
-        // Mettez à jour l'état en ajoutant les cartes piochées à la main
+        // Mettez à jour la pioche dans le state avec la copie sans les cartes piochées
+        const updatedPioche = pioche.filter(
+          (card) => !drawnCards.includes(card)
+        );
+
+        // Mettez à jour l'état en ajoutant les cartes piochées à la main et en modifiant la pioche
         return {
           ...state,
           main: [...state.main, ...drawnCards],
+          pioche: updatedPioche,
         };
       }
 
       // Si la pioche n'a pas suffisamment de cartes, renvoyez simplement l'état actuel
+      return state;
+
+    case PIOCHER_UNE_CARTE:
+      // Vérifiez si la pioche n'est pas vide
+      if (state && state.pioche && state.pioche.length > 0) {
+        // Créez une copie de la pioche
+        const piocheCopy = [...state.pioche];
+
+        // Piochez la carte du dessus (premier élément) et créez une copie de la carte
+        const cartePiochee = { ...piocheCopy[0] };
+
+        // Supprimez la carte piochée du dessus de la pile dans la copie
+        piocheCopy.shift();
+
+        // Mettez à jour le state avec la nouvelle pioche (copie) et ajoutez la carte à la main
+        return {
+          ...state,
+          pioche: piocheCopy,
+          main: [...state.main, cartePiochee],
+        };
+      }
+
+      // Si la pioche est vide, retournez simplement l'état actuel
       return state;
 
     case SET_CARD_ANIMATION_ACTIVE:

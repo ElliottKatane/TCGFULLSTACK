@@ -27,12 +27,19 @@ const Card = ({ player, enflammerActivated }) => {
   const handleCardClick = (clickedCard) => {
     // Vérifie si le joueur a assez de mana pour jouer la carte
     if (player.currentMana >= clickedCard.card.cost) {
-      dispatch(setCardAnimationActive(true));
+      // Check if the clicked card is "Défense" or "Même pas mal"
+      const isBuffCard = ["Défense", "Même pas mal"].includes(
+        clickedCard.card.name
+      );
 
-      // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
-      setTimeout(() => {
-        dispatch(setCardAnimationActive(false));
-      }, 1000);
+      if (!isBuffCard) {
+        // If it's not a buff card, set card animation active
+        dispatch(setCardAnimationActive(true));
+        // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
+        setTimeout(() => {
+          dispatch(setCardAnimationActive(false));
+        }, 1000);
+      }
 
       switch (clickedCard.card.name) {
         case "Frappe":

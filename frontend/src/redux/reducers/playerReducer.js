@@ -20,7 +20,7 @@ import {
   REMOVE_CARD_FROM_MAIN,
   MOVE_CARDS_TO_DEFAUSSE,
   SET_CARD_ANIMATION_ACTIVE,
-  ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE,
+  SET_BUFF_ANIMATION_ACTIVE,
   UPDATE_ARMOR,
   RESET_ARMOR,
   ADD_COLERE_COPY,
@@ -47,6 +47,7 @@ const initialState = {
   defausse: [],
   //animation
   cardAnimationActive: false,
+  buffAnimationActive: false,
 };
 
 const playerReducer = (state = initialState, action) => {
@@ -346,7 +347,12 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         cardAnimationActive: action.payload,
       };
-    // default
+
+    case SET_BUFF_ANIMATION_ACTIVE:
+      return {
+        ...state,
+        buffAnimationActive: action.payload,
+      };
     default:
       return state;
   }

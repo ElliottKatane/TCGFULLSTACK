@@ -21,13 +21,14 @@ import {
 } from "../redux/actions/player.action";
 import flameIcon from "../assets/flame-icon.png";
 import combustionIcon from "../assets/combustion-icon.png";
-
+import buffIcon from "../assets/buff.gif";
 const Player = ({
   player,
   dispatch,
   enflammerActivated,
   combustionActivated,
   isCardAnimationActive,
+  isBuffAnimationActive,
 }) => {
   // importer le contexte d'authentification
   const { user } = useAuthContext();
@@ -65,7 +66,11 @@ const Player = ({
   }, [player.playerInfo, player.currentPlayerHealth, dispatch]);
 
   const playerLevelClassName = `player-level${mapLevel} ${
-    isCardAnimationActive ? "attack-animation" : "idle-animation"
+    isBuffAnimationActive
+      ? "buff-animation idle-animation"
+      : isCardAnimationActive
+      ? "attack-animation"
+      : "idle-animation"
   }`;
 
   return (
@@ -73,7 +78,11 @@ const Player = ({
       {player.playerInfo ? (
         <div>
           <img
-            src={isCardAnimationActive ? attackImage : image}
+            src={
+              isCardAnimationActive && !isBuffAnimationActive
+                ? attackImage
+                : image
+            }
             alt="copie"
             className={`player ${playerLevelClassName}`}
           />
@@ -93,7 +102,12 @@ const Player = ({
                 style={{ width: "30px", height: "30px" }}
               />
             ) : null}
+
+            {isBuffAnimationActive ? (
+              <img src={buffIcon} alt="buff-icon" />
+            ) : null}
           </div>
+
           <div className="player-hp">
             <StatsBar
               HPValue={player.playerInfo.HP}
@@ -124,6 +138,7 @@ const mapStateToProps = (state) => {
     enflammerActivated: state.player.enflammerActivated,
     combustionActivated: state.player.combustionActivated,
     isCardAnimationActive: state.player.cardAnimationActive,
+    isBuffAnimationActive: state.player.buffAnimationActive,
   };
 };
 export default connect(mapStateToProps)(Player);

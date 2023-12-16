@@ -29,14 +29,17 @@ const SwitchTurnButton = () => {
       // Get the damage value of the randomly selected attack
       const monsterAttackValue = monsterInfo.attacks[randomAttackIndex].damage;
 
-      // on devrait mette un set TimeOut pour qu'il y ait un délai entre le clic du bouton et l'attaque du monstre
-      console.log("Monster attack value: (switch turn)", monsterAttackValue);
-      setShowMonsterImage(true);
-
+      // Introduce a 2-second delay before showing the monster image
       setTimeout(() => {
-        dispatch(MonsterAttack(monsterAttackValue));
-        console.log(`Monster attacks with ${monsterAttackValue} damage!`);
-        setShowMonsterImage(false);
+        console.log("Monster attack value: (switch turn)", monsterAttackValue);
+        setShowMonsterImage(true);
+
+        // Introduce another 1-second delay before processing the attack
+        setTimeout(() => {
+          dispatch(MonsterAttack(monsterAttackValue));
+          console.log(`Monster attacks with ${monsterAttackValue} damage!`);
+          setShowMonsterImage(false);
+        }, 1450);
       }, 1000);
 
       // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
@@ -64,6 +67,13 @@ const SwitchTurnButton = () => {
       <button onClick={handleEndTurn}>
         End {currentTurn === "player" ? "Player" : "Monster"} Turn
       </button>
+      {/* 
+      <div className="fintourbtn">
+  {currentTurn === "player" && (
+    <button onClick={handleEndTurn}>
+      End Player Turn
+    </button>
+  )} */}
 
       {showMonsterImage && (
         <div>

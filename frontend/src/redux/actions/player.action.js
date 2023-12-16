@@ -46,6 +46,7 @@ export const FETCH_5CARDS_FROM_PIOCHE = "FETCH_5CARDS_FROM_PIOCHE";
 export const PIOCHER_UNE_CARTE = "PIOCHER_UNE_CARTE";
 // animation
 export const SET_CARD_ANIMATION_ACTIVE = "SET_CARD_ANIMATION_ACTIVE";
+export const SET_BUFF_ANIMATION_ACTIVE = "SET_BUFF_ANIMATION_ACTIVE";
 
 export const switchTurn = (currentTurn) => (dispatch) => {
   if (currentTurn === "player") {
@@ -285,5 +286,9 @@ export const checkAndFetchCards = () => ({
 });
 export const setCardAnimationActive = (isActive) => ({
   type: SET_CARD_ANIMATION_ACTIVE,
+  payload: isActive,
+});
+export const setBuffAnimationActive = (isActive) => ({
+  type: SET_BUFF_ANIMATION_ACTIVE,
   payload: isActive,
 });

@@ -18,6 +18,7 @@ const SwitchTurnButton = () => {
   const currentTurn = useSelector((state) => state.player.currentTurn);
   const monsterInfo = useSelector((state) => state.monster.monsterInfo);
   const [showMonsterImage, setShowMonsterImage] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
@@ -28,6 +29,11 @@ const SwitchTurnButton = () => {
       const randomAttackIndex = Math.floor(Math.random() * numberOfAttacks);
       // Get the damage value of the randomly selected attack
       const monsterAttackValue = monsterInfo.attacks[randomAttackIndex].damage;
+
+      setIsButtonDisabled(true);
+      setTimeout(() => {
+        setIsButtonDisabled(false);
+      }, 3000);
 
       // Introduce a 2-second delay before showing the monster image
       setTimeout(() => {
@@ -64,7 +70,11 @@ const SwitchTurnButton = () => {
   };
   return (
     <div>
-      <button className="fintourbtn" onClick={handleEndTurn}>
+      <button
+        className="fintourbtn"
+        onClick={handleEndTurn}
+        disabled={isButtonDisabled}
+      >
         Fin Tour {currentTurn === "player" ? "Joueur" : "Monstre"}
       </button>
       {/* 

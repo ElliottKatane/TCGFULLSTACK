@@ -104,7 +104,7 @@ const Player = ({
             ) : null}
 
             {isBuffAnimationActive ? (
-              <img src={buffIcon} alt="buff-icon" />
+              <img className="buff" src={buffIcon} alt="buff-icon" />
             ) : null}
           </div>
 

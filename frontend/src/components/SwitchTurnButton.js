@@ -63,9 +63,9 @@ const SwitchTurnButton = () => {
     }
   };
   return (
-    <div className="fintourbtn">
-      <button onClick={handleEndTurn}>
-        End {currentTurn === "player" ? "Player" : "Monster"} Turn
+    <div>
+      <button className="fintourbtn" onClick={handleEndTurn}>
+        Fin Tour {currentTurn === "player" ? "Joueur" : "Monstre"}
       </button>
       {/* 
       <div className="fintourbtn">

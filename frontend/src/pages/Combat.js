@@ -49,11 +49,7 @@ const Combat = () => {
         <Player />
         <Monster />
       </div>
-
-      {/* Bouton fin du tour */}
-      <div className="fintourbtn">
-        <SwitchTurnButton />
-      </div>
+      <SwitchTurnButton />
     </div>
   );
 };

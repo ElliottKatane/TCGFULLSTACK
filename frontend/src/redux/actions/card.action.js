@@ -38,7 +38,13 @@ export const fetchRandomCards = () => {
       const response = await fetch("/api/card-form/getRandomCards");
       if (response.ok) {
         const data = await response.json();
-        dispatch({ type: FETCH_RANDOM_CARDS_SUCCESS, payload: data });
+
+        const updatedCards = data.map((card) => ({
+          ...card,
+          imageURL: `/assets/${card.name.toLowerCase()}.png`,
+        }));
+
+        dispatch({ type: FETCH_RANDOM_CARDS_SUCCESS, payload: updatedCards });
       } else {
         // Handle the error, dispatch an error action, etc.
       }

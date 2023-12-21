@@ -9,9 +9,15 @@ const initialState = {
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_RANDOM_CARDS_SUCCESS:
+      const updatedCards = action.payload.map((card) => ({
+        ...card,
+        imageURL: `/assets/${card.name.toLowerCase()}.png`,
+      }));
+      console.log("Updated Cards:", updatedCards);
+
       return {
         ...state,
-        randomCards: action.payload,
+        randomCards: updatedCards,
       };
 
     // Vous pouvez ajouter d'autres cas pour d'autres types d'action ici

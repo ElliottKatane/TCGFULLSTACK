@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
-import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 //redux imports
 import { configureStore } from "@reduxjs/toolkit";
@@ -17,8 +16,6 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk), // Add your middleware (e.g., Redux Thunk) here
 });
-
-if (ProcessingInstruction.env.NODE_ENV === "production") disableReactDevTools();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

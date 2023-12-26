@@ -80,9 +80,7 @@ export const fetchPlayerInfoFailure = (error) => ({
 
 export const fetchPlayer = (userEmail) => async (dispatch) => {
   try {
-    const response = await fetch(
-      `https://tcg-frontend.onrender.com/api/player/profile/${userEmail}`
-    );
+    const response = await fetch(`/api/player/profile/${userEmail}`);
     if (!response.ok) {
       throw new Error("La requête a échoué (fetchPlayer, Redux)");
     }
@@ -132,9 +130,7 @@ export const addCardHebetement = (cardName) => {
   return async (dispatch) => {
     try {
       // Faire la requête à l'API pour récupérer la carte par son nom
-      const response = await fetch(
-        `https://tcg-frontend.onrender.com/api/card-form/findCardByName/${cardName}`
-      );
+      const response = await fetch(`/api/card-form/findCardByName/${cardName}`);
 
       if (!response.ok) {
         throw new Error(`Erreur HTTP: ${response.status}`);

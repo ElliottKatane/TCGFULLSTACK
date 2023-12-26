@@ -14,9 +14,7 @@ export const createCard = (formData) => {
 export const fetchCards = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(
-        "https://tcg-frontend.onrender.com/api/card-form/getcards"
-      );
+      const response = await fetch("/api/card-form/getcards");
       if (!response.ok) {
         throw new Error("La requête a échoué (cards introuvables)");
       }
@@ -37,9 +35,7 @@ export const fetchAllCardsSuccess = (cards) => ({
 export const fetchRandomCards = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(
-        "https://tcg-frontend.onrender.com/api/card-form/getRandomCards"
-      );
+      const response = await fetch("/api/card-form/getRandomCards");
       if (response.ok) {
         const data = await response.json();
 
@@ -61,9 +57,7 @@ export const fetchRandomCards = () => {
 export const fetchAllCards = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(
-        "https://tcg-frontend.onrender.com/api/card-form/getAllCards"
-      );
+      const response = await fetch("/api/card-form/getAllCards");
       const data = await response.json();
       dispatch(fetchAllCardsSuccess(data.cards));
     } catch (error) {

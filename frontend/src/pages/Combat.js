@@ -31,7 +31,7 @@ const Combat = () => {
     <div
       className="combat-container"
       style={{
-        backgroundImage: `url(map/api/levels/${mapLevel}/backgroundImage)`,
+        backgroundImage: `url(/map/api/levels/${mapLevel}/backgroundImage)`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",

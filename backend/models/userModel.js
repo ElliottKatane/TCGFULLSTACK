@@ -73,29 +73,21 @@ userSchema.statics.signup = async function (email, password) {
 };
 const initializePlayerDeck = async () => {
   try {
-    const cardNames = ["Même pas mal", "Frappe", "Défense"];
+    const card1 = await Card.findOne({ name: "Même pas mal" });
+    const card2 = await Card.findOne({ name: "Frappe" });
+    const card3 = await Card.findOne({ name: "Defense" });
 
-    // Use Promise.all to concurrently fetch all cards
-    const cardPromises = cardNames.map(async (cardName) => {
-      const card = await Card.findOne({ name: cardName });
-
-      if (!card) {
-        throw new Error(`Card not found: ${cardName}`);
-      }
-
-      return { card: card.toObject(), quantity: 5 };
-    });
-
-    // Wait for all card promises to resolve
-    const cards = await Promise.all(cardPromises);
-
-    return cards;
+    // Retourne un tableau avec les identifiants des cartes
+    return [
+      { card: card1.toObject(), quantity: 5 },
+      { card: card2.toObject(), quantity: 5 },
+      { card: card3.toObject(), quantity: 5 },
+    ];
   } catch (error) {
     console.error("Error initializing player deck:", error);
     throw error;
   }
 };
-
 // static login method
 userSchema.statics.login = async function (email, password) {
   // check if fields are filled. We don't even wanna try to login if we don't have email/password

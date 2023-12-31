@@ -27,7 +27,7 @@ const Combat = () => {
         to={
           user
             ? `https://tcg-backend.onrender.com/combat/${userLevelReached}`
-            : "/cantcheat"
+            : "https://tcg-backend.onrender.com/cantcheat"
         }
       />
     );

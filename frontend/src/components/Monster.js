@@ -33,7 +33,7 @@ const Monster = ({ monster, dispatch }) => {
       dispatch(handleVictory(userEmail, mapLevel));
       dispatch(resetVictory());
       window.alert("Félicitations ! Vous avez remporté la victoire !");
-      window.location.href = "https://tcg-backend.onrender.com/map";
+      window.location.href = "https://tcg-frontend.onrender.com/map";
     }
   }, [
     monster.monsterInfo,

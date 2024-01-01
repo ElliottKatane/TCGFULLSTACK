@@ -23,13 +23,7 @@ const Combat = () => {
   if (!user || parsedMapLevel > player.levelReached) {
     // Redirect to the appropriate map level or login page
     return (
-      <Navigate
-        to={
-          user
-            ? `https://tcg-backend.onrender.com/combat/${userLevelReached}`
-            : "https://tcg-frontend.onrender.com/cantcheat"
-        }
-      />
+      <Navigate to={user ? `/combat/${userLevelReached}` : "/cantcheat"} />
     );
   }
 

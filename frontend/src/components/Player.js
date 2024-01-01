@@ -8,6 +8,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
 import { handleDefeat, resetVictory } from "../redux/actions/game.action";
 import "../CSS/Positions.css";
+import { useHistory } from "react-router-dom"; // Import the useHistory hook
 
 import {
   fetchPlayer,
@@ -33,6 +34,7 @@ const Player = ({
   // importer le contexte d'authentification
   const { user } = useAuthContext();
   const { mapLevel } = useParams();
+  const history = useHistory(); // Initialize the useHistory hook
 
   useEffect(() => {
     if (user) {
@@ -61,9 +63,10 @@ const Player = ({
       dispatch(handleDefeat());
       dispatch(resetVictory());
       window.alert("Game Over...");
-      window.location.href = "https://tcg-frontend.onrender.com/map";
+      //window.location.href = "https://tcg-frontend.onrender.com/map";
+      history.push("/map");
     }
-  }, [player.playerInfo, player.currentPlayerHealth, dispatch]);
+  }, [player.playerInfo, player.currentPlayerHealth, dispatch, history]);
 
   const playerLevelClassName = `player-level${mapLevel} ${
     isBuffAnimationActive

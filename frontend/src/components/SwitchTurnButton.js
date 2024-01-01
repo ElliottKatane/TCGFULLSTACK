@@ -59,10 +59,11 @@ const SwitchTurnButton = () => {
       }
       // le reste des cartes de la main du joueur sont défaussées
       dispatch(moveCardsToDefausse(player.main));
+
+      dispatch(switchTurn(currentTurn));
     } else {
       // quand on clique sur "End Monster Turn:"
       // Refill/Reset des stats du joueur : armure et mana
-      dispatch(switchTurn(currentTurn));
       dispatch(initializeCurrentMana(player.playerInfo.manaPool));
       dispatch(resetArmor());
       // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche

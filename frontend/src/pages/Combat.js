@@ -17,15 +17,15 @@ const Combat = () => {
   const { mapLevel } = useParams();
   const player = useSelector((state) => state.player.playerInfo);
 
-  // // Empêche l'utilisateur d'accéder par l'url à un niveau de carte > à son levelReached
-  // const userLevelReached = user ? player.levelReached : 1;
-  // const parsedMapLevel = parseInt(mapLevel, 10);
-  // if (!user || parsedMapLevel > player.levelReached) {
-  //   // Redirect to the appropriate map level or login page
-  //   return (
-  //     <Navigate to={user ? `/combat/${userLevelReached}` : "/cantcheat"} />
-  //   );
-  // }
+  // Empêche l'utilisateur d'accéder par l'url à un niveau de carte > à son levelReached
+  const userLevelReached = user ? player.levelReached : 1;
+  const parsedMapLevel = parseInt(mapLevel, 10);
+  if (!user || parsedMapLevel > player.levelReached) {
+    // Redirect to the appropriate map level or login page
+    return (
+      <Navigate to={user ? `/combat/${userLevelReached}` : "/cantcheat"} />
+    );
+  }
 
   return (
     <div

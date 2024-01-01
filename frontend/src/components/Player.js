@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import image from "../assets/guerrier.gif";
 import attackImage from "../assets/guerrier_attack.gif";
 import StatsBar from "./StatsBar";
@@ -8,8 +8,6 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
 import { handleDefeat, resetVictory } from "../redux/actions/game.action";
 import "../CSS/Positions.css";
-import { useHistory } from "react-router-dom"; // Import the useHistory hook
-
 import {
   fetchPlayer,
   fetch5CardsFromPioche,
@@ -34,7 +32,7 @@ const Player = ({
   // importer le contexte d'authentification
   const { user } = useAuthContext();
   const { mapLevel } = useParams();
-  const history = useHistory(); // Initialize the useHistory hook
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -64,9 +62,9 @@ const Player = ({
       dispatch(resetVictory());
       window.alert("Game Over...");
       //window.location.href = "https://tcg-frontend.onrender.com/map";
-      history.push("/map");
+      navigate("/map");
     }
-  }, [player.playerInfo, player.currentPlayerHealth, dispatch, history]);
+  }, [player.playerInfo, player.currentPlayerHealth, dispatch, navigate]);
 
   const playerLevelClassName = `player-level${mapLevel} ${
     isBuffAnimationActive

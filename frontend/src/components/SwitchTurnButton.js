@@ -48,7 +48,7 @@ const SwitchTurnButton = () => {
 
           // Introduce another delay before switching the turn back to the player
           setTimeout(() => {
-            dispatch(switchTurn(currentTurn));
+            dispatch(switchTurn("monster"));
           }, 800);
         }, 1000);
       }, 2000);
@@ -80,7 +80,7 @@ const SwitchTurnButton = () => {
         onClick={handleEndTurn}
         disabled={isButtonDisabled}
       >
-        Fin Tour {currentTurn === "player" ? "Joueur" : "Monstre"}
+        Finir Votre Tour
       </button>
       {/* 
       <div className="fintourbtn">

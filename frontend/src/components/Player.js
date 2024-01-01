@@ -61,7 +61,7 @@ const Player = ({
       dispatch(handleDefeat());
       dispatch(resetVictory());
       window.alert("Game Over...");
-      navigate("/map");
+      navigate("/");
     }
   }, [player.playerInfo, player.currentPlayerHealth, dispatch, navigate]);
 

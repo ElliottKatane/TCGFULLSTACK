@@ -64,7 +64,7 @@ export const switchTurn = (currentTurn) => (dispatch) => {
 
     // Reset the player's armor and mana
     dispatch(resetArmor());
-    dispatch(initializeCurrentMana(player.playerInfo.manaPool));
+    dispatch(initializeCurrentMana(playerInfo.manaPool));
 
     // Switch back to the player's turn
     dispatch(initializeCurrentTurn("player"));

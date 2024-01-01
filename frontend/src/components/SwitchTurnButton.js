@@ -36,15 +36,18 @@ const SwitchTurnButton = () => {
       }, 3000);
 
       // Introduce a 2-second delay before showing the monster image
-      setTimeout(() => {
-        console.log("Monster attack value: (switch turn)", monsterAttackValue);
-        setShowMonsterImage(true);
+      // setTimeout(() => {
+      //   console.log("Monster attack value: (switch turn)", monsterAttackValue);
+      //   setShowMonsterImage(true);
 
-        // Introduce another 1-second delay before processing the attack
+      // Introduce another 1-second delay before processing the attack
+      setTimeout(() => {
+        dispatch(MonsterAttack(monsterAttackValue));
+        console.log(`Monster attacks with ${monsterAttackValue} damage!`);
+        setShowMonsterImage(false);
+
         setTimeout(() => {
-          dispatch(MonsterAttack(monsterAttackValue));
-          console.log(`Monster attacks with ${monsterAttackValue} damage!`);
-          setShowMonsterImage(false);
+          dispatch(switchTurn(currentTurn));
         }, 1450);
       }, 1000);
 

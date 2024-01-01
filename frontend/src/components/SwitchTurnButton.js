@@ -12,6 +12,7 @@ import {
 } from "../redux/actions/player.action";
 import enemyAttack from "../assets/enemy-attack.gif";
 import { DegatsSubis } from "../redux/actions/monster.action";
+
 const SwitchTurnButton = () => {
   const dispatch = useDispatch();
   const player = useSelector((state) => state.player);
@@ -19,6 +20,7 @@ const SwitchTurnButton = () => {
   const monsterInfo = useSelector((state) => state.monster.monsterInfo);
   const [showMonsterImage, setShowMonsterImage] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isMonsterTurn, setIsMonsterTurn] = useState(false);
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
@@ -45,11 +47,6 @@ const SwitchTurnButton = () => {
           dispatch(MonsterAttack(monsterAttackValue));
           console.log(`Monster attacks with ${monsterAttackValue} damage!`);
           setShowMonsterImage(false);
-
-          // Introduce another delay before switching the turn back to the player
-          setTimeout(() => {
-            dispatch(switchTurn("monster"));
-          }, 800);
         }, 1000);
       }, 2000);
 
@@ -65,6 +62,7 @@ const SwitchTurnButton = () => {
     } else {
       // quand on clique sur "End Monster Turn:"
       // Refill/Reset des stats du joueur : armure et mana
+      dispatch(switchTurn(currentTurn));
       dispatch(initializeCurrentMana(player.playerInfo.manaPool));
       dispatch(resetArmor());
       // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche

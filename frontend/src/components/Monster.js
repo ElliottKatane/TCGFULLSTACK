@@ -32,6 +32,7 @@ const Monster = ({ monster, dispatch }) => {
       dispatch(handleVictory(userEmail, mapLevel));
       dispatch(resetVictory());
       window.alert("Félicitations ! Vous avez remporté la victoire !");
+      navigate("/");
       window.location.href = "/";
     }
   }, [

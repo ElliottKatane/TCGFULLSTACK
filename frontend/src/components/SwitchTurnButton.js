@@ -49,11 +49,6 @@ const SwitchTurnButton = () => {
           dispatch(MonsterAttack(monsterAttackValue));
           console.log(`Monster attacks with ${monsterAttackValue} damage!`);
           setShowMonsterImage(false);
-
-          // After the monster's turn and attack animation, switch back to the player's turn
-          setTimeout(() => {
-            dispatch(switchTurn("player"));
-          }, 1000);
         }, 1450);
       }, 1000);
 

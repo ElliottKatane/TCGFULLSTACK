@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { switchTurn, MonsterAttack } from "../redux/actions/player.action";
 import enemyAttack from "../assets/enemy-attack.gif";
-import { DegatsSubis } from "../redux/actions/monster.action";
+// import { DegatsSubis } from "../redux/actions/monster.action";
 
 const SwitchTurnButton = () => {
   const dispatch = useDispatch();
-  const player = useSelector((state) => state.player);
+  // const player = useSelector((state) => state.player);
   const currentTurn = useSelector((state) => state.player.currentTurn);
-  const monsterInfo = useSelector((state) => state.monster.monsterInfo);
+  // const monsterInfo = useSelector((state) => state.monster.monsterInfo);
   const [showMonsterImage, setShowMonsterImage] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 

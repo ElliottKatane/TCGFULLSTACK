@@ -61,7 +61,6 @@ const Player = ({
       dispatch(handleDefeat());
       dispatch(resetVictory());
       window.alert("Game Over...");
-      //window.location.href = "https://tcg-frontend.onrender.com/map";
       navigate("/map");
     }
   }, [player.playerInfo, player.currentPlayerHealth, dispatch, navigate]);

@@ -24,6 +24,14 @@ const SwitchTurnButton = () => {
     dispatch(switchTurn(currentTurn));
 
     if (currentTurn === "player") {
+      // ... (player's turn logic)
+    } else {
+      // Monster's turn logic
+      dispatch(initializeCurrentMana(player.playerInfo.manaPool));
+      dispatch(resetArmor());
+      dispatch(checkAndFetchCards());
+      dispatch(fetch5CardsFromPioche());
+
       const numberOfAttacks = monsterInfo.attacks.length;
       const randomAttackIndex = Math.floor(Math.random() * numberOfAttacks);
       const monsterAttackValue = monsterInfo.attacks[randomAttackIndex].damage;
@@ -42,10 +50,8 @@ const SwitchTurnButton = () => {
           console.log(`Monster attacks with ${monsterAttackValue} damage!`);
           setShowMonsterImage(false);
 
-          // After the monster's turn, switch back to the player's turn after a delay
-          setTimeout(() => {
-            dispatch(switchTurn(currentTurn));
-          }, 2000); // Adjust the delay as needed
+          // After the monster's turn, switch back to the player's turn
+          dispatch(switchTurn("player"));
         }, 1450);
       }, 1000);
 
@@ -57,16 +63,15 @@ const SwitchTurnButton = () => {
       }
 
       dispatch(moveCardsToDefausse(player.main));
-    } else {
-      // Monster's turn logic
-      dispatch(initializeCurrentMana(player.playerInfo.manaPool));
-      dispatch(resetArmor());
-      dispatch(checkAndFetchCards());
-      dispatch(fetch5CardsFromPioche());
-
-      // If you need additional logic for the monster's turn, you can add it here
     }
   };
+
+  useEffect(() => {
+    // Automatically switch to the player's turn when currentTurn changes
+    if (currentTurn === "monster") {
+      handleEndTurn();
+    }
+  }, [currentTurn]);
 
   return (
     <div>

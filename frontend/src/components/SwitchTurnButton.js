@@ -49,6 +49,7 @@ const SwitchTurnButton = () => {
           dispatch(MonsterAttack(monsterAttackValue));
           console.log(`Monster attacks with ${monsterAttackValue} damage!`);
           setShowMonsterImage(false);
+          handleEndTurn();
         }, 1450);
       }, 1000);
 
@@ -62,13 +63,6 @@ const SwitchTurnButton = () => {
       dispatch(moveCardsToDefausse(player.main));
     }
   };
-
-  useEffect(() => {
-    // Automatically switch to the player's turn when currentTurn changes
-    if (currentTurn === "monster") {
-      handleEndTurn();
-    }
-  }, [currentTurn]);
 
   return (
     <div>

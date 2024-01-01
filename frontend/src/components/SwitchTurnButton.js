@@ -36,20 +36,22 @@ const SwitchTurnButton = () => {
       }, 3000);
 
       // Introduce a 2-second delay before showing the monster image
-      // setTimeout(() => {
-      //   console.log("Monster attack value: (switch turn)", monsterAttackValue);
-      //   setShowMonsterImage(true);
-
-      // Introduce another 1-second delay before processing the attack
       setTimeout(() => {
-        dispatch(MonsterAttack(monsterAttackValue));
-        console.log(`Monster attacks with ${monsterAttackValue} damage!`);
-        setShowMonsterImage(false);
+        console.log("Monster attack value: (switch turn)", monsterAttackValue);
+        setShowMonsterImage(true);
 
+        // Introduce another 1-second delay before processing the attack
         setTimeout(() => {
-          dispatch(switchTurn(currentTurn));
-        }, 1450);
-      }, 1000);
+          dispatch(MonsterAttack(monsterAttackValue));
+          console.log(`Monster attacks with ${monsterAttackValue} damage!`);
+          setShowMonsterImage(false);
+
+          // Introduce another delay before switching the turn back to the player
+          setTimeout(() => {
+            dispatch(switchTurn(currentTurn));
+          }, 1450);
+        }, 1000);
+      }, 2000);
 
       // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
       if (player.combustionActivated) {

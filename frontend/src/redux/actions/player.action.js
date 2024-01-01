@@ -50,24 +50,13 @@ export const SET_BUFF_ANIMATION_ACTIVE = "SET_BUFF_ANIMATION_ACTIVE";
 
 export const switchTurn = (currentTurn) => (dispatch) => {
   if (currentTurn === "player") {
-    // Additional logic if needed for the player's turn
     dispatch(endPlayerTurn());
   } else if (currentTurn === "monster") {
-    // Additional logic if needed for the monster's turn
     dispatch(endMonsterTurn());
-
-    // Ensure there are enough cards in the pioche before switching back to the player's turn
-    dispatch(checkAndFetchCards());
-
-    // Fetch new cards for the player
-    dispatch(fetch5CardsFromPioche());
-
-    // Reset the player's armor and mana
-    dispatch(resetArmor());
-    dispatch(initializeCurrentMana(playerInfo.manaPool));
-
-    // Switch back to the player's turn
-    dispatch(initializeCurrentTurn("player"));
+    // probablement qu'il faudra rajouter :
+    // vérifier si la pioche est vide. si oui, il faut aller transvaser les cartes de la défausse dans la pioche
+    // la logique pour fetch de nouvelles cartes depuis la pioche
+    // le reset de currentMana
   }
 };
 

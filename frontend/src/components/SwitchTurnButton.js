@@ -49,20 +49,19 @@ const SwitchTurnButton = () => {
           // Introduce another delay before switching the turn back to the player
           setTimeout(() => {
             dispatch(switchTurn(currentTurn));
-
-            // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
-            if (player.combustionActivated) {
-              const combustionDamageToPlayer = player.combustionPlayedCount * 1;
-              const combustionDamageToMonster =
-                player.combustionPlayedCount * 5;
-              dispatch(MonsterAttack(combustionDamageToPlayer));
-              dispatch(DegatsSubis(combustionDamageToMonster));
-            }
-            // le reste des cartes de la main du joueur sont défaussées
-            dispatch(moveCardsToDefausse(player.main));
-          }, 500); // Adjust the timing here as needed
+          }, 800);
         }, 1000);
       }, 2000);
+
+      // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
+      if (player.combustionActivated) {
+        const combustionDamageToPlayer = player.combustionPlayedCount * 1;
+        const combustionDamageToMonster = player.combustionPlayedCount * 5;
+        dispatch(MonsterAttack(combustionDamageToPlayer));
+        dispatch(DegatsSubis(combustionDamageToMonster));
+      }
+      // le reste des cartes de la main du joueur sont défaussées
+      dispatch(moveCardsToDefausse(player.main));
     } else {
       // quand on clique sur "End Monster Turn:"
       // Refill/Reset des stats du joueur : armure et mana

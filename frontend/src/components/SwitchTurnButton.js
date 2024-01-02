@@ -48,7 +48,7 @@ const SwitchTurnButton = () => {
         }, 1450);
       }, 1000);
       setTimeout(() => {
-        dispatch(switchTurn("player"));
+        dispatch(switchTurn(currentTurn));
       }, 10000);
       // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
       if (player.combustionActivated) {

@@ -49,6 +49,12 @@ const SwitchTurnButton = () => {
       }, 1000);
       setTimeout(() => {
         dispatch(switchTurn("monster"));
+        dispatch(initializeCurrentMana(player.playerInfo.manaPool));
+        dispatch(resetArmor());
+        // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche
+        dispatch(checkAndFetchCards());
+        // fetch de nouvelles cartes depuis la pioche
+        dispatch(fetch5CardsFromPioche());
       }, 10000);
       // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
       if (player.combustionActivated) {
@@ -61,14 +67,7 @@ const SwitchTurnButton = () => {
       dispatch(moveCardsToDefausse(player.main));
     } else {
       // quand on clique sur "End Monster Turn:"
-      // Refill/Reset des stats du joueur : armure et mana
-
-      dispatch(initializeCurrentMana(player.playerInfo.manaPool));
-      dispatch(resetArmor());
-      // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche
-      dispatch(checkAndFetchCards());
-      // fetch de nouvelles cartes depuis la pioche
-      dispatch(fetch5CardsFromPioche());
+      // Refill/Reset des stats du joueur : armure et man
     }
   };
   return (

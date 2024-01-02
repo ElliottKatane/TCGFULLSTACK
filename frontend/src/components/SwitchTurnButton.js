@@ -60,6 +60,9 @@ const SwitchTurnButton = () => {
     } else {
       // quand on clique sur "End Monster Turn:"
       // Refill/Reset des stats du joueur : armure et mana
+      setTimeout(() => {
+        handleEndTurn(); // Call handleEndTurn to switch back to the player's turn
+      }, 2000);
       dispatch(initializeCurrentMana(player.playerInfo.manaPool));
       dispatch(resetArmor());
       // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche

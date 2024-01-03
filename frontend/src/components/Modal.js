@@ -1,11 +1,7 @@
 // Modal.js
 import ReactModal from "react-modal";
 import { connect, useDispatch, useSelector } from "react-redux";
-import {
-  addToDeck,
-  cardAddedToDeck,
-  closeModal,
-} from "../redux/actions/card.action";
+import { addToDeck, closeModal } from "../redux/actions/card.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useEffect } from "react";
 const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {

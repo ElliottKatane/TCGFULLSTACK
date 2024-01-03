@@ -53,10 +53,6 @@ export const switchTurn = (currentTurn) => (dispatch) => {
     dispatch(endPlayerTurn());
   } else if (currentTurn === "monster") {
     dispatch(endMonsterTurn());
-    // probablement qu'il faudra rajouter :
-    // vérifier si la pioche est vide. si oui, il faut aller transvaser les cartes de la défausse dans la pioche
-    // la logique pour fetch de nouvelles cartes depuis la pioche
-    // le reset de currentMana
   }
 };
 

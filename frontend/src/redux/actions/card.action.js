@@ -19,7 +19,9 @@ export const createCard = (formData) => {
 export const fetchCards = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch("/api/card-form/getcards");
+      const response = await fetch(
+        "https://tcg-backend.onrender.com/api/card-form/getcards"
+      );
       if (!response.ok) {
         throw new Error("La requête a échoué (cards introuvables)");
       }
@@ -45,7 +47,9 @@ export const selectRewardCard = (selectedCard) => ({
 export const fetchRewardCards = () => {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch("/api/card-form/getRewardCards");
+      const response = await fetch(
+        "https://tcg-backend.onrender.com/api/card-form/getRewardCards"
+      );
       if (response.ok) {
         const data = await response.json();
         dispatch({ type: FETCH_REWARD_CARDS_SUCCESS, payload: data });
@@ -79,7 +83,9 @@ export const closeModal = () => ({
 export const fetchAllCards = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch("/api/card-form/getAllCards");
+      const response = await fetch(
+        "https://tcg-backend.onrender.com/api/card-form/getAllCards"
+      );
       const data = await response.json();
       dispatch(fetchAllCardsSuccess(data.cards));
     } catch (error) {
@@ -95,13 +101,16 @@ export const addToDeck = (userEmail, selectedCard) => async (dispatch) => {
       selectedCard
     );
 
-    const response = await fetch(`/api/player/add-to-deck`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userEmail, selectedCard }),
-    });
+    const response = await fetch(
+      `https://tcg-backend.onrender.com/api/player/add-to-deck`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail, selectedCard }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to add card to deck");

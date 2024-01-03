@@ -29,12 +29,6 @@ app.use("/api/levels", levelRoute);
 app.use("/api/monsters", monsterRoute);
 app.use("/api/player", playerRoute);
 
-app.get("*", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "frontend", "public", "assets", "index.html")
-  );
-});
-
 app.get(
   "/api/levels/:mapLevel/backgroundImage",
   levelController.getLevelBackgroundImage

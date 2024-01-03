@@ -21,7 +21,7 @@ const App = () => {
           path="/"
           element={user ? <Navigate to="/map" /> : <Navigate to="/login" />}
         />
-        <Route path="/" element={<Map />} />
+        <Route path="/map" element={<Map />} />
         <Route path="/combat/:mapLevel" element={<Combat />} />
         <Route
           path="/login"
@@ -32,7 +32,7 @@ const App = () => {
           element={!user ? <Signup /> : <Navigate to="/map" />}
         />
         <Route path="/createcard" element={<CardCreationPage />} />
-        <Route path="/cantcheat" element={<Map />} />
+        {/* <Route path="/cantcheat" element={<Map />} /> */}
         <Route path="/rules" element={<Rules />} />
       </Routes>
     </div>

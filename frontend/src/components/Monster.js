@@ -1,17 +1,29 @@
+// react & router dom
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { connect } from "react-redux";
-import StatsBar from "./StatsBar";
-import { fetchMonster } from "../redux/actions/monster.action";
-import { handleVictory, resetVictory } from "../redux/actions/game.action";
-import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+// redux
+import { connect, useSelector } from "react-redux";
+import { fetchMonster } from "../redux/actions/monster.action";
+import {
+  handleVictory,
+  resetVictory,
+  rewardPlayer,
+} from "../redux/actions/game.action";
+import { useAuthContext } from "../hooks/useAuthContext";
+// components
+import StatsBar from "./StatsBar";
+import Modal from "./Modal";
 
 const Monster = ({ monster, dispatch }) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  // Utilisez useSelector pour extraire isOpen et cards du Redux store
+  const modalIsOpen = useSelector((state) => state.card.modalIsOpen);
+  const modalCards = useSelector((state) => state.card.rewardCards);
+  const isVictory = useSelector((state) => state.game.isVictory);
 
   useEffect(() => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
@@ -27,13 +39,15 @@ const Monster = ({ monster, dispatch }) => {
   console.log("Monster state:", monster.monsterInfo);
 
   useEffect(() => {
-    if (monster.monsterInfo && monster.currentHealth <= 0) {
+    if (monster.monsterInfo && monster.currentHealth <= 0 && !isVictory) {
+      console.log("Entering handleVictory effect");
+
       const userEmail = user.email;
 
       dispatch(handleVictory(userEmail, mapLevel));
+      dispatch(rewardPlayer());
       dispatch(resetVictory());
       window.alert("Félicitations ! Vous avez remporté la victoire !");
-      window.location.href = "/map";
     }
   }, [
     monster.monsterInfo,
@@ -66,14 +80,15 @@ const Monster = ({ monster, dispatch }) => {
       ) : (
         <p>Loading...</p>
       )}
+      {isVictory && <Modal isOpen={modalIsOpen} cards={modalCards} />}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    monster: state.monster,
-  };
-};
+const mapStateToProps = ({ monster, card }) => ({
+  monster,
+  modalIsOpen: card.modalIsOpen,
+  modalCards: card.rewardCards,
+});
 
 export default connect(mapStateToProps)(Monster);

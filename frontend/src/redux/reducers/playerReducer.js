@@ -98,9 +98,9 @@ const playerReducer = (state = initialState, action) => {
     // carte Colère
     case ADD_COLERE_COPY:
       const clickedCardId = action.payload.id;
-      console.log("Reducer - ADD_COLERE_COPY - clickedCardId:", clickedCardId);
+      //  console.log("Reducer - ADD_COLERE_COPY - clickedCardId:", clickedCardId);
 
-      const existingColereCard = state.pioche.find(
+      const existingColereCard = state.main.find(
         (card) => card.card.name === "Colère" && card.id === clickedCardId
       );
 
@@ -111,9 +111,9 @@ const playerReducer = (state = initialState, action) => {
           quantity: 1,
         };
 
-        console.log(
-          `Adding a copy of Colère with new id ${newColereCopy.id} to Defausse.`
-        );
+        // console.log(
+        //   `Adding a copy of Colère with new id ${newColereCopy.id} to Defausse.`
+        // );
 
         return {
           ...state,

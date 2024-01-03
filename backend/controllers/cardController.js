@@ -53,19 +53,19 @@ const getAllCards = async (req, res) => {
   }
 };
 
-// Retrieve 5 random cards
-const getRandomCards = async (req, res) => {
+// Retrieve 2 reward cards
+const getRewardCards = async (req, res) => {
   try {
     const cardCount = await Card.countDocuments();
-    const sampleSize = Math.min(5, cardCount); // Determine the sample size
+    const sampleSize = Math.min(2, cardCount); // Determine the sample size
     const randomCards = await Card.aggregate([
       { $sample: { size: sampleSize } }, // Retrieve random cards based on the sample size
     ]);
 
     // Log each card as it's retrieved
-    randomCards.forEach((card, index) => {
-      console.log(`"Controller method" Card ${index + 1}:`, card);
-    });
+    // randomCards.forEach((card, index) => {
+    //   console.log(`"Controller method" Card ${index + 1}:`, card);
+    // });
 
     res.status(200).json(randomCards);
   } catch (error) {
@@ -89,14 +89,13 @@ const findCardByName = async (req, res) => {
 
     res.status(200).json(card);
   } catch (error) {
-    console.error("Erreur lors de la recherche de la carte :", error);
     res.status(500).json({ message: "Erreur serveur" });
   }
 };
 module.exports = {
   createCard,
   getAllCardsWithCounts,
-  getRandomCards,
+  getRewardCards,
   getAllCards,
   findCardByName,
 };

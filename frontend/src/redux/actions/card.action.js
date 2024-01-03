@@ -1,8 +1,13 @@
 // Fetch des cartes
-export const FETCH_RANDOM_CARDS_SUCCESS = "FETCH_RANDOM_CARDS_SUCCESS";
+export const FETCH_REWARD_CARDS_SUCCESS = "FETCH_REWARD_CARDS_SUCCESS";
 export const FETCH_ALL_CARDS_SUCCESS = "FETCH_ALL_CARDS_SUCCESS";
 export const CREATE_CARD = "CREATE_CARD";
 export const FETCH_CARDS = "FETCH_CARDS";
+export const OPEN_MODAL = "OPEN_MODAL";
+export const CLOSE_MODAL = "CLOSE_MODAL";
+export const CARD_ADDED_TO_DECK = "CARD_ADDED_TO_DECK";
+export const SELECT_REWARD_CARD = "SELECT_REWARD_CARD";
+
 //Action creator for CardForm
 export const createCard = (formData) => {
   return {
@@ -32,13 +37,27 @@ export const fetchAllCardsSuccess = (cards) => ({
   payload: cards,
 });
 
-export const fetchRandomCards = () => {
-  return async (dispatch) => {
+export const selectRewardCard = (selectedCard) => ({
+  type: SELECT_REWARD_CARD,
+  payload: selectedCard,
+});
+
+export const fetchRewardCards = () => {
+  return async (dispatch, getState) => {
     try {
-      const response = await fetch("/api/card-form/getRandomCards");
+      const response = await fetch("/api/card-form/getRewardCards");
       if (response.ok) {
         const data = await response.json();
-        dispatch({ type: FETCH_RANDOM_CARDS_SUCCESS, payload: data });
+        dispatch({ type: FETCH_REWARD_CARDS_SUCCESS, payload: data });
+        console.log("Carte 1 :", data[0]);
+        console.log("Carte 2 :", data[1]);
+        const { card } = getState();
+        console.log("card State dans REWARD PLAYER", card);
+        // Accéder aux données des cartes depuis le state après avoir dispatché fetchRewardCards
+        const rewardCards = card.rewardCards;
+        // Dispatch l'action pour ouvrir la modal avec les cartes
+        console.log("Dispatching openModal with rewardCards:", rewardCards);
+        dispatch(openModal(rewardCards));
       } else {
         // Handle the error, dispatch an error action, etc.
       }
@@ -47,6 +66,15 @@ export const fetchRandomCards = () => {
     }
   };
 };
+export const openModal = (rewardCards) => ({
+  type: OPEN_MODAL,
+  payload: { rewardCards },
+});
+
+export const closeModal = () => ({
+  type: CLOSE_MODAL,
+});
+
 // Thunk action to fetch all cards
 export const fetchAllCards = () => {
   return async (dispatch) => {
@@ -59,3 +87,38 @@ export const fetchAllCards = () => {
     }
   };
 };
+export const addToDeck = (userEmail, selectedCard) => async (dispatch) => {
+  try {
+    console.log(
+      "Adding card to deck (addtodeck, card action):",
+      userEmail,
+      selectedCard
+    );
+
+    const response = await fetch(`/api/player/add-to-deck`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userEmail, selectedCard }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add card to deck");
+    }
+    const data = await response.json();
+
+    console.log("Data after adding card to deck:", data);
+
+    // Dispatcher une action pour mettre à jour le state Redux si nécessaire
+    dispatch(cardAddedToDeck(selectedCard));
+  } catch (error) {
+    console.error("Error adding card to deck:", error);
+    // Gérer l'erreur selon vos besoins
+  }
+};
+
+export const cardAddedToDeck = (selectedCard) => ({
+  type: CARD_ADDED_TO_DECK,
+  payload: { selectedCard },
+});

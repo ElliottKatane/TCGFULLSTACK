@@ -31,7 +31,7 @@ const Combat = () => {
     <div
       className="combat-container"
       style={{
-        backgroundImage: `url(/api/levels/${mapLevel}/backgroundImage)`,
+        backgroundImage: `url(https://tcg-backend.onrender.com/api/levels/${mapLevel}/backgroundImage)`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
@@ -49,11 +49,7 @@ const Combat = () => {
         <Player />
         <Monster />
       </div>
-
-      {/* Bouton fin du tour */}
-      <div className="fintourbtn">
-        <SwitchTurnButton />
-      </div>
+      <SwitchTurnButton />
     </div>
   );
 };

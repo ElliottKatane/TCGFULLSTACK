@@ -15,7 +15,9 @@ export const fetchMonsterInfoFailure = (error) => ({
 
 export const fetchMonster = (mapLevel) => async (dispatch) => {
   try {
-    const response = await fetch(`/api/monsters/${mapLevel}`);
+    const response = await fetch(
+      `https://tcg-backend.onrender.com/api/monsters/${mapLevel}`
+    );
     if (!response.ok) {
       throw new Error("La requête a échoué");
     }

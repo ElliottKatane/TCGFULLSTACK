@@ -77,13 +77,12 @@ export const openModal = (rewardCards) => ({
 
 export const closeModal = () => {
   // Ajoutez votre redirection ici
-  window.location.href = "/map";
-
-  // Retournez votre action Redux
+  window.location.href = "/";
   return {
     type: CLOSE_MODAL,
   };
 };
+
 // Thunk action to fetch all cards
 export const fetchAllCards = () => {
   return async (dispatch) => {

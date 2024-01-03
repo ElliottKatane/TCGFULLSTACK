@@ -27,12 +27,19 @@ const Card = ({ player, enflammerActivated }) => {
   const handleCardClick = (clickedCard) => {
     // Vérifie si le joueur a assez de mana pour jouer la carte
     if (player.currentMana >= clickedCard.card.cost) {
-      dispatch(setCardAnimationActive(true));
+      // Check if the clicked card is "Défense" or "Même pas mal"
+      const isBuffCard = ["Défense", "Même pas mal"].includes(
+        clickedCard.card.name
+      );
 
-      // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
-      setTimeout(() => {
-        dispatch(setCardAnimationActive(false));
-      }, 1000);
+      if (!isBuffCard) {
+        // If it's not a buff card, set card animation active
+        dispatch(setCardAnimationActive(true));
+        // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
+        setTimeout(() => {
+          dispatch(setCardAnimationActive(false));
+        }, 1000);
+      }
 
       switch (clickedCard.card.name) {
         case "Frappe":
@@ -84,7 +91,7 @@ const Card = ({ player, enflammerActivated }) => {
           // add colere copy to pioche
           dispatch(addColereCopy(clickedCard.id));
           break;
-        case "Défense": // 1 - Gagnez 5 de blocage.
+        case "Defense": // 1 - Gagnez 5 de blocage.
           dispatch(updateArmor(clickedCard.card.value));
           dispatch(setBuffAnimationActive(true));
           // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
@@ -150,14 +157,11 @@ const Card = ({ player, enflammerActivated }) => {
               className={`card-container card-${piocheItem.card.type.toLowerCase()}`}
               onClick={() => handleCardClick(piocheItem)}
             >
-              {/* Afficher les détails de la carte dans la pioche */}
-              <p className="card-title">{piocheItem.card.name}</p>
-              <p className="card-description">{piocheItem.card.description}</p>
-              <div className="card-details">
-                <p>Rarity: {piocheItem.card.rarity}</p>
-                <p>Type: {piocheItem.card.type}</p>
-              </div>
-              <div className="card-cost">{piocheItem.card.cost}</div>
+              <img
+                src={piocheItem.card.imageURL}
+                alt={piocheItem.card.name}
+                className="card-image"
+              />
             </div>
           </div>
         ))}
@@ -170,13 +174,11 @@ const Card = ({ player, enflammerActivated }) => {
               className={`card-container card-${mainItem.card.type.toLowerCase()}`}
               onClick={() => handleCardClick(mainItem)}
             >
-              <p className="card-title">{mainItem.card.name}</p>
-              <p className="card-description">{mainItem.card.description}</p>
-              <div className="card-details">
-                <p>Rarity: {mainItem.card.rarity}</p>
-                <p>Type: {mainItem.card.type}</p>
-              </div>
-              <div className="card-cost">{mainItem.card.cost}</div>
+              <img
+                src={mainItem.card.imageURL}
+                alt={mainItem.card.name}
+                className="card-image"
+              />
             </div>
           </div>
         ))}

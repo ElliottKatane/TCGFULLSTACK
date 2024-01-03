@@ -18,6 +18,7 @@ const SwitchTurnButton = () => {
   const currentTurn = useSelector((state) => state.player.currentTurn);
   const monsterInfo = useSelector((state) => state.monster.monsterInfo);
   const [showMonsterImage, setShowMonsterImage] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
@@ -28,6 +29,11 @@ const SwitchTurnButton = () => {
       const randomAttackIndex = Math.floor(Math.random() * numberOfAttacks);
       // Get the damage value of the randomly selected attack
       const monsterAttackValue = monsterInfo.attacks[randomAttackIndex].damage;
+
+      setIsButtonDisabled(true);
+      setTimeout(() => {
+        setIsButtonDisabled(false);
+      }, 3000);
 
       // Introduce a 2-second delay before showing the monster image
       setTimeout(() => {
@@ -41,7 +47,15 @@ const SwitchTurnButton = () => {
           setShowMonsterImage(false);
         }, 1450);
       }, 1000);
-
+      setTimeout(() => {
+        dispatch(switchTurn("monster"));
+        dispatch(initializeCurrentMana(player.playerInfo.manaPool));
+        dispatch(resetArmor());
+        // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche
+        dispatch(checkAndFetchCards());
+        // fetch de nouvelles cartes depuis la pioche
+        dispatch(fetch5CardsFromPioche());
+      }, 4000);
       // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
       if (player.combustionActivated) {
         const combustionDamageToPlayer = player.combustionPlayedCount * 1;
@@ -53,27 +67,20 @@ const SwitchTurnButton = () => {
       dispatch(moveCardsToDefausse(player.main));
     } else {
       // quand on clique sur "End Monster Turn:"
-      // Refill/Reset des stats du joueur : armure et mana
-      dispatch(initializeCurrentMana(player.playerInfo.manaPool));
-      dispatch(resetArmor());
-      // vérifier s'il y a encore assez de cartes dans la pioche, sinon transvaser les cartes de la défausse dans la pioche
-      dispatch(checkAndFetchCards());
-      // fetch de nouvelles cartes depuis la pioche
-      dispatch(fetch5CardsFromPioche());
+      // Refill/Reset des stats du joueur : armure et man
     }
   };
   return (
-    <div className="fintourbtn">
-      <button onClick={handleEndTurn}>
-        End {currentTurn === "player" ? "Player" : "Monster"} Turn
-      </button>
-      {/* 
-      <div className="fintourbtn">
-  {currentTurn === "player" && (
-    <button onClick={handleEndTurn}>
-      End Player Turn
-    </button>
-  )} */}
+    <div>
+      {currentTurn === "player" && (
+        <button
+          className="fintourbtn"
+          onClick={handleEndTurn}
+          disabled={isButtonDisabled}
+        >
+          Fin Tour
+        </button>
+      )}
 
       {showMonsterImage && (
         <div>

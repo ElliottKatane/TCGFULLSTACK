@@ -38,13 +38,16 @@ export const handleVictory =
           const newLevelReached = playerData.levelReached + 1;
 
           // Make a server request to update the levelReached
-          const response = await fetch(`/api/player/update-level`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ userEmail, newLevelReached }),
-          });
+          const response = await fetch(
+            `https://tcg-backend.onrender.com/api/player/update-level`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ userEmail, newLevelReached }),
+            }
+          );
 
           if (!response.ok) {
             throw new Error("Failed to update levelReached");

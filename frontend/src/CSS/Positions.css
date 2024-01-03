@@ -7,7 +7,10 @@
 .player {
   position: absolute;
 }
-
+.buff {
+  position: absolute;
+  top: 50%;
+}
 .player-level1.idle-animation {
   top: 68%;
   left: 15%;

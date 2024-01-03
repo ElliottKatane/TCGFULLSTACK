@@ -1,8 +1,7 @@
 // react & router dom
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-// redux
+import { useParams, useNavigate } from "react-router-dom";
+
 import { connect, useSelector } from "react-redux";
 import { fetchMonster } from "../redux/actions/monster.action";
 import {
@@ -48,6 +47,8 @@ const Monster = ({ monster, dispatch }) => {
       dispatch(rewardPlayer());
       dispatch(resetVictory());
       window.alert("Félicitations ! Vous avez remporté la victoire !");
+      // navigate("/");
+      // window.location.href = "/";
     }
   }, [
     monster.monsterInfo,

@@ -21,7 +21,7 @@ const App = () => {
           path="/"
           element={user ? <Navigate to="/map" /> : <Navigate to="/login" />}
         />
-        <Route path="/map" element={<Map />} />
+        <Route path="/" element={<Map />} />
         <Route path="/combat/:mapLevel" element={<Combat />} />
         <Route
           path="/login"

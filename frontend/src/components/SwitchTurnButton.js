@@ -72,20 +72,15 @@ const SwitchTurnButton = () => {
   };
   return (
     <div>
-      <button
-        className="fintourbtn"
-        onClick={handleEndTurn}
-        disabled={isButtonDisabled}
-      >
-        Fin Tour {currentTurn === "player" ? "Joueur" : "Monstre"}
-      </button>
-      {/* 
-      <div className="fintourbtn">
-  {currentTurn === "player" && (
-    <button onClick={handleEndTurn}>
-      End Player Turn
-    </button>
-  )} */}
+      {currentTurn === "player" && (
+        <button
+          className="fintourbtn"
+          onClick={handleEndTurn}
+          disabled={isButtonDisabled}
+        >
+          Fin Tour
+        </button>
+      )}
 
       {showMonsterImage && (
         <div>

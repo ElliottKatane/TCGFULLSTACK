@@ -1,11 +1,7 @@
 // Modal.js
 import ReactModal from "react-modal";
 import { connect, useDispatch, useSelector } from "react-redux";
-import {
-  addToDeck,
-  cardAddedToDeck,
-  closeModal,
-} from "../redux/actions/card.action";
+import { addToDeck, closeModal } from "../redux/actions/card.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useEffect } from "react";
 const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
@@ -30,7 +26,6 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
 
       // Close the modal or perform other actions if necessary
       closeModal();
-      // window.location.href = "/map";
     } catch (error) {
       console.error("Error in handleRewardSelection:", error);
       // Handle the error as needed
@@ -63,10 +58,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
           key={card._id}
           onClick={() => handleRewardSelection(card)}
         >
-          <div
-            className={`card-container card-${card.type.toLowerCase()}`}
-            // onClick={() => handleRewardCardClick(card)}
-          >
+          <div className={`card-container card-${card.type.toLowerCase()}`}>
             <p className="card-title">{card.name}</p>
             <p className="card-description">{card.description}</p>
             <div className="card-details">

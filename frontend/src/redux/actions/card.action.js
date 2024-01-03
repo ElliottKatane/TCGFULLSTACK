@@ -44,19 +44,6 @@ export const selectRewardCard = (selectedCard) => ({
   payload: selectedCard,
 });
 
-// const response = await fetch(
-//   "https://tcg-backend.onrender.com/api/card-form/getRandomCards"
-// );
-// if (response.ok) {
-//   const data = await response.json();
-
-//   const updatedCards = data.map((card) => ({
-//     ...card,
-//     imageURL: `/assets/${card.name.toLowerCase()}.png`,
-//   }));
-
-//   dispatch({ type: FETCH_RANDOM_CARDS_SUCCESS, payload: updatedCards });
-
 export const fetchRewardCards = () => {
   return async (dispatch, getState) => {
     try {
@@ -114,13 +101,16 @@ export const addToDeck = (userEmail, selectedCard) => async (dispatch) => {
       selectedCard
     );
 
-    const response = await fetch(`/api/player/add-to-deck`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userEmail, selectedCard }),
-    });
+    const response = await fetch(
+      `https://tcg-backend.onrender.com/api/player/add-to-deck`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail, selectedCard }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to add card to deck");

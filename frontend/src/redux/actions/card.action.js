@@ -75,9 +75,16 @@ export const openModal = (rewardCards) => ({
   payload: { rewardCards },
 });
 
-export const closeModal = () => ({
-  type: CLOSE_MODAL,
-});
+export const closeModal = () => {
+  // Ajoutez votre redirection ici
+  navigate("/");
+  window.location.href = "/";
+
+  // Retournez votre action Redux
+  return {
+    type: CLOSE_MODAL,
+  };
+};
 
 // Thunk action to fetch all cards
 export const fetchAllCards = () => {

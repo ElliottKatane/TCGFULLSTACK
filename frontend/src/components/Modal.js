@@ -30,7 +30,6 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
 
       // Close the modal or perform other actions if necessary
       closeModal();
-      // window.location.href = "/map";
     } catch (error) {
       console.error("Error in handleRewardSelection:", error);
       // Handle the error as needed

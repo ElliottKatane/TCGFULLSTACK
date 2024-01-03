@@ -48,7 +48,7 @@ export const fetchRewardCards = () => {
   return async (dispatch, getState) => {
     try {
       const response = await fetch(
-        "https://tcg-backend.onrender.com/api/card-form/getRewardCard"
+        "https://tcg-backend.onrender.com/api/card-form/getRewardCards"
       );
       if (response.ok) {
         const data = await response.json();

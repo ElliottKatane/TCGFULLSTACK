@@ -77,7 +77,6 @@ export const openModal = (rewardCards) => ({
 
 export const closeModal = () => {
   // Ajoutez votre redirection ici
-  navigate("/");
   window.location.href = "/";
 
   // Retournez votre action Redux

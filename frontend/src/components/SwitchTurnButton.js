@@ -55,7 +55,7 @@ const SwitchTurnButton = () => {
         dispatch(checkAndFetchCards());
         // fetch de nouvelles cartes depuis la pioche
         dispatch(fetch5CardsFromPioche());
-      }, 10000);
+      }, 7000);
       // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
       if (player.combustionActivated) {
         const combustionDamageToPlayer = player.combustionPlayedCount * 1;

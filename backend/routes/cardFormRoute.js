@@ -4,7 +4,7 @@ const router = express.Router();
 // Controller functions for cards
 const {
   createCard,
-  getRandomCards,
+  getRewardCards,
   getAllCardsWithCounts,
   getAllCards,
   findCardByName,
@@ -14,8 +14,8 @@ const {
 router.post("/createcard", createCard);
 // Retrieve all cards (used in /createcard under the form)
 router.get("/getcards", getAllCardsWithCounts);
-// Retrieve 5 random cards, displayed in Combat.js / Cardboard.js
-router.get("/getRandomCards", getRandomCards);
+// Retrieve X reward cards
+router.get("/getRewardCards", getRewardCards);
 // Retrieve all cards, displayed in CardList.js
 router.get("/getAllCards", getAllCards);
 // Get card by name

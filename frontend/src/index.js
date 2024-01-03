@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
-
+import ReactModal from "react-modal";
 //redux imports
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./redux/reducers/rootReducer"; // Update the import path to access the rootReducer.js file
@@ -16,6 +16,7 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk), // Add your middleware (e.g., Redux Thunk) here
 });
+ReactModal.setAppElement("#root");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

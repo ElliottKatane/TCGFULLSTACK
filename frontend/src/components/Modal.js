@@ -54,6 +54,10 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       fontFamily: "Arial, sans-serif", // Font family
       overflow: "hidden", // Add this line to hide content overflow
       padding: "100px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center", // Align content in the center horizontally
+      justifyContent: "center", // Align content in the center vertically
     },
   };
 

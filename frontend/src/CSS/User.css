@@ -10,6 +10,7 @@ body {
   background: #f1f1f1;
   margin: 0;
   font-family: "Poppins";
+  background-image: url("../assets/login_bg.jpg");
 }
 header {
   background: #fff;

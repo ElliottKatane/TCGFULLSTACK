@@ -43,7 +43,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       zIndex: 1000,
     },
     content: {
-      width: "15%", // Adjusted width
+      width: "25%", // Adjusted width
       height: "25%", // Adjusted height
       margin: "auto",
       borderRadius: "10px", // Rounded corners
@@ -72,7 +72,11 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
           fontWeight: "bold",
         }}
       >
-        <p>Choisir une Carte</p>
+        <p>
+          {" "}
+          Félicitations ! Vous avez remporté la victoire !Choisir une
+          récompense.
+        </p>
       </div>
 
       {rewardCards.map((card) => (

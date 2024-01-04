@@ -77,13 +77,6 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
               src={card.imageURL} // Make sure the card object has an 'imageURL' property
               alt={card.name}
             />
-            <p className="card-title">{card.name}</p>
-            <p className="card-description">{card.description}</p>
-            <div className="card-details">
-              <p>Rarity: {card.rarity}</p>
-              <p>Type: {card.type}</p>
-            </div>
-            <div className="card-cost">{card.cost}</div>
           </div>
         </div>
       ))}

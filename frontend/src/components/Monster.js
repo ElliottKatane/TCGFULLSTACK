@@ -47,8 +47,6 @@ const Monster = ({ monster, dispatch }) => {
       dispatch(rewardPlayer());
       dispatch(resetVictory());
       window.alert("Félicitations ! Vous avez remporté la victoire !");
-      // navigate("/");
-      // window.location.href = "/";
     }
   }, [
     monster.monsterInfo,

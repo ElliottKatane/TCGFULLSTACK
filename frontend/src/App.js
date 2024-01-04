@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import CardCreationPage from "./pages/CardCreation";
 import Map from "./pages/Map";
 import Rules from "./pages/Rules";
+import HomeStart from "./pages/HomeStart";
 // import Cantcheat from "./pages/Cantcheat";
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/createcard" element={<CardCreationPage />} />
         <Route path="/cantcheat" element={<Map />} />
         <Route path="/rules" element={<Rules />} />
+        <Route path="/homestart" element={<HomeStart />} />
       </Routes>
     </div>
   );

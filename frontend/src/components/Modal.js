@@ -43,8 +43,8 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       zIndex: 1000,
     },
     content: {
-      width: "60%", // Adjusted width
-      height: "60%", // Adjusted height
+      width: "30%", // Adjusted width
+      height: "30%", // Adjusted height
       margin: "auto",
       padding: "20px", // Added padding for content
       borderRadius: "10px", // Rounded corners

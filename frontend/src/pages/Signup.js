@@ -14,7 +14,7 @@ const Signup = () => {
 
   return (
     <form onSubmit={handleSubmit} className="signup">
-      <h3>Sign up</h3>
+      <h3>Nouveau jeu</h3>
       <label>Email</label>
       {/* e.target.value :
     e est l'event. target est l'input. value est la valeur de ce qui est rentré par l'user */}
@@ -31,8 +31,12 @@ const Signup = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
+      <p>
+        Le mot de passe doit contenir : 3 caractères en minuscules, 3 caractères
+        en majuscules, 3 chiffres et un caractère spécial. Ex: abcABC123!
+      </p>
       {/* disabled={isLoading} parce qu'on ne veut pas envoyer de nouvelle requête tant qu'il y a le chargement d'une autre */}
-      <button disabled={isLoading}>Signup</button>
+      <button disabled={isLoading}>Commencer à jouer</button>
       {error && <div className="error">{error}</div>}
     </form>
   );

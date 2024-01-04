@@ -40,8 +40,9 @@ const Rules = () => {
         Redux/Toolkit a été utilisé en tant que global state manager
       </div>
       <div className="rules-div">
+        {" "}
         Le système d'authentification a été construit à l'aide de Json Web
-        Token, Validator et du système de hash and salt Bcrypt.
+        Token, Validator et du système de hash and salt Bcrypt.{" "}
       </div>
     </div>
   );

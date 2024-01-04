@@ -43,10 +43,9 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       zIndex: 1000,
     },
     content: {
-      width: "20%", // Adjusted width
+      width: "10%", // Adjusted width
       height: "20%", // Adjusted height
       margin: "auto",
-      padding: "80px", // Added padding for content
       borderRadius: "10px", // Rounded corners
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Drop shadow
       background: "linear-gradient(to bottom, #1a1a1a, #333333)", // Gradient background
@@ -54,6 +53,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       color: "#fff", // Text color
       fontFamily: "Arial, sans-serif", // Font family
       overflow: "hidden", // Add this line to hide content overflow
+      padding: "100px",
     },
   };
 
@@ -68,7 +68,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
         style={{
           textAlign: "center",
           color: "#fff",
-          marginBottom: "20px",
+          marginBottom: "40px",
           fontSize: "18px",
           fontWeight: "bold",
         }}

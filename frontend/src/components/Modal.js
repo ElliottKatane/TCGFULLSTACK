@@ -53,7 +53,6 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       color: "#fff", // Text color
       fontFamily: "Arial, sans-serif", // Font family
       overflow: "hidden", // Add this line to hide content overflow
-      padding: "100px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center", // Align content in the center horizontally
@@ -88,11 +87,14 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
         >
           <div
             className={`card-container card-${card.type.toLowerCase()}`}
+            style={{ textAlign: "center" }} // Adjusted styling for the container
+
             // onClick={() => handleRewardCardClick(card)}
           >
             <img
-              src={card.imageURL} // Make sure the card object has an 'imageURL' property
+              src={card.imageURL}
               alt={card.name}
+              style={{ padding: "100px", margin: "auto" }}
             />
           </div>
         </div>

@@ -8,6 +8,7 @@ import {
 } from "../redux/actions/card.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useEffect } from "react";
+import "../CSS/Modal.css";
 const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
   const { user } = useAuthContext();
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       onRequestClose={closeModal}
       contentLabel="Example Modal"
       style={customStyles}
+      className="custom-modal" // Add your custom class here
     >
       {rewardCards.map((card) => (
         <div

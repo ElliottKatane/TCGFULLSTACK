@@ -11,6 +11,9 @@ body {
   margin: 0;
   font-family: "Poppins";
   background-image: url("../assets/login_bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 header {
   background: #fff;

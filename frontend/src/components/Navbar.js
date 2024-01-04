@@ -16,17 +16,9 @@ export default function Navbar() {
   };
   return (
     <header>
-      <div
-        className="container"
-        style={{
-          backgroundImage: `url(${require("../assets/navbar.jpg")})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <div className="container">
         <NavLink className="navbar-brand" to="/">
-          <img src={stslogo} alt="oui"></img>
+          <img src={stslogo} alt="logo slay the spire"></img>
         </NavLink>
         <Link to="/rules">Règles du jeu</Link>
 
@@ -36,12 +28,6 @@ export default function Navbar() {
             <div>
               <span>{user.email}</span>
               <button onClick={handleClick}>Log out</button>
-            </div>
-          )}
-          {!user && (
-            <div>
-              <Link to="/login">S'identifier</Link>
-              <Link to="/signup">S'enregistrer</Link>
             </div>
           )}
         </nav>

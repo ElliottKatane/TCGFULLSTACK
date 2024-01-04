@@ -1,7 +1,11 @@
 // Modal.js
 import ReactModal from "react-modal";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { addToDeck, closeModal } from "../redux/actions/card.action";
+import {
+  addToDeck,
+  cardAddedToDeck,
+  closeModal,
+} from "../redux/actions/card.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useEffect } from "react";
 const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
@@ -35,13 +39,24 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
   // css du modal
   const customStyles = {
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)", // Couleur de fond semi-transparente
-      zIndex: 1000, // Position au-dessus de l'image
+      backgroundColor: "rgba(0, 0, 0, 0.8)", // Darker semi-transparent background
+      zIndex: 1000,
     },
     content: {
-      width: "50%", // ajustez la taille selon vos besoins
-      height: "50%", // ajustez la taille selon vos besoins
+      width: "10%", // Adjusted width
+      height: "20%", // Adjusted height
       margin: "auto",
+      borderRadius: "10px", // Rounded corners
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Drop shadow
+      background: "linear-gradient(to bottom, #1a1a1a, #333333)", // Gradient background
+      border: "2px solid #fff", // White border
+      color: "#fff", // Text color
+      fontFamily: "Arial, sans-serif", // Font family
+      overflow: "hidden", // Add this line to hide content overflow
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center", // Align content in the center horizontally
+      justifyContent: "center", // Align content in the center vertically
     },
   };
 
@@ -52,20 +67,35 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       contentLabel="Example Modal"
       style={customStyles}
     >
+      <div
+        style={{
+          textAlign: "center",
+          color: "#fff",
+          marginBottom: "40px",
+          fontSize: "18px",
+          fontWeight: "bold",
+        }}
+      >
+        <p>Choisir une Carte</p>
+      </div>
+
       {rewardCards.map((card) => (
         <div
           className="card-align"
           key={card._id}
           onClick={() => handleRewardSelection(card)}
         >
-          <div className={`card-container card-${card.type.toLowerCase()}`}>
-            <p className="card-title">{card.name}</p>
-            <p className="card-description">{card.description}</p>
-            <div className="card-details">
-              <p>Rarity: {card.rarity}</p>
-              <p>Type: {card.type}</p>
-            </div>
-            <div className="card-cost">{card.cost}</div>
+          <div
+            className={`card-container card-${card.type.toLowerCase()}`}
+            style={{ textAlign: "center" }} // Adjusted styling for the container
+
+            // onClick={() => handleRewardCardClick(card)}
+          >
+            <img
+              src={card.imageURL}
+              alt={card.name}
+              style={{ padding: "100px", margin: "auto" }}
+            />
           </div>
         </div>
       ))}

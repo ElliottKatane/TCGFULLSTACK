@@ -74,8 +74,8 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
             // onClick={() => handleRewardCardClick(card)}
           >
             <img
-              src={card.imageURL} // Make sure the card object has an 'imageURL' property
-              alt={card.name}
+              src={rewardCards.card.imageURL} // Make sure the card object has an 'imageURL' property
+              alt={rewardCards.card.name}
               className="card-image"
             />
             <p className="card-title">{card.name}</p>

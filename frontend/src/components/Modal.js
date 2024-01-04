@@ -67,7 +67,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
         style={{
           textAlign: "center",
           color: "#fff",
-          marginBottom: "40px",
+          marginBottom: "30px",
           fontSize: "18px",
           fontWeight: "bold",
         }}

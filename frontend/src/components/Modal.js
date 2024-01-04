@@ -43,10 +43,10 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       zIndex: 1000,
     },
     content: {
-      width: "30%", // Adjusted width
-      height: "30%", // Adjusted height
+      width: "20%", // Adjusted width
+      height: "20%", // Adjusted height
       margin: "auto",
-      padding: "20px", // Added padding for content
+      padding: "40px", // Added padding for content
       borderRadius: "10px", // Rounded corners
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Drop shadow
       background: "linear-gradient(to bottom, #1a1a1a, #333333)", // Gradient background
@@ -63,6 +63,10 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       contentLabel="Example Modal"
       style={customStyles}
     >
+      <div className="modal-header">
+        <p>Your Text Here</p>
+      </div>
+
       {rewardCards.map((card) => (
         <div
           className="card-align"

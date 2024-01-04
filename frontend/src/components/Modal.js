@@ -46,13 +46,14 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       width: "20%", // Adjusted width
       height: "20%", // Adjusted height
       margin: "auto",
-      padding: "40px", // Added padding for content
+      padding: "80px", // Added padding for content
       borderRadius: "10px", // Rounded corners
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Drop shadow
       background: "linear-gradient(to bottom, #1a1a1a, #333333)", // Gradient background
       border: "2px solid #fff", // White border
       color: "#fff", // Text color
       fontFamily: "Arial, sans-serif", // Font family
+      overflow: "hidden", // Add this line to hide content overflow
     },
   };
 
@@ -63,8 +64,16 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       contentLabel="Example Modal"
       style={customStyles}
     >
-      <div className="modal-header">
-        <p>Your Text Here</p>
+      <div
+        style={{
+          textAlign: "center",
+          color: "#fff",
+          marginBottom: "20px",
+          fontSize: "18px",
+          fontWeight: "bold",
+        }}
+      >
+        <p>Choisir une Carte</p>
       </div>
 
       {rewardCards.map((card) => (

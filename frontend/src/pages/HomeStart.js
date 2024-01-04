@@ -1,6 +1,7 @@
 // HomeStart.jsx
 import React from "react";
 import "../CSS/HomeStart.css";
+import { Link } from "react-router-dom";
 
 const HomeStart = () => {
   return (
@@ -8,24 +9,15 @@ const HomeStart = () => {
       <header className="homestart-header">
         <h1>TCG</h1>
         <div className="homestart-buttons-container">
-          <a
-            href="https://frontend-tcg-eli.onrender.com/signup"
-            className="homestart-button"
-          >
+          <Link to="/signup" className="homestart-button">
             Nouveau jeu
-          </a>
-          <a
-            href="https://frontend-tcg-eli.onrender.com/login"
-            className="homestart-button"
-          >
+          </Link>
+          <Link to="/login" className="homestart-button">
             Continuer
-          </a>
-          <a
-            href="https://frontend-tcg-eli.onrender.com/rules"
-            className="homestart-button"
-          >
+          </Link>
+          <Link to="/rules" className="homestart-button">
             Règles du jeu
-          </a>
+          </Link>
         </div>
       </header>
     </div>

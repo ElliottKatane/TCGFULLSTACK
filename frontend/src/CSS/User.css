@@ -8,13 +8,19 @@
 }
 body {
   background: #f1f1f1;
-  margin: 0;
+
   font-family: "Poppins";
+  height: 100vh;
+}
+.signuplogin-bg {
   background-image: url("../../public/assets/login_bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  height: 100vh;
+  width: 100vw;
 }
+
 header {
   background: #fff;
 }
@@ -53,6 +59,7 @@ input {
   display: block;
 }
 input {
+  color: #ddd;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -115,8 +122,8 @@ nav button {
 form.signup,
 form.login {
   max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
+  margin: 0 auto;
+  padding: 40px;
   border-radius: 4px;
   color: green;
   background-color: rgba(0, 0, 0, 0.8);

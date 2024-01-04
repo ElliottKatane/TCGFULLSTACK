@@ -8,13 +8,22 @@ const HomeStart = () => {
       <header className="homestart-header">
         <h1>TCG</h1>
         <div className="homestart-buttons-container">
-          <a href="/signup" className="homestart-button">
+          <a
+            href="https://frontend-tcg-eli.onrender.com/signup"
+            className="homestart-button"
+          >
             Nouveau jeu
           </a>
-          <a href="/login" className="homestart-button">
+          <a
+            href="https://frontend-tcg-eli.onrender.com/login"
+            className="homestart-button"
+          >
             Continuer
           </a>
-          <a href="/rules" className="homestart-button">
+          <a
+            href="https://frontend-tcg-eli.onrender.com/rules"
+            className="homestart-button"
+          >
             Règles du jeu
           </a>
         </div>

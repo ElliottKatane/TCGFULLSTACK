@@ -20,7 +20,7 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={user ? <Navigate to="/map" /> : <Navigate to="/login" />}
+          element={user ? <Navigate to="/map" /> : <Navigate to="/homestart" />}
         />
         <Route path="/map" element={<Map />} />
         <Route path="/combat/:mapLevel" element={<Combat />} />

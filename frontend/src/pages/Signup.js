@@ -14,7 +14,7 @@ const Signup = () => {
 
   return (
     <form onSubmit={handleSubmit} className="signup">
-      <h3>Sign up</h3>
+      <h3>Nouveau jeu</h3>
       <label>Email</label>
       {/* e.target.value :
     e est l'event. target est l'input. value est la valeur de ce qui est rentré par l'user */}

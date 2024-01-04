@@ -1,19 +1,26 @@
+// HomeStart.jsx
 import React from "react";
 import "../CSS/HomeStart.css";
 
-function HomeStart() {
+const HomeStart = () => {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="homestart background-image">
+      <header className="homestart-header">
         <h1>TCG</h1>
-        <div className="buttons-container">
-          <button className="button">Nouveau jeu</button>
-          <button className="button">Continuer</button>
-          <button className="button">Règles du jeu</button>
+        <div className="homestart-buttons-container">
+          <a href="/signup" className="homestart-button">
+            Nouveau jeu
+          </a>
+          <a href="/login" className="homestart-button">
+            Continuer
+          </a>
+          <a href="/rules" className="homestart-button">
+            Règles du jeu
+          </a>
         </div>
       </header>
     </div>
   );
-}
+};
 
 export default HomeStart;

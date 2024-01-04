@@ -1,45 +1,54 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34; /* Fond noir pour tout le corps de la page */
-  color: white; /* Couleur du texte par défaut */
-  overflow: hidden; /* Empêche le débordement de contenu en dehors de la fenêtre */
-}
-
-.App {
+/* HomeStart.css */
+.homestart {
   text-align: center;
   display: flex;
   flex-direction: column;
+  background-image: url("../assets/slaythespire_background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; /* Centre l'image horizontalement et verticalement */
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-.App-header {
-  padding: 20px;
-  background-color: #282c34;
-}
-
-.buttons-container {
+.homestart-buttons-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
 }
-
-.button {
-  background-color: #61dafb;
+.homestart-header {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  width: 20%;
+  border-radius: 10px;
+  margin-top: -250px;
+}
+.homestart-button {
+  background-color: #169f2f;
   color: rgb(50, 50, 50);
-  font-size: 18px;
+  font-size: 22px;
   padding: 10px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  width: 150px;
+  width: 180px;
 }
 
-.button:hover {
+.homestart-button:hover {
   background-color: #4fa3d1;
+}
+@media screen and (max-width: 600px) {
+  .homestart {
+    background-size: cover;
+  }
+
+  .homestart-header {
+    width: 90%;
+    margin-top: -150px;
+  }
 }

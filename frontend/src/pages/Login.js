@@ -15,7 +15,7 @@ const Login = () => {
 
   return (
     <form onSubmit={handleSubmit} className="login">
-      <h3>S'identifier</h3>
+      <h3>Continuer</h3>
       <label>Email</label>
       <input
         type="email"

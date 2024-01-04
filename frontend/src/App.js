@@ -9,6 +9,7 @@ import CardCreationPage from "./pages/CardCreation";
 import Map from "./pages/Map";
 import Rules from "./pages/Rules";
 import Cantcheat from "./pages/Cantcheat";
+import HomeStart from "./pages/HomeStart";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/createcard" element={<CardCreationPage />} />
         <Route path="/cantcheat" element={<Cantcheat />} />
         <Route path="/rules" element={<Rules />} />
+        <Route path="/homestart" element={<HomeStart />} />
       </Routes>
     </div>
   );

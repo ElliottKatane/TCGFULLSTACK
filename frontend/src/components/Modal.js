@@ -43,8 +43,8 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       zIndex: 1000,
     },
     content: {
-      width: "50%", // Adjusted width
-      height: "40%", // Adjusted height
+      width: "30%", // Adjusted width
+      height: "30%", // Adjusted height
       margin: "auto",
       borderRadius: "10px", // Rounded corners
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Drop shadow
@@ -53,10 +53,6 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       color: "#fff", // Text color
       fontFamily: "Arial, sans-serif", // Font family
       overflow: "hidden", // Add this line to hide content overflow
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center", // Align content in the center horizontally
-      justifyContent: "center", // Align content in the center vertically
     },
   };
 

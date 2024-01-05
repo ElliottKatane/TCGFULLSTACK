@@ -77,7 +77,7 @@ export const openModal = (rewardCards) => ({
 
 export const closeModal = () => {
   // Ajoutez votre redirection ici
-  window.location.href = "/map";
+  window.location.href = "/";
   return {
     type: CLOSE_MODAL,
   };

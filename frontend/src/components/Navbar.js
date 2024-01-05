@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import stslogo from "../assets/stslogo.png";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Link } from "react-router-dom";
+import "./Navbar.css"; // Import your CSS file for styling
 
-// We import NavLink to utilize the react router.
-import { Link, NavLink } from "react-router-dom";
-
-// Here, we display our Navbar
 export default function Navbar() {
-  // hooks import
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
-  // State to manage the menu visibility
   const [menuVisible, setMenuVisible] = useState(false);
 
   const toggleMenu = () => {
@@ -25,26 +21,17 @@ export default function Navbar() {
 
   return (
     <header>
-      <div
-        className="container"
-        style={{
-          backgroundImage: `url(${require("../assets/navbar.jpg")})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <NavLink className="navbar-brand" to="/">
-          <img src={stslogo} alt="oui"></img>
-        </NavLink>
+      <div className="container">
+        <div className="navbar">
+          <div className="logo">
+            <img src={stslogo} alt="oui"></img>
+          </div>
 
-        <div className="menu-icon" onClick={toggleMenu}>
-          <span>&#9776;</span>
-        </div>
+          <div className="menu-icon" onClick={toggleMenu}>
+            <span>&#9776;</span>
+          </div>
 
-        {/* Conditional rendering based on menu visibility */}
-        {menuVisible && (
-          <nav className="menu">
+          <nav className={`menu ${menuVisible ? "open" : ""}`}>
             <Link to="/rules">Règles du jeu</Link>
 
             {user ? (
@@ -59,7 +46,7 @@ export default function Navbar() {
               </div>
             )}
           </nav>
-        )}
+        </div>
       </div>
     </header>
   );

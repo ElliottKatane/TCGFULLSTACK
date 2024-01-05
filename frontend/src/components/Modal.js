@@ -52,7 +52,6 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       border: "2px solid #fff", // White border
       color: "#fff", // Text color
       fontFamily: "Arial, sans-serif", // Font family
-      overflow: "hidden", // Add this line to hide content overflow
     },
   };
 

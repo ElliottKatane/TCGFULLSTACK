@@ -3,7 +3,7 @@ import stslogo from "../assets/stslogo.png";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-import "./Navbar.css"; // Import your CSS file for styling
+import "../CSS/Navbar.css"; // Import your CSS file for styling
 
 export default function Navbar() {
   const { logout } = useLogout();

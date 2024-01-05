@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { connect, useSelector } from "react-redux";
-import { fetchPlayer } from "../redux/actions/player.action";
 import { fetchMonster } from "../redux/actions/monster.action";
 import {
   handleVictory,
@@ -41,21 +40,11 @@ const Monster = ({ monster, dispatch }) => {
   useEffect(() => {
     if (monster.monsterInfo && monster.currentHealth <= 0 && !isVictory) {
       console.log("Entering handleVictory effect");
-
       const userEmail = user.email;
-      dispatch(fetchPlayer(userEmail)).then((result) => {
-        console.log("Fetch player result:", result.levelReached);
-
-        if (result.levelReached <= mapLevel) {
-          // Si le niveau atteint par le joueur est inférieur ou égal à mapLevel
-          dispatch(rewardPlayer());
-        }
-
-        dispatch(handleVictory(userEmail, mapLevel));
-        dispatch(resetVictory());
-        window.alert("Félicitations ! Vous avez remporté la victoire !");
-        window.location.href = "/map";
-      });
+      dispatch(rewardPlayer());
+      dispatch(handleVictory(userEmail, mapLevel));
+      dispatch(resetVictory());
+      window.alert("Félicitations ! Vous avez remporté la victoire !");
     }
   }, [
     dispatch,

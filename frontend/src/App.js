@@ -19,7 +19,9 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={user ? <Navigate to="/map" /> : <Navigate to="/homestart" />}
+          element={
+            !user ? <Navigate to="/homestart" /> : <Navigate to="/map" />
+          }
         />
         <Route path="/map" element={<Map />} />
         <Route path="/combat/:mapLevel" element={<Combat />} />

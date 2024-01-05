@@ -73,7 +73,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       >
         <p>
           {" "}
-          Félicitations ! Vous avez remporté la victoire !Choisir une
+          Félicitations! Vous avez remporté la victoire! <br /> Choisir une
           récompense.
         </p>
       </div>

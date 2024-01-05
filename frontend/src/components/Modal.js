@@ -44,7 +44,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
     },
     content: {
       width: "700px", // Adjusted width
-      height: "500px", // Adjusted height
+      height: "550px", // Adjusted height
       margin: "auto",
       borderRadius: "10px", // Rounded corners
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Drop shadow

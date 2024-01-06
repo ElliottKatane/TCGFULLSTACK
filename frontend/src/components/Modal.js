@@ -103,8 +103,17 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
             </div>
           ))
         : null}
-
-      <button onClick={closeModal}>Fermer</button>
+      <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <button onClick={closeModal}>Fermer</button>
+        </div>{" "}
+      </div>
     </ReactModal>
   );
 };

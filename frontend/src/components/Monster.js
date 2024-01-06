@@ -40,20 +40,18 @@ const Monster = ({ monster, dispatch }) => {
   useEffect(() => {
     if (monster.monsterInfo && monster.currentHealth <= 0 && !isVictory) {
       console.log("Entering handleVictory effect");
-
       const userEmail = user.email;
-
-      dispatch(handleVictory(userEmail, mapLevel));
       dispatch(rewardPlayer());
+      dispatch(handleVictory(userEmail, mapLevel));
       dispatch(resetVictory());
     }
   }, [
+    dispatch,
+    user.email,
     monster.monsterInfo,
     monster.currentHealth,
-    dispatch,
-    navigate,
+    isVictory,
     mapLevel,
-    user.email,
   ]);
 
   const levelClassName = `level${mapLevel}`;

@@ -142,7 +142,7 @@ export const addCardHebetement = (cardName) => {
       // Assurez-vous de traiter la réponse en tant que JSON
       const responseData = await response.json();
 
-      // Supposons que la réponse a une structure comme { name, description, value, cost, rarity, type }
+      // La réponse a une structure comme { name, description, value, cost, rarity, type }
       const carteHebetement = {
         card: {
           name: responseData.name,
@@ -151,7 +151,6 @@ export const addCardHebetement = (cardName) => {
           cost: responseData.cost,
           rarity: responseData.rarity,
           type: responseData.type,
-          // Autres propriétés de la carte...
         },
         id: uuidv4(), // Utilisation d'uuid pour générer un identifiant unique
         quantity: 1,

@@ -1,5 +1,5 @@
 .rules-div {
-  background-color: #f2f2f2;
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   margin: 20px;
   width: 100%;
@@ -9,7 +9,10 @@
   text-align: justify;
   font-size: 20px;
   font-family: "Roboto", sans-serif;
-  color: #000000;
+  color: #de0000;
   text-decoration: none;
   transition-duration: 0.4s;
+}
+h1 {
+  color: green;
 }

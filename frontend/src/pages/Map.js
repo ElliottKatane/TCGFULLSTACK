@@ -8,6 +8,7 @@ import {
 } from "../redux/actions/player.action";
 
 import "../CSS/Map.css";
+import Navbar from "../components/Navbar";
 
 const Map = () => {
   // Using the useAuthContext hook to get the user information
@@ -49,6 +50,7 @@ const Map = () => {
   // Render the map buttons using an array of levels
   return (
     <div className="mapStyle">
+      <Navbar />
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((buttonLevel) => (
         <React.Fragment key={buttonLevel}>
           {isButtonClickable(buttonLevel) ? (

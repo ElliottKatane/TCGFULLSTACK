@@ -56,17 +56,37 @@ const getAllCards = async (req, res) => {
 // Retrieve 2 reward cards
 const getRewardCards = async (req, res) => {
   try {
-    const cardCount = await Card.countDocuments();
-    const sampleSize = Math.min(2, cardCount); // Determine the sample size
+    // Ancienne méthode pour piocher 2 cartes aléatoires parmi tous les documents de la collection
+    // const cardCount = await Card.countDocuments();
+    // const sampleSize = Math.min(2, cardCount); // Determine the sample size
+    // const randomCards = await Card.aggregate([
+    //   { $sample: { size: sampleSize } }, // Retrieve random cards based on the sample size
+    // ]);
+    const playerLevel = req.params.mapLevel; // Récupérer le niveau du joueur à partir des paramètres de la requête
+
+    const levelCardCategories = {
+      1: ["Conflit", "Heurt", "Coup de boule"],
+      2: ["Charge imprudente", "Défense", "Frappe double"],
+      3: ["Même pas mal", "Combustion", "Frappe"],
+      4: ["Conflit", "Colère", "Enflammer"],
+      5: ["Conflit", "Heurt", "Coup de boule"],
+      6: ["Conflit", "Heurt", "Coup de boule"],
+      7: ["Conflit", "Heurt", "Coup de boule"],
+      8: ["Conflit", "Heurt", "Coup de boule"],
+      9: ["Conflit", "Heurt", "Coup de boule"],
+      10: ["Conflit", "Heurt", "Coup de boule"],
+    };
+    // Get the card categories for the player's level
+    const cardCategories = levelCardCategories[playerLevel] || [];
+    // Define the sample size (you can set it to any value)
+    const sampleSize = Math.min(3, cardCategories.length);
+    // Log the card categories for debugging
+    console.log("Card Categories for Level", playerLevel, ":", cardCategories);
+    // Retrieve 2 random cards from the specified categories
     const randomCards = await Card.aggregate([
-      { $sample: { size: sampleSize } }, // Retrieve random cards based on the sample size
+      { $match: { category: { $in: cardCategories } } }, // Filter by card categories
+      { $sample: { size: sampleSize } }, // Récupérer 3 cartes au hasard parmi les catégories filtrées
     ]);
-
-    // Log each card as it's retrieved
-    // randomCards.forEach((card, index) => {
-    //   console.log(`"Controller method" Card ${index + 1}:`, card);
-    // });
-
     res.status(200).json(randomCards);
   } catch (error) {
     res.status(500).json({ error: error.message });

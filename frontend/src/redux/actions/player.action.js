@@ -133,7 +133,7 @@ export const addCardHebetement = (cardName) => {
     try {
       // Faire la requête à l'API pour récupérer la carte par son nom
       const response = await fetch(
-        `/https://tcg-backend-eli.onrender.com/api/card-form/findCardByName/${cardName}`
+        `https://tcg-backend-eli.onrender.com/api/card-form/findCardByName/${cardName}`
       );
 
       if (!response.ok) {

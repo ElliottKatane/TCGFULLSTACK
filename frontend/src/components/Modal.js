@@ -37,20 +37,19 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
 
   const customStyles = {
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.8)",
+      backgroundColor: "rgba(0, 0, 0, 0.8)", // Darker semi-transparent background
       zIndex: 1000,
     },
     content: {
-      width: "60%",
-      height: "60%",
+      width: "700px", // Adjusted width
+      height: "550px", // Adjusted height
       margin: "auto",
-      borderRadius: "10px",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
-      background: "linear-gradient(to bottom, #1a1a1a, #333333)",
-      border: "2px solid #fff",
-      color: "#fff",
-      fontFamily: "Arial, sans-serif",
-      overflow: "hidden",
+      borderRadius: "10px", // Rounded corners
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Drop shadow
+      background: "linear-gradient(to bottom, #1a1a1a, #333333)", // Gradient background
+      border: "2px solid #fff", // White border
+      color: "#fff", // Text color
+      fontFamily: "Arial, sans-serif", // Font family
     },
   };
 
@@ -103,8 +102,17 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
             </div>
           ))
         : null}
-
-      <button onClick={closeModal}>Fermer</button>
+      <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <button onClick={closeModal}>Fermer</button>
+        </div>{" "}
+      </div>
     </ReactModal>
   );
 };

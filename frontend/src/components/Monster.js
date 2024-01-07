@@ -40,7 +40,6 @@ const Monster = ({ monster, dispatch }) => {
       dispatch(fetchRewardCards(mapLevel));
       dispatch(handleVictory(userEmail, mapLevel));
       dispatch(resetVictory());
-      window.alert("Félicitations ! Vous avez remporté la victoire !");
     }
   }, [
     dispatch,

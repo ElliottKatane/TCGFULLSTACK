@@ -13,7 +13,7 @@ export const useSignup = () => {
 
     // this is the request
     const response = await fetch(
-      "https://tcg-backend.onrender.com/api/user/signup",
+      "https://tcg-backend-eli.onrender.com/api/user/signup",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

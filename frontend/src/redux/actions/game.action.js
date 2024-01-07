@@ -39,7 +39,7 @@ export const handleVictory =
 
           // Make a server request to update the levelReached
           const response = await fetch(
-            `https://tcg-backend.onrender.com/api/player/update-level`,
+            `https://tcg-backend-eli.onrender.com/api/player/update-level`,
             {
               method: "POST",
               headers: {

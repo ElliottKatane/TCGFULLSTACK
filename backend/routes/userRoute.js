@@ -16,7 +16,7 @@ router.post("/signup", signupUser);
 
 // level Reached route
 router.get(
-  "https://tcg-backend.onrender.com/api/user/levelReached",
+  "https://tcg-backend-eli.onrender.com/api/user/levelReached",
   requireAuth,
   getLevelReached
 );

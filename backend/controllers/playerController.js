@@ -20,7 +20,7 @@ const getPlayerData = async (req, res) => {
     if (!user || !user.player) {
       return res.status(404).json({ message: "Player not found for the user" });
     }
-    console.log("DeckOfCards before conversion:", user.player.DeckOfCards);
+    // console.log("DeckOfCards before conversion:", user.player.DeckOfCards);
 
     const playerData = user.player.toObject();
     res.json(playerData);

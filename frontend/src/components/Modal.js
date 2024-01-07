@@ -1,13 +1,16 @@
-// Modal.js
 import ReactModal from "react-modal";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { addToDeck, closeModal } from "../redux/actions/card.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom"; // Ajoutez ceci
+
 const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
   const { user } = useAuthContext();
   const dispatch = useDispatch();
   const rewardCards = useSelector((state) => state.card.rewardCards);
+  const playerInfo = useSelector((state) => state.player.playerInfo);
+  const { mapLevel } = useParams();
 
   useEffect(() => {
     console.log("modalIsOpen:", modalIsOpen);
@@ -16,33 +19,37 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
 
   const handleRewardSelection = async (selectedCard) => {
     const userEmail = user.email;
-    console.log("User Email in handlerewardselection modal:", userEmail);
-    console.log("Selected Card: in handlerewardselection modal", selectedCard);
 
     try {
-      console.log("Dispatching addToDeck in modal");
-      await dispatch(addToDeck(userEmail, selectedCard));
-      console.log("addToDeck completed in modal");
-
-      // Close the modal or perform other actions if necessary
-      closeModal();
-      // window.location.href = "/map";
+      // Vous pouvez accéder directement à playerInfo dans le state avec useSelector
+      if (mapLevel && mapLevel <= playerInfo.levelReached) {
+        await dispatch(addToDeck(userEmail, selectedCard));
+        closeModal();
+      } else {
+        console.log("Niveau insuffisant pour la récompense.");
+        // Vous pouvez également choisir de ne pas fermer la modal dans ce cas
+      }
     } catch (error) {
       console.error("Error in handleRewardSelection:", error);
-      // Handle the error as needed
+      // Gérez l'erreur selon vos besoins
     }
   };
 
-  // css du modal
   const customStyles = {
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)", // Couleur de fond semi-transparente
-      zIndex: 1000, // Position au-dessus de l'image
+      backgroundColor: "rgba(0, 0, 0, 0.8)", // Darker semi-transparent background
+      zIndex: 1000,
     },
     content: {
-      width: "50%", // ajustez la taille selon vos besoins
-      height: "50%", // ajustez la taille selon vos besoins
+      width: "700px", // Adjusted width
+      height: "550px", // Adjusted height
       margin: "auto",
+      borderRadius: "10px", // Rounded corners
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Drop shadow
+      background: "linear-gradient(to bottom, #1a1a1a, #333333)", // Gradient background
+      border: "2px solid #fff", // White border
+      color: "#fff", // Text color
+      fontFamily: "Arial, sans-serif", // Font family
     },
   };
 
@@ -53,27 +60,59 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       contentLabel="Example Modal"
       style={customStyles}
     >
-      {rewardCards.map((card) => (
-        <div
-          className="card-align"
-          key={card._id}
-          onClick={() => handleRewardSelection(card)}
-        >
-          <div
-            className={`card-container card-${card.type.toLowerCase()}`}
-            // onClick={() => handleRewardCardClick(card)}
-          >
-            <p className="card-title">{card.name}</p>
-            <p className="card-description">{card.description}</p>
-            <div className="card-details">
-              <p>Rarity: {card.rarity}</p>
-              <p>Type: {card.type}</p>
+      <div
+        style={{
+          textAlign: "center",
+          color: "#fff",
+          marginBottom: "30px",
+          fontSize: "18px",
+          fontWeight: "bold",
+        }}
+      >
+        {mapLevel && mapLevel >= playerInfo.levelReached ? (
+          <p>
+            Félicitations ! Vous avez remporté la victoire ! Choisissez une
+            récompense. Map level: {mapLevel}
+          </p>
+        ) : (
+          <p>
+            Vous avez déjà terminé ce niveau précédemment. Aucune récompense
+            obtenue.
+          </p>
+        )}
+      </div>
+
+      {mapLevel && mapLevel >= playerInfo.levelReached
+        ? rewardCards.map((card) => (
+            <div
+              className="card-align"
+              key={card._id}
+              onClick={() => handleRewardSelection(card)}
+            >
+              <div
+                className={`card-container card-${card.type.toLowerCase()}`}
+                style={{ textAlign: "center" }}
+              >
+                <img
+                  src={card.imageURL}
+                  alt={card.name}
+                  style={{ padding: "100px", margin: "auto" }}
+                />
+              </div>
             </div>
-            <div className="card-cost">{card.cost}</div>
-          </div>
-        </div>
-      ))}
-      <button onClick={closeModal}>Fermer</button>
+          ))
+        : null}
+      <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <button onClick={closeModal}>Fermer</button>
+        </div>{" "}
+      </div>
     </ReactModal>
   );
 };

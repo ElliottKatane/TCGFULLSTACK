@@ -14,6 +14,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 // components
 import StatsBar from "./StatsBar";
 import Modal from "./Modal";
+import { fetchRewardCards } from "../redux/actions/card.action";
 
 const Monster = ({ monster, dispatch }) => {
   // useParams permet de récupérer les paramètres de l'URL
@@ -45,7 +46,7 @@ const Monster = ({ monster, dispatch }) => {
       const userEmail = user.email;
 
       dispatch(handleVictory(userEmail, mapLevel));
-      dispatch(rewardPlayer());
+      dispatch(fetchRewardCards(mapLevel));
       dispatch(resetVictory());
       window.alert("Félicitations ! Vous avez remporté la victoire !");
     }

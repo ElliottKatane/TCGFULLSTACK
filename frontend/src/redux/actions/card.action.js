@@ -42,15 +42,18 @@ export const selectRewardCard = (selectedCard) => ({
   payload: selectedCard,
 });
 
-export const fetchRewardCards = () => {
+export const fetchRewardCards = (level) => {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch("/api/card-form/getRewardCards");
+      const response = await fetch(`/api/card-form/getRewardCards/${level}`);
       if (response.ok) {
         const data = await response.json();
         dispatch({ type: FETCH_REWARD_CARDS_SUCCESS, payload: data });
+        console.log("le level fourni est :", level);
+        console.log("Data from API:", data);
         console.log("Carte 1 :", data[0]);
         console.log("Carte 2 :", data[1]);
+        console.log("Carte 3 :", data[2]);
         const { card } = getState();
         console.log("card State dans REWARD PLAYER", card);
         // Accéder aux données des cartes depuis le state après avoir dispatché fetchRewardCards
@@ -74,8 +77,6 @@ export const openModal = (rewardCards) => ({
 export const closeModal = () => {
   // Ajoutez votre redirection ici
   window.location.href = "/";
-
-  // Retournez votre action Redux
   return {
     type: CLOSE_MODAL,
   };
@@ -85,7 +86,7 @@ export const closeModal = () => {
 export const fetchAllCards = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch("api/card-form/getAllCards");
+      const response = await fetch("/api/card-form/getAllCards");
       const data = await response.json();
       dispatch(fetchAllCardsSuccess(data.cards));
     } catch (error) {

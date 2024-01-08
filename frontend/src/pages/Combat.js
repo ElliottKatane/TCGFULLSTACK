@@ -35,6 +35,7 @@ const Combat = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
+        zIndex: 1,
       }}
     >
       {/* Composant CardBoard */}

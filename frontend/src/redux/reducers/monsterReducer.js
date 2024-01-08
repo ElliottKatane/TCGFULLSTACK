@@ -3,19 +3,19 @@ import {
   FETCH_MONSTER_INFO_FAILURE,
   DEGATS_SUBIS,
   INITIALIZE_CURRENT_HP,
-  ACTIVATE_VULNERABILITE,
-  DEACTIVATE_VULNERABILITE,
-  ACTIVATE_FAIBLESSE,
-  DEACTIVATE_FAIBLESSE,
-  HANDLE_FAIBLESSE_VULNERABILITE,
+  HANDLE_FAIBLESSE_VULNERABILITE_MONSTER,
+  ACTIVATE_VULNERABILITE_FOR_MONSTER,
+  DEACTIVATE_VULNERABILITE_FOR_MONSTER,
+  ACTIVATE_FAIBLESSE_FOR_MONSTER,
+  DEACTIVATE_FAIBLESSE_FOR_MONSTER,
 } from "../actions/monster.action";
 
 const initialState = {
   monsterInfo: null, // Informations du monstre
-  faiblesseActivated: false,
-  vulnerabiliteActivated: false,
-  faiblesseCount: 0,
-  vulnerabiliteCount: 0,
+  monsterFaiblesseActivated: false,
+  monsterVulnerabiliteActivated: false,
+  monsterFaiblesseCount: 0,
+  monsterVulnerabiliteCount: 0,
   currentHealth: 0,
 };
 
@@ -49,38 +49,42 @@ const monsterReducer = (state = initialState, action) => {
         currentHealth: newHP,
       };
     // Etats Vulnerabilite et Faiblesse
-    case ACTIVATE_VULNERABILITE:
+    case ACTIVATE_VULNERABILITE_FOR_MONSTER:
       return {
         ...state,
-        vulnerabiliteActivated: true,
+        monsterVulnerabiliteActivated: true,
       };
-    case DEACTIVATE_VULNERABILITE:
+    case DEACTIVATE_VULNERABILITE_FOR_MONSTER:
       return {
         ...state,
-        vulnerabiliteActivated: false,
+        monsterVulnerabiliteActivated: false,
       };
-    case ACTIVATE_FAIBLESSE:
+    case ACTIVATE_FAIBLESSE_FOR_MONSTER:
       return {
         ...state,
-        faiblesseActivated: true,
+        monsterFaiblesseActivated: true,
       };
-    case DEACTIVATE_FAIBLESSE:
+    case DEACTIVATE_FAIBLESSE_FOR_MONSTER:
       return {
         ...state,
-        faiblesseActivated: false,
+        monsterFaiblesseActivated: false,
       };
-    case HANDLE_FAIBLESSE_VULNERABILITE:
-      if (state.faiblesseActivated) {
+    case HANDLE_FAIBLESSE_VULNERABILITE_MONSTER:
+      if (state.monsterFaiblesseActivated) {
         return {
           ...state,
-          faiblesseCount:
-            state.faiblesseCount > 0 ? state.faiblesseCount - 1 : 0,
+          monsterFaiblesseCount:
+            state.monsterFaiblesseCount > 0
+              ? state.monsterFaiblesseCount - 1
+              : 0,
         };
-      } else if (state.vulnerabiliteActivated) {
+      } else if (state.monsterVulnerabiliteActivated) {
         return {
           ...state,
-          vulnerabiliteCount:
-            state.vulnerabiliteCount > 0 ? state.vulnerabiliteCount - 1 : 0,
+          monsterVulnerabiliteCount:
+            state.monsterVulnerabiliteCount > 0
+              ? state.monsterVulnerabiliteCount - 1
+              : 0,
         };
       }
       return state;

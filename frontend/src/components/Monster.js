@@ -12,7 +12,12 @@ import { fetchRewardCards } from "../redux/actions/card.action";
 import faiblesseIcon from "../assets/icons/faiblesse-icon.jpg";
 import vulnerabiliteIcon from "../assets/icons/vulnerabilite-icon.png";
 
-const Monster = ({ monster, dispatch, faiblesseActivated }) => {
+const Monster = ({
+  monster,
+  dispatch,
+  monsterFaiblesseActivated,
+  monsterVulnerabiliteActivated,
+}) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
@@ -63,14 +68,19 @@ const Monster = ({ monster, dispatch, faiblesseActivated }) => {
               HPValue={monster.monsterInfo.health}
               currentHealth={monster.currentHealth}
             />
-            {monster.faiblesseActivated ? (
-              <img
-                src={faiblesseIcon}
-                alt="faiblesse-icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+            {monster.monsterFaiblesseActivated ? (
+              <div>
+                <img
+                  src={faiblesseIcon}
+                  alt="faiblesse-icon"
+                  style={{ width: "30px", height: "30px" }}
+                />
+                {monster.monsterFaiblesseCount > 0
+                  ? monster.monsterFaiblesseCount
+                  : null}
+              </div>
             ) : null}
-            {monster.vulnerabiliteActivated ? (
+            {monster.monsterVulnerabiliteActivated ? (
               <img
                 src={vulnerabiliteIcon}
                 alt="vulnerabilite-icon"

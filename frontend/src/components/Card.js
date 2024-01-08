@@ -9,10 +9,6 @@ import {
   activateCombustion,
   deactivateCombustion,
   increaseCombustionCount,
-  activateFaiblesse,
-  activateVulnerabilite,
-  deactivateFaiblesse,
-  deactivateVulnerabilite,
   setCardAnimationActive,
   setBuffAnimationActive,
   updateArmor,
@@ -22,13 +18,16 @@ import {
   fetchCardFromPioche,
 } from "../redux/actions/player.action";
 import { connect } from "react-redux";
-import { DegatsSubis } from "../redux/actions/monster.action";
+import {
+  DegatsSubis,
+  activateVulnerabiliteForMonster,
+} from "../redux/actions/monster.action";
 
 const Card = ({
   player,
   enflammerActivated,
-  faiblesseActivated,
-  vulnerabiliteActivated,
+  monsterFaiblesseActivated,
+  monsterVulnerabiliteActivated,
 }) => {
   const dispatch = useDispatch(); // Initialize the useDispatch hook
 
@@ -84,7 +83,7 @@ const Card = ({
 
         case "Coup de tonnerre": // Infligez 4 dégâts et appliquez 1 de Vulnérabilité à tous les ennemis
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
-          dispatch(activateVulnerabilite());
+          dispatch(activateVulnerabiliteForMonster());
 
           break;
 
@@ -162,12 +161,12 @@ const Card = ({
       modifiedDamage += 2;
     }
     // Si l'effet Faiblesse est activé, réduit les dégâts de 30% (arrondi à l'entier supérieur)
-    if (faiblesseActivated) {
+    if (monsterFaiblesseActivated) {
       const weaknessReduction = Math.ceil(baseDamage * 0.3);
       modifiedDamage -= weaknessReduction;
     }
     // Si l'effet Vulnérabilité est activé, ajoute 30% aux dégâts
-    if (vulnerabiliteActivated) {
+    if (monsterVulnerabiliteActivated) {
       const vulnerabilityBonus = Math.ceil(baseDamage * 0.3);
       modifiedDamage += vulnerabilityBonus;
     }
@@ -221,6 +220,8 @@ const mapStateToProps = (state) => {
     faiblesseActivated: state.player.faiblesseActivated,
     vulnerabiliteActivated: state.player.vulnerabiliteActivated,
     combustionActivated: state.player.combustionActivated,
+    monsterVulnerabiliteActivated: state.monster.monsterVulnerabiliteActivated,
+    monsterFaiblesseActivated: state.monster.monsterFaiblesseActivated,
   };
 };
 export default connect(mapStateToProps)(Card);

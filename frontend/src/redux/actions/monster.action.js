@@ -3,11 +3,15 @@ export const FETCH_MONSTER_INFO_FAILURE = "FETCH_MONSTER_INFO_FAILURE";
 export const DEGATS_SUBIS = "DEGATS_SUBIS";
 export const INITIALIZE_CURRENT_HP = "INITIALIZE_CURRENT_HP";
 // Etats Vulnerabilite et Faiblesse
-export const ACTIVATE_VULNERABILITE = "ACTIVATE_VULNERABILITE";
-export const DEACTIVATE_VULNERABILITE = "DEACTIVATE_VULNERABILITE";
-export const ACTIVATE_FAIBLESSE = "ACTIVATE_FAIBLESSE";
-export const DEACTIVATE_FAIBLESSE = "DEACTIVATE_FAIBLESSE";
-export const HANDLE_FAIBLESSE_VULNERABILITE = "HANDLE_FAIBLESSE_VULNERABILITE";
+export const ACTIVATE_VULNERABILITE_FOR_MONSTER =
+  "ACTIVATE_VULNERABILITE_FOR_MONSTER";
+export const DEACTIVATE_VULNERABILITE_FOR_MONSTER =
+  "DEACTIVATE_VULNERABILITE_FOR_MONSTER";
+export const ACTIVATE_FAIBLESSE_FOR_MONSTER = "ACTIVATE_FAIBLESSE_FOR_MONSTER";
+export const DEACTIVATE_FAIBLESSE_FOR_MONSTER =
+  "DEACTIVATE_FAIBLESSE_FOR_MONSTER";
+export const HANDLE_FAIBLESSE_VULNERABILITE_MONSTER =
+  "HANDLE_FAIBLESSE_VULNERABILITE_MONSTER";
 
 export const fetchMonsterInfoSuccess = (monsterInfo) => ({
   type: FETCH_MONSTER_INFO_SUCCESS,
@@ -55,18 +59,18 @@ export const InitializeMonsterHP = (health) => {
   };
 };
 // Etats Vulnerabilite et Faiblesse
-export const activateVulnerabilite = () => ({
-  type: ACTIVATE_VULNERABILITE,
+export const activateVulnerabiliteForMonster = () => ({
+  type: ACTIVATE_VULNERABILITE_FOR_MONSTER,
 });
-export const deactivateVulnerabilite = () => ({
-  type: DEACTIVATE_VULNERABILITE,
+export const deactivateVulnerabiliteForMonster = () => ({
+  type: DEACTIVATE_VULNERABILITE_FOR_MONSTER,
 });
-export const activateFaiblesse = () => ({
-  type: ACTIVATE_FAIBLESSE,
+export const activateFaiblesseForMonster = () => ({
+  type: ACTIVATE_FAIBLESSE_FOR_MONSTER,
 });
-export const deactivateFaiblesse = () => ({
-  type: DEACTIVATE_FAIBLESSE,
+export const deactivateFaiblesseForMonster = () => ({
+  type: DEACTIVATE_FAIBLESSE_FOR_MONSTER,
 });
-export const handleFaiblesseVulnerabilite = () => ({
-  type: HANDLE_FAIBLESSE_VULNERABILITE,
+export const handleFaiblesseVulnerabiliteForMonster = () => ({
+  type: HANDLE_FAIBLESSE_VULNERABILITE_MONSTER,
 });

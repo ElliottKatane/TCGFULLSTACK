@@ -165,6 +165,7 @@ export const addCardHebetement = (cardName) => {
           cost: responseData.cost,
           rarity: responseData.rarity,
           type: responseData.type,
+          imageURL: responseData.imageURL,
         },
         id: uuidv4(), // Utilisation d'uuid pour générer un identifiant unique
         quantity: 1,

@@ -91,7 +91,7 @@ const Card = ({ player, enflammerActivated }) => {
           // add colere copy to pioche
           dispatch(addColereCopy(clickedCard.id));
           break;
-        case "Defense": // 1 - Gagnez 5 de blocage.
+        case "Défense": // 1 - Gagnez 5 de blocage.
           dispatch(updateArmor(clickedCard.card.value));
           dispatch(setBuffAnimationActive(true));
           // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)

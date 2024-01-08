@@ -1,5 +1,4 @@
 import { fetchPlayer } from "./player.action";
-import { fetchRewardCards } from "./card.action";
 
 export const VICTORY = "VICTORY";
 export const DEFEAT = "DEFEAT";
@@ -64,15 +63,6 @@ export const handleVictory =
       // Handle error as needed
     }
   };
-
-export const rewardPlayer = () => async (dispatch) => {
-  try {
-    // Appeler l'action fetchRewardCards pour récupérer deux cartes aléatoires
-    await dispatch(fetchRewardCards());
-  } catch (error) {
-    console.error("ERROR REWARDING PLAYER: ", error);
-  }
-};
 
 export const handleDefeat = () => (dispatch) => {
   try {

@@ -129,6 +129,11 @@ const Card = ({
           // carte sans effet. Occupe une place dans la main. cliquez pour la faire disparaître
           dispatch(removeCardFromMain(clickedCard.id));
           break;
+        case "Heurt":
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          dispatch(activateVulnerabiliteForMonster());
+          dispatch(activateVulnerabiliteForMonster());
+          break;
         default:
           // Gérer le cas par défaut si le nom de la carte n'est pas reconnu
           console.log("Carte non codée encore : ", clickedCard.card.name);

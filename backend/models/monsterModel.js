@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const attackSchema = new Schema({
   name: { type: String, required: true },
-  damage: { type: Number, required: true },
+  damage: { type: Number },
+  armor: { type: Number },
 });
 
 const monsterSchema = new Schema({

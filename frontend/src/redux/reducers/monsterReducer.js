@@ -3,11 +3,14 @@ import {
   FETCH_MONSTER_INFO_FAILURE,
   DEGATS_SUBIS,
   INITIALIZE_CURRENT_HP,
+  UPDATE_MONSTER_ARMOR,
+  RESET_MONSTER_ARMOR,
 } from "../actions/monster.action";
 
 const initialState = {
   monsterInfo: null, // Informations du monstre
   currentHealth: 0,
+  armor: 0,
 };
 
 const monsterReducer = (state = initialState, action) => {
@@ -30,10 +33,25 @@ const monsterReducer = (state = initialState, action) => {
         currentHealth: action.payload.health,
       };
 
+    case UPDATE_MONSTER_ARMOR:
+      return {
+        ...state,
+        armor: state.armor + action.payload.armorValue,
+      };
+    case RESET_MONSTER_ARMOR:
+      return {
+        ...state,
+        armor: 0,
+      };
+
     case DEGATS_SUBIS:
       console.log("Reducing damage. Current health:", state.currentHealth);
       console.log("Damage value:", action.payload.damageValue);
-      const newHP = state.currentHealth - action.payload.damageValue; //J'ai modifier le log (ligne 28) pour montrer la vie courante. Avant ca afficher la vie avant l'attaque
+      const effectiveDamage = Math.max(
+        action.payload.damageValue - state.armor,
+        0
+      );
+      const newHP = state.currentHealth - effectiveDamage;
       console.log("HP after dmg", newHP);
       return {
         ...state,

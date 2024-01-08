@@ -25,11 +25,20 @@ const SwitchTurnButton = () => {
     // Quand on clique sur "End Player Turn" :
     if (currentTurn === "player") {
       const numberOfAttacks = monsterInfo.attacks.length;
-      // Generate a random index within the range of the attacks array
       const randomAttackIndex = Math.floor(Math.random() * numberOfAttacks);
-      // Get the damage value of the randomly selected attack
-      const monsterAttackValue = monsterInfo.attacks[randomAttackIndex].damage;
 
+      const selectedAttack = monsterInfo.attacks[randomAttackIndex];
+      const isArmorAttack = selectedAttack.hasOwnProperty("armor"); // Check if it's an armor attack
+
+      let monsterAttackValue;
+
+      if (isArmorAttack) {
+        // If it's an armor attack, get the armor value
+        monsterAttackValue = selectedAttack.armor;
+      } else {
+        // If it's a regular damage attack, get the damage value
+        monsterAttackValue = selectedAttack.damage;
+      }
       setIsButtonDisabled(true);
       setTimeout(() => {
         setIsButtonDisabled(false);

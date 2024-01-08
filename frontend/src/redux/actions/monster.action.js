@@ -2,6 +2,8 @@ export const FETCH_MONSTER_INFO_SUCCESS = "FETCH_MONSTER_INFO_SUCCESS";
 export const FETCH_MONSTER_INFO_FAILURE = "FETCH_MONSTER_INFO_FAILURE";
 export const DEGATS_SUBIS = "DEGATS_SUBIS";
 export const INITIALIZE_CURRENT_HP = "INITIALIZE_CURRENT_HP";
+export const UPDATE_MONSTER_ARMOR = "UPDATE_MONSTER_ARMOR";
+export const RESET_MONSTER_ARMOR = "RESET_MONSTER_ARMOR";
 
 export const fetchMonsterInfoSuccess = (monsterInfo) => ({
   type: FETCH_MONSTER_INFO_SUCCESS,
@@ -48,3 +50,12 @@ export const InitializeMonsterHP = (health) => {
     },
   };
 };
+
+export const updateMonsterArmor = (armorValue) => ({
+  type: UPDATE_MONSTER_ARMOR,
+  payload: { armorValue },
+});
+
+export const resetMonsterArmor = () => ({
+  type: RESET_MONSTER_ARMOR,
+});

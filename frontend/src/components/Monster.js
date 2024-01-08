@@ -1,24 +1,20 @@
 // react & router dom
 import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import { fetchMonster } from "../redux/actions/monster.action";
-import {
-  handleVictory,
-  resetVictory,
-  rewardPlayer,
-} from "../redux/actions/game.action";
+import { handleVictory, resetVictory } from "../redux/actions/game.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 // components
 import StatsBar from "./StatsBar";
 import Modal from "./Modal";
+import { fetchRewardCards } from "../redux/actions/card.action";
+import faiblesseIcon from "../assets/icons/faiblesse-icon.jpg";
 
-const Monster = ({ monster, dispatch }) => {
+const Monster = ({ monster, dispatch, faiblesseActivated }) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
-  const navigate = useNavigate();
   // Utilisez useSelector pour extraire isOpen et cards du Redux store
   const modalIsOpen = useSelector((state) => state.card.modalIsOpen);
   const modalCards = useSelector((state) => state.card.rewardCards);
@@ -41,7 +37,7 @@ const Monster = ({ monster, dispatch }) => {
     if (monster.monsterInfo && monster.currentHealth <= 0 && !isVictory) {
       console.log("Entering handleVictory effect");
       const userEmail = user.email;
-      dispatch(rewardPlayer());
+      dispatch(fetchRewardCards(mapLevel));
       dispatch(handleVictory(userEmail, mapLevel));
       dispatch(resetVictory());
     }
@@ -67,6 +63,14 @@ const Monster = ({ monster, dispatch }) => {
               currentHealth={monster.currentHealth}
             />
           </div>
+          {faiblesseActivated ? (
+            <img
+              src={faiblesseIcon}
+              alt="faiblesse-icon"
+              style={{ width: "30px", height: "30px" }}
+            />
+          ) : null}
+
           <img
             src={`/assets/${monster.monsterInfo.image}`}
             alt={monster.monsterInfo.name}

@@ -15,10 +15,6 @@ router.post("/login", loginUser);
 router.post("/signup", signupUser);
 
 // level Reached route
-router.get(
-  "https://tcg-backend.onrender.com/api/user/levelReached",
-  requireAuth,
-  getLevelReached
-);
+router.get("/levelReached", requireAuth, getLevelReached);
 
 module.exports = router;

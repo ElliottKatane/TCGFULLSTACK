@@ -1,7 +1,6 @@
 import ReactModal from "react-modal";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { addToDeck, closeModal } from "../redux/actions/card.action";
-import { fetchPlayer } from "../redux/actions/player.action";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"; // Ajoutez ceci
@@ -72,8 +71,8 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       >
         {mapLevel && mapLevel >= playerInfo.levelReached ? (
           <p>
-            Félicitations ! Vous avez remporté la victoire ! <br /> Choisissez
-            une récompense.
+            Félicitations ! Vous avez remporté la victoire ! Choisissez une
+            récompense. Map level: {mapLevel}
           </p>
         ) : (
           <p>

@@ -1,5 +1,4 @@
 import { fetchPlayer } from "./player.action";
-import { fetchRewardCards } from "./card.action";
 
 export const VICTORY = "VICTORY";
 export const DEFEAT = "DEFEAT";
@@ -39,7 +38,7 @@ export const handleVictory =
 
           // Make a server request to update the levelReached
           const response = await fetch(
-            `https://tcg-backend.onrender.com/api/player/update-level`,
+            `https://tcg-backend-eli.onrender.com/api/player/update-level`,
             {
               method: "POST",
               headers: {
@@ -64,15 +63,6 @@ export const handleVictory =
       // Handle error as needed
     }
   };
-
-export const rewardPlayer = () => async (dispatch) => {
-  try {
-    // Appeler l'action fetchRewardCards pour récupérer deux cartes aléatoires
-    await dispatch(fetchRewardCards());
-  } catch (error) {
-    console.error("ERROR REWARDING PLAYER: ", error);
-  }
-};
 
 export const handleDefeat = () => (dispatch) => {
   try {

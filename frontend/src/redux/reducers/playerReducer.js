@@ -12,6 +12,10 @@ import {
   DEACTIVATE_COMBUSTION,
   INCREASE_COMBUSTION_COUNT,
   INITIALIZE_COMBUSTION_COUNT,
+  ACTIVATE_VULNERABILITE,
+  DEACTIVATE_VULNERABILITE,
+  ACTIVATE_FAIBLESSE,
+  DEACTIVATE_FAIBLESSE,
   END_PLAYER_TURN,
   END_MONSTER_TURN,
   INITIALIZE_CURRENT_PLAYER_HP,
@@ -41,6 +45,9 @@ const initialState = {
   enflammerActivated: false,
   combustionActivated: false,
   combustionPlayedCount: 0, // Nombre de fois que la carte "Combustion" a été jouée
+  // temp states
+  faiblesseActivated: false,
+  vulnerabiliteActivated: false,
   // cartes
   pioche: [],
   main: [],
@@ -93,6 +100,27 @@ const playerReducer = (state = initialState, action) => {
       return {
         ...state,
         enflammerActivated: false,
+      };
+    // Etats Vulnerabilite et Faiblesse
+    case ACTIVATE_VULNERABILITE:
+      return {
+        ...state,
+        vulnerabiliteActivated: true,
+      };
+    case DEACTIVATE_VULNERABILITE:
+      return {
+        ...state,
+        vulnerabiliteActivated: false,
+      };
+    case ACTIVATE_FAIBLESSE:
+      return {
+        ...state,
+        faiblesseActivated: true,
+      };
+    case DEACTIVATE_FAIBLESSE:
+      return {
+        ...state,
+        faiblesseActivated: false,
       };
 
     // carte Colère

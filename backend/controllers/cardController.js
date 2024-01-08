@@ -53,20 +53,33 @@ const getAllCards = async (req, res) => {
   }
 };
 
-// Retrieve 2 reward cards
 const getRewardCards = async (req, res) => {
   try {
-    const cardCount = await Card.countDocuments();
-    const sampleSize = Math.min(2, cardCount); // Determine the sample size
+    const playerLevel = req.params.mapLevel; // Récupérer le niveau du joueur à partir des paramètres de la requête
+    console.log("playerLevel", playerLevel);
+    const levelCardCategories = {
+      1: ["Conflit", "Frappe", "Coup de boule"],
+      2: ["Charge imprudente", "Défense", "Frappe double"],
+      3: ["Même pas mal", "Combustion", "Frappe"],
+      4: ["Conflit", "Colère", "Enflammer"],
+      5: ["Conflit", "Frappe", "Coup de boule"],
+      6: ["Conflit", "Frappe", "Coup de boule"],
+      7: ["Conflit", "Frappe", "Coup de boule"],
+      8: ["Conflit", "Frappe", "Coup de boule"],
+      9: ["Conflit", "Frappe", "Coup de boule"],
+      10: ["Conflit", "Frappe", "Coup de boule"],
+    };
+    // Get the card categories for the player's level
+    const cardCategories = levelCardCategories[playerLevel] || [];
+    // Define the sample size (you can set it to any value)
+    const sampleSize = Math.min(3, cardCategories.length);
+    // Log the card categories for debugging
+    console.log("Card Categories for Level", playerLevel, ":", cardCategories);
     const randomCards = await Card.aggregate([
-      { $sample: { size: sampleSize } }, // Retrieve random cards based on the sample size
+      { $match: { name: { $in: cardCategories } } }, // Filter by card categories
+      { $sample: { size: sampleSize } }, // Récupérer 3 cartes au hasard parmi les catégories filtrées
     ]);
-
-    // Log each card as it's retrieved
-    // randomCards.forEach((card, index) => {
-    //   console.log(`"Controller method" Card ${index + 1}:`, card);
-    // });
-
+    console.log("Random Cards:", randomCards);
     res.status(200).json(randomCards);
   } catch (error) {
     res.status(500).json({ error: error.message });

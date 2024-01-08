@@ -15,7 +15,7 @@ router.post("/createcard", createCard);
 // Retrieve all cards (used in /createcard under the form)
 router.get("/getcards", getAllCardsWithCounts);
 // Retrieve X reward cards
-router.get("/getRewardCards", getRewardCards);
+router.get("/getRewardCards/:mapLevel", getRewardCards);
 // Retrieve all cards, displayed in CardList.js
 router.get("/getAllCards", getAllCards);
 // Get card by name

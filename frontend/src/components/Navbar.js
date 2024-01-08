@@ -3,7 +3,7 @@ import stslogo from "../assets/stslogo.png";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-import "../CSS/Navbar.css"; // Import your CSS file for styling
+import "../CSS/Navbar.css";
 
 export default function Navbar() {
   const { logout } = useLogout();
@@ -18,6 +18,7 @@ export default function Navbar() {
   const handleClick = () => {
     logout();
     setMenuVisible(false); // Close the menu after logout
+    window.location.href = "/"; // Redirect to home page
   };
 
   useEffect(() => {
@@ -62,11 +63,11 @@ export default function Navbar() {
         ) : (
           <div>
             <Link to="/login" onClick={() => setMenuVisible(false)}>
-              S'identifier
+              Continuer
             </Link>
             <br />
             <Link to="/signup" onClick={() => setMenuVisible(false)}>
-              S'enregistrer
+              Nouveau jeu
             </Link>
           </div>
         )}

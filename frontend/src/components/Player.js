@@ -18,8 +18,8 @@ import {
   updateArmor,
   initializeCombustionCount,
 } from "../redux/actions/player.action";
-import flameIcon from "../assets/flame-icon.png";
-import combustionIcon from "../assets/combustion-icon.png";
+import flameIcon from "../assets/icons/flame-icon.png";
+import combustionIcon from "../assets/icons/combustion-icon.png";
 import buffIcon from "../assets/buff.gif";
 const Player = ({
   player,

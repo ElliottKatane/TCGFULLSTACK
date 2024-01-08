@@ -4,6 +4,16 @@ export const DEGATS_SUBIS = "DEGATS_SUBIS";
 export const INITIALIZE_CURRENT_HP = "INITIALIZE_CURRENT_HP";
 export const UPDATE_MONSTER_ARMOR = "UPDATE_MONSTER_ARMOR";
 export const RESET_MONSTER_ARMOR = "RESET_MONSTER_ARMOR";
+// Etats Vulnerabilite et Faiblesse
+export const ACTIVATE_VULNERABILITE_FOR_MONSTER =
+  "ACTIVATE_VULNERABILITE_FOR_MONSTER";
+export const DEACTIVATE_VULNERABILITE_FOR_MONSTER =
+  "DEACTIVATE_VULNERABILITE_FOR_MONSTER";
+export const ACTIVATE_FAIBLESSE_FOR_MONSTER = "ACTIVATE_FAIBLESSE_FOR_MONSTER";
+export const DEACTIVATE_FAIBLESSE_FOR_MONSTER =
+  "DEACTIVATE_FAIBLESSE_FOR_MONSTER";
+export const HANDLE_FAIBLESSE_VULNERABILITE_MONSTER =
+  "HANDLE_FAIBLESSE_VULNERABILITE_MONSTER";
 
 export const fetchMonsterInfoSuccess = (monsterInfo) => ({
   type: FETCH_MONSTER_INFO_SUCCESS,
@@ -58,4 +68,19 @@ export const updateMonsterArmor = (armorValue) => ({
 
 export const resetMonsterArmor = () => ({
   type: RESET_MONSTER_ARMOR,
+// Etats Vulnerabilite et Faiblesse
+export const activateVulnerabiliteForMonster = () => ({
+  type: ACTIVATE_VULNERABILITE_FOR_MONSTER,
+});
+export const deactivateVulnerabiliteForMonster = () => ({
+  type: DEACTIVATE_VULNERABILITE_FOR_MONSTER,
+});
+export const activateFaiblesseForMonster = () => ({
+  type: ACTIVATE_FAIBLESSE_FOR_MONSTER,
+});
+export const deactivateFaiblesseForMonster = () => ({
+  type: DEACTIVATE_FAIBLESSE_FOR_MONSTER,
+});
+export const handleFaiblesseVulnerabiliteForMonster = () => ({
+  type: HANDLE_FAIBLESSE_VULNERABILITE_MONSTER,
 });

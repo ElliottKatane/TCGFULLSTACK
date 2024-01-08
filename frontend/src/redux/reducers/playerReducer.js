@@ -46,8 +46,10 @@ const initialState = {
   combustionActivated: false,
   combustionPlayedCount: 0, // Nombre de fois que la carte "Combustion" a été jouée
   // temp states
-  faiblesseActivated: false,
-  vulnerabiliteActivated: false,
+  playerFaiblesseActivated: false,
+  playerVulnerabiliteActivated: false,
+  playerFaiblesseCount: 0,
+  playerVulnerabiliteCount: 0,
   // cartes
   pioche: [],
   main: [],

@@ -5,10 +5,19 @@ import {
   INITIALIZE_CURRENT_HP,
   UPDATE_MONSTER_ARMOR,
   RESET_MONSTER_ARMOR,
+  HANDLE_FAIBLESSE_VULNERABILITE_MONSTER,
+  ACTIVATE_VULNERABILITE_FOR_MONSTER,
+  DEACTIVATE_VULNERABILITE_FOR_MONSTER,
+  ACTIVATE_FAIBLESSE_FOR_MONSTER,
+  DEACTIVATE_FAIBLESSE_FOR_MONSTER,
 } from "../actions/monster.action";
 
 const initialState = {
   monsterInfo: null, // Informations du monstre
+  monsterFaiblesseActivated: false,
+  monsterVulnerabiliteActivated: false,
+  monsterFaiblesseCount: 0,
+  monsterVulnerabiliteCount: 0,
   currentHealth: 0,
   armor: 0,
 };
@@ -78,7 +87,46 @@ const monsterReducer = (state = initialState, action) => {
         ...state,
         currentHealth: newHP,
       };
-
+    // Etats Vulnerabilite et Faiblesse
+    case ACTIVATE_VULNERABILITE_FOR_MONSTER:
+      return {
+        ...state,
+        monsterVulnerabiliteActivated: true,
+      };
+    case DEACTIVATE_VULNERABILITE_FOR_MONSTER:
+      return {
+        ...state,
+        monsterVulnerabiliteActivated: false,
+      };
+    case ACTIVATE_FAIBLESSE_FOR_MONSTER:
+      return {
+        ...state,
+        monsterFaiblesseActivated: true,
+      };
+    case DEACTIVATE_FAIBLESSE_FOR_MONSTER:
+      return {
+        ...state,
+        monsterFaiblesseActivated: false,
+      };
+    case HANDLE_FAIBLESSE_VULNERABILITE_MONSTER:
+      if (state.monsterFaiblesseActivated) {
+        return {
+          ...state,
+          monsterFaiblesseCount:
+            state.monsterFaiblesseCount > 0
+              ? state.monsterFaiblesseCount - 1
+              : 0,
+        };
+      } else if (state.monsterVulnerabiliteActivated) {
+        return {
+          ...state,
+          monsterVulnerabiliteCount:
+            state.monsterVulnerabiliteCount > 0
+              ? state.monsterVulnerabiliteCount - 1
+              : 0,
+        };
+      }
+      return state;
     default:
       return state;
   }

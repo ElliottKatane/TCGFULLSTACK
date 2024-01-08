@@ -68,6 +68,7 @@ export const updateMonsterArmor = (armorValue) => ({
 
 export const resetMonsterArmor = () => ({
   type: RESET_MONSTER_ARMOR,
+});
 // Etats Vulnerabilite et Faiblesse
 export const activateVulnerabiliteForMonster = () => ({
   type: ACTIVATE_VULNERABILITE_FOR_MONSTER,

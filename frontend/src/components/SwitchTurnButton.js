@@ -27,8 +27,9 @@ const SwitchTurnButton = () => {
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
-    // Quand on clique sur "End Player Turn" :
+    //Ending player turn
     if (currentTurn === "player") {
+      dispatch(resetMonsterArmor());
       const numberOfAttacks = monsterInfo.attacks.length;
       const randomAttackIndex = Math.floor(Math.random() * numberOfAttacks);
 
@@ -57,14 +58,8 @@ const SwitchTurnButton = () => {
         // Introduce another 1-second delay before processing the attack
         setTimeout(() => {
           if (isArmorAttack) {
-            const remainingArmor = monsterInfo.armor - selectedAttack.armor;
+            dispatch(updateMonsterArmor(monsterAttackValue));
 
-            if (remainingArmor < 0) {
-              // If armor is negative, set it to 0
-              dispatch(updateMonsterArmor(0));
-            } else {
-              dispatch(updateMonsterArmor(remainingArmor));
-            }
             console.log(
               `Monster increases it's defence by ${selectedAttack.armor} !`
             );
@@ -95,10 +90,6 @@ const SwitchTurnButton = () => {
       }
       // le reste des cartes de la main du joueur sont défaussées
       dispatch(moveCardsToDefausse(player.main));
-    } else {
-      // quand on clique sur "End Monster Turn:"
-      // Refill/Reset des stats du joueur : armure et man
-      dispatch(resetMonsterArmor());
     }
   };
   return (

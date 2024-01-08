@@ -51,6 +51,7 @@ const monsterReducer = (state = initialState, action) => {
       };
 
     case RESET_MONSTER_ARMOR:
+      console.log("Resetting monster armor to 0");
       return {
         ...state,
         armor: 0,
@@ -73,20 +74,38 @@ const monsterReducer = (state = initialState, action) => {
         return state;
       }
 
-      // If conversion to number fails, default to 0
-      const effectiveDamage = Math.max(damageValue - armor, 0);
+      // S'il y a de l'armure
+      if (armor > 0) {
+        // Réduire d'abord l'armure
+        const remainingArmor = armor - damageValue;
 
-      console.log("Effective damage after armor:", effectiveDamage);
+        // Si l'armure ne suffit pas à absorber toute l'attaque
+        if (remainingArmor < 0) {
+          const remainingHealth = state.currentHealth + remainingArmor;
+          return {
+            ...state,
+            armor: 0,
+            // Ternaire qui permet de ne pas avoir de points de vie négatifs
+            currentHealth: remainingHealth < 0 ? 0 : remainingHealth,
+          };
+        } else {
+          // Si l'armure suffit à absorber l'attaque, mettre à jour l'armure
+          return {
+            ...state,
+            armor: remainingArmor,
+          };
+        }
+      } else {
+        // S'il n'y a pas d'armure, réduire directement les points de vie
+        const newHP = Math.max(state.currentHealth - damageValue, 0);
+        console.log("HP after dmg", newHP);
 
-      // Ensure currentHealth is a valid number
-      const newHP = Math.max(Number(state.currentHealth) - effectiveDamage, 0);
+        return {
+          ...state,
+          currentHealth: newHP,
+        };
+      }
 
-      console.log("HP after dmg", newHP);
-
-      return {
-        ...state,
-        currentHealth: newHP,
-      };
     // Etats Vulnerabilite et Faiblesse
     case ACTIVATE_VULNERABILITE_FOR_MONSTER:
       return {

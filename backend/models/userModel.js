@@ -78,13 +78,13 @@ const initializePlayerDeck = async () => {
     // const card3 = await Card.findOne({ name: "Défense" });
 
     const card1 = await Card.findOne({ name: "Colère" });
-    // const card2 = await Card.findOne({ name: "Colère" });
+    const card2 = await Card.findOne({ name: "Coup de tonnerre" });
     // const card3 = await Card.findOne({ name: "Colère" });
 
     // Retourne un tableau avec les identifiants des cartes
     return [
-      { card: card1.toObject(), quantity: 15 },
-      // { card: card2.toObject(), quantity: 5 },
+      { card: card1.toObject(), quantity: 10 },
+      { card: card2.toObject(), quantity: 5 },
       // { card: card3.toObject(), quantity: 5 },
     ];
   } catch (error) {

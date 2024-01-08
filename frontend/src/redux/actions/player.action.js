@@ -22,6 +22,11 @@ export const DEACTIVATE_ENFLAMMER = "DEACTIVATE_ENFLAMMER";
 export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
 export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
 export const INCREASE_COMBUSTION_COUNT = "INCREASE_COMBUSTION_COUNT";
+// Etats Vulnerabilite et Faiblesse
+export const ACTIVATE_VULNERABILITE = "ACTIVATE_VULNERABILITE";
+export const DEACTIVATE_VULNERABILITE = "DEACTIVATE_VULNERABILITE";
+export const ACTIVATE_FAIBLESSE = "ACTIVATE_FAIBLESSE";
+export const DEACTIVATE_FAIBLESSE = "DEACTIVATE_FAIBLESSE";
 // carte Colère
 export const ADD_COLERE_COPY = "ADD_COLERE_COPY";
 //carte Hébétement
@@ -53,10 +58,6 @@ export const switchTurn = (currentTurn) => (dispatch) => {
     dispatch(endPlayerTurn());
   } else if (currentTurn === "monster") {
     dispatch(endMonsterTurn());
-    // probablement qu'il faudra rajouter :
-    // vérifier si la pioche est vide. si oui, il faut aller transvaser les cartes de la défausse dans la pioche
-    // la logique pour fetch de nouvelles cartes depuis la pioche
-    // le reset de currentMana
   }
 };
 
@@ -116,6 +117,19 @@ export const increaseCombustionCount = (combustionPlayedCount) => {
     payload: { combustionPlayedCount },
   };
 };
+// Etats Vulnerabilite et Faiblesse
+export const activateVulnerabilite = () => ({
+  type: ACTIVATE_VULNERABILITE,
+});
+export const deactivateVulnerabilite = () => ({
+  type: DEACTIVATE_VULNERABILITE,
+});
+export const activateFaiblesse = () => ({
+  type: ACTIVATE_FAIBLESSE,
+});
+export const deactivateFaiblesse = () => ({
+  type: DEACTIVATE_FAIBLESSE,
+});
 // carte Colère (création d'une copie)
 export const addColereCopy = (id) => ({
   type: ADD_COLERE_COPY,

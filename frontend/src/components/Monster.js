@@ -1,7 +1,6 @@
 // react & router dom
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import { connect, useSelector } from "react-redux";
 import { fetchMonster } from "../redux/actions/monster.action";
 import { handleVictory, resetVictory } from "../redux/actions/game.action";
@@ -10,8 +9,9 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import StatsBar from "./StatsBar";
 import Modal from "./Modal";
 import { fetchRewardCards } from "../redux/actions/card.action";
+import faiblesseIcon from "../assets/faiblesse-icon.jpg";
 
-const Monster = ({ monster, dispatch }) => {
+const Monster = ({ monster, dispatch, faiblesseActivated }) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
@@ -63,6 +63,14 @@ const Monster = ({ monster, dispatch }) => {
               currentHealth={monster.currentHealth}
             />
           </div>
+          {faiblesseActivated ? (
+            <img
+              src={faiblesseIcon}
+              alt="faiblesse-icon"
+              style={{ width: "30px", height: "30px" }}
+            />
+          ) : null}
+
           <img
             src={`/assets/${monster.monsterInfo.image}`}
             alt={monster.monsterInfo.name}

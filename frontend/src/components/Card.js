@@ -9,6 +9,10 @@ import {
   activateCombustion,
   deactivateCombustion,
   increaseCombustionCount,
+  activateFaiblesse,
+  activateVulnerabilite,
+  deactivateFaiblesse,
+  deactivateVulnerabilite,
   setCardAnimationActive,
   setBuffAnimationActive,
   updateArmor,
@@ -20,7 +24,12 @@ import {
 import { connect } from "react-redux";
 import { DegatsSubis } from "../redux/actions/monster.action";
 
-const Card = ({ player, enflammerActivated }) => {
+const Card = ({
+  player,
+  enflammerActivated,
+  faiblesseActivated,
+  vulnerabiliteActivated,
+}) => {
   const dispatch = useDispatch(); // Initialize the useDispatch hook
 
   // Au clic sur la carte :
@@ -49,7 +58,7 @@ const Card = ({ player, enflammerActivated }) => {
 
         case "Conflit": // 0 - Jouable si vous n'avez que des Attaque en main. Infligez 14 dégâts
           //vérifie si toutes les cartes sont de type Attaque, condition pour jouer la carte Conflit
-          const allAttackCards = player.pioche.every(
+          const allAttackCards = player.main.every(
             (card) => card.card.type === "Attack"
           );
           if (allAttackCards) {
@@ -58,6 +67,9 @@ const Card = ({ player, enflammerActivated }) => {
             dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
             // Autres actions spécifiques à la carte "Conflit" si nécessaire
           } else {
+            window.alert(
+              "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
+            );
             console.log(
               "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
             );
@@ -71,8 +83,9 @@ const Card = ({ player, enflammerActivated }) => {
           break;
 
         case "Coup de tonnerre": // Infligez 4 dégâts et appliquez 1 de Vulnérabilité à tous les ennemis
-          console.log("clickedCard name clicked : ", clickedCard.card.name);
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          dispatch(activateVulnerabilite());
+          dispatch();
           break;
 
         case "Enflammer": // 1 - Gagnez 2 de force.
@@ -112,7 +125,6 @@ const Card = ({ player, enflammerActivated }) => {
           break;
         case "Charge imprudente": // 1 - Infligez 7 dégâts. Ajoutez un Hébétement à votre pioche
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
-          // méthode pour ajouter une carte "Hébétement" à la pioche
           dispatch(addCardHebetement("Hébétement"));
           break;
         case "Hébétement":
@@ -144,8 +156,23 @@ const Card = ({ player, enflammerActivated }) => {
 
   // Fonction pour calculer les dégâts avec les effets spéciaux
   const calculateExtraDMG = (baseDamage) => {
+    let modifiedDamage = baseDamage;
     // Si l'effet Enflammer est activé, ajoute +2 aux dégâts
-    return enflammerActivated ? baseDamage + 2 : baseDamage;
+    if (enflammerActivated) {
+      modifiedDamage += 2;
+    }
+    // Si l'effet Faiblesse est activé, réduit les dégâts de 30% (arrondi à l'entier supérieur)
+    if (faiblesseActivated) {
+      const weaknessReduction = Math.ceil(baseDamage * 0.3);
+      modifiedDamage -= weaknessReduction;
+    }
+    // Si l'effet Vulnérabilité est activé, ajoute 30% aux dégâts
+    if (vulnerabiliteActivated) {
+      const vulnerabilityBonus = Math.ceil(baseDamage * 0.3);
+      modifiedDamage += vulnerabilityBonus;
+    }
+
+    return modifiedDamage;
   };
 
   return (
@@ -191,6 +218,8 @@ const mapStateToProps = (state) => {
   return {
     player: state.player,
     enflammerActivated: state.player.enflammerActivated,
+    faiblesseActivated: state.player.faiblesseActivated,
+    vulnerabiliteActivated: state.player.vulnerabiliteActivated,
     combustionActivated: state.player.combustionActivated,
   };
 };

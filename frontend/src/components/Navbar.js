@@ -62,11 +62,11 @@ export default function Navbar() {
         ) : (
           <div>
             <Link to="/login" onClick={() => setMenuVisible(false)}>
-              S'identifier
+              Continuer
             </Link>
             <br />
             <Link to="/signup" onClick={() => setMenuVisible(false)}>
-              S'enregistrer
+              Nouveau jeu
             </Link>
           </div>
         )}

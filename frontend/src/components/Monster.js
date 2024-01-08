@@ -9,7 +9,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import StatsBar from "./StatsBar";
 import Modal from "./Modal";
 import { fetchRewardCards } from "../redux/actions/card.action";
-import faiblesseIcon from "../assets/faiblesse-icon.jpg";
+import faiblesseIcon from "../assets/icons/faiblesse-icon.jpg";
 
 const Monster = ({ monster, dispatch, faiblesseActivated }) => {
   // useParams permet de récupérer les paramètres de l'URL

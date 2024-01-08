@@ -85,7 +85,7 @@ const Card = ({
         case "Coup de tonnerre": // Infligez 4 dégâts et appliquez 1 de Vulnérabilité à tous les ennemis
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           dispatch(activateVulnerabilite());
-          dispatch();
+
           break;
 
         case "Enflammer": // 1 - Gagnez 2 de force.

@@ -3,10 +3,19 @@ import {
   FETCH_MONSTER_INFO_FAILURE,
   DEGATS_SUBIS,
   INITIALIZE_CURRENT_HP,
+  ACTIVATE_VULNERABILITE,
+  DEACTIVATE_VULNERABILITE,
+  ACTIVATE_FAIBLESSE,
+  DEACTIVATE_FAIBLESSE,
+  HANDLE_FAIBLESSE_VULNERABILITE,
 } from "../actions/monster.action";
 
 const initialState = {
   monsterInfo: null, // Informations du monstre
+  faiblesseActivated: false,
+  vulnerabiliteActivated: false,
+  faiblesseCount: 0,
+  vulnerabiliteCount: 0,
   currentHealth: 0,
 };
 
@@ -39,7 +48,42 @@ const monsterReducer = (state = initialState, action) => {
         ...state,
         currentHealth: newHP,
       };
-
+    // Etats Vulnerabilite et Faiblesse
+    case ACTIVATE_VULNERABILITE:
+      return {
+        ...state,
+        vulnerabiliteActivated: true,
+      };
+    case DEACTIVATE_VULNERABILITE:
+      return {
+        ...state,
+        vulnerabiliteActivated: false,
+      };
+    case ACTIVATE_FAIBLESSE:
+      return {
+        ...state,
+        faiblesseActivated: true,
+      };
+    case DEACTIVATE_FAIBLESSE:
+      return {
+        ...state,
+        faiblesseActivated: false,
+      };
+    case HANDLE_FAIBLESSE_VULNERABILITE:
+      if (state.faiblesseActivated) {
+        return {
+          ...state,
+          faiblesseCount:
+            state.faiblesseCount > 0 ? state.faiblesseCount - 1 : 0,
+        };
+      } else if (state.vulnerabiliteActivated) {
+        return {
+          ...state,
+          vulnerabiliteCount:
+            state.vulnerabiliteCount > 0 ? state.vulnerabiliteCount - 1 : 0,
+        };
+      }
+      return state;
     default:
       return state;
   }

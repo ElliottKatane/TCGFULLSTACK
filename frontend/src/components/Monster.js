@@ -10,6 +10,7 @@ import StatsBar from "./StatsBar";
 import Modal from "./Modal";
 import { fetchRewardCards } from "../redux/actions/card.action";
 import faiblesseIcon from "../assets/icons/faiblesse-icon.jpg";
+import vulnerabiliteIcon from "../assets/icons/vulnerabilite-icon.png";
 
 const Monster = ({ monster, dispatch, faiblesseActivated }) => {
   // useParams permet de récupérer les paramètres de l'URL
@@ -62,14 +63,21 @@ const Monster = ({ monster, dispatch, faiblesseActivated }) => {
               HPValue={monster.monsterInfo.health}
               currentHealth={monster.currentHealth}
             />
+            {monster.faiblesseActivated ? (
+              <img
+                src={faiblesseIcon}
+                alt="faiblesse-icon"
+                style={{ width: "30px", height: "30px" }}
+              />
+            ) : null}
+            {monster.vulnerabiliteActivated ? (
+              <img
+                src={vulnerabiliteIcon}
+                alt="vulnerabilite-icon"
+                style={{ width: "30px", height: "30px" }}
+              />
+            ) : null}
           </div>
-          {faiblesseActivated ? (
-            <img
-              src={faiblesseIcon}
-              alt="faiblesse-icon"
-              style={{ width: "30px", height: "30px" }}
-            />
-          ) : null}
 
           <img
             src={`/assets/${monster.monsterInfo.image}`}

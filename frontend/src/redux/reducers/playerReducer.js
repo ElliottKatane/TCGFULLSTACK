@@ -48,6 +48,8 @@ const initialState = {
   // temp states
   faiblesseActivated: false,
   vulnerabiliteActivated: false,
+  faiblesseCount: 0,
+  vulnerabiliteCount: 0,
   // cartes
   pioche: [],
   main: [],

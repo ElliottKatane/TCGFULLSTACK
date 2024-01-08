@@ -26,6 +26,7 @@ import { DegatsSubis } from "../redux/actions/monster.action";
 
 const Card = ({
   player,
+  monster,
   enflammerActivated,
   faiblesseActivated,
   vulnerabiliteActivated,
@@ -34,6 +35,12 @@ const Card = ({
 
   // Au clic sur la carte :
   const handleCardClick = (clickedCard) => {
+    // Check if the monster's health is zero or less
+    if (monster.currentHealth <= 0) {
+      // If the monster is defeated, do nothing when the card is clicked
+      return;
+    }
+
     // Vérifie si le joueur a assez de mana pour jouer la carte
     if (player.currentMana >= clickedCard.card.cost) {
       // Check if the clicked card is "Défense" or "Même pas mal"
@@ -217,6 +224,7 @@ const Card = ({
 const mapStateToProps = (state) => {
   return {
     player: state.player,
+    monster: state.monster,
     enflammerActivated: state.player.enflammerActivated,
     faiblesseActivated: state.player.faiblesseActivated,
     vulnerabiliteActivated: state.player.vulnerabiliteActivated,

@@ -26,7 +26,7 @@ import {
 const Card = ({
   player,
   enflammerActivated,
-  monsterFaiblesseActivated,
+  playerFaiblesseActivated,
   monsterVulnerabiliteActivated,
 }) => {
   const dispatch = useDispatch(); // Initialize the useDispatch hook
@@ -84,7 +84,6 @@ const Card = ({
         case "Coup de tonnerre": // Infligez 4 dégâts et appliquez 1 de Vulnérabilité à tous les ennemis
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           dispatch(activateVulnerabiliteForMonster());
-
           break;
 
         case "Enflammer": // 1 - Gagnez 2 de force.
@@ -160,12 +159,12 @@ const Card = ({
     if (enflammerActivated) {
       modifiedDamage += 2;
     }
-    // Si l'effet Faiblesse est activé, réduit les dégâts de 30% (arrondi à l'entier supérieur)
-    if (monsterFaiblesseActivated) {
+    // Si l'effet Faiblesse est activé (sur le joueur), réduit les dégâts de 30% (arrondi à l'entier supérieur)
+    if (playerFaiblesseActivated) {
       const weaknessReduction = Math.ceil(baseDamage * 0.3);
       modifiedDamage -= weaknessReduction;
     }
-    // Si l'effet Vulnérabilité est activé, ajoute 30% aux dégâts
+    // Si l'effet Vulnérabilité est activé (sur le monstre), ajoute 30% aux dégâts
     if (monsterVulnerabiliteActivated) {
       const vulnerabilityBonus = Math.ceil(baseDamage * 0.3);
       modifiedDamage += vulnerabilityBonus;
@@ -176,7 +175,7 @@ const Card = ({
 
   return (
     <div>
-      <div className="pioche">
+      {/* <div className="pioche">
         {player.pioche.map((piocheItem, index) => (
           <div className="card-align" key={index}>
             <div // Render each card as a div. bg color's card changes with type
@@ -191,7 +190,7 @@ const Card = ({
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
       {/* mapping de la main */}
       <div>
         {player.main.map((mainItem, index) => (
@@ -220,6 +219,7 @@ const mapStateToProps = (state) => {
     faiblesseActivated: state.player.faiblesseActivated,
     vulnerabiliteActivated: state.player.vulnerabiliteActivated,
     combustionActivated: state.player.combustionActivated,
+    playerFaiblesseActivated: state.player.playerFaiblesseActivated,
     monsterVulnerabiliteActivated: state.monster.monsterVulnerabiliteActivated,
     monsterFaiblesseActivated: state.monster.monsterFaiblesseActivated,
   };

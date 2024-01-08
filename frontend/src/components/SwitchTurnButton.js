@@ -11,7 +11,10 @@ import {
   checkAndFetchCards,
 } from "../redux/actions/player.action";
 import enemyAttack from "../assets/enemy-attack.gif";
-import { DegatsSubis } from "../redux/actions/monster.action";
+import {
+  DegatsSubis,
+  handleFaiblesseVulnerabiliteForMonster,
+} from "../redux/actions/monster.action";
 const SwitchTurnButton = () => {
   const dispatch = useDispatch();
   const player = useSelector((state) => state.player);
@@ -65,6 +68,8 @@ const SwitchTurnButton = () => {
       }
       // le reste des cartes de la main du joueur sont défaussées
       dispatch(moveCardsToDefausse(player.main));
+      // ajustement des stats de faiblesse et vulnérabilité du monstre
+      dispatch(handleFaiblesseVulnerabiliteForMonster());
     } else {
       // quand on clique sur "End Monster Turn:"
       // Refill/Reset des stats du joueur : armure et man

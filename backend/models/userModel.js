@@ -83,7 +83,7 @@ const initializePlayerDeck = async () => {
 
     // Retourne un tableau avec les identifiants des cartes
     return [
-      { card: card1.toObject(), quantity: 10 },
+      { card: card1.toObject(), quantity: 5 },
       { card: card2.toObject(), quantity: 5 },
       // { card: card3.toObject(), quantity: 5 },
     ];

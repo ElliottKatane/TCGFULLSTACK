@@ -81,11 +81,16 @@ const Monster = ({
               </div>
             ) : null}
             {monster.monsterVulnerabiliteActivated ? (
-              <img
-                src={vulnerabiliteIcon}
-                alt="vulnerabilite-icon"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <div>
+                <img
+                  src={vulnerabiliteIcon}
+                  alt="vulnerabilite-icon"
+                  style={{ width: "30px", height: "30px" }}
+                />
+                {monster.monsterVulnerabiliteCount > 0
+                  ? monster.monsterVulnerabiliteCount
+                  : null}
+              </div>
             ) : null}
           </div>
 

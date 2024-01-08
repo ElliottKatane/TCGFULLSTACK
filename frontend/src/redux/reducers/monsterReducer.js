@@ -17,10 +17,12 @@ const monsterReducer = (state = initialState, action) => {
   switch (action.type) {
     // fetch des infos du monstre
     case FETCH_MONSTER_INFO_SUCCESS:
+      console.log("Monster Info received:", action.payload);
       return {
         ...state,
-        monsterInfo: action.payload, // Stockez les informations du monstre, 1er élément du tableau
+        monsterInfo: action.payload,
       };
+
     case FETCH_MONSTER_INFO_FAILURE:
       return {
         ...state,
@@ -36,8 +38,9 @@ const monsterReducer = (state = initialState, action) => {
     case UPDATE_MONSTER_ARMOR:
       return {
         ...state,
-        armor: state.armor + action.payload.armorValue,
+        armor: Math.max(state.armor + action.payload.armorValue, 0),
       };
+
     case RESET_MONSTER_ARMOR:
       return {
         ...state,
@@ -47,12 +50,30 @@ const monsterReducer = (state = initialState, action) => {
     case DEGATS_SUBIS:
       console.log("Reducing damage. Current health:", state.currentHealth);
       console.log("Damage value:", action.payload.damageValue);
-      const effectiveDamage = Math.max(
-        action.payload.damageValue - state.armor,
-        0
-      );
-      const newHP = state.currentHealth - effectiveDamage;
+      console.log("Armor:", state.armor);
+
+      // Ensure damageValue and armor are valid numbers
+      const damageValue = Number(action.payload.damageValue);
+      const armor = Number(state.armor);
+
+      console.log("Converted Damage value:", damageValue);
+      console.log("Converted Armor:", armor);
+
+      if (isNaN(damageValue) || isNaN(armor)) {
+        console.error("Invalid damageValue or armor:", damageValue, armor);
+        return state;
+      }
+
+      // If conversion to number fails, default to 0
+      const effectiveDamage = Math.max(damageValue - armor, 0);
+
+      console.log("Effective damage after armor:", effectiveDamage);
+
+      // Ensure currentHealth is a valid number
+      const newHP = Math.max(Number(state.currentHealth) - effectiveDamage, 0);
+
       console.log("HP after dmg", newHP);
+
       return {
         ...state,
         currentHealth: newHP,

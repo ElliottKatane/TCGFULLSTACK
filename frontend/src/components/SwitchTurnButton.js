@@ -10,8 +10,13 @@ import {
   fetch5CardsFromPioche,
   checkAndFetchCards,
 } from "../redux/actions/player.action";
+
 import enemyAttack from "../assets/enemy-attack.gif";
-import { DegatsSubis } from "../redux/actions/monster.action";
+import {
+  DegatsSubis,
+  updateMonsterArmor,
+  resetMonsterArmor,
+} from "../redux/actions/monster.action";
 const SwitchTurnButton = () => {
   const dispatch = useDispatch();
   const player = useSelector((state) => state.player);
@@ -51,8 +56,24 @@ const SwitchTurnButton = () => {
 
         // Introduce another 1-second delay before processing the attack
         setTimeout(() => {
-          dispatch(MonsterAttack(monsterAttackValue));
-          console.log(`Monster attacks with ${monsterAttackValue} damage!`);
+          if (isArmorAttack) {
+            const remainingArmor = monsterInfo.armor - selectedAttack.armor;
+
+            if (remainingArmor < 0) {
+              // If armor is negative, set it to 0
+              dispatch(updateMonsterArmor(0));
+            } else {
+              dispatch(updateMonsterArmor(remainingArmor));
+            }
+            console.log(
+              `Monster increases it's defence by ${selectedAttack.armor} !`
+            );
+          } else {
+            dispatch(MonsterAttack(selectedAttack.damage));
+            console.log(
+              `Monster attacks with ${selectedAttack.damage} damage!`
+            );
+          }
           setShowMonsterImage(false);
         }, 1450);
       }, 1000);
@@ -77,6 +98,7 @@ const SwitchTurnButton = () => {
     } else {
       // quand on clique sur "End Monster Turn:"
       // Refill/Reset des stats du joueur : armure et man
+      dispatch(resetMonsterArmor());
     }
   };
   return (

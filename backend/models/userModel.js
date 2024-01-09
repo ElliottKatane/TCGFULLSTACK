@@ -76,7 +76,6 @@ const initializePlayerDeck = async () => {
     const card1 = await Card.findOne({ name: "Colère" });
     const card2 = await Card.findOne({ name: "Coup de tonnerre" });
     const card3 = await Card.findOne({ name: "Heurt" });
-    // const card3 = await Card.findOne({ name: "Colère" });
     console.log("card1:", card1);
     console.log("card2:", card2);
     console.log("card3:", card3);

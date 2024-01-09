@@ -13,6 +13,7 @@ p.card {
   /* inline-flex est ce qui m'a permis d'aligner les cartes */
   display: inline-flex;
 }
+
 .pioche .card-container {
   /* Création d'une div englobant le rendering de chaque carte */
   /* inline-flex est ce qui m'a permis d'aligner les cartes */
@@ -33,6 +34,22 @@ p.card {
 }
 
 .card-container:hover {
-  transform: translateZ(0) scale(1.1); /* Adjust the scale factor as needed */
+  transform: translateZ(0) scale(1.15); /* Adjust the scale factor as needed */
+  z-index: 2;
+}
+
+.card-align-modal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card-container-modal {
+  transition: transform 0.1s linear; /* Adjust duration and timing function */
+  z-index: 1; /* Set initial z-index */
+  will-change: transform;
+  justify-content: space-evenly;
+}
+.card-container-modal:hover {
+  transform: translateZ(0) scale(1.15); /* Adjust the scale factor as needed */
   z-index: 2;
 }

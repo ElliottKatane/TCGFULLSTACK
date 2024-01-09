@@ -37,7 +37,6 @@ p.card {
   transform: translateZ(0) scale(1.15); /* Adjust the scale factor as needed */
   z-index: 2;
 }
-
 .card-align-modal {
   display: flex;
   flex-direction: row;

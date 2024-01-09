@@ -147,7 +147,7 @@ const Card = ({
       );
     } else {
       // Sinon, on obtient une alerte
-      alert("Not enough mana to play this card!");
+      alert("Pas assez de mana pour jouer cette carte");
     }
   };
 

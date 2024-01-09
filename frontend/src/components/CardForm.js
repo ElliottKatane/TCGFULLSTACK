@@ -26,7 +26,7 @@ const CardForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    fetch("https://tcg-backend.onrender.com/api/card-form/createcard", {
+    fetch("https://tcg-backend-eli.onrender.com/api/card-form/createcard", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const CardForm = () => {
 
   useEffect(() => {
     // Fetch existing cards and update the 'cards' state
-    fetch("https://tcg-backend.onrender.com/api/card-form/getcards")
+    fetch("https://tcg-backend-eli.onrender.com/api/card-form/getcards")
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {

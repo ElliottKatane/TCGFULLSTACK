@@ -20,7 +20,7 @@ export const fetchCards = () => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        "https://tcg-backend-eli.onrender.com/api/card-form/getcards"
+        "https://tcg-backend.onrender.com/api/card-form/getcards"
       );
       if (!response.ok) {
         throw new Error("La requête a échoué (cards introuvables)");
@@ -48,7 +48,7 @@ export const fetchRewardCards = (level) => {
   return async (dispatch, getState) => {
     try {
       const response = await fetch(
-        `https://tcg-backend-eli.onrender.com/api/card-form/getRewardCards/${level}`
+        `https://tcg-backend.onrender.com/api/card-form/getRewardCards/${level}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -90,7 +90,7 @@ export const fetchAllCards = () => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        "https://tcg-backend-eli.onrender.com/api/card-form/getAllCards"
+        "https://tcg-backend.onrender.com/api/card-form/getAllCards"
       );
       const data = await response.json();
       dispatch(fetchAllCardsSuccess(data.cards));
@@ -108,7 +108,7 @@ export const addToDeck = (userEmail, selectedCard) => async (dispatch) => {
     );
 
     const response = await fetch(
-      `https://tcg-backend-eli.onrender.com/api/player/add-to-deck`,
+      `https://tcg-backend.onrender.com/api/player/add-to-deck`,
       {
         method: "POST",
         headers: {

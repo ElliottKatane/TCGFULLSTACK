@@ -125,28 +125,38 @@ const Player = ({
               armor={player.armor}
               isPlayer={true}
             />
-            {player.playerFaiblesseActivated ? (
-              <div>
-                <img
-                  src={faiblesseIcon}
-                  alt="faiblesse-icon"
-                  style={{ width: "30px", height: "30px", marginTop: "30px" }}
-                />
-                {player.playerFaiblesseCount > 0
-                  ? player.playerFaiblesseCount
-                  : null}
-              </div>
-            ) : null}
-            {player.playerVulnerabiliteActivated ? (
-              <div>
-                <img
-                  src={vulnerabiliteIcon}
-                  alt="vulnerabilite-icon"
-                  style={{ width: "30px", height: "30px" }}
-                />
-                {player.playerVulnerabiliteCount > 0
-                  ? player.playerVulnerabiliteCount
-                  : null}
+            {player.playerFaiblesseActivated ||
+            player.playerVulnerabiliteActivated ? (
+              <div style={{ display: "flex" }}>
+                {player.playerFaiblesseActivated ? (
+                  <div style={{ marginRight: "10px", marginTop: "30px" }}>
+                    <img
+                      src={faiblesseIcon}
+                      alt="faiblesse-icon"
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                    {player.playerFaiblesseCount > 0 ? (
+                      <div style={{ color: "green" }}>
+                        {player.playerFaiblesseCount}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+
+                {player.playerVulnerabiliteActivated ? (
+                  <div style={{ marginRight: "10px", marginTop: "30px" }}>
+                    <img
+                      src={vulnerabiliteIcon}
+                      alt="vulnerabilite-icon"
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                    {player.playerVulnerabiliteCount > 0 ? (
+                      <div style={{ color: "green" }}>
+                        {player.playerVulnerabiliteCount}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
             ) : null}
           </div>

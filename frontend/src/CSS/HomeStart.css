@@ -3,7 +3,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  background-image: url("../assets/backgrounds/slaythespire_background.jpg");
+  background-image: url("../assets/slaythespire_background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; /* Centre l'image horizontalement et verticalement */

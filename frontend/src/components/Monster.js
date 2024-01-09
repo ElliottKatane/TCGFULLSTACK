@@ -25,6 +25,7 @@ const Monster = ({
   const modalIsOpen = useSelector((state) => state.card.modalIsOpen);
   const modalCards = useSelector((state) => state.card.rewardCards);
   const isVictory = useSelector((state) => state.game.isVictory);
+  const armor = useSelector((state) => state.monster.armor);
 
   useEffect(() => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
@@ -88,6 +89,13 @@ const Monster = ({
               />
             ) : null}
           </div>
+
+          {armor > 0 && (
+            <div className="armordisplay">
+              <img src="/assets/shield.png" alt="Armor Image" />
+              <span className="armor-text">{armor}</span>
+            </div>
+          )}
 
           <img
             src={`/assets/${monster.monsterInfo.image}`}

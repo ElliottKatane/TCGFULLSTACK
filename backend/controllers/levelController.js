@@ -23,7 +23,6 @@ const getLevelBackgroundImage = async (req, res) => {
       "frontend",
       "src",
       "assets",
-      "backgrounds",
       backgroundImagePath
     );
 

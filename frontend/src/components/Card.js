@@ -157,7 +157,7 @@ const Card = ({
     dispatch(deactivateCombustion());
   }, [dispatch]);
 
-  // Fonction pour calculer les dégâts avec les effets spéciaux
+  // Fonction pour calculer les dégâts du PLAYER avec les effets spéciaux (faiblesse, vulnérabilité, cartes pouvoir)
   const calculateExtraDMG = (baseDamage) => {
     let modifiedDamage = baseDamage;
     // Si l'effet Enflammer est activé, ajoute +2 aux dégâts
@@ -221,10 +221,11 @@ const mapStateToProps = (state) => {
   return {
     player: state.player,
     enflammerActivated: state.player.enflammerActivated,
-    faiblesseActivated: state.player.faiblesseActivated,
-    vulnerabiliteActivated: state.player.vulnerabiliteActivated,
     combustionActivated: state.player.combustionActivated,
+    // player faiblesse et vulnérabilité
+    playerVulnerabiliteActivated: state.player.playerVulnerabiliteActivated,
     playerFaiblesseActivated: state.player.playerFaiblesseActivated,
+    // monster faiblesse et vulnérabilité
     monsterVulnerabiliteActivated: state.monster.monsterVulnerabiliteActivated,
     monsterFaiblesseActivated: state.monster.monsterFaiblesseActivated,
   };

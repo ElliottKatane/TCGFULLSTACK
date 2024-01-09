@@ -9,6 +9,8 @@ import {
   moveCardsToDefausse,
   fetch5CardsFromPioche,
   checkAndFetchCards,
+  activateFaiblesseForPlayer,
+  activateVulnerabiliteForPlayer,
 } from "../redux/actions/player.action";
 import enemyAttack from "../assets/enemy-attack.gif";
 import {
@@ -46,9 +48,12 @@ const SwitchTurnButton = () => {
         // Introduce another 1-second delay before processing the attack
         setTimeout(() => {
           dispatch(MonsterAttack(monsterAttackValue));
+          dispatch(activateFaiblesseForPlayer());
+          dispatch(activateFaiblesseForPlayer());
+          dispatch(activateVulnerabiliteForPlayer());
           console.log(`Monster attacks with ${monsterAttackValue} damage!`);
           setShowMonsterImage(false);
-        }, 1450);
+        }, 450);
       }, 1000);
       setTimeout(() => {
         dispatch(switchTurn("monster"));

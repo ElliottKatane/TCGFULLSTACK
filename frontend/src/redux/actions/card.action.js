@@ -53,10 +53,6 @@ export const fetchRewardCards = (level) => {
       if (response.ok) {
         const data = await response.json();
         dispatch({ type: FETCH_REWARD_CARDS_SUCCESS, payload: data });
-        console.log("Data from API:", data);
-        console.log("Carte 1 :", data[0]);
-        console.log("Carte 2 :", data[1]);
-        console.log("Carte 3 :", data[2]);
         const { card } = getState();
         console.log("card State dans REWARD PLAYER", card);
         // Accéder aux données des cartes depuis le state après avoir dispatché fetchRewardCards

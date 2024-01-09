@@ -47,7 +47,7 @@ const StatsBar = ({
           {currentMana}/{manaPool}
         </div>
       ) : null}
-      {isPlayer && armor > 0 && (
+      {armor > 0 && (
         <div className="armordisplay">
           <img src="/assets/shield.png" alt="Armor Image" />
           <span className="armor-text">{armor}</span>

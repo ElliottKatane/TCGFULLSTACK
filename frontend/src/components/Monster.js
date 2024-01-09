@@ -63,6 +63,7 @@ const Monster = ({ monster, dispatch }) => {
             <StatsBar
               HPValue={monster.monsterInfo.health}
               currentHealth={monster.currentHealth}
+              armor={armor}
             />
             {monster.monsterFaiblesseActivated ||
             monster.monsterVulnerabiliteActivated ? (
@@ -99,14 +100,6 @@ const Monster = ({ monster, dispatch }) => {
               </div>
             ) : null}
           </div>
-
-          {armor > 0 && (
-            <div className="armordisplay">
-              <img src="/assets/shield.png" alt="Armor Image" />
-              <span className="armor-text">{armor}</span>
-            </div>
-          )}
-
           <img
             src={`/assets/${monster.monsterInfo.image}`}
             alt={monster.monsterInfo.name}

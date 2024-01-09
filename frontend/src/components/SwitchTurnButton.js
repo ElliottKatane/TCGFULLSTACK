@@ -63,7 +63,8 @@ const SwitchTurnButton = () => {
         setTimeout(() => {
           if (isArmorAttack) {
             dispatch(updateMonsterArmor(monsterAttackValue));
-
+            dispatch(activateFaiblesseForPlayer());
+            dispatch(activateVulnerabiliteForPlayer());
             console.log(
               `Monster increases it's defence by ${selectedAttack.armor} !`
             );
@@ -73,8 +74,6 @@ const SwitchTurnButton = () => {
               `Monster attacks with ${selectedAttack.damage} damage!`
             );
           }
-          dispatch(MonsterAttack(monsterAttackValue));
-          dispatch(activateFaiblesseForPlayer());
           dispatch(activateFaiblesseForPlayer());
           dispatch(activateVulnerabiliteForPlayer());
           console.log(`Monster attacks with ${monsterAttackValue} damage!`);

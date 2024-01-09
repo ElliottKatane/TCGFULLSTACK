@@ -9,6 +9,9 @@ import {
   moveCardsToDefausse,
   fetch5CardsFromPioche,
   checkAndFetchCards,
+  activateFaiblesseForPlayer,
+  activateVulnerabiliteForPlayer,
+  handleFaiblesseVulnerabiliteForPlayer,
 } from "../redux/actions/player.action";
 
 import enemyAttack from "../assets/enemy-attack.gif";
@@ -16,6 +19,7 @@ import {
   DegatsSubis,
   updateMonsterArmor,
   resetMonsterArmor,
+  handleFaiblesseVulnerabiliteForMonster,
 } from "../redux/actions/monster.action";
 const SwitchTurnButton = () => {
   const dispatch = useDispatch();
@@ -69,8 +73,13 @@ const SwitchTurnButton = () => {
               `Monster attacks with ${selectedAttack.damage} damage!`
             );
           }
+          dispatch(MonsterAttack(monsterAttackValue));
+          dispatch(activateFaiblesseForPlayer());
+          dispatch(activateFaiblesseForPlayer());
+          dispatch(activateVulnerabiliteForPlayer());
+          console.log(`Monster attacks with ${monsterAttackValue} damage!`);
           setShowMonsterImage(false);
-        }, 1450);
+        }, 450);
       }, 1000);
       setTimeout(() => {
         dispatch(switchTurn("monster"));
@@ -90,6 +99,13 @@ const SwitchTurnButton = () => {
       }
       // le reste des cartes de la main du joueur sont défaussées
       dispatch(moveCardsToDefausse(player.main));
+      // ajustement des stats de faiblesse et vulnérabilité du monstre
+      dispatch(handleFaiblesseVulnerabiliteForMonster());
+      // ajustement des stats de faiblesse et vulnérabilité du joueur
+      dispatch(handleFaiblesseVulnerabiliteForPlayer());
+    } else {
+      // quand on clique sur "End Monster Turn:"
+      // Refill/Reset des stats du joueur : armure et man
     }
   };
   return (

@@ -1,13 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import image from "../assets/guerrier.gif";
-import attackImage from "../assets/guerrier_attack.gif";
-import StatsBar from "./StatsBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { connect } from "react-redux";
+
+// Actions redux
 import { handleDefeat, resetVictory } from "../redux/actions/game.action";
-import "../CSS/Positions.css";
 import {
   fetchPlayer,
   fetch5CardsFromPioche,
@@ -18,9 +16,19 @@ import {
   updateArmor,
   initializeCombustionCount,
 } from "../redux/actions/player.action";
+//composant StatsBar
+import StatsBar from "./StatsBar";
+// import d'icones et CSS
 import flameIcon from "../assets/icons/flame-icon.png";
 import combustionIcon from "../assets/icons/combustion-icon.png";
 import buffIcon from "../assets/buff.gif";
+import faiblesseIcon from "../assets/icons/faiblesse-icon.png";
+import vulnerabiliteIcon from "../assets/icons/vulnerabilite-icon.png";
+import image from "../assets/guerrier.gif";
+import attackImage from "../assets/guerrier_attack.gif";
+import "../CSS/Positions.css";
+
+// Composant Player
 const Player = ({
   player,
   dispatch,
@@ -37,6 +45,7 @@ const Player = ({
   useEffect(() => {
     if (user) {
       const userEmail = user.email;
+      // chargement des infos du joueur (début du combat)
       dispatch(fetchPlayer(userEmail))
         .then((result) => {
           dispatch(initializeCurrentMana(result.manaPool));
@@ -53,8 +62,6 @@ const Player = ({
         });
     }
   }, [user, dispatch]);
-
-  // initialisation de la manaPool et enregistrement dans une constante
 
   useEffect(() => {
     if (player.playerInfo && player.currentPlayerHealth <= 0) {
@@ -118,6 +125,40 @@ const Player = ({
               armor={player.armor}
               isPlayer={true}
             />
+            {player.playerFaiblesseActivated ||
+            player.playerVulnerabiliteActivated ? (
+              <div style={{ display: "flex" }}>
+                {player.playerFaiblesseActivated ? (
+                  <div style={{ marginRight: "10px", marginTop: "30px" }}>
+                    <img
+                      src={faiblesseIcon}
+                      alt="faiblesse-icon"
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                    {player.playerFaiblesseCount > 0 ? (
+                      <div style={{ color: "green" }}>
+                        {player.playerFaiblesseCount}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+
+                {player.playerVulnerabiliteActivated ? (
+                  <div style={{ marginRight: "10px", marginTop: "30px" }}>
+                    <img
+                      src={vulnerabiliteIcon}
+                      alt="vulnerabilite-icon"
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                    {player.playerVulnerabiliteCount > 0 ? (
+                      <div style={{ color: "green" }}>
+                        {player.playerVulnerabiliteCount}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </div>
       ) : (

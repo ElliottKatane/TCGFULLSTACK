@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 const CardForm = () => {
+  const [successfulMessage, setSuccessfulMessage] = useState("");
+
   // représente le modèle de carte
   const [formData, setFormData] = useState({
     name: "",
@@ -37,7 +39,7 @@ const CardForm = () => {
           console.error("Error creating card", data.error);
         } else {
           console.log("Card created successfully", data);
-
+          setSuccessfulMessage("Card created successfully");
           // Optionally reset the form or perform other actions
         }
       })
@@ -70,7 +72,10 @@ const CardForm = () => {
         console.error("Error fetching cards", error);
       });
   }, []); // The empty dependency array ensures this effect runs once on component mount
-
+  const inputStyle = {
+    color: "darkblue",
+    /* Autres styles nécessaires */
+  };
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -82,6 +87,7 @@ const CardForm = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            style={inputStyle}
           />
         </div>
         <div>
@@ -92,6 +98,7 @@ const CardForm = () => {
             name="description"
             value={formData.description}
             onChange={handleChange}
+            style={inputStyle}
           />
         </div>
         <div>
@@ -136,6 +143,7 @@ const CardForm = () => {
             name="value"
             value={formData.value}
             onChange={handleChange}
+            style={inputStyle}
           />
         </div>
         <div>
@@ -146,6 +154,7 @@ const CardForm = () => {
             name="cost"
             value={formData.cost}
             onChange={handleChange}
+            style={inputStyle}
           />
         </div>
 
@@ -157,6 +166,7 @@ const CardForm = () => {
             name="imageURL"
             value={formData.imageURL}
             onChange={handleChange}
+            style={inputStyle}
           />
         </div>
 
@@ -168,6 +178,7 @@ const CardForm = () => {
             name="upgradedValue"
             value={formData.upgradedValue}
             onChange={handleChange}
+            style={inputStyle}
           />
         </div>
 
@@ -182,10 +193,12 @@ const CardForm = () => {
             name="upgradedImageURL"
             value={formData.upgradedImageURL}
             onChange={handleChange}
+            style={inputStyle}
           />
         </div>
 
         <button type="submit">Enregistrer dans BDD</button>
+        <p>{successfulMessage}</p>
       </form>
 
       {/* Existing cards */}

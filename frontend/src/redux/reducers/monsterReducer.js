@@ -111,6 +111,7 @@ const monsterReducer = (state = initialState, action) => {
       return {
         ...state,
         monsterVulnerabiliteActivated: true,
+        monsterVulnerabiliteCount: state.monsterVulnerabiliteCount + 1,
       };
     case DEACTIVATE_VULNERABILITE_FOR_MONSTER:
       return {
@@ -121,6 +122,7 @@ const monsterReducer = (state = initialState, action) => {
       return {
         ...state,
         monsterFaiblesseActivated: true,
+        monsterFaiblesseCount: state.monsterFaiblesseCount + 1,
       };
     case DEACTIVATE_FAIBLESSE_FOR_MONSTER:
       return {
@@ -135,6 +137,7 @@ const monsterReducer = (state = initialState, action) => {
             state.monsterFaiblesseCount > 0
               ? state.monsterFaiblesseCount - 1
               : 0,
+          monsterFaiblesseActivated: state.monsterFaiblesseCount > 1, // Set to false when count reaches 0
         };
       } else if (state.monsterVulnerabiliteActivated) {
         return {
@@ -143,6 +146,7 @@ const monsterReducer = (state = initialState, action) => {
             state.monsterVulnerabiliteCount > 0
               ? state.monsterVulnerabiliteCount - 1
               : 0,
+          monsterVulnerabiliteActivated: state.monsterVulnerabiliteCount > 1, // Set to false when count reaches 0
         };
       }
       return state;

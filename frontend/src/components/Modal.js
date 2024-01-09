@@ -41,7 +41,7 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       zIndex: 1000,
     },
     content: {
-      width: "700px", // Adjusted width
+      width: "750px", // Adjusted width
       height: "550px", // Adjusted height
       margin: "auto",
       borderRadius: "10px", // Rounded corners
@@ -61,10 +61,11 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
       style={customStyles}
     >
       <div
+        // style du texte "Félicitations ! Vous avez remporté la victoire ! Choisissez une récompense."
         style={{
           textAlign: "center",
           color: "#fff",
-          marginBottom: "30px",
+          marginBottom: "80px",
           fontSize: "18px",
           fontWeight: "bold",
         }}
@@ -82,28 +83,32 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
         )}
       </div>
 
-      {mapLevel && mapLevel >= playerInfo.levelReached
-        ? rewardCards.map((card) => (
+      {mapLevel && mapLevel >= playerInfo.levelReached ? (
+        <div className="card-align-modal">
+          {rewardCards.map((card) => (
             <div
-              className="card-align"
+              className="card-container-modal"
               key={card._id}
               onClick={() => handleRewardSelection(card)}
             >
               <div
-                className={`card-container card-${card.type.toLowerCase()}`}
-                style={{ textAlign: "center" }}
+                style={{
+                  textAlign: "center",
+                }}
               >
                 <img
                   src={card.imageURL}
                   alt={card.name}
-                  style={{ padding: "100px", margin: "auto" }}
+                  style={{ padding: "20px" }}
                 />
               </div>
             </div>
-          ))
-        : null}
+          ))}
+        </div>
+      ) : null}
       <div>
         <div
+          // position du bouton "fermer"
           style={{
             display: "flex",
             justifyContent: "center",

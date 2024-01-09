@@ -23,10 +23,15 @@ export const ACTIVATE_COMBUSTION = "ACTIVATE_COMBUSTION";
 export const DEACTIVATE_COMBUSTION = "DEACTIVATE_COMBUSTION";
 export const INCREASE_COMBUSTION_COUNT = "INCREASE_COMBUSTION_COUNT";
 // Etats Vulnerabilite et Faiblesse
-export const ACTIVATE_VULNERABILITE = "ACTIVATE_VULNERABILITE";
-export const DEACTIVATE_VULNERABILITE = "DEACTIVATE_VULNERABILITE";
-export const ACTIVATE_FAIBLESSE = "ACTIVATE_FAIBLESSE";
-export const DEACTIVATE_FAIBLESSE = "DEACTIVATE_FAIBLESSE";
+export const ACTIVATE_VULNERABILITE_FOR_PLAYER =
+  "ACTIVATE_VULNERABILITE_FOR_PLAYER";
+export const DEACTIVATE_VULNERABILITE_FOR_PLAYER =
+  "DEACTIVATE_VULNERABILITE_FOR_PLAYER";
+export const ACTIVATE_FAIBLESSE_FOR_PLAYER = "ACTIVATE_FAIBLESSE_FOR_PLAYER";
+export const DEACTIVATE_FAIBLESSE_FOR_PLAYER =
+  "DEACTIVATE_FAIBLESSE_FOR_PLAYER";
+export const HANDLE_FAIBLESSE_VULNERABILITE_PLAYER =
+  "HANDLE_FAIBLESSE_VULNERABILITE_PLAYER";
 // carte Colère
 export const ADD_COLERE_COPY = "ADD_COLERE_COPY";
 //carte Hébétement
@@ -118,17 +123,20 @@ export const increaseCombustionCount = (combustionPlayedCount) => {
   };
 };
 // Etats Vulnerabilite et Faiblesse
-export const activateVulnerabilite = () => ({
-  type: ACTIVATE_VULNERABILITE,
+export const activateVulnerabiliteForPlayer = () => ({
+  type: ACTIVATE_VULNERABILITE_FOR_PLAYER,
 });
-export const deactivateVulnerabilite = () => ({
-  type: DEACTIVATE_VULNERABILITE,
+export const deactivateVulnerabiliteForPlayer = () => ({
+  type: DEACTIVATE_VULNERABILITE_FOR_PLAYER,
 });
-export const activateFaiblesse = () => ({
-  type: ACTIVATE_FAIBLESSE,
+export const activateFaiblesseForPlayer = () => ({
+  type: ACTIVATE_FAIBLESSE_FOR_PLAYER,
 });
-export const deactivateFaiblesse = () => ({
-  type: DEACTIVATE_FAIBLESSE,
+export const deactivateFaiblesseForPlayer = () => ({
+  type: DEACTIVATE_FAIBLESSE_FOR_PLAYER,
+});
+export const handleFaiblesseVulnerabiliteForPlayer = () => ({
+  type: HANDLE_FAIBLESSE_VULNERABILITE_PLAYER,
 });
 // carte Colère (création d'une copie)
 export const addColereCopy = (id) => ({

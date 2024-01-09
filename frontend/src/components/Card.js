@@ -27,7 +27,7 @@ const Card = ({
   player,
   monster,
   enflammerActivated,
-  monsterFaiblesseActivated,
+  playerFaiblesseActivated,
   monsterVulnerabiliteActivated,
 }) => {
   const dispatch = useDispatch(); // Initialize the useDispatch hook
@@ -91,7 +91,6 @@ const Card = ({
         case "Coup de tonnerre": // Infligez 4 dégâts et appliquez 1 de Vulnérabilité à tous les ennemis
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           dispatch(activateVulnerabiliteForMonster());
-
           break;
 
         case "Enflammer": // 1 - Gagnez 2 de force.
@@ -137,6 +136,11 @@ const Card = ({
           // carte sans effet. Occupe une place dans la main. cliquez pour la faire disparaître
           dispatch(removeCardFromMain(clickedCard.id));
           break;
+        case "Heurt":
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          dispatch(activateVulnerabiliteForMonster());
+          dispatch(activateVulnerabiliteForMonster());
+          break;
         default:
           // Gérer le cas par défaut si le nom de la carte n'est pas reconnu
           console.log("Carte non codée encore : ", clickedCard.card.name);
@@ -150,7 +154,7 @@ const Card = ({
       );
     } else {
       // Sinon, on obtient une alerte
-      alert("Not enough mana to play this card!");
+      alert("Pas assez de mana pour jouer cette carte");
     }
   };
 
@@ -160,19 +164,19 @@ const Card = ({
     dispatch(deactivateCombustion());
   }, [dispatch]);
 
-  // Fonction pour calculer les dégâts avec les effets spéciaux
+  // Fonction pour calculer les dégâts du PLAYER avec les effets spéciaux (faiblesse, vulnérabilité, cartes pouvoir)
   const calculateExtraDMG = (baseDamage) => {
     let modifiedDamage = baseDamage;
     // Si l'effet Enflammer est activé, ajoute +2 aux dégâts
     if (enflammerActivated) {
       modifiedDamage += 2;
     }
-    // Si l'effet Faiblesse est activé, réduit les dégâts de 30% (arrondi à l'entier supérieur)
-    if (monsterFaiblesseActivated) {
+    // Si l'effet Faiblesse est activé (sur le joueur), réduit les dégâts de 30% (arrondi à l'entier supérieur)
+    if (playerFaiblesseActivated) {
       const weaknessReduction = Math.ceil(baseDamage * 0.3);
       modifiedDamage -= weaknessReduction;
     }
-    // Si l'effet Vulnérabilité est activé, ajoute 30% aux dégâts
+    // Si l'effet Vulnérabilité est activé (sur le monstre), ajoute 30% aux dégâts
     if (monsterVulnerabiliteActivated) {
       const vulnerabilityBonus = Math.ceil(baseDamage * 0.3);
       modifiedDamage += vulnerabilityBonus;
@@ -183,7 +187,7 @@ const Card = ({
 
   return (
     <div>
-      <div className="pioche">
+      {/* <div className="pioche">
         {player.pioche.map((piocheItem, index) => (
           <div className="card-align" key={index}>
             <div // Render each card as a div. bg color's card changes with type
@@ -198,7 +202,7 @@ const Card = ({
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
       {/* mapping de la main */}
       <div>
         {player.main.map((mainItem, index) => (
@@ -225,9 +229,11 @@ const mapStateToProps = (state) => {
     player: state.player,
     monster: state.monster,
     enflammerActivated: state.player.enflammerActivated,
-    faiblesseActivated: state.player.faiblesseActivated,
-    vulnerabiliteActivated: state.player.vulnerabiliteActivated,
     combustionActivated: state.player.combustionActivated,
+    // player faiblesse et vulnérabilité
+    playerVulnerabiliteActivated: state.player.playerVulnerabiliteActivated,
+    playerFaiblesseActivated: state.player.playerFaiblesseActivated,
+    // monster faiblesse et vulnérabilité
     monsterVulnerabiliteActivated: state.monster.monsterVulnerabiliteActivated,
     monsterFaiblesseActivated: state.monster.monsterFaiblesseActivated,
   };

@@ -12,12 +12,7 @@ import { fetchRewardCards } from "../redux/actions/card.action";
 import faiblesseIcon from "../assets/icons/faiblesse-icon.jpg";
 import vulnerabiliteIcon from "../assets/icons/vulnerabilite-icon.png";
 
-const Monster = ({
-  monster,
-  dispatch,
-  monsterFaiblesseActivated,
-  monsterVulnerabiliteActivated,
-}) => {
+const Monster = ({ monster, dispatch }) => {
   // useParams permet de récupérer les paramètres de l'URL
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
@@ -69,24 +64,39 @@ const Monster = ({
               HPValue={monster.monsterInfo.health}
               currentHealth={monster.currentHealth}
             />
-            {monster.monsterFaiblesseActivated ? (
-              <div>
-                <img
-                  src={faiblesseIcon}
-                  alt="faiblesse-icon"
-                  style={{ width: "30px", height: "30px" }}
-                />
-                {monster.monsterFaiblesseCount > 0
-                  ? monster.monsterFaiblesseCount
-                  : null}
+            {monster.monsterFaiblesseActivated ||
+            monster.monsterVulnerabiliteActivated ? (
+              <div style={{ display: "flex" }}>
+                {monster.monsterFaiblesseActivated ? (
+                  <div style={{ marginRight: "10px", marginTop: "30px" }}>
+                    <img
+                      src={faiblesseIcon}
+                      alt="faiblesse-icon"
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                    {monster.monsterFaiblesseCount > 0 ? (
+                      <div style={{ color: "green" }}>
+                        {monster.monsterFaiblesseCount}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+
+                {monster.monsterVulnerabiliteActivated ? (
+                  <div>
+                    <img
+                      src={vulnerabiliteIcon}
+                      alt="vulnerabilite-icon"
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                    {monster.monsterVulnerabiliteCount > 0 ? (
+                      <div style={{ color: "green" }}>
+                        {monster.monsterVulnerabiliteCount}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
-            ) : null}
-            {monster.monsterVulnerabiliteActivated ? (
-              <img
-                src={vulnerabiliteIcon}
-                alt="vulnerabilite-icon"
-                style={{ width: "30px", height: "30px" }}
-              />
             ) : null}
           </div>
 

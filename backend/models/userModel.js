@@ -73,19 +73,17 @@ userSchema.statics.signup = async function (email, password) {
 };
 const initializePlayerDeck = async () => {
   try {
-    // const card1 = await Card.findOne({ name: "Même pas mal" });
-    // const card2 = await Card.findOne({ name: "Frappe" });
-    // const card3 = await Card.findOne({ name: "Défense" });
-
-    const card1 = await Card.findOne({ name: "Défense" });
+    const card1 = await Card.findOne({ name: "Colère" });
     const card2 = await Card.findOne({ name: "Coup de tonnerre" });
-    // const card3 = await Card.findOne({ name: "Colère" });
-
+    const card3 = await Card.findOne({ name: "Heurt" });
+    console.log("card1:", card1);
+    console.log("card2:", card2);
+    console.log("card3:", card3);
     // Retourne un tableau avec les identifiants des cartes
     return [
-      { card: card1.toObject(), quantity: 10 },
+      { card: card1.toObject(), quantity: 5 },
       { card: card2.toObject(), quantity: 5 },
-      // { card: card3.toObject(), quantity: 5 },
+      { card: card3.toObject(), quantity: 4 },
     ];
   } catch (error) {
     console.error("Error initializing player deck:", error);

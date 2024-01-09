@@ -12,10 +12,11 @@ import {
   DEACTIVATE_COMBUSTION,
   INCREASE_COMBUSTION_COUNT,
   INITIALIZE_COMBUSTION_COUNT,
-  ACTIVATE_VULNERABILITE,
-  DEACTIVATE_VULNERABILITE,
-  ACTIVATE_FAIBLESSE,
-  DEACTIVATE_FAIBLESSE,
+  ACTIVATE_VULNERABILITE_FOR_PLAYER,
+  DEACTIVATE_VULNERABILITE_FOR_PLAYER,
+  ACTIVATE_FAIBLESSE_FOR_PLAYER,
+  DEACTIVATE_FAIBLESSE_FOR_PLAYER,
+  HANDLE_FAIBLESSE_VULNERABILITE_PLAYER,
   END_PLAYER_TURN,
   END_MONSTER_TURN,
   INITIALIZE_CURRENT_PLAYER_HP,
@@ -104,27 +105,47 @@ const playerReducer = (state = initialState, action) => {
         enflammerActivated: false,
       };
     // Etats Vulnerabilite et Faiblesse
-    case ACTIVATE_VULNERABILITE:
+    case ACTIVATE_VULNERABILITE_FOR_PLAYER:
       return {
         ...state,
-        vulnerabiliteActivated: true,
+        playerVulnerabiliteActivated: true,
+        playerVulnerabiliteCount: state.playerVulnerabiliteCount + 1,
       };
-    case DEACTIVATE_VULNERABILITE:
+    case DEACTIVATE_VULNERABILITE_FOR_PLAYER:
       return {
         ...state,
-        vulnerabiliteActivated: false,
+        playerVulnerabiliteActivated: false,
       };
-    case ACTIVATE_FAIBLESSE:
+    case ACTIVATE_FAIBLESSE_FOR_PLAYER:
       return {
         ...state,
-        faiblesseActivated: true,
+        playerFaiblesseActivated: true,
+        playerFaiblesseCount: state.playerFaiblesseCount + 1,
       };
-    case DEACTIVATE_FAIBLESSE:
+    case DEACTIVATE_FAIBLESSE_FOR_PLAYER:
       return {
         ...state,
-        faiblesseActivated: false,
+        playerFaiblesseActivated: false,
       };
-
+    case HANDLE_FAIBLESSE_VULNERABILITE_PLAYER:
+      if (state.playerFaiblesseActivated) {
+        return {
+          ...state,
+          playerFaiblesseCount:
+            state.playerFaiblesseCount > 0 ? state.playerFaiblesseCount - 1 : 0,
+          playerFaiblesseActivated: state.playerFaiblesseCount > 1, // Set to false when count reaches 0
+        };
+      } else if (state.playerVulnerabiliteActivated) {
+        return {
+          ...state,
+          playerVulnerabiliteCount:
+            state.playerVulnerabiliteCount > 0
+              ? state.playerVulnerabiliteCount - 1
+              : 0,
+          playerVulnerabiliteActivated: state.playerVulnerabiliteCount > 1, // Set to false when count reaches 0
+        };
+      }
+      return state;
     // carte Colère
     case ADD_COLERE_COPY:
       const clickedCardId = action.payload.id;

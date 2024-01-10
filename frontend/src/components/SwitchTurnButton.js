@@ -14,7 +14,9 @@ import {
   handleFaiblesseVulnerabiliteForPlayer,
 } from "../redux/actions/player.action";
 
+import enemyAttackArmor from "../assets/buff.gif";
 import enemyAttack from "../assets/enemy-attack.gif";
+
 import {
   DegatsSubis,
   updateMonsterArmor,
@@ -27,7 +29,7 @@ const SwitchTurnButton = () => {
   const currentTurn = useSelector((state) => state.player.currentTurn);
   const monsterInfo = useSelector((state) => state.monster.monsterInfo);
   const [showMonsterImage, setShowMonsterImage] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isArmorAttackAnimation, setIsArmorAttackAnimation] = useState(false);
 
   const handleEndTurn = () => {
     dispatch(switchTurn(currentTurn));
@@ -42,26 +44,15 @@ const SwitchTurnButton = () => {
 
       let monsterAttackValue;
 
-      if (isArmorAttack) {
-        // If it's an armor attack, get the armor value
-        monsterAttackValue = selectedAttack.armor;
-      } else {
-        // If it's a regular damage attack, get the damage value
-        monsterAttackValue = selectedAttack.damage;
-      }
-      setIsButtonDisabled(true);
-      setTimeout(() => {
-        setIsButtonDisabled(false);
-      }, 3000);
-
-      // Introduce a 2-second delay before showing the monster image
       setTimeout(() => {
         console.log("Monster attack value: (switch turn)", monsterAttackValue);
         setShowMonsterImage(true);
 
-        // Introduce another 1-second delay before processing the attack
         setTimeout(() => {
           if (isArmorAttack) {
+            // If it's an armor attack, get the armor value
+            monsterAttackValue = selectedAttack.armor;
+            setIsArmorAttackAnimation(true);
             dispatch(updateMonsterArmor(monsterAttackValue));
             dispatch(activateFaiblesseForPlayer());
             dispatch(activateVulnerabiliteForPlayer());
@@ -69,6 +60,8 @@ const SwitchTurnButton = () => {
               `Monster increases it's defence by ${selectedAttack.armor} !`
             );
           } else {
+            monsterAttackValue = selectedAttack.damage;
+            setIsArmorAttackAnimation(false);
             dispatch(MonsterAttack(selectedAttack.damage));
             console.log(
               `Monster attacks with ${selectedAttack.damage} damage!`
@@ -78,8 +71,8 @@ const SwitchTurnButton = () => {
           dispatch(activateVulnerabiliteForPlayer());
           console.log(`Monster attacks with ${monsterAttackValue} damage!`);
           setShowMonsterImage(false);
-        }, 450);
-      }, 1000);
+        }, 450); // Temps de l'animation d'attaque
+      }, 1000); // Temps avant que le tour revien au joueur
       setTimeout(() => {
         dispatch(switchTurn("monster"));
         dispatch(initializeCurrentMana(player.playerInfo.manaPool));
@@ -88,7 +81,7 @@ const SwitchTurnButton = () => {
         dispatch(checkAndFetchCards());
         // fetch de nouvelles cartes depuis la pioche
         dispatch(fetch5CardsFromPioche());
-      }, 4000);
+      }, 2000);
       // Si combustionActivated est true (carte Combustion jouée), le joueur subit 1 dégât et le monstre subit 5 dégâts
       if (player.combustionActivated) {
         const combustionDamageToPlayer = player.combustionPlayedCount * 1;
@@ -102,19 +95,13 @@ const SwitchTurnButton = () => {
       dispatch(handleFaiblesseVulnerabiliteForMonster());
       // ajustement des stats de faiblesse et vulnérabilité du joueur
       dispatch(handleFaiblesseVulnerabiliteForPlayer());
-    } else {
-      // quand on clique sur "End Monster Turn:"
-      // Refill/Reset des stats du joueur : armure et man
     }
   };
+
   return (
     <div>
       {currentTurn === "player" && (
-        <button
-          className="fintourbtn"
-          onClick={handleEndTurn}
-          disabled={isButtonDisabled}
-        >
+        <button className="fintourbtn" onClick={handleEndTurn}>
           Fin Tour
         </button>
       )}
@@ -122,7 +109,7 @@ const SwitchTurnButton = () => {
       {showMonsterImage && (
         <div>
           <img
-            src={enemyAttack}
+            src={isArmorAttackAnimation ? enemyAttackArmor : enemyAttack}
             alt="Monster Attack"
             style={{
               position: "absolute",

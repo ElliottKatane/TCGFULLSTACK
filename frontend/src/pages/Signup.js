@@ -33,9 +33,8 @@ const Signup = () => {
           value={password}
         />
         <p>
-          Le mot de passe doit contenir : 3 caractères en minuscules, 3
-          caractères en majuscules, 3 chiffres et un caractère spécial. Ex:
-          abcABC123!
+          Le mot de passe doit contenir : 1 caractère en majuscule, 3 caractères
+          en minuscules, , 3 chiffres et un caractère spécial. Ex: Abcd123!
         </p>
         {/* disabled={isLoading} parce qu'on ne veut pas envoyer de nouvelle requête tant qu'il y a le chargement d'une autre */}
         <button disabled={isLoading}>Commencer à jouer</button>

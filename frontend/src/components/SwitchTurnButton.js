@@ -63,8 +63,17 @@ const SwitchTurnButton = () => {
         setTimeout(() => {
           if (isArmorAttack) {
             dispatch(updateMonsterArmor(monsterAttackValue));
-            dispatch(activateFaiblesseForPlayer());
-            dispatch(activateVulnerabiliteForPlayer());
+            // Randomly choose between activateFaiblesseForPlayer and activateVulnerabiliteForPlayer
+            // Randomly choose between activateFaiblesseForPlayer and activateVulnerabiliteForPlayer
+            if (Math.random() < 0.5) {
+              dispatch(activateFaiblesseForPlayer());
+              dispatch(activateFaiblesseForPlayer());
+              console.log("faiblesse jouée");
+            } else {
+              dispatch(activateVulnerabiliteForPlayer());
+              dispatch(activateVulnerabiliteForPlayer());
+              console.log("vulnerabilite jouée");
+            }
             console.log(
               `Monster increases it's defence by ${selectedAttack.armor} !`
             );
@@ -74,8 +83,6 @@ const SwitchTurnButton = () => {
               `Monster attacks with ${selectedAttack.damage} damage!`
             );
           }
-          dispatch(activateFaiblesseForPlayer());
-          dispatch(activateVulnerabiliteForPlayer());
           console.log(`Monster attacks with ${monsterAttackValue} damage!`);
           setShowMonsterImage(false);
         }, 450);

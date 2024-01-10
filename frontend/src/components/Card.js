@@ -72,14 +72,16 @@ const Card = ({
             // inflige les dégâts (monster action/reducer)
             dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
             // Autres actions spécifiques à la carte "Conflit" si nécessaire
-          } else {
+          }
+          if (!allAttackCards) {
+            // If the condition for playing "Conflit" is not met, do not remove the card from the hand
             window.alert(
               "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
             );
             console.log(
               "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
             );
-            break;
+            return;
           }
           break;
         case "Frappe double":

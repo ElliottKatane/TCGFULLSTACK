@@ -49,7 +49,7 @@ const StatsBar = ({
       ) : null}
       {armor > 0 && (
         <div className="armordisplay">
-          <img src="/assets/shield.png" alt="Armor Image" />
+          <img src="/assets/shield.png" alt="Armor icon" />
           <span className="armor-text">{armor}</span>
         </div>
       )}

@@ -21,6 +21,7 @@ import { connect } from "react-redux";
 import {
   DegatsSubis,
   activateVulnerabiliteForMonster,
+  activateFaiblesseForMonster,
 } from "../redux/actions/monster.action";
 
 const Card = ({
@@ -143,6 +144,10 @@ const Card = ({
           dispatch(activateVulnerabiliteForMonster());
           dispatch(activateVulnerabiliteForMonster());
           break;
+        case "Uppercut":
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          dispatch(activateVulnerabiliteForMonster());
+          dispatch(activateFaiblesseForMonster());
         default:
           // Gérer le cas par défaut si le nom de la carte n'est pas reconnu
           console.log("Carte non codée encore : ", clickedCard.card.name);

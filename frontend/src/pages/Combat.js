@@ -4,7 +4,7 @@ import React from "react";
 import Player from "../components/Player";
 import CardBoard from "../components/CardBoard";
 import Monster from "../components/Monster";
-import SwitchTurnButton from "../components/SwitchTurnButton"; // Importez le nouveau composant
+import HandleTurn from "../components/HandleTurn"; // Importez le nouveau composant
 import "../CSS/Combat.css";
 import "../CSS/Positions.css";
 import "../CSS/Card.css";
@@ -50,7 +50,7 @@ const Combat = () => {
         <Player />
         <Monster />
       </div>
-      <SwitchTurnButton />
+      <HandleTurn />
     </div>
   );
 };

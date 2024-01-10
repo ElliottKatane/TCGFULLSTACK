@@ -58,16 +58,16 @@ const getRewardCards = async (req, res) => {
     const playerLevel = req.params.mapLevel; // Récupérer le niveau du joueur à partir des paramètres de la requête
     console.log("playerLevel", playerLevel);
     const levelCardCategories = {
-      1: ["Conflit", "Frappe", "Coup de boule"],
-      2: ["Charge imprudente", "Défense", "Frappe double"],
-      3: ["Même pas mal", "Combustion", "Frappe"],
-      4: ["Conflit", "Colère", "Enflammer"],
-      5: ["Conflit", "Frappe", "Coup de boule"],
-      6: ["Conflit", "Frappe", "Coup de boule"],
-      7: ["Conflit", "Frappe", "Coup de boule"],
-      8: ["Conflit", "Frappe", "Coup de boule"],
-      9: ["Conflit", "Frappe", "Coup de boule"],
-      10: ["Conflit", "Frappe", "Coup de boule"],
+      1: ["Conflit", "Frappe", "Charge imprudente", "Défense"],
+      2: ["Charge imprudente", "Défense", "Frappe double", "Conflit"],
+      3: ["Même pas mal", "Combustion", "Frappe", "Colère"],
+      4: ["Conflit", "Colère", "Enflammer", "Manchette"],
+      5: ["Défense", "Frappe", "Charge imprudente", "Uppercut"],
+      6: ["Conflit", "Enflammer", "Charge imprudente", "Combustion"],
+      7: ["Conflit", "Frappe", "Charge imprudente", "Même pas mal"],
+      8: ["Conflit", "Frappe", "Charge imprudente", "Enflammer"],
+      9: ["Conflit", "Frappe", "Charge imprudente", "Coup de tonnerre"],
+      10: ["Conflit", "Frappe", "Charge imprudente", "Heurt"],
     };
     // Get the card categories for the player's level
     const cardCategories = levelCardCategories[playerLevel] || [];

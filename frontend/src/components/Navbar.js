@@ -4,10 +4,12 @@ import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
 import "../CSS/Navbar.css";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  const location = useLocation();
 
   const [menuVisible, setMenuVisible] = useState(false);
 
@@ -37,6 +39,7 @@ export default function Navbar() {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [menuVisible]);
+  const isInCombatComponent = location.pathname.includes("/combat");
 
   return (
     <div className="menu-container">
@@ -56,6 +59,13 @@ export default function Navbar() {
                 Règles du jeu
               </Link>
             </div>
+            {isInCombatComponent && (
+              <div>
+                <Link to="/map" onClick={() => setMenuVisible(false)}>
+                  Retourner à la carte
+                </Link>
+              </div>
+            )}
             <div>
               <button onClick={handleClick}>Déconnexion</button>
             </div>

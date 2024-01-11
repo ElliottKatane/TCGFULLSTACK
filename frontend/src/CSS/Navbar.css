@@ -17,7 +17,7 @@
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 2; /* Ensure it's on top */
+  z-index: 10; /* Ensure it's on top */
 }
 
 .menu {

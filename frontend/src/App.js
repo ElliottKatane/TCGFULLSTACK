@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
-// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Combat from "./pages/Combat";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -16,6 +16,7 @@ const App = () => {
 
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route
           path="/"

@@ -5,6 +5,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: #977d4e;
 }
 
 .map-button {
@@ -25,9 +26,7 @@ html {
 
 .mapStyle {
   background-image: url(../assets/map.png);
-  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center;
   height: 810px;
   width: 1440px;
   margin: 0 auto;

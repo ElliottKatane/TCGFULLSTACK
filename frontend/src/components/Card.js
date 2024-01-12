@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // redux imports
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import {
@@ -21,8 +21,9 @@ import { connect } from "react-redux";
 import {
   DegatsSubis,
   activateVulnerabiliteForMonster,
+  activateFaiblesseForMonster,
 } from "../redux/actions/monster.action";
-
+import AttackInfo from "./AttackInfo";
 const Card = ({
   player,
   monster,
@@ -31,6 +32,8 @@ const Card = ({
   monsterVulnerabiliteActivated,
 }) => {
   const dispatch = useDispatch(); // Initialize the useDispatch hook
+  const [playerAttackDetails, setPlayerAttackDetails] = useState(null);
+  const [showAttackDetails, setShowAttackDetails] = useState(false);
 
   // Au clic sur la carte :
   const handleCardClick = (clickedCard) => {
@@ -72,14 +75,16 @@ const Card = ({
             // inflige les dégâts (monster action/reducer)
             dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
             // Autres actions spécifiques à la carte "Conflit" si nécessaire
-          } else {
+          }
+          if (!allAttackCards) {
+            // If the condition for playing "Conflit" is not met, do not remove the card from the hand
             window.alert(
               "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
             );
             console.log(
               "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
             );
-            break;
+            return;
           }
           break;
         case "Frappe double":
@@ -116,6 +121,16 @@ const Card = ({
           setTimeout(() => {
             dispatch(setBuffAnimationActive(false));
           }, 850);
+          // détails de l'attaque à afficher
+          setPlayerAttackDetails({
+            type: "playerArmor",
+            value: clickedCard.card.value,
+          });
+          // test de rajout pour affichage armure
+          setShowAttackDetails(true);
+          setTimeout(() => {
+            setShowAttackDetails(false);
+          }, 3000);
           break;
         case "Même pas mal": // 1 - 8 d'armure + piocher une carte
           dispatch(updateArmor(clickedCard.card.value));
@@ -126,7 +141,15 @@ const Card = ({
           }, 850);
           // méthode pour piocher une carte
           dispatch(fetchCardFromPioche());
-
+          // détails de l'attaque à afficher
+          setPlayerAttackDetails({
+            type: "playerArmor",
+            value: clickedCard.card.value,
+          });
+          setShowAttackDetails(true);
+          setTimeout(() => {
+            setShowAttackDetails(false);
+          }, 3000);
           break;
         case "Charge imprudente": // 1 - Infligez 7 dégâts. Ajoutez un Hébétement à votre pioche
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
@@ -135,23 +158,35 @@ const Card = ({
         case "Hébétement":
           // carte sans effet. Occupe une place dans la main. cliquez pour la faire disparaître
           dispatch(removeCardFromMain(clickedCard.id));
+          setPlayerAttackDetails(null);
           break;
         case "Heurt":
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           dispatch(activateVulnerabiliteForMonster());
           dispatch(activateVulnerabiliteForMonster());
           break;
+        case "Uppercut":
+          dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
+          dispatch(activateVulnerabiliteForMonster());
+          dispatch(activateFaiblesseForMonster());
+          break;
         default:
           // Gérer le cas par défaut si le nom de la carte n'est pas reconnu
           console.log("Carte non codée encore : ", clickedCard.card.name);
           break;
       }
+
       // Déduit le mana une fois que la vérification est faite, sinon
       dispatch(ManaCost(clickedCard.card.cost));
       // Ajoute la carte à la défausse et la retire de la main
       dispatch(
         addCardToDefausseAndRemoveFromMain(clickedCard.card, clickedCard.id)
       );
+      // Affiche temporairement les détails de l'attaque du joueur
+      setShowAttackDetails(true);
+      setTimeout(() => {
+        setShowAttackDetails(false);
+      }, 2000); // 2000 milliseconds (2 seconds), ajustez le délai selon vos besoins
     } else {
       // Sinon, on obtient une alerte
       alert("Pas assez de mana pour jouer cette carte");
@@ -165,7 +200,7 @@ const Card = ({
   }, [dispatch]);
 
   // Fonction pour calculer les dégâts du PLAYER avec les effets spéciaux (faiblesse, vulnérabilité, cartes pouvoir)
-  const calculateExtraDMG = (baseDamage) => {
+  const calculateExtraDMG = (baseDamage, actionType) => {
     let modifiedDamage = baseDamage;
     // Si l'effet Enflammer est activé, ajoute +2 aux dégâts
     if (enflammerActivated) {
@@ -181,7 +216,11 @@ const Card = ({
       const vulnerabilityBonus = Math.ceil(baseDamage * 0.3);
       modifiedDamage += vulnerabilityBonus;
     }
-
+    // Set player attack details
+    setPlayerAttackDetails({
+      type: actionType || "playerDamage",
+      value: modifiedDamage,
+    });
     return modifiedDamage;
   };
 
@@ -204,6 +243,13 @@ const Card = ({
         ))}
       </div> */}
       {/* mapping de la main */}
+      {showAttackDetails && playerAttackDetails && (
+        <AttackInfo
+          type={playerAttackDetails.type}
+          value={playerAttackDetails.value}
+          attacker="player"
+        />
+      )}
       <div>
         {player.main.map((mainItem, index) => (
           <div className="card-align" key={index}>

@@ -41,6 +41,7 @@ const Player = ({
   const { user } = useAuthContext();
   const { mapLevel } = useParams();
   const navigate = useNavigate();
+  // gère l'affichage des animations de buff et d'attaque
 
   useEffect(() => {
     if (user) {
@@ -94,27 +95,6 @@ const Player = ({
             alt="copie"
             className={`player ${playerLevelClassName}`}
           />
-          <div className="power-icons">
-            {enflammerActivated ? (
-              <img
-                src={flameIcon}
-                alt="flame-icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-            ) : null}
-
-            {combustionActivated ? (
-              <img
-                src={combustionIcon}
-                alt="combustion-icon"
-                style={{ width: "30px", height: "30px" }}
-              />
-            ) : null}
-
-            {isBuffAnimationActive ? (
-              <img className="buff" src={buffIcon} alt="buff-icon" />
-            ) : null}
-          </div>
 
           <div className="player-hp">
             <StatsBar
@@ -125,6 +105,27 @@ const Player = ({
               armor={player.armor}
               isPlayer={true}
             />
+            <div className="power-icons">
+              {enflammerActivated ? (
+                <img
+                  src={flameIcon}
+                  alt="flame-icon"
+                  style={{ width: "30px", height: "30px", marginTop: "60px" }}
+                />
+              ) : null}
+
+              {combustionActivated ? (
+                <img
+                  src={combustionIcon}
+                  alt="combustion-icon"
+                  style={{ width: "30px", height: "30px", marginTop: "60px" }}
+                />
+              ) : null}
+
+              {isBuffAnimationActive ? (
+                <img className="buff" src={buffIcon} alt="buff-icon" />
+              ) : null}
+            </div>
             {player.playerFaiblesseActivated ||
             player.playerVulnerabiliteActivated ? (
               <div style={{ display: "flex" }}>

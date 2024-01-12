@@ -24,8 +24,8 @@ import combustionIcon from "../assets/icons/combustion-icon.png";
 import buffIcon from "../assets/buff.gif";
 import faiblesseIcon from "../assets/icons/faiblesse-icon.png";
 import vulnerabiliteIcon from "../assets/icons/vulnerabilite-icon.png";
-import image from "../assets/guerrier.gif";
-import attackImage from "../assets/guerrier_attack.gif";
+import image from "../assets/main.gif";
+import attackImage from "../assets/mainIdle.gif";
 import "../CSS/Positions.css";
 
 // Composant Player

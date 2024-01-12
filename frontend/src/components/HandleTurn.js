@@ -121,7 +121,11 @@ const HandleTurn = () => {
       )}
       {/* Permet d'afficher le type et le nombre de dégâts */}
       {attackDetails && (
-        <AttackInfo type={attackDetails.type} value={attackDetails.value} />
+        <AttackInfo
+          type={attackDetails.type}
+          attacker="monster"
+          value={attackDetails.value}
+        />
       )}
       {showMonsterImage && (
         <div>

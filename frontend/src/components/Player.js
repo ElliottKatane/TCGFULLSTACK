@@ -41,6 +41,7 @@ const Player = ({
   const { user } = useAuthContext();
   const { mapLevel } = useParams();
   const navigate = useNavigate();
+  // gère l'affichage des animations de buff et d'attaque
 
   useEffect(() => {
     if (user) {

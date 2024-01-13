@@ -12,15 +12,15 @@
   top: 50%;
 }
 .player-level1.idle-animation {
-  top: 68%;
+  top: 30%;
   left: 15%;
 }
 .player-level1.attack-animation {
-  top: 55%;
-  left: 15%;
+  top: 15%;
+  left: 10%;
 }
 .enemy-level1 {
-  top: 62%;
+  top: 22%;
   right: 15%;
 }
 
@@ -152,7 +152,7 @@
     left: 0%;
   }
   .player-level1.attack-animation {
-    left: 0%;
+    left: -11%;
   }
   .enemy-level1 {
     right: 0%;
@@ -251,10 +251,10 @@
 
 @media only screen and (max-width: 700px) {
   .player-level1.idle-animation {
-    left: -15%;
+    left: 0%;
   }
   .player-level1.attack-animation {
-    left: -10%;
+    left: -20%;
   }
   .enemy-level1 {
     right: -15%;

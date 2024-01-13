@@ -16,9 +16,9 @@ import {
 import enemyAttackArmor from "../assets/buff.gif";
 import AttackInfo from "./AttackInfo";
 
-import enemyAttack1 from "../../assets/enemy1-attack.gif";
-import enemyAttack2 from "/enemy2-attack.gif";
-import enemyAttack3 from "./enemy3-attack.gif";
+import enemyAttack1 from "../assets/enemy1-attack.gif";
+import enemyAttack2 from "../assets/enemy2-attack.gif";
+import enemyAttack3 from "../assets/enemy3-attack.gif";
 import enemyAttack4 from "../assets/enemy4-attack.gif";
 import enemyAttack5 from "../assets/enemy5-attack.gif";
 import enemyAttack6 from "../assets/enemy6-attack.gif";
@@ -57,9 +57,9 @@ const HandleTurn = () => {
     enemyAttack9,
     enemyAttack10,
   ];
-  const monsterLevel = monsterInfo.level;
+  const mapLevel = monsterInfo ? monsterInfo.mapLevel : null;
 
-  const monsterAttackAnimation = attackAnimations[monsterLevel - 1]; // Adjust for array indexing
+  const monsterAttackAnimation = attackAnimations[mapLevel - 1]; // Adjust for array indexing
 
   // méthode de gestion du tour du joueur
   const handlePlayerTurn = () => {

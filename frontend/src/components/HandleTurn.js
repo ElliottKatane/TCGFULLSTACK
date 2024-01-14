@@ -12,8 +12,8 @@ import {
   activateVulnerabiliteForPlayer,
   handleFaiblesseVulnerabiliteForPlayer,
 } from "../redux/actions/player.action";
+import { toggleAttackAnimation } from "../redux/actions/monster.action";
 import Monster from "./Monster";
-
 import "../CSS/Positions.css"; // Remove after fixing
 
 import enemyAttackArmor from "../assets/buff.gif";
@@ -120,6 +120,7 @@ const HandleTurn = () => {
           `Monster increases its defense by ${selectedAttack.armor}!`
         );
       } else {
+        dispatch(toggleAttackAnimation(true));
         monsterAttackValue = selectedAttack.damage;
         setAttackDetails({
           type: isArmorAttack ? "monsterArmor" : "monsterDamage",
@@ -131,6 +132,7 @@ const HandleTurn = () => {
       setTimeout(() => {
         setShowMonsterImage(false);
         setIsArmorAttackAnimation(false); // désactive l'animation d'armure
+        dispatch(toggleAttackAnimation(false));
 
         setTimeout(() => {
           // This block will be executed after the animation and other logic is completed

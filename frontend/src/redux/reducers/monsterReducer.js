@@ -10,6 +10,7 @@ import {
   DEACTIVATE_VULNERABILITE_FOR_MONSTER,
   ACTIVATE_FAIBLESSE_FOR_MONSTER,
   DEACTIVATE_FAIBLESSE_FOR_MONSTER,
+  TOGGLE_ATTACK_ANIMATION,
 } from "../actions/monster.action";
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   monsterVulnerabiliteCount: 0,
   currentHealth: 0,
   armor: 0,
+  attackAnimationVisible: false,
 };
 
 const monsterReducer = (state = initialState, action) => {
@@ -105,6 +107,12 @@ const monsterReducer = (state = initialState, action) => {
           currentHealth: newHP,
         };
       }
+
+    case TOGGLE_ATTACK_ANIMATION:
+      return {
+        ...state,
+        attackAnimationVisible: action.payload, // directly use the payload value
+      };
 
     // Etats Vulnerabilite et Faiblesse
     case ACTIVATE_VULNERABILITE_FOR_MONSTER:

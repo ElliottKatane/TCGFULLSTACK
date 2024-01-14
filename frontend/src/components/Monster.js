@@ -13,7 +13,7 @@ import { fetchRewardCards } from "../redux/actions/card.action";
 import faiblesseIcon from "../assets/icons/faiblesse-icon.jpg";
 import vulnerabiliteIcon from "../assets/icons/vulnerabilite-icon.png";
 
-const Monster = ({ monster, dispatch, showMonsterImage }) => {
+const Monster = ({ monster, dispatch }) => {
   // useParams permet de récupérer les paramètres de l'URL
 
   const { mapLevel } = useParams();
@@ -23,6 +23,9 @@ const Monster = ({ monster, dispatch, showMonsterImage }) => {
   const modalCards = useSelector((state) => state.card.rewardCards);
   const isVictory = useSelector((state) => state.game.isVictory);
   const armor = useSelector((state) => state.monster.armor);
+  const attackAnimationVisible = useSelector(
+    (state) => state.monster.attackAnimationVisible
+  );
 
   useEffect(() => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
@@ -56,7 +59,6 @@ const Monster = ({ monster, dispatch, showMonsterImage }) => {
 
   const levelClassName = `level${mapLevel}`;
   const enemyLevelClassName = `enemy-level${mapLevel}`;
-  console.log("showMonsterImage in Monster component:", showMonsterImage);
 
   return (
     <div>
@@ -104,11 +106,13 @@ const Monster = ({ monster, dispatch, showMonsterImage }) => {
             ) : null}
           </div>
           <div>
-            <img
-              src={`/assets/${monster.monsterInfo.image}`}
-              alt={monster.monsterInfo.name}
-              className={`enemy ${levelClassName} ${enemyLevelClassName}`}
-            />
+            {!attackAnimationVisible && (
+              <img
+                src={`/assets/${monster.monsterInfo.image}`}
+                alt={monster.monsterInfo.name}
+                className={`enemy ${levelClassName} ${enemyLevelClassName}`}
+              />
+            )}
           </div>
           {isVictory && <Modal isOpen={modalIsOpen} cards={modalCards} />}
         </div>

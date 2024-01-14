@@ -4,6 +4,7 @@ export const DEGATS_SUBIS = "DEGATS_SUBIS";
 export const INITIALIZE_CURRENT_HP = "INITIALIZE_CURRENT_HP";
 export const UPDATE_MONSTER_ARMOR = "UPDATE_MONSTER_ARMOR";
 export const RESET_MONSTER_ARMOR = "RESET_MONSTER_ARMOR";
+export const TOGGLE_ATTACK_ANIMATION = "TOGGLE_ATTACK_ANIMATION";
 // Etats Vulnerabilite et Faiblesse
 export const ACTIVATE_VULNERABILITE_FOR_MONSTER =
   "ACTIVATE_VULNERABILITE_FOR_MONSTER";
@@ -24,6 +25,12 @@ export const fetchMonsterInfoFailure = (error) => ({
   type: FETCH_MONSTER_INFO_FAILURE,
   payload: error,
 });
+export const toggleAttackAnimation = (isVisible) => {
+  return {
+    type: TOGGLE_ATTACK_ANIMATION,
+    payload: isVisible,
+  };
+};
 
 export const fetchMonster = (mapLevel) => async (dispatch) => {
   try {

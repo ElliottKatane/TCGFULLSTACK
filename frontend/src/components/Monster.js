@@ -62,7 +62,7 @@ const Monster = ({ monster, dispatch, showMonsterImage }) => {
     <div>
       {monster.monsterInfo ? (
         <div>
-          <div className="monster-hp">
+          <div className="hp-bar-container-enemy">
             <StatsBar
               HPValue={monster.monsterInfo.health}
               currentHealth={monster.currentHealth}

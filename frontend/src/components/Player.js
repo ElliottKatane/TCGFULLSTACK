@@ -96,7 +96,7 @@ const Player = ({
             className={`player ${playerLevelClassName}`}
           />
 
-          <div className="player-hp">
+          <div className="hp-bar-container-player">
             <StatsBar
               HPValue={player.playerInfo.HP}
               currentHealth={player.currentPlayerHealth}

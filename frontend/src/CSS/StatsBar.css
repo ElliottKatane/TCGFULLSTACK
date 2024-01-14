@@ -1,11 +1,16 @@
 /* statsbar.css */
 
-.hp-bar-container {
-  display: flex;
-  align-items: center; /* Center horizontally */
-  position: relative; /* Add relative positioning to contain absolute children */
+.hp-bar-container-player {
+  position: absolute;
+  left: 2%;
+  top: 63%;
 }
 
+.hp-bar-container-enemy {
+  position: absolute;
+  right: 2%;
+  top: 65%;
+}
 .hp-bar {
   width: 150px;
   height: 25px;

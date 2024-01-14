@@ -17,24 +17,34 @@
 }
 .player-level1.attack-animation {
   top: 15%;
-  left: 10%;
+  left: 5%;
 }
 .enemy-level1 {
   top: 22%;
   right: 15%;
 }
+.enemy-attack1 {
+  position: absolute;
+  top: 22%;
+  right: 15%;
+}
 
 .player-level2.idle-animation {
-  top: 80%;
+  top: 30%;
   left: 15%;
 }
 .player-level2.attack-animation {
-  top: 68%;
-  left: 15%;
+  top: 5%;
+  left: 5%;
 }
 .enemy-level2 {
-  top: 80%;
-  right: 15%;
+  top: 5%;
+  right: 3%;
+}
+.enemy-attack2 {
+  position: absolute;
+  top: 5%;
+  right: 3%;
 }
 .player-level3.idle-animation {
   top: 70%;
@@ -45,8 +55,13 @@
   left: 18%;
 }
 .enemy-level3 {
-  top: 60%;
-  right: 15%;
+  top: 5%;
+  right: 3%;
+}
+.enemy-attack3 {
+  position: absolute;
+  top: 5%;
+  right: 3%;
 }
 .player-level4.idle-animation {
   top: 75%;
@@ -157,6 +172,11 @@
   .enemy-level1 {
     right: 0%;
   }
+  .enemy-attack1 {
+    position: absolute;
+    top: 22%;
+    right: 0%;
+  }
 
   .player-level2.idle-animation {
     left: 0%;
@@ -165,9 +185,13 @@
     left: 0%;
   }
   .enemy-level2 {
+    right: -10%;
+  }
+  .enemy-attack2 {
+    position: absolute;
+    top: 22%;
     right: 0%;
   }
-
   .player-level3.idle-animation {
     left: 0%;
   }
@@ -257,6 +281,12 @@
     left: -20%;
   }
   .enemy-level1 {
+    right: -15%;
+  }
+
+  .enemy-attack1 {
+    position: absolute;
+    top: 22%;
     right: -15%;
   }
   .player-level2.idle-animation {

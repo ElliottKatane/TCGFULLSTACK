@@ -28,11 +28,15 @@
   text-decoration: none;
   display: inline-block;
   font-size: 18px;
-  margin-bottom: 10vh;
+  margin-bottom: 8vh;
   background-color: #3498db; /* Change this color to your preferred background color */
   border-radius: 30px; /* Adjust the border-radius for a rounder shape */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for a nice effect */
   transition: background-color 0.3s ease; /* Add a smooth transition effect for background color */
+  position: fixed; /* Fix the position */
+  bottom: 0; /* Align to the bottom of the viewport */
+  left: 90%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
 }
 
 /* Hover effect for a subtle color change */

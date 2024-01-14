@@ -12,6 +12,9 @@ import {
   activateVulnerabiliteForPlayer,
   handleFaiblesseVulnerabiliteForPlayer,
 } from "../redux/actions/player.action";
+import Monster from "./Monster";
+
+import "../CSS/Positions.css"; // Remove after fixing
 
 import enemyAttackArmor from "../assets/buff.gif";
 import AttackInfo from "./AttackInfo";
@@ -60,6 +63,7 @@ const HandleTurn = () => {
   const mapLevel = monsterInfo ? monsterInfo.mapLevel : null;
 
   const monsterAttackAnimation = attackAnimations[mapLevel - 1]; // Adjust for array indexing
+  const monsterAttackAnimationClassName = `enemy-attack${mapLevel}`;
 
   // méthode de gestion du tour du joueur
   const handlePlayerTurn = () => {
@@ -156,16 +160,15 @@ const HandleTurn = () => {
       {showMonsterImage && (
         <div>
           <img
+            className={
+              isArmorAttackAnimation
+                ? "armor-attack"
+                : monsterAttackAnimationClassName
+            }
             src={
               isArmorAttackAnimation ? enemyAttackArmor : monsterAttackAnimation
             }
             alt="Monster Attack"
-            style={{
-              position: "absolute",
-              top: "70%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
           />
         </div>
       )}

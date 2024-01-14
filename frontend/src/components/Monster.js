@@ -1,10 +1,11 @@
 // react & router dom
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import { fetchMonster } from "../redux/actions/monster.action";
 import { handleVictory, resetVictory } from "../redux/actions/game.action";
 import { useAuthContext } from "../hooks/useAuthContext";
+
 // components
 import StatsBar from "./StatsBar";
 import Modal from "./Modal";
@@ -12,8 +13,9 @@ import { fetchRewardCards } from "../redux/actions/card.action";
 import faiblesseIcon from "../assets/icons/faiblesse-icon.jpg";
 import vulnerabiliteIcon from "../assets/icons/vulnerabilite-icon.png";
 
-const Monster = ({ monster, dispatch }) => {
+const Monster = ({ monster, dispatch, showMonsterImage }) => {
   // useParams permet de récupérer les paramètres de l'URL
+
   const { mapLevel } = useParams();
   const { user } = useAuthContext();
   // Utilisez useSelector pour extraire isOpen et cards du Redux store
@@ -54,6 +56,7 @@ const Monster = ({ monster, dispatch }) => {
 
   const levelClassName = `level${mapLevel}`;
   const enemyLevelClassName = `enemy-level${mapLevel}`;
+  console.log("showMonsterImage in Monster component:", showMonsterImage);
 
   return (
     <div>
@@ -100,16 +103,18 @@ const Monster = ({ monster, dispatch }) => {
               </div>
             ) : null}
           </div>
-          <img
-            src={`/assets/${monster.monsterInfo.image}`}
-            alt={monster.monsterInfo.name}
-            className={`enemy ${levelClassName} ${enemyLevelClassName}`}
-          />
+          <div>
+            <img
+              src={`/assets/${monster.monsterInfo.image}`}
+              alt={monster.monsterInfo.name}
+              className={`enemy ${levelClassName} ${enemyLevelClassName}`}
+            />
+          </div>
+          {isVictory && <Modal isOpen={modalIsOpen} cards={modalCards} />}
         </div>
       ) : (
         <p>Loading...</p>
       )}
-      {isVictory && <Modal isOpen={modalIsOpen} cards={modalCards} />}
     </div>
   );
 };

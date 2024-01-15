@@ -46,7 +46,7 @@ const Card = ({
     setIsCardClickDisabled(true);
     setTimeout(() => {
       setIsCardClickDisabled(false);
-    }, 1000);
+    }, 500);
     // Check if the monster's health is zero or less
     if (monster.currentHealth <= 0) {
       // If the monster is defeated, do nothing when the card is clicked
@@ -254,12 +254,17 @@ const Card = ({
       </div> */}
       {/* mapping de la main */}
       {showAttackDetails && playerAttackDetails && (
-        <AttackInfo
-          type={playerAttackDetails.type}
-          value={playerAttackDetails.value}
-          attacker="player"
-        />
+        <div className="AttackInfo-container">
+          <div className="AttackInfo">
+            <AttackInfo
+              type={playerAttackDetails.type}
+              value={playerAttackDetails.value}
+              attacker="player"
+            />
+          </div>
+        </div>
       )}
+
       <div>
         {player.main.map((mainItem, index) => (
           <div className="card-align" key={index}>

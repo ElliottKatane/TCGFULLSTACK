@@ -115,7 +115,32 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
             alignItems: "center",
           }}
         >
-          <button onClick={closeModal}>Fermer</button>
+          <button
+            style={{
+              border: "none",
+              color: "#ffffff",
+              padding: "15px 30px",
+              textAlign: "center",
+              textDecoration: "none",
+              display: "inline-block",
+              fontSize: "18px",
+              backgroundColor: "#3498db",
+              borderRadius: "30px",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              transition: "background-color 0.3s ease",
+              position: "fixed",
+              marginTop: " 80px",
+            }}
+            onClick={closeModal}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = "#2980b9";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = "#3498db";
+            }}
+          >
+            Fermer
+          </button>
         </div>{" "}
       </div>
     </ReactModal>

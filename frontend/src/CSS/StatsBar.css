@@ -81,8 +81,9 @@
 
 .armor-text {
   position: absolute;
-  top: 27%;
-  left: 30%;
+  top: 80%;
+  left: 60%;
+  transform: translate(-50%, -50%);
   font-size: 16px;
   color: white;
 }

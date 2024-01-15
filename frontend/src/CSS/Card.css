@@ -52,3 +52,10 @@ p.card {
   transform: translateZ(0) scale(1.15); /* Adjust the scale factor as needed */
   z-index: 2;
 }
+
+.disabled-card {
+  opacity: 0.6; /* Adjust the opacity as needed */
+  /* You can also add other styles to visually distinguish disabled cards */
+  filter: grayscale(50%); /* Optional: Apply grayscale effect */
+  cursor: not-allowed; /* Optional: Change cursor to indicate not clickable */
+}

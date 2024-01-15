@@ -34,9 +34,19 @@ const Card = ({
   const dispatch = useDispatch(); // Initialize the useDispatch hook
   const [playerAttackDetails, setPlayerAttackDetails] = useState(null);
   const [showAttackDetails, setShowAttackDetails] = useState(false);
+  const [isCardClickDisabled, setIsCardClickDisabled] = useState(false);
 
   // Au clic sur la carte :
   const handleCardClick = (clickedCard) => {
+    if (isCardClickDisabled) {
+      return;
+    }
+
+    // Disable card clicking for 2 seconds
+    setIsCardClickDisabled(true);
+    setTimeout(() => {
+      setIsCardClickDisabled(false);
+    }, 1000);
     // Check if the monster's health is zero or less
     if (monster.currentHealth <= 0) {
       // If the monster is defeated, do nothing when the card is clicked
@@ -254,7 +264,9 @@ const Card = ({
         {player.main.map((mainItem, index) => (
           <div className="card-align" key={index}>
             <div
-              className={`card-container card-${mainItem.card.type.toLowerCase()}`}
+              className={`card-container card-${mainItem.card.type.toLowerCase()} ${
+                isCardClickDisabled ? "disabled-card" : ""
+              }`}
               onClick={() => handleCardClick(mainItem)}
             >
               <img

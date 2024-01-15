@@ -254,11 +254,15 @@ const Card = ({
       </div> */}
       {/* mapping de la main */}
       {showAttackDetails && playerAttackDetails && (
-        <AttackInfo
-          type={playerAttackDetails.type}
-          value={playerAttackDetails.value}
-          attacker="player"
-        />
+        <div className="AttackInfo-container">
+          <div className="AttackInfo">
+            <AttackInfo
+              type={playerAttackDetails.type}
+              value={playerAttackDetails.value}
+              attacker="player"
+            />
+          </div>
+        </div>
       )}
       <div>
         {player.main.map((mainItem, index) => (

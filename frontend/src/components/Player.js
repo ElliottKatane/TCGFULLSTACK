@@ -165,13 +165,13 @@ const Player = ({
       ) : (
         <p>Loading...</p>
       )}
-      <div className="card-stacks">
+      {/* <div className="card-stacks">
         pioche: {player.pioche.length}
         <br />
         main: {player.main.length}
         <br />
         defausse: {player.defausse.length}
-      </div>
+      </div> */}
     </div>
   );
 };

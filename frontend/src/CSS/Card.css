@@ -59,3 +59,29 @@ p.card {
   filter: grayscale(50%); /* Optional: Apply grayscale effect */
   cursor: not-allowed; /* Optional: Change cursor to indicate not clickable */
 }
+
+.AttackInfo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.AttackInfo {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.AttackInfo-content {
+  text-align: center;
+}
+
+.AttackInfo-content {
+  text-align: center;
+}

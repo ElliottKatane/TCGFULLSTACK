@@ -13,7 +13,6 @@ import {
   handleFaiblesseVulnerabiliteForPlayer,
 } from "../redux/actions/player.action";
 import { toggleAttackAnimation } from "../redux/actions/monster.action";
-import Monster from "./Monster";
 import "../CSS/Positions.css"; // Remove after fixing
 
 import enemyAttackArmor from "../assets/buff.gif";
@@ -140,7 +139,7 @@ const HandleTurn = () => {
           dispatch(switchTurn("monster"));
           handlePlayerTurn();
         }, 0); // Using 0ms timeout to schedule the code at the end of the current event loop
-      }, 1450); // Attack animation time
+      }, 2000); // Attack animation time
     }, 650); // Time before attack (after clicking "fin tour")
   };
 
@@ -166,6 +165,17 @@ const HandleTurn = () => {
               isArmorAttackAnimation
                 ? "armor-attack"
                 : monsterAttackAnimationClassName
+            }
+            style={
+              isArmorAttackAnimation
+                ? {
+                    position: "fixed",
+                    top: 120,
+                    right: 230,
+                    height: "150px",
+                    width: "150px",
+                  }
+                : {}
             }
             src={
               isArmorAttackAnimation ? enemyAttackArmor : monsterAttackAnimation

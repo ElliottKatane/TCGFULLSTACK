@@ -19,7 +19,7 @@ const StatsBar = ({
   }, [HPValue]); // Add keyForRemount to the dependency array
 
   if (initialHealth === null) {
-    return <p>Loading...</p>;
+    return <p>Chargement...</p>;
   }
 
   const percentageRemaining = (currentHealth / HPValue) * 100;

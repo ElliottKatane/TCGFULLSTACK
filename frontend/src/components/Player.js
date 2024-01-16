@@ -163,7 +163,7 @@ const Player = ({
           </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Chargement...</p>
       )}
     </div>
   );

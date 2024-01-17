@@ -42,11 +42,11 @@ const Card = ({
       return;
     }
 
-    // Disable card clicking for 2 seconds
+    // Disable card clicking for 1 second after using a card
     setIsCardClickDisabled(true);
     setTimeout(() => {
       setIsCardClickDisabled(false);
-    }, 500);
+    }, 1000);
     // Check if the monster's health is zero or less
     if (monster.currentHealth <= 0) {
       // If the monster is defeated, do nothing when the card is clicked

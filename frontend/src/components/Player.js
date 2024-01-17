@@ -123,7 +123,18 @@ const Player = ({
               ) : null}
 
               {isBuffAnimationActive ? (
-                <img className="buff" src={buffIcon} alt="buff-icon" />
+                <img
+                  className="buff"
+                  style={{
+                    position: "fixed",
+                    top: 120,
+                    left: 230,
+                    height: "150px",
+                    width: "150px",
+                  }}
+                  src={buffIcon}
+                  alt="buff-icon"
+                />
               ) : null}
             </div>
             {player.playerFaiblesseActivated ||
@@ -165,6 +176,13 @@ const Player = ({
       ) : (
         <p>Chargement...</p>
       )}
+      {/* <div className="card-stacks">
+        pioche: {player.pioche.length}
+        <br />
+        main: {player.main.length}
+        <br />
+        defausse: {player.defausse.length}
+      </div> */}
     </div>
   );
 };

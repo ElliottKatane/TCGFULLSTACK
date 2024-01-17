@@ -105,8 +105,8 @@ html {
 }
 .map-button.button-10 {
   position: relative;
-  bottom: -14%;
-  left: 72%;
-  color: black;
-  font-size: 24px;
+  bottom: -12%;
+  left: 69%;
+  color: red;
+  font-size: 45px;
 }

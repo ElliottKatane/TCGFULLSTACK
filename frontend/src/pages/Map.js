@@ -57,13 +57,20 @@ const Map = () => {
             // Render a clickable link if the button is clickable
             <Link
               to={`/combat/${buttonLevel}`}
-              className={`map-button button-${buttonLevel} clickable`}
+              className={`map-button button-${buttonLevel} clickable ${
+                buttonLevel === 10 ? "level-10" : ""
+              }`}
             >
-              <i className="fa fa-flag"></i>
+              {buttonLevel === 10 ? (
+                // Include the dragon icon for level 10
+                <i className="fa fa-brands fa-phoenix-framework"></i>
+              ) : (
+                // Include a flag icon for other levels
+                <i className="fa fa-flag"></i>
+              )}
             </Link>
           ) : (
-            // Render a non-clickable div with a lock icon if the button is not clickable
-            <div className={`map-button button-${buttonLevel} unclickable`}>
+            <div style={{ display: "none" }}>
               <i className="fa fa-lock"></i>
             </div>
           )}

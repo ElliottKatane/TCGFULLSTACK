@@ -117,7 +117,7 @@ const Monster = ({ monster, dispatch }) => {
           {isVictory && <Modal isOpen={modalIsOpen} cards={modalCards} />}
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Chargement...</p>
       )}
     </div>
   );

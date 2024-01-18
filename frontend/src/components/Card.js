@@ -236,23 +236,6 @@ const Card = ({
 
   return (
     <div>
-      {/* <div className="pioche">
-        {player.pioche.map((piocheItem, index) => (
-          <div className="card-align" key={index}>
-            <div // Render each card as a div. bg color's card changes with type
-              className={`card-container card-${piocheItem.card.type.toLowerCase()}`}
-              onClick={() => handleCardClick(piocheItem)}
-            >
-              <img
-                src={piocheItem.card.imageURL}
-                alt={piocheItem.card.name}
-                className="card-image"
-              />
-            </div>
-          </div>
-        ))}
-      </div> */}
-      {/* mapping de la main */}
       {showAttackDetails && playerAttackDetails && (
         <div className="AttackInfo-container">
           <div className="AttackInfo">

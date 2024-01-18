@@ -172,7 +172,7 @@ const Card = ({
             "Cette carte n'a pas d'effet. Elle vous empêche potentiellement de jouer d'autres cartes..."
           );
           setPlayerAttackDetails(null);
-          break;
+          return;
         case "Heurt":
           dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
           dispatch(activateVulnerabiliteForMonster());

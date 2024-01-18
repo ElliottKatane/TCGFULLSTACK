@@ -26,21 +26,21 @@ const userSchema = new Schema({
 userSchema.statics.signup = async function (email, password) {
   // validation. Put first cause if it fails, we don't need to execute the rest of the code
   if (!email || !password) {
-    throw Error("All fields must be filled");
+    throw Error("Tous les champs doivent être remplis  ");
   }
   // .isEmail() is a validator method from validator package
   if (!validator.isEmail(email)) {
-    throw Error("Email is not valid");
+    throw Error("L'adresse e-mail n'est pas valide");
   }
   // .isStrongPassword() is a validator method from validator package
   if (!validator.isStrongPassword(password)) {
-    throw Error("Password is not strong enough");
+    throw Error("Le mot de passe n'est pas assez fort");
   }
   // check if user exists. "this" refers to the model
   const exists = await this.findOne({ email });
 
   if (exists) {
-    throw Error("User already exists");
+    throw Error("L'utilisateur existe déjà");
   }
   // hash the password. using "await" because bcrypt is async. Takes time to generate salt and hash
   // async function returns a promise. await waits for the promise to resolve
@@ -94,18 +94,18 @@ const initializePlayerDeck = async () => {
 userSchema.statics.login = async function (email, password) {
   // check if fields are filled. We don't even wanna try to login if we don't have email/password
   if (!email || !password) {
-    throw Error("All fields must be filled");
+    throw Error("Tous les champs doivent être remplis");
   }
   const user = await this.findOne({ email });
   if (!user) {
-    throw Error("User does not exist. Incorrect email");
+    throw Error("L'utilisateur n'existe pas. Adresse e-mail incorrecte");
   }
   // compare passwords
   // password = plain text one
   // user.password = hashed one
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    throw Error("Incorrect password");
+    throw Error("Mot de passe incorrect");
   }
 
   await user.populate("player");

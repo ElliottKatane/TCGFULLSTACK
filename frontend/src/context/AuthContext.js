@@ -31,7 +31,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, []);
 
-  console.log("AuthContext state:", state);
+  // ("AuthContext state:", state);
 
   // on doit retourner un template avec un context provider
   return (

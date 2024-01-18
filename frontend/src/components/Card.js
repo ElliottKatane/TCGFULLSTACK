@@ -46,7 +46,7 @@ const Card = ({
     setIsCardClickDisabled(true);
     setTimeout(() => {
       setIsCardClickDisabled(false);
-    }, 2000);
+    }, 500);
     // Check if the monster's health is zero or less
     if (monster.currentHealth <= 0) {
       // If the monster is defeated, do nothing when the card is clicked
@@ -66,7 +66,7 @@ const Card = ({
         // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
         setTimeout(() => {
           dispatch(setCardAnimationActive(false));
-        }, 1500);
+        }, 500);
       }
 
       switch (clickedCard.card.name) {
@@ -81,7 +81,7 @@ const Card = ({
             (card) => card.card.type === "Attack"
           );
           if (allAttackCards) {
-            console.log("Toutes les cartes sont des cartes d'attaque");
+            // console.log("Toutes les cartes sont des cartes d'attaque");
             // inflige les dégâts (monster action/reducer)
             dispatch(DegatsSubis(calculateExtraDMG(clickedCard.card.value)));
             // Autres actions spécifiques à la carte "Conflit" si nécessaire
@@ -91,9 +91,9 @@ const Card = ({
             window.alert(
               "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
             );
-            console.log(
-              "Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
-            );
+            //console.log(
+            //"Impossible de jouer la carte Conflit. Toutes les cartes ne sont pas de type Attaque "
+            // );
             return;
           }
           break;
@@ -167,7 +167,10 @@ const Card = ({
           break;
         case "Hébétement":
           // carte sans effet. Occupe une place dans la main. cliquez pour la faire disparaître
-          dispatch(removeCardFromMain(clickedCard.id));
+          //dispatch(removeCardFromMain(clickedCard.id));
+          window.alert(
+            "Cette carte n'a pas d'effet. Elle vous empêche potentiellement de jouer d'autres cartes..."
+          );
           setPlayerAttackDetails(null);
           break;
         case "Heurt":

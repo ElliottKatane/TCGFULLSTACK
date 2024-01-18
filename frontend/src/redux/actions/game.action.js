@@ -18,19 +18,10 @@ export const resetVictory = () => ({
 export const handleVictory =
   (userEmail, mapLevel) => async (dispatch, getState) => {
     try {
-      console.log("Entering handleVictory action");
-
       // Check if a user is available
       if (userEmail) {
-        console.log("Fetching player data for user with email:", userEmail);
-
         // Dispatch the action to fetch player data from the API using Redux
         const playerData = await dispatch(fetchPlayer(userEmail));
-
-        // Log the received player data and update the state
-        console.log("Player data received:", playerData);
-        console.log("Current levelReached:", playerData.levelReached);
-        console.log("Current mapLevel:", mapLevel);
 
         // Check if the player's already beaten the level, if true, don't increment
         if (playerData.levelReached <= parseInt(mapLevel, 10)) {
@@ -53,9 +44,9 @@ export const handleVictory =
           }
         }
 
-        console.log("VICTORY action dispatched");
+        // console.log("VICTORY action dispatched");
         // Log the updated state
-        console.log("Updated state:", getState());
+        //console.log("Updated state:", getState());
         dispatch(victory());
       }
     } catch (error) {
@@ -68,7 +59,6 @@ export const handleDefeat = () => (dispatch) => {
   try {
     // Dispatch the DEFEAT action
     dispatch(defeat());
-    console.log("DEFEAT action dispatched");
   } catch (error) {
     console.error("Error handling defeat:", error);
     // Handle error as needed

@@ -28,7 +28,7 @@ const monsterReducer = (state = initialState, action) => {
   switch (action.type) {
     // fetch des infos du monstre
     case FETCH_MONSTER_INFO_SUCCESS:
-      console.log("Monster Info received:", action.payload);
+      //console.log("Monster Info received:", action.payload);
       return {
         ...state,
         monsterInfo: action.payload,
@@ -53,23 +53,19 @@ const monsterReducer = (state = initialState, action) => {
       };
 
     case RESET_MONSTER_ARMOR:
-      console.log("Resetting monster armor to 0");
+      //console.log("Resetting monster armor to 0");
       return {
         ...state,
         armor: 0,
       };
 
     case DEGATS_SUBIS:
-      console.log("Reducing damage. Current health:", state.currentHealth);
-      console.log("Damage value:", action.payload.damageValue);
-      console.log("Armor:", state.armor);
-
       // Ensure damageValue and armor are valid numbers
       const damageValue = Number(action.payload.damageValue);
       const armor = Number(state.armor);
 
-      console.log("Converted Damage value:", damageValue);
-      console.log("Converted Armor:", armor);
+      //  console.log("Converted Damage value:", damageValue);
+      //  console.log("Converted Armor:", armor);
 
       if (isNaN(damageValue) || isNaN(armor)) {
         console.error("Invalid damageValue or armor:", damageValue, armor);
@@ -100,7 +96,7 @@ const monsterReducer = (state = initialState, action) => {
       } else {
         // S'il n'y a pas d'armure, réduire directement les points de vie
         const newHP = Math.max(state.currentHealth - damageValue, 0);
-        console.log("HP after dmg", newHP);
+        // console.log("HP after dmg", newHP);
 
         return {
           ...state,

@@ -1,5 +1,5 @@
 // react & router dom
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import { fetchMonster } from "../redux/actions/monster.action";
@@ -38,7 +38,7 @@ const Monster = ({ monster, dispatch }) => {
       });
   }, [mapLevel, dispatch]);
 
-  console.log("Monster state:", monster.monsterInfo);
+  // console.log("Monster state:", monster.monsterInfo);
 
   useEffect(() => {
     if (monster.monsterInfo && monster.currentHealth <= 0 && !isVictory) {

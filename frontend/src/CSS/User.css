@@ -1,5 +1,39 @@
 /* google font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
+/* HoverButton CSS */
+.hoverbutton-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Ajoutez ces styles dans votre fichier CSS global ou dans le fichier où vous définissez les styles du composant HoverButton */
+.hover-message {
+  position: relative;
+  display: inline-block;
+}
+
+.info-icon {
+  display: block;
+  margin: 8px;
+}
+
+.info-message-container {
+  position: absolute; /* Modifiez de relative à absolute */
+  top: 200%; /* placer le message en dessous de l'icône */
+  left: 0; /* placer le message à gauche de l'icône */
+  background-color: #f0f0f0;
+  padding: 8px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.5s linear;
+  width: 250px;
+}
+
+.hover-message:hover .info-message-container {
+  visibility: visible;
+}
 
 /* layout */
 :root {

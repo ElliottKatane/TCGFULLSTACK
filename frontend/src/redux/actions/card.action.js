@@ -54,11 +54,11 @@ export const fetchRewardCards = (level) => {
         const data = await response.json();
         dispatch({ type: FETCH_REWARD_CARDS_SUCCESS, payload: data });
         const { card } = getState();
-        console.log("card State dans REWARD PLAYER", card);
+        // console.log("card State dans REWARD PLAYER", card);
         // Accéder aux données des cartes depuis le state après avoir dispatché fetchRewardCards
         const rewardCards = card.rewardCards;
         // Dispatch l'action pour ouvrir la modal avec les cartes
-        console.log("Dispatching openModal with rewardCards:", rewardCards);
+        // console.log("Dispatching openModal with rewardCards:", rewardCards);
         dispatch(openModal(rewardCards));
       } else {
         // Handle the error, dispatch an error action, etc.
@@ -119,7 +119,7 @@ export const addToDeck = (userEmail, selectedCard) => async (dispatch) => {
     }
     const data = await response.json();
 
-    console.log("Data after adding card to deck:", data);
+    //console.log("Data after adding card to deck:", data);
 
     // Dispatcher une action pour mettre à jour le state Redux si nécessaire
     dispatch(cardAddedToDeck(selectedCard));

@@ -12,11 +12,6 @@ const Modal = ({ modalIsOpen, closeModal, addToDeck }) => {
   const playerInfo = useSelector((state) => state.player.playerInfo);
   const { mapLevel } = useParams();
 
-  useEffect(() => {
-    console.log("modalIsOpen:", modalIsOpen);
-    console.log("rewardCards:", rewardCards);
-  }, [modalIsOpen, rewardCards]);
-
   const handleRewardSelection = async (selectedCard) => {
     const userEmail = user.email;
 

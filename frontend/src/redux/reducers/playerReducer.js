@@ -172,8 +172,8 @@ const playerReducer = (state = initialState, action) => {
         };
       }
 
-      // Si la carte "Colère" n'est pas trouvée, vous pouvez éventuellement ajouter un message de console.log pour le suivi
-      console.log("Colère not found in Pioche. No update needed.");
+      // Si la carte "Colère" n'est pas trouvée:
+      // console.log("Colère not found in Pioche. No update needed.");
 
       // Renvoie simplement l'état actuel car aucune modification n'est nécessaire
       return state;
@@ -273,7 +273,7 @@ const playerReducer = (state = initialState, action) => {
     case ADD_CARD_TO_DEFAUSSE_AND_REMOVE_FROM_PIOCHE:
       const updatedPioche = state.pioche.map((piocheItem) => {
         if (piocheItem.id === action.payload.id) {
-          console.log("Updating piocheItem:", piocheItem);
+          //   console.log("Updating piocheItem:", piocheItem);
           return { ...piocheItem, quantity: piocheItem.quantity - 1 };
         }
         return piocheItem;

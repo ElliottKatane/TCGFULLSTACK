@@ -126,7 +126,7 @@ const HandleTurn = () => {
           value: monsterAttackValue,
         });
         dispatch(MonsterAttack(selectedAttack.damage));
-        console.log(`Monster attacks with ${selectedAttack.damage} damage!`);
+        //console.log(`Monster attacks with ${selectedAttack.damage} damage!`);
       }
       setTimeout(() => {
         setShowMonsterImage(false);

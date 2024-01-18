@@ -17,7 +17,7 @@ const AttackInfo = ({ attacker, type, value }) => {
       ) : (
         <>
           {type === "monsterArmor" &&
-            `Monster increases its defense by ${value}!`}
+            `Le monstre augmente son armure de ${value}!`}
           {type === "monsterDamage" &&
             `Le monstre attaque pour ${value} de dégâts!`}
         </>

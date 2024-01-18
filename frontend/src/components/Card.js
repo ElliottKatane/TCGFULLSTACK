@@ -37,16 +37,16 @@ const Card = ({
   const [isCardClickDisabled, setIsCardClickDisabled] = useState(false);
 
   // Au clic sur la carte :
+
   const handleCardClick = (clickedCard) => {
     if (isCardClickDisabled) {
       return;
     }
-
     // Disable card clicking for 1 second after using a card
     setIsCardClickDisabled(true);
     setTimeout(() => {
       setIsCardClickDisabled(false);
-    }, 1000);
+    }, 2000);
     // Check if the monster's health is zero or less
     if (monster.currentHealth <= 0) {
       // If the monster is defeated, do nothing when the card is clicked
@@ -66,7 +66,7 @@ const Card = ({
         // Set a timeout to reset cardAnimationActive to false after 1000 milliseconds (1 second)
         setTimeout(() => {
           dispatch(setCardAnimationActive(false));
-        }, 1000);
+        }, 1500);
       }
 
       switch (clickedCard.card.name) {

@@ -31,7 +31,7 @@ const Monster = ({ monster, dispatch }) => {
     // Appelez l'action pour fetch les données du monstre et les mettre dans Redux
     dispatch(fetchMonster(mapLevel))
       .then((result) => {
-        //  console.log("Fetch monster result:", result);
+        console.log("Fetch monster result:", result);
       })
       .catch((error) => {
         console.error("Fetch monster failed:", error);

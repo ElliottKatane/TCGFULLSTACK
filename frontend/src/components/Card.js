@@ -46,7 +46,7 @@ const Card = ({
     setIsCardClickDisabled(true);
     setTimeout(() => {
       setIsCardClickDisabled(false);
-    }, 500);
+    }, 800);
     // Check if the monster's health is zero or less
     if (monster.currentHealth <= 0) {
       // If the monster is defeated, do nothing when the card is clicked
